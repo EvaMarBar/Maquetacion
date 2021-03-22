@@ -1,0 +1,23 @@
+.table {
+    border-collapse:collapse;
+    background-color: rgb(107, 106, 106);
+    margin-top: 2em;
+    text-align: center;
+    width: 40%;
+    height: max-content;
+}
+
+.table table{
+    width: 100%;
+}
+
+.table table tr {
+    background-color: #F0FBFF;
+}
+
+.table table tr:nth-child(even) {
+    background-color: rgb(255, 255, 255);
+}
+.table table tr:hover {
+    background-color: rgb(199, 199, 199);
+}
