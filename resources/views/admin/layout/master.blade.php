@@ -14,12 +14,10 @@
     <body>
 
         <div class="main">
-            @yield('table-form')
+            @yield('content')
         </div>
 
-    </body>
-
-    @include("admin.layout.partials.js")
-    
+        @include("admin.layout.partials.js")
+    </body>  
 </html>
         

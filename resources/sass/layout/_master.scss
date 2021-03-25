@@ -1,6 +1,6 @@
 body{
-    margin: 0;
-    background-color: rgb(219, 217, 217);
+    background-color: rgb(173, 173, 173);
+    
 }
 
 .main {
@@ -10,4 +10,12 @@ body{
     justify-content: space-evenly;
     width: 100%;
     height: 100vh; 
+    margin-top: 1em;
+
+        .two-columns{
+            display: flex;
+            justify-content: space-evenly;
+            width: 80%;
+            height: max-content;
+      
 }

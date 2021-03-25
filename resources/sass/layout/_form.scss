@@ -1,34 +1,37 @@
-.form {
+.form{
+    width: 100%;
     background-color: #F0FBFF;
     border: 2px solid rgb(107, 106, 106);
-    height: max-content;
+    height:max-content;
+    width: 100%;
     margin-top: 2em;
-    padding: 1em;
-    width: 40%;
-}
 
-.form_group {
+    .form_group {
     margin-bottom: 1em;
+    width: 90%;
+    margin: 1em;
+    }
+
+    .form_group .form_label {
     width: 100%;
-}
+    }
 
-.form_group .form_label {
+    .form_group .form_label label {
+    width:100%;
+    }
+
+
+    .form_group .form_input input {
+    width:100%;
+    }
+
+    .form_group .form_input textarea {
+    width:100%;
+    }
+
+    .form_submit {
     width: 100%;
-}
+    margin: 1em;
+    }
+    }
 
-.form_group .form_label label {
-    width:100%;
-}
-
-
-.form_group .form_input input {
-    width:100%;
-}
-
-.form_group .form_input textarea {
-    width:100%;
-}
-
-.form_submit {
-    width: 100%;
-}
