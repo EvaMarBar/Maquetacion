@@ -1,30 +1,50 @@
+const forms = document.querySelectorAll(".admin-form");
+// const labels = document.getElementsByTagName('label');
+// const inputs = document.querySelectorAll('.input')
 const sendButton = document.getElementById("send");
+const table = document.getElementById("table");
 
 
-sendButton.addEventListener('click', () => {
+// inputs.forEach(input => {
+
+//     input.addEventListener('focusin', () => {
+
+//         for( var i = 0; i < labels.length; i++ ) {
+//             if (labels[i].htmlFor == input.name){
+//                 labels[i].classList.add("active");
+//             }
+//         }
+//     });
+
+//     input.addEventListener('blur', () => {
+
+//         for( var i = 0; i < labels.length; i++ ) {
+//             labels[i].classList.remove("active");
+//         }
+//     });
+//});
+
+sendButton.addEventListener("click", () => {
     
-    const forms = document.querySelectorAll(".admin-form");
-    
-        forms.forEach(form => {
-            let idForm =document.getElementById(form.id);
-            let data = new FormData(idForm);
-            let url = form.action;
+    forms.forEach(form => { 
+        
+        let data = new FormData(form);
+        let url = form.action;
 
-            let sendPostRequest = async () => {
+        let sendPostRequest = async () => {
 
-                try {
-                    let response = await axios.post(url, data).then(response => {
-                        form.innerHTML = response.data.form;
-                        console.log('2');
-                    });
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
+            try {
+                await axios.post(url, data).then(response => {
+                    console.log(response.data.table)
+                    form.id.value = response.data.id;
+                    table.innerHTML = response.data.table;
+                });
+                 
+            } catch (error) {
+                console.error(error);
+            }
+        };
 
-            sendPostRequest();
-
-            console.log('1');
-        });
+        sendPostRequest();
+    });
 });
