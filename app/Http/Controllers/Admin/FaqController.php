@@ -23,7 +23,7 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->get());
+            ->with('faqs', $this->faq->where('active', 1)->get());   
 
         if(request()->ajax()) {
 
@@ -61,7 +61,7 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
             ->with('faq', $faq)
-            ->with('faqs', $this->faq->get())
+            ->with('faqs', $this->faq->where('active', 1)->get())   
             ->renderSections();        
 
         return response()->json([
@@ -73,16 +73,12 @@ class FaqController extends Controller
 
     public function show(Faq $faq)
     {
-     
-        $this->locale->setParent(slug_helper($faq->category->name));
-        $locale = $this->locale->show($faq->id);
-
         $view = View::make('admin.faqs.index')
         ->with('faq', $faq)
-        ->with('locale', $locale)
-        ->with('crud_permissions', $this->crud_permissions);   
+        ->with('faqs', $this->faq->where('active', 1)->get());   
         
         if(request()->ajax()) {
+
             $sections = $view->renderSections(); 
     
             return response()->json([
@@ -95,22 +91,19 @@ class FaqController extends Controller
 
     public function destroy(Faq $faq)
     {
+        $faq->active = 0;
+        $faq->save();
 
-        $faq->delete();
-        $this->locale->setParent(slug_helper($faq->category->name));
-        $this->locale->delete($faq->id);
-
-        $message = \Lang::get('admin/faqs.faq-delete');
+        // $faq->delete();
 
         $view = View::make('admin.faqs.index')
-            ->with('faqs', $this->faq->get())
-            ->with('crud_permissions', $this->crud_permissions)
+            ->with('faq', $this->faq)
+            ->with('faqs', $this->faq->where('active', 1)->get())
             ->renderSections();
         
         return response()->json([
             'table' => $view['table'],
-            'form' => $view['form'],
-            'message' => $message,
+            'form' => $view['form']
         ]);
     }
 }

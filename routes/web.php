@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\FaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index');[UserController::class
+Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index',[
+    'names' => [
+        'index' => 'faqs',
+    ]]);
 
 Route::group(['prefix' => 'admin'],function (){
 

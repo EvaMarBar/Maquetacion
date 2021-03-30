@@ -2,7 +2,6 @@
     border: 2em solid rgb(236, 157, 117);
     border-radius: 2em;
     color: rgb(25, 23, 22);
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 1em;
     height: max-content;
     margin-top: 2em;
@@ -43,12 +42,15 @@
         }   
     }
 
-.table-icons{ 
+.edit-button{ 
+    width: 2em;
+    height: 2em;
     margin:0.2em;
-    
-    path{background-color: rgb(63, 63, 112);
-    }
-
-    path:hover{background-color: rgb(241, 131, 75);
-    }
+    path:hover {fill:rgb(241, 131, 75)}
+}
+.delete-button{ 
+    width: 2em;
+    height: 2em;
+    margin:0.2em;
+    path:hover {fill:rgb(241, 131, 75)}
 }
