@@ -1872,13 +1872,16 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /***/ (() => {
 
 var moreButtons = document.querySelectorAll(".button");
-var show = document.querySelectorAll(".description");
 moreButtons.forEach(function (moreButton) {
   moreButton.addEventListener("click", function () {
     if (moreButton.classList.contains("active")) {
       moreButton.classList.remove("active");
       moreButton.parentElement.nextElementSibling.classList.remove("active");
     } else {
+      var activeElements = document.querySelectorAll('.active');
+      activeElements.forEach(function (activeElement) {
+        activeElement.classList.remove("active");
+      });
       moreButton.classList.add("active");
       moreButton.parentElement.nextElementSibling.classList.add("active");
     }

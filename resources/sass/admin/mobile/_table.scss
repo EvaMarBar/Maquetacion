@@ -1,0 +1,54 @@
+.table{
+    border: 1em solid rgb(236, 157, 117);
+    border-radius: 1em;
+    color: rgb(25, 23, 22);
+    font-size: 1em;
+    height: max-content;
+    margin-top: 2em;
+    width: 90%;
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+
+        td{
+        word-break: break-word;
+        text-align: left;
+        padding: 0 0.5em;
+        }
+
+        td:nth-child(1){ width: 10%;}
+        td:nth-child(2) {width: 10%;}
+        td:nth-child(3) {width: 20%;}
+        td:nth-child(4){width: 10%;}
+        
+        }
+
+        th{
+            height: 2em;
+            text-align: left;
+            padding: 0 0.5em;
+        }
+
+        tr{
+            background-color: rgb(216, 209, 205);
+        }
+
+        tr:nth-child(even) {
+            background-color:rgb(251, 251, 255);
+        }
+        tr:hover {
+            background-color: rgb(130, 138, 149);
+        }   
+    }
+
+.edit-button{ 
+    width: 1em;
+    height: 1em;
+    path:hover {fill:rgb(241, 131, 75)}
+}
+.delete-button{ 
+    width: 1em;
+    height: 1em;
+    path:hover {fill:rgb(241, 131, 75)}
+}

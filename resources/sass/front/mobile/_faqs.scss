@@ -1,8 +1,9 @@
-.main-faqs{
+.title-faqs{
+    font-size: 1.2em;
     text-align: left;
 }
 
-.faqs{
+.faqs{ 
     margin:auto;
     width: 90%;
 }
@@ -11,43 +12,41 @@
     background-color: rgb(216, 209, 205);
     border:1px solid black;
     display: flex;
-    font-size: 1.5em;
+    font-size: 1em;
     justify-content: space-between;
-    margin-top: 0.1em;
-    padding: 0.2em 0.2em 0.2em 0.5em;
+    margin: 0.1em 0;
+    padding: 0.5em 0 0 0.5em;
     text-align: left;
     width: 100%;
-
 }
 
 .description{
-    border:1px solid black;
     background-color: white;
+    border:1px solid black;
     max-height: 0vh;
     opacity: 0%;
     overflow: hidden;
     transition: 0.5s;
     width: 100%;
-
 }
+
 .description.active{
-    border:1px solid black;
     background-color: white;
-    font-size: 1.5em;
-    max-height: 100vh;
-    margin-top: 0.1em;
+    border:1px solid black;
+    font-size: 1em;
+    height: max-content;
+    margin: 0.2em 0;
     opacity: 100%;
-    padding: 0.2em 0.2em 0.2em 0.5em;
+    padding: 0.5em 0 0 0.5em;
     text-align: left;
     transition: 0.5s;
     width: 100%;
     word-break: break-word;
+    max-height: 100vh;
+    
 }
 
-.button{
-    display:flex;
-    justify-content: center;
-    height: 1em;
-    margin:0.2em;
-    width: 1em;
+.button {
+    margin-right: 0.2em;
+    transform: translateY(-15%);
 }

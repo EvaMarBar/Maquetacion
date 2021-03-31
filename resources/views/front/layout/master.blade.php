@@ -19,7 +19,6 @@
                 </svg>
                 Cabecera
             </h1>
-            
         </header>
 
         <div class="main">

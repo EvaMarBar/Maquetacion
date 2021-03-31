@@ -7,7 +7,7 @@
             <th> Id </th>
             <th> Pregunta </th>
             <th> Respuesta </th>
-            <th> Acciones </th>
+            <th> Act </th>
         </tr>
 
         @foreach($faqs as $faq_element)
