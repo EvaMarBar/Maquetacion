@@ -57,12 +57,13 @@ class FaqController extends Controller
             'title' => request('title'),
             'description' => request('description'),
             'active' => 1,
+            'category_id' => request('category_id'),
         ]);
 
         $view = View::make('admin.faqs.index')
-            ->with('faq', $faq)
-            ->with('faqs', $this->faq->where('active', 1)->get())   
-            ->renderSections();        
+        ->with('faq', $faq)
+        ->with('faqs', $this->faq->where('active', 1)->get())
+        ->renderSections();        
 
         return response()->json([
             'table' => $view['table'],

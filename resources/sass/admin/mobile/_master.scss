@@ -1,8 +1,10 @@
 body{
-    background-color: rgb(130, 138, 149);
+    background-color: rgb(142, 149, 130);
     font-family: Arial, Helvetica, sans-serif;
 }
+
 .main {
     align-items: center;
-    width: 100%; 
+    transform: rotate(180deg);
+    width: 100%;
 }

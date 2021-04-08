@@ -1,9 +1,10 @@
 .form{
     background-color: rgb(216, 209, 205);
-    border: 2em solid  rgb(236, 157, 117);
-    border-radius: 2em;
+    border: 1.2em solid  rgb(236, 157, 117);
+    border-radius: 1em;
     height: max-content;
-    margin-top: 2em;
+    margin: 2em;
+    align-self: right;
     width: 40%;
 }
 
@@ -35,7 +36,7 @@
 
 .form_submit {
     margin: 1em;
-    width: 100%;
+    width: 20%;
 
     button:hover{ 
         background-color:rgb(241, 131, 75) ;

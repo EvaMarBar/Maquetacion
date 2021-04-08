@@ -4,7 +4,6 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
        
-
         <title>Maquetacion</title>
         
         @include("admin.layout.partials.style") 
@@ -12,12 +11,18 @@
     </head>
 
     <body>
-
         <div class="main">
-            @yield('content')
-        </div>
+     
+            @include('admin.layout.sidebar')
+            <div id="screen">
+                 @yield('content')
+            </div>
+        
 
         @include("admin.layout.partials.js")
+
+    </div>
+
     </body>  
 </html>
         

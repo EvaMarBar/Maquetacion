@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
-
+use App\Http\Controllers\Admin\FaqCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +22,19 @@ Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index',[
 
 Route::group(['prefix' => 'admin'],function (){
 
+    Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
+        'parameters' => [
+            'categorias' => 'faq_category', 
+        ],
+        'names' => [
+            'index' => 'faqs_category',
+            'create' => 'faqs_category_create',
+            'store' => 'faqs_category_store',
+            'destroy' => 'faqs_category_destroy',
+            'show' => 'faqs_category_show',
+        ]
+    ]);
+
     //Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
@@ -32,5 +45,6 @@ Route::group(['prefix' => 'admin'],function (){
             'show' => 'faqs_show',
         ]
     ]);
+   
 });
 

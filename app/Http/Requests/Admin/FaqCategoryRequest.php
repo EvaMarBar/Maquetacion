@@ -18,7 +18,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FaqRequest extends FormRequest
+class FaqCategoryRequest extends FormRequest
 {
     public function authorize()
     {
@@ -28,18 +28,14 @@ class FaqRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
+            'name' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'El titulo es obligatorio',
-            'description.required' => 'Debe añadir una descripción',
-            'category_id.required'=> 'Debe elegir una categoria',
+            'name.required' => 'El nombre es obligatorio',
         ];
     }
 }

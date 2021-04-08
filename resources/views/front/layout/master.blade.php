@@ -26,6 +26,5 @@
         </div>
 
         @include("front.layout.partials.js")
-    </body>  
-</html>
+   
         

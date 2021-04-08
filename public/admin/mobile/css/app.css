@@ -1,71 +1,73 @@
 body {
-  background-color: #828a95;
+  background-color: #8e9582;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .main {
   align-items: center;
+  transform: rotate(180deg);
   width: 100%;
 }
 
 .table {
-  border: 1em solid #ec9d75;
-  border-radius: 1em;
+  border: 0.5em solid #ec9d75;
+  border-radius: 0.5em;
   color: #191716;
-  font-size: 1em;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin-top: 2em;
+  margin: 1em auto;
+  transform: rotate(180deg);
   width: 90%;
 }
 .table table {
   border-collapse: collapse;
-  width: 100%;
 }
 .table table td {
-  word-break: break-word;
+  font-size: 1.5em;
+  padding: 0 0.2em;
   text-align: left;
-  padding: 0 0.5em;
+  word-break: break-word;
 }
 .table table td:nth-child(1) {
-  width: 10%;
-}
-.table table td:nth-child(2) {
-  width: 10%;
-}
-.table table td:nth-child(3) {
   width: 20%;
 }
+.table table td:nth-child(2) {
+  width: 30%;
+}
+.table table td:nth-child(3) {
+  width: 35%;
+}
 .table table td:nth-child(4) {
-  width: 10%;
+  width: 15%;
 }
-.table th {
+.table table th {
+  font-size: 1.2em;
+  font-weight: bold;
   height: 2em;
+  padding: 0 0.2em;
   text-align: left;
-  padding: 0 0.5em;
+  word-break: break-word;
 }
-.table tr {
+.table table tr {
   background-color: #d8d1cd;
 }
-.table tr:nth-child(even) {
+.table table tr:nth-child(even) {
   background-color: #fbfbff;
 }
-.table tr:hover {
+.table table tr:hover {
   background-color: #828a95;
 }
 
 .edit-button {
-  width: 1em;
-  height: 1em;
+  margin-top: 0.5em;
 }
 .edit-button path:hover {
   fill: #f1834b;
 }
 
 .delete-button {
-  width: 1em;
-  height: 1em;
+  margin-bottom: 0.5em;
 }
 .delete-button path:hover {
   fill: #f1834b;
@@ -73,17 +75,19 @@ body {
 
 .form {
   background-color: #d8d1cd;
-  border: 1em solid #ec9d75;
-  border-radius: 1em;
+  border: 0.4em solid #ec9d75;
+  border-radius: 0.5em;
+  font-size: 1.5em;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin-top: 1em;
+  margin: 1em auto;
+  transform: rotate(180deg);
   width: 90%;
 }
 
 .form_group {
-  margin: 1em;
+  margin: 1em auto;
   width: 90%;
 }
 
@@ -111,7 +115,6 @@ body {
 
 .form_submit {
   margin: 1em;
-  width: 100%;
 }
 .form_submit button:hover {
   background-color: #f1834b;

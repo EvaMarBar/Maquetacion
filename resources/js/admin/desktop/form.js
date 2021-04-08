@@ -1,78 +1,106 @@
-const axios = require('axios');
-const forms = document.querySelectorAll(".admin-form");
-const sendButton = document.getElementById("send");
 const table = document.getElementById("table");
-const editButtons = document.querySelectorAll(".edit-button");
-const deleteButtons  = document.querySelectorAll(".delete-button");
-const formContainer = document.getElementById("form");
+const form = document.getElementById("form");
+import { renderCkeditor } from "../../ckeditor";
 
-sendButton.addEventListener("click", () => {
+
+export let renderForm = () => {
+
+    let forms = document.querySelectorAll(".admin-form");
+    let sendButton = document.getElementById("send");
+
+    sendButton.addEventListener("click", (event) => {
     
-    forms.forEach(form => { 
+        event.preventDefault();
         
-        let data = new FormData(form);
-        let url = form.action;
+        forms.forEach(form => { 
+        
+            let data = new FormData(form);
 
-        let sendPostRequest = async () => {
+            if( ckeditors != 'null'){
 
-            try {
-                await axios.post(url, data).then(response => {
-                    //console.log(response.data.table)
-                    form.id.value = response.data.id;
-                    table.innerHTML = response.data.table;
+                Object.entries(ckeditors).forEach(([key, value]) => {
+                    data.append(key, value.getData());
                 });
-                 
-            } catch (error) {
-                console.error(error);
+              
             }
-        };
 
-        sendPostRequest();
+            let url = form.action;
+    
+            let sendPostRequest = async () => {
+    
+                try {
+                    await axios.post(url, data).then(response => {
+                        form.id.value = response.data.id;
+                        table.innerHTML = response.data.table;
+                        renderTable();  
+                        renderCkeditor();
+                });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+    
+            sendPostRequest();
+        });
     });
-});
+};
 
-editButtons.forEach(editButton => {
 
-    editButton.addEventListener('click', () =>{
+export let renderTable = () => {
 
-        let url = editButton.dataset.url;
+    let editButtons = document.querySelectorAll(".edit-button");
+    let deleteButtons = document.querySelectorAll(".delete-button");
 
-        let sendGetRequest = async () => {
+    editButtons.forEach(editButton => {
 
-            try {
-                console.log(url);
-                await axios.get(url).then(response => {
-                    formContainer.innerHTML = response.data.form;
-                });
-                 
-            }catch (error) {
-                console.error(error);
-            }
-        };
+        editButton.addEventListener("click", () => {
 
-        sendGetRequest();
-    })
-});
+            let url = editButton.dataset.url;
 
-deleteButtons.forEach(deleteButton =>{
+            let sendEditRequest = async () => {
 
-    deleteButton.addEventListener("click", ()=>{
+                try {
+                    await axios.get(url).then(response => {
+                        form.innerHTML = response.data.form;
+                        renderForm();
+                        renderCkeditor();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
 
-        let url = deleteButton.dataset.url;
+            sendEditRequest();
+        });
+    });
 
-        let sendDeleteRequest = async () => {
+    deleteButtons.forEach(deleteButton => {
 
-            try {
-                await axios.delete(url).then(response => {
-                    console.log(response.data.table)
-                    table.innerHTML = response.data.table;
-                });
-                 
-            }catch (error) {
-                console.error(error);
-            }
-        };
+        deleteButton.addEventListener("click", () => {
 
-        sendDeleteRequest();
-    })
-});
+            let url = deleteButton.dataset.url;
+
+            let sendDeleteRequest = async () => {
+
+                try {
+                    await axios.delete(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            sendDeleteRequest();
+        });
+    });
+};
+
+renderForm();
+renderTable();
+
+

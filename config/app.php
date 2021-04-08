@@ -161,14 +161,22 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        
+
 
         /*
          * Package Service Providers...
          */
 
+        Jenssegers\Agent\AgentServiceProvider::class,
+        
+        //Custom View Composers
+        App\Providers\AgentServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
+        App\Providers\ViewComposerServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
@@ -190,6 +198,7 @@ return [
 
     'aliases' => [
 
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
