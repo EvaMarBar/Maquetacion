@@ -2095,15 +2095,19 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-var menuButtons = document.querySelectorAll(".menu-button");
+var linkButtons = document.querySelectorAll(".link-button");
+var menuButton = document.getElementById("menu-button");
 var form = document.getElementById("form");
 var table = document.getElementById("table");
+var menu = document.getElementById("menu");
+var sidebar = document.getElementById("sidebar");
+var categoryTitle = document.getElementById("category-title");
 
 
 
-menuButtons.forEach(function (menuButton) {
-  menuButton.addEventListener('click', function () {
-    var url = menuButton.dataset.url;
+linkButtons.forEach(function (linkButton) {
+  linkButton.addEventListener('click', function () {
+    var url = linkButton.dataset.url;
 
     var sendMenuRequest = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2119,6 +2123,10 @@ menuButtons.forEach(function (menuButton) {
                   (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderForm)();
                   (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
                   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_2__.renderCkeditor)();
+                  menu.classList.remove("active");
+                  sidebar.classList.remove("active");
+                  window.history.pushState('', '', url); //Este cambia el enlace y lo recarga, el que estamos usando solo cambia el enlace.
+                  //window.location = url;
                 });
 
               case 3:
@@ -2145,6 +2153,17 @@ menuButtons.forEach(function (menuButton) {
 
     sendMenuRequest();
   });
+});
+menuButton.addEventListener("click", function () {
+  if (menuButton.classList.contains("active")) {
+    menuButton.classList.remove("active");
+    menu.classList.remove("active");
+    sidebar.classList.remove("active");
+  } else {
+    menuButton.classList.add("active");
+    menu.classList.add("active");
+    sidebar.classList.add("active");
+  }
 });
 
 /***/ }),

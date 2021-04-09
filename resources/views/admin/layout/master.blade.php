@@ -11,10 +11,9 @@
     </head>
 
     <body>
-        <div class="main">
-     
             @include('admin.layout.sidebar')
-            <div id="screen">
+
+            <div class="main">
                  @yield('content')
             </div>
         

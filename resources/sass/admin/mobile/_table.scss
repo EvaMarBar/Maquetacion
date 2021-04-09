@@ -42,14 +42,24 @@
         tr:hover {
             background-color: rgb(130, 138, 149);
         }   
+        .table-icons-container{
+            display: flex;
+            justify-content: space-around;
+        }
+        .title{
+            background-color:rgb(236, 157, 117);
+            width: 100%;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            padding-bottom: 0.5em;
+        }
     }
 }
 
 .edit-button{ 
-    margin-top: 0.5em;
     path:hover {fill:rgb(241, 131, 75)}
 }
 .delete-button{ 
-    margin-bottom: 0.5em;
     path:hover {fill:rgb(241, 131, 75)}
 }

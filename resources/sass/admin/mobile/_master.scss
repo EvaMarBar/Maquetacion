@@ -1,10 +1,77 @@
 body{
-    background-color: rgb(142, 149, 130);
+    background-color:  rgb(130, 138, 149);
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .main {
     align-items: center;
     transform: rotate(180deg);
-    width: 100%;
+    display: flex;
+    width: 100%; 
+    height: 100vh;
+    justify-content: space-around;  
+      
+}
+
+.menu{
+
+    display:flex;
+    position: absolute;
+    left:-100;
+
+    .sidebar{
+        font-size:0;
+    }
+
+    .sidebar.active{
+     
+        display: flex;
+        align-self: left;
+        justify-content: top;
+        font-size: 1em;
+        transition: 0.5s;
+        
+        ul{
+            
+            width: 100%;
+            padding:0;
+            margin:0;
+            word-break: break-word; 
+        }
+
+        li{
+            background-color: rgb(236, 157, 117);
+            width: 100%;
+            font-weight: bold;
+            padding:0.5em 0 0.5em 0.5em;
+        }
+
+        li:hover {
+            background-color: rgb(130, 138, 149);
+        }   
+    }
+
+    .menu-button{
+        height: 2em;
+        background-color: rgb(236, 157, 117);
+        padding: 1em;
+        position: fixed;
+        top:0; left:0;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        z-index: 100;
+}
+    }
+    .menu-button:hover{background-color: rgb(130, 138, 149);}
+    .menu-button.active:hover{background-color: rgb(130, 138, 149);}
+
+.menu.active{
+    display:flex;
+    background-color: rgb(236, 157, 117);
+    flex-direction:column;
+    position: absolute;
+    transition: 0.5s;
+    width: max-content;
+    top: 4em; left:0;
+    z-index: 100;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2)
 }
