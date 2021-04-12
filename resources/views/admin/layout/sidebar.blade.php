@@ -12,6 +12,9 @@
             <li class="link-button" data-url="{{route("faqs_category")}}" value="Categorias de FAQ's">
                 Categorias Faqs
             </li>
+            <li class="link-button" data-url="{{route("users")}}" value="Usuarios">
+                Usuarios
+            </li>
         </ul>
     </div>
 </div>

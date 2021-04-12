@@ -20,6 +20,14 @@ Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index',[
         'index' => 'faqs',
     ]]);
 
+Route::get('/usuarios', 'App\Http\Controllers\Front\UserController@index',[
+    'parameters' => [
+        'usuarios' => 'user', 
+    ],
+        'names' => [
+            'index' => 'users',
+        ]]);
+
 Route::group(['prefix' => 'admin'],function (){
 
     Route::resource('faqs/categorias', 'App\Http\Controllers\Admin\FaqCategoryController', [
@@ -43,6 +51,18 @@ Route::group(['prefix' => 'admin'],function (){
             'store' => 'faqs_store',
             'destroy' => 'faqs_destroy',
             'show' => 'faqs_show',
+        ]
+    ]);
+    Route::resource('usuarios', 'App\Http\Controllers\Admin\UserController', [
+        'parameters' => [
+            'usuarios' => 'user', 
+        ],
+        'names' => [
+            'index' => 'users',
+            'create' => 'users_create',
+            'store' => 'users_store',
+            'destroy' => 'users_destroy',
+            'show' => 'users_show',
         ]
     ]);
    
