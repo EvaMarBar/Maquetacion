@@ -35,55 +35,58 @@
 
 @section('form')
 
-<div class="form-content">
+    {{-- @include('admin.layout.errors') --}}
 
-    <form class="admin-form" id="faqs-form" action="{{route("faqs_store")}}" autocomplete="off">
 
-        {{ csrf_field() }}
+        <div class="form-content">
 
-        <input autocomplete="false" name="hidden" type="text" style="display:none;">
-        <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
+            <form class="admin-form" id="faqs-form" action="{{route("faqs_store")}}" autocomplete="off">
 
-        <div class="form_group">
-            <div class="form_label">
-                <label> @lang('admin/faqs.faq-question')</label>
+                {{ csrf_field() }}
+
+                <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
+
+                <div class="form_group">
+                    <div class="form_label">
+                        <label> @lang('admin/faqs.faq-question')</label>
+                    </div>
+
+                    <div class="form_input">
+                        <input type="text" name="title" value="{{isset($faq->title) ? $faq->title : ''}}" class="input">
+                    </div>
+                </div>
+                
+                <div class="form_group">
+                    <div class="form_label">
+                        <label>@lang('admin/faqs.faq-answer')</label>
+                    </div>
+                    <div class="form_input" id="editor">
+                        <textarea name="description" class="ckeditor" rows="5">{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                    </div>
+                </div>
+                
+                <div class="form_group">
+                    <div class="form_label">
+                        <label>@lang('admin/faqs.faq-category')</label>
+                    </div>
+                    <div class="form_input">
+                        <select name="category_id" value="id">
+                            <option></option>
+                            @foreach ($faqs_categories as $faq_category)
+                            <option value="{{$faq_category->id}}" {{$faq->category_id == $faq_category->id ? 'selected':''}} class="category_id">{{ $faq_category->name }}</option>
+                            @endforeach 
+                        </select>
+                    </div>
+                </div>
+
+            </form>
+
+            <div class="form_submit">
+                <button id="send">@lang('admin/faqs.faq-send')</button>
             </div>
-
-            <div class="form_input">
-                <input type="text" name="title" value="{{isset($faq->title) ? $faq->title : ''}}" class="input">
-            </div>
+                
         </div>
-        
-        <div class="form_group">
-            <div class="form_label">
-                <label>@lang('admin/faqs.faq-answer')</label>
-            </div>
-            <div class="form_input" id="editor">
-                <textarea name="description" class="ckeditor" rows="5">{{isset($faq->description) ? $faq->description : ''}}</textarea>
-            </div>
-        </div>
-        
-        <div class="form_group">
-            <div class="form_label">
-                <label>@lang('admin/faqs.faq-category')</label>
-            </div>
-            <div class="form_input">
-                <select name="category_id" value="id">
-                    <option></option>
-                    @foreach ($faqs_categories as $faq_category)
-                    <option value="{{$faq_category->id}}" {{$faq->category_id == $faq_category->id ? 'selected':''}} class="category_id">{{ $faq_category->name }}</option>
-                    @endforeach 
-                </select>
-            </div>
-        </div>
-
-    </form>
-
-    <div class="form_submit">
-        <button id="send">@lang('admin/faqs.faq-send')</button>
-    </div>
-        
-</div>
 
 
 @endsection

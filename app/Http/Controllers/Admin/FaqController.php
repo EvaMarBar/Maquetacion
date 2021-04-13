@@ -11,10 +11,12 @@ use App\Models\DB\Faq;
 
 class FaqController extends Controller
 {
+  
     protected $faq;
 
     function __construct(Faq $faq)
     {
+        $this->middleware('auth');
         $this->faq = $faq;
     }
 

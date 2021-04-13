@@ -2035,6 +2035,7 @@ var renderTable = function renderTable() {
 
       var sendDeleteRequest = /*#__PURE__*/function () {
         var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+          var errors, errorMessage;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
             while (1) {
               switch (_context3.prev = _context3.next) {
@@ -2053,9 +2054,22 @@ var renderTable = function renderTable() {
                 case 5:
                   _context3.prev = 5;
                   _context3.t0 = _context3["catch"](0);
-                  console.error(_context3.t0);
+
+                  if (_context3.t0.response.status == '422') {
+                    errors = _context3.t0.response.data.errors;
+                    errorMessage = '';
+                    Object.keys(errors).forEach(function (key) {
+                      errorMessage += '<li>' + errors[key] + '</li>';
+                    });
+                    document.getElementById('error-container').classList.add('active');
+                    document.getElementById('errors').innerHTML = errorMessage;
+                  }
 
                 case 8:
+                  ;
+                  sendDeleteRequest();
+
+                case 10:
                 case "end":
                   return _context3.stop();
               }
@@ -2067,13 +2081,11 @@ var renderTable = function renderTable() {
           return _ref5.apply(this, arguments);
         };
       }();
-
-      sendDeleteRequest();
     });
   });
+  renderForm();
+  renderTable();
 };
-renderForm();
-renderTable();
 
 /***/ }),
 
@@ -2101,7 +2113,6 @@ var form = document.getElementById("form");
 var table = document.getElementById("table");
 var menu = document.getElementById("menu");
 var sidebar = document.getElementById("sidebar");
-var categoryTitle = document.getElementById("category-title");
 
 
 

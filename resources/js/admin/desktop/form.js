@@ -91,16 +91,26 @@ export let renderTable = () => {
                     });
                     
                 } catch (error) {
-                    console.error(error);
+                    if(error.response.status == '422'){
+    
+                        let errors = error.response.data.errors;      
+                        let errorMessage = '';
+    
+                        Object.keys(errors).forEach(function(key) {
+                            errorMessage += '<li>' + errors[key] + '</li>';
+                        })
+        
+                        document.getElementById('error-container').classList.add('active');
+                        document.getElementById('errors').innerHTML = errorMessage;
                 }
             };
 
             sendDeleteRequest();
-        });
+        };
     });
-};
+});
 
 renderForm();
 renderTable();
 
-
+}

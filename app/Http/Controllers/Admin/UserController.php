@@ -4,29 +4,29 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserRequest;
 use App\Models\DB\User;
+use App\Http\Requests\Admin\UserRequest;
 
 class UserController extends Controller
 {
     protected $user;
 
-    function __construct(User $user)
+    public function __construct(User $user)
     {
+        // $this->middleware('auth');
         $this->user = $user;
     }
-
+    
     public function index()
     {
 
         $view = View::make('admin.users.index')
-            ->with('user', $this->user)
-            ->with('users', $this->user->where('active', 1)->get());   
+                ->with('user', $this->user)
+                ->with('users', $this->user->where('active', 1)->get());
 
         if(request()->ajax()) {
-
+            
             $sections = $view->renderSections(); 
     
             return response()->json([
@@ -50,19 +50,32 @@ class UserController extends Controller
         ]);
     }
 
-    public function store(UserRequest $user)
+    public function store(UserRequest $request)
     {            
-        $user = $this->user->updateOrCreate([
-            'id' => request('id')],[
-            'name' => request('name'),
-            'email' => request('email'),
-            'password' => bcrypt(request('password')),
-            'active' => 1,
-        ]);
+        
+        if (request('password') !== null) {
+
+            $user = User::updateOrCreate([
+                'id' => request('id')],[
+                'name' => request('name'),
+                'email' => request('email'),
+                'password' => bcrypt(request('password')),
+                'active' => 1,
+            ]);
+            
+        }else{
+
+            $user = User::updateOrCreate([
+                'id' => request('id')],[
+                'name' => request('name'),
+                'email' => request('email'),
+                'active' => 1,
+            ]);
+        }
 
         $view = View::make('admin.users.index')
-        ->with('user', $user)
         ->with('users', $this->user->where('active', 1)->get())
+        ->with('user', $user)
         ->renderSections();        
 
         return response()->json([
@@ -72,7 +85,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function edit(user $user)
     {
         $view = View::make('admin.users.index')
         ->with('user', $user)
@@ -90,12 +103,14 @@ class UserController extends Controller
         return $view;
     }
 
-    public function destroy(User $user)
+    public function show(user $user){
+
+    }
+
+    public function destroy(user $user)
     {
         $user->active = 0;
         $user->save();
-
-        // $faq->delete();
 
         $view = View::make('admin.users.index')
             ->with('user', $this->user)
@@ -108,3 +123,4 @@ class UserController extends Controller
         ]);
     }
 }
+

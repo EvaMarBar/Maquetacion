@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Front\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,19 +16,13 @@ use App\Http\Controllers\Admin\FaqCategoryController;
 |
 */
 
-//Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index');[UserController::class
-Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index',[
-    'names' => [
-        'index' => 'faqs',
-    ]]);
 
-Route::get('/usuarios', 'App\Http\Controllers\Front\UserController@index',[
-    'parameters' => [
-        'usuarios' => 'user', 
-    ],
-        'names' => [
-            'index' => 'users',
-        ]]);
+//Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index');[UserController::class
+
+Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
+Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
+
+Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
 
 Route::group(['prefix' => 'admin'],function (){
 

@@ -33,7 +33,7 @@
 
 @section('form')
 
-    @include('admin.layout.errors')
+    {{-- @include('admin.layout.errors') --}}
 
         <div class="form-content">
 
@@ -68,7 +68,7 @@
                         <label>Contraseña</label>
                     </div>
                     <div class="form_input">
-                        <input type="password" name="password" value="{{isset($user->password) ? $user->password : ''}}" class="input">
+                        <input type="password" name="password" value='' class="input">
                     </div>
                 </div>
 
@@ -77,7 +77,7 @@
                         <label>Repita la Contraseña</label>
                     </div>
                     <div class="form_input">
-                        <input type="password" name="password_confirmation" value="{{isset($user->password) ? $user->password : ''}}" class="input">
+                        <input type="password" name="password_confirmation" value='' class="input">
                     </div>
                 </div>
 

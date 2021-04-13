@@ -1,6 +1,6 @@
-@extends('front.layout.table_form')
+@extends('front.layout.master')
 
-@section('table')
+@section('content')
 
 <div class="faqs">
 

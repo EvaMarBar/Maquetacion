@@ -4,7 +4,6 @@ const form = document.getElementById("form");
 const table = document.getElementById("table");
 const menu = document.getElementById("menu");
 const sidebar = document.getElementById("sidebar");
-const categoryTitle = document.getElementById("category-title");
 import { renderForm } from "./form";
 import { renderTable } from "./form";
 import { renderCkeditor } from "../../ckeditor";
