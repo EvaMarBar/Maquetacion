@@ -15,6 +15,9 @@
             <li class="link-button" data-url="{{route("users")}}" value="Usuarios">
                 Usuarios
             </li>
+            <li class="link-button" data-url="{{route("clients")}}" value="Clientes">
+                @lang('admin/clients.parent_section')
+            </li>
         </ul>
     </div>
 </div>

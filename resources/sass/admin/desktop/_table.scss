@@ -1,11 +1,12 @@
 .table{
-    border: 1.2em solid rgb(236, 157, 117);
-    border-radius: 1em;
+    border: 0.5em solid rgb(236, 157, 117);
+    border-radius: 0.5em;
     color: rgb(25, 23, 22);
     font-size: 1em;
     height: max-content;
-    margin: 4em 0;
-    width: 45%;
+    margin: 4em 1em;
+    width: 60%;
+
 
     table {
         border-collapse: collapse;
@@ -18,9 +19,13 @@
         text-align: left;
         word-break: break-word;
         }
+        tr td:first-child {
+            white-space: nowrap;
+            width: 10%;
+        }
         tr td:last-child {
             white-space: nowrap;
-            width: 25%;
+            width: 10%;
         }
         
         .table-icons-container{
