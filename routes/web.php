@@ -19,8 +19,10 @@ use App\Http\Controllers\Front\LoginController;
 
 //Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index');[UserController::class
 
+Route::post('/fingerprint', 'App\Http\Controllers\Front\FingerprintController@store')->name('front_fingerprint');
 Route::get('/login', 'App\Http\Controllers\Front\LoginController@index')->name('front_login');
 Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name('front_login_submit');
+Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
 
 Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
 

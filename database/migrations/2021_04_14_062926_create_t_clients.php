@@ -20,7 +20,7 @@ class CreateTClients extends Migration
             $table->string('address');
             $table->integer('postal_code');
             $table->string('city');
-            $table->string('country');
+            $table->integer('country_id');
             $table->string('email');
             $table->integer('telephone');
             $table->integer('order_id')->unique();

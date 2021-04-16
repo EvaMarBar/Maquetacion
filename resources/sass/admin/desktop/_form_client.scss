@@ -1,24 +1,15 @@
-.form{
+
+.pannel-form{
+    display: none;
+}
+.pannel-form.active{
+    display: block;
     background-color: rgb(216, 209, 205);
     border: 1.2em solid  rgb(236, 157, 117);
     border-radius: 1em;
     height: max-content;
     margin: 4em 0;
     width: 45%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-evenly;
-   
-}
-
-.name {
-    margin:1em;
-    width:max-content;
-
-    }
-.surname{
-    margin:1em;
-    width:max-content;
 }
 .form_label {
     margin-bottom: 1em;
@@ -51,4 +42,3 @@
         border-radius: 0.2em;
     }
 }
-

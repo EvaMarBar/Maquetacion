@@ -16,7 +16,7 @@ class ClientController extends Controller
 
     function __construct(Client $client)
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->client = $client;
     }
 
@@ -61,7 +61,7 @@ class ClientController extends Controller
             'address' => request('address'),
             'postal_code' => request('postal_code'),
             'city' => request('city'),
-            'country' => request('country'),
+            'country_id' => request('country_id'),
             'email' => request('email'),
             'telephone' => request('telephone'),
             'order_id' => request('order_id'),

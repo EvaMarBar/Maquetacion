@@ -32,7 +32,7 @@ class ClientRequest extends FormRequest
             'surname' => 'required',
             'postal_code' => 'required|numeric',
             'city' => 'required',
-            'country' => 'required',
+            // 'country' => 'required',
             'email'=>'required_without:id',
             'telephone' => 'required|numeric',
             'order_id' => 'required|numeric',

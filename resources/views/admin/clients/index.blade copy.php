@@ -2,23 +2,36 @@
 
 @section('table')
 
-    <div class="title">@lang('admin/clients.parent_section')</div>
-    <div class="row row-header">
-        <div class="column">@lang('admin/clients.client_order_id')</div>
-        <div class="column">@lang('admin/clients.client_email')</div>
-    </div>     
-    <div class="row">
-        @foreach($clients as $client_element)
-                <div class="swipe-element">
-                    <div class="swipe-back">
-                    </div>            
-                    <div class="swipe-front promote-layer" id="el">
-                        <div class="column"> {{$client_element->order_id}} </div>
-                        <div class="column"> {{$client_element->email}} </div>
-                    </div>    
-                </div>  
-        @endforeach
-    </div>
+    <table>
+        <div class="title">@lang('admin/clients.parent_section')</div>
+        <tr>
+            <th>@lang('admin/clients.client_order_id')</th>
+            <th>@lang('admin/clients.client_email')</th>
+            {{-- <th>@lang('admin/clients.client_country')</th>
+            <th>@lang('admin/clients.client_date_ordered')</th>
+            <th>@lang('admin/clients.client_date_sended')</th>
+            <th>@lang('admin/clients.client_payment')</th> --}}
+            {{-- <th> </th> --}}
+        </tr>
+
+        <div class="swipe-element">
+            <div class="swipe-back">
+            </div>
+            <div class="swipe-front promote-layer">
+                @foreach($clients as $client_element)
+                    <tr>
+                        <td> {{$client_element->order_id}} </td>
+                        <td> {{$client_element->email}} </td>
+                        {{-- <td> {{$client_element->country->name}} </td>
+                        <td> {{$client_element->date_ordered}} </td>
+                        <td> {{$client_element->date_sended}} </td>
+                        <td> {{$client_element->payment}} </td> --}}
+                    </tr>
+                @endforeach
+            </div>
+        </div>
+    </table>
+   
 @endsection
 
 
