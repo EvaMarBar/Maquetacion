@@ -2,15 +2,14 @@
 
 @section('content')
 
-{{-- class="two-columns" --}}
-    <div>
-        <div class="table" id="table">
+    <div class="two-columns">
+        <div class="table active" id="table">
             @yield('table')
         </div>
 
-        {{-- <div class="form" id="form">
+        <div class="form" id="form">
             @yield('form')
         </div>
-    </div> --}}
+    </div>
 
 @endsection

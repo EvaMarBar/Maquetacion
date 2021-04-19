@@ -16,6 +16,64 @@ body {
   width: 100%;
 }
 
+.table-filter {
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+.table-filter.filter-active .table-filter-container {
+  max-height: 70vh;
+  background-color: #ec9d75;
+  position: relative;
+  top: 0;
+}
+.table-filter .table-filter-container {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s;
+  width: 100%;
+  padding-left: 4em;
+}
+.table-filter .table-filter-container form {
+  padding: 1em;
+}
+.table-filter .table-filter-buttons {
+  width: 100%;
+}
+.table-filter .table-filter-buttons .table-filter-button {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s;
+  width: 100%;
+  text-align: center;
+}
+.table-filter .table-filter-buttons .table-filter-button.button-active {
+  max-height: 10vh;
+  height: 2em;
+  padding: 1em 0;
+}
+.table-filter .table-filter-buttons .table-filter-button.open-filter {
+  background-color: #ec9d75;
+}
+.table-filter .table-filter-buttons .table-filter-button.apply-filter {
+  background-color: #b0b0b0;
+  height: 2em;
+}
+.table-filter .table-filter-buttons .table-filter-button.remove-filter {
+  background-color: #d74242;
+}
+.table-filter .table-filter-buttons .table-filter-button svg {
+  height: 1.5em;
+  padding: 0.5em;
+  width: 1.5em;
+}
+.table-filter .table-filter-buttons .table-filter-button svg path {
+  fill: white;
+}
+
 .table {
   border: 0.5em solid #ec9d75;
   border-radius: 0.5em;
@@ -71,6 +129,126 @@ body {
   padding-bottom: 0.5em;
   text-align: center;
   width: 100%;
+}
+
+.table-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.row-header {
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #d8d1cd;
+  justify-content: space-evenly;
+}
+
+.row-title {
+  font-size: 1em;
+  font-weight: bold;
+  text-align: left;
+  background-color: #ec9d75;
+}
+
+.table-row {
+  background-color: white;
+  border-bottom: 1px solid #bababa;
+  border-top: 1px solid #bababa;
+  min-height: 10vh;
+  position: relative;
+  width: inherit;
+  justify-content: space-evenly;
+}
+
+.column {
+  margin: 0.5em;
+  width: 25%;
+}
+
+.content {
+  padding: 32px;
+  box-sizing: border-box;
+  display: row;
+  overflow: hidden;
+}
+
+.swipe-element {
+  position: relative;
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.swipe-front {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  border: 1px solid black;
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  margin: 0;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.table-field-container {
+  background-color: white;
+  min-height: 10vh;
+  position: absolute;
+  touch-action: none;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.table-field {
+  margin: 0.2em;
+  white-space: nowrap;
+  justify-content: space-evenly;
+}
+
+.table-icons-container {
+  position: absolute;
+  width: 100%;
+  z-index: 997;
+}
+.table-icons-container .table-icons {
+  display: none;
+  min-height: 10vh;
+}
+.table-icons-container .table-icons svg {
+  height: 1.5em;
+  width: 1.5em;
+}
+.table-icons-container .table-icons svg path {
+  fill: white;
+}
+.table-icons-container .table-icons#swipe-active {
+  display: block;
+}
+.table-icons-container .table-icons.edit-button {
+  background-color: #aae9aa;
+  text-align: left;
+}
+.table-icons-container .table-icons.edit-button svg {
+  margin-left: 1em;
+  margin-top: 1em;
+}
+.table-icons-container .table-icons.delete-button {
+  background-color: #e78d8d;
+  text-align: right;
+}
+.table-icons-container .table-icons.delete-button svg {
+  margin-right: 1em;
+  margin-top: 1em;
 }
 
 .button {
@@ -220,6 +398,7 @@ body {
   font-size: 1em;
   justify-content: top;
   transition: 0.5s;
+  z-index: 10000;
 }
 .menu .sidebar.active ul {
   margin: 0;
@@ -248,7 +427,7 @@ body {
   left: 0;
   transition: 0.5s;
   width: 15%;
-  z-index: 10;
+  z-index: 1005;
   position: fixed;
 }
 
@@ -256,7 +435,6 @@ body {
   position: fixed;
   z-index: 100;
   background-color: #ec9d75;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   height: 2em;
   padding: 1em;
   position: fixed;

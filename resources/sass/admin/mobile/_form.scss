@@ -1,14 +1,29 @@
 .form{
-    background-color: rgb(216, 209, 205);
-    border: 0.4em solid  rgb(236, 157, 117);
-    border-radius: 0.5em;
-    font-size: 1.5em;
-    height: max-content;
-    margin: 1em auto;
-    transform: rotate(180deg);
-    width: 80%;
+
+	background-color: rgb(255, 255, 255);
+	display: none;
+	min-height: 80vh;
+	width: 100%;
+
+	&.active{
+		display: block;
+        background-color: rgb(216, 209, 205);
+        border: 0.4em solid  rgb(236, 157, 117);
+        border-radius: 0.5em;
+        font-size: 1.5em;
+        height: max-content;
+        margin: 1em auto;
+        width: 80%;
+        display: block;
+    }  
+}
+
+.pannel-form{
+    display: none;
+}
+.pannel-form.active{
     display: block;
-  
+
 }
 
 .form_group {
@@ -24,12 +39,14 @@
 .form_label label {
     color: rgb(25, 23, 22);
     font-weight: bold;
-    width:100%;    
+    width:100%; 
+    margin: 0.2em;
     }
 
 
 .form_input input {
-    width:100%;
+    width:90%;
+    margin: 0.2em;
     }
 
 .form_input textarea {
@@ -37,6 +54,40 @@
     width:100%;
     }
 
+.form-topbar-options{
+    display: none;
+    }
+
+.form-topbar-options.active{
+    background-color: rgb(236, 157, 117);
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+    display:block;
+    position: absolute;
+    top: 6.5em; right:5.5em;
+    transition: 0.5s;
+    width: 15%;
+    z-index: 10;
+    position: fixed;
+    ul{
+        margin:0;
+        padding:0;
+        width: 100%;
+        word-break: break-word; 
+    }
+
+    li{
+        background-color: rgb(236, 157, 117);
+        font-weight: bold;
+        padding:0.5em 0 0.5em 0.5em;
+        width: 100%;
+        cursor: default;
+    }
+
+    li:hover {
+        background-color: rgb(130, 138, 149);
+    } 
+    }
+        
 .form_submit {
     margin: 1em;
 

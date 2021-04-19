@@ -1,3 +1,7 @@
+import {editElement} from './form';
+import {deletePopUp} from './form';
+
+export function swipeRevealItem (element){
 window.requestAnimFrame = (function(){
     'use strict';
 
@@ -42,6 +46,8 @@ window.requestAnimFrame = (function(){
     var currentXPosition = 0;
     var currentState = STATE_DEFAULT;
     var handleSize = 10;
+    let leftSwipeVisible = 0;
+    let rightSwipeVisible = 0;
 
     // Perform client width here as this can be expensive and doens't
     // change until window.onresize
@@ -165,9 +171,11 @@ window.requestAnimFrame = (function(){
           break;
         case STATE_LEFT_SIDE:
           currentXPosition = -(itemWidth - handleSize);
+          deletePopUp(element.querySelector('.left-swipe').dataset.url);
           break;
         case STATE_RIGHT_SIDE:
           currentXPosition = itemWidth - handleSize;
+          editElement(element.querySelector('.right-swipe').dataset.url);
           break;
       }
 
@@ -206,6 +214,33 @@ window.requestAnimFrame = (function(){
 
       var newXTransform = (currentXPosition - differenceInX)+'px';
       var transformStyle = 'translateX('+newXTransform+')';
+      if(Math.sign(differenceInX) == 1 && leftSwipeVisible == 0){
+
+        let swipeActive = document.getElementById('swipe-active');
+
+        if(swipeActive !== null){
+            swipeActive.removeAttribute('id');
+        }
+
+        element.querySelector('.left-swipe').id = 'swipe-active';
+        console.log(element.querySelector('.left-swipe').id)
+
+        leftSwipeVisible = 1;
+        rightSwipeVisible = 0;
+
+    }else if(Math.sign(differenceInX) == -1 && rightSwipeVisible == 0){
+
+        let swipeActive = document.getElementById('swipe-active');
+
+        if(swipeActive !== null){
+            swipeActive.removeAttribute('id');
+        }
+
+        element.querySelector('.right-swipe').id = 'swipe-active';
+
+        leftSwipeVisible = 0;
+        rightSwipeVisible = 1;
+    }
       swipeFrontElement.style.webkitTransform = transformStyle;
       swipeFrontElement.style.MozTransform = transformStyle;
       swipeFrontElement.style.msTransform = transformStyle;
@@ -284,3 +319,4 @@ window.requestAnimFrame = (function(){
       isCompleted[sampleName] = true;
     }
   }
+}

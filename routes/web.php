@@ -42,6 +42,7 @@ Route::group(['prefix' => 'admin'],function (){
     ]);
 
     //Route::get('/faqs/json', 'App\Http\Controllers\Admin\FaqController@indexJson')->name('faqs_json');
+    Route::post('faqs/filter', 'App\Http\Controllers\Admin\FaqController@filter')->name('faqs_filter');
     Route::resource('faqs', 'App\Http\Controllers\Admin\FaqController', [
         'names' => [
             'index' => 'faqs',
@@ -63,6 +64,7 @@ Route::group(['prefix' => 'admin'],function (){
             'show' => 'users_show',
         ]
     ]);
+
     Route::resource('clientes', 'App\Http\Controllers\Admin\ClientController', [
         'parameters' => [
             'clientes' => 'client', 

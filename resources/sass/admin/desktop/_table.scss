@@ -61,6 +61,138 @@
         }
     }
 
+    .table-content{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+      }
+      .row{
+        display: flex;
+        flex-direction: row;
+      
+      }
+      .row-header{
+        font-size: 1em;
+        font-weight: bold;
+        background-color:rgb(216, 209, 205) ;
+        justify-content: space-evenly;
+      }
+      .row-title{
+        font-size: 1em;
+        font-weight: bold;
+        text-align: left;
+        background-color:rgb(236, 157, 117);
+      }
+      .table-row {
+        background-color: rgb(255, 255, 255);
+        border-bottom: 1px solid hsl(0, 0%, 73%);
+        border-top: 1px solid hsl(0, 0%, 73%);
+        min-height: 10vh;
+        position: relative;  
+        width: inherit;  
+        justify-content: space-evenly;
+      }
+      .column{
+        margin: 0.5em;
+        width: 25%;
+      }
+      
+      .content {
+          padding: 32px;
+          box-sizing: border-box;
+          display: row;
+      
+          overflow: hidden;
+        }
+      
+        .swipe-element {
+          position: relative;
+      
+          width: 100%;
+          height: max-content;
+        }
+      
+        .swipe-front {
+          position: relative;
+          display: flex;
+          flex-direction: row;
+          border: 1px solid black;
+      
+          width: 100%;
+          height: max-content;
+      
+          margin: 0;
+          padding: 8px;
+          box-sizing: border-box;
+      
+       
+        }
+      
+        
+      .table-field-container{
+        background-color: white;
+        min-height: 10vh;
+        position: absolute;
+        -ms-touch-action: none;
+        touch-action: none;
+        width: 100%;
+        justify-content: space-evenly;
+      }
+      .table-field{
+        margin: 0.2em;
+        white-space: nowrap; 
+        justify-content: space-evenly;
+      }
+      
+      .table-icons-container{
+      
+        position: absolute;
+        width: 100%;
+        z-index: 997;
+      
+        .table-icons{
+      
+            display: none;
+            min-height: 10vh;
+      
+            svg{
+                height: 1.5em;
+                width: 1.5em;
+        
+                path{
+                    fill: hsl(0, 0%, 100%);
+                }
+            }
+        }
+      
+        .table-icons#swipe-active{
+            display: block;
+        }
+      
+        .table-icons.edit-button{
+      
+           background-color: rgb(170, 233, 170);
+           text-align: left;
+      
+            svg{
+                margin-left: 1em;
+                margin-top: 1em;
+            }
+      
+        }
+        
+        .table-icons.delete-button{
+      
+            background-color: hsl(0, 65%, 73%);
+            text-align: right;
+      
+            svg{
+                margin-right: 1em;
+                margin-top: 1em;
+            }
+        }
+      }
+      
 .button{ 
     margin:0.2em;
     path:hover {fill:rgb(241, 131, 75)}

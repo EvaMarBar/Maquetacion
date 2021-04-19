@@ -1,7 +1,7 @@
 const table = document.getElementById("table");
 const form = document.getElementById("form");
 import { renderCkeditor } from "../../ckeditor";
-
+import {renderFilterTable} from "./filterTable";
 
 export let renderForm = () => {
 
@@ -34,6 +34,7 @@ export let renderForm = () => {
                         table.innerHTML = response.data.table;
                         renderTable();  
                         renderCkeditor();
+                        renderFilterTable();
                 });
                     
                 } catch (error) {
@@ -65,6 +66,7 @@ export let renderTable = () => {
                         form.innerHTML = response.data.form;
                         renderForm();
                         renderCkeditor();
+                        renderFilterTable();
                     });
                     
                 } catch (error) {
@@ -88,6 +90,7 @@ export let renderTable = () => {
                     await axios.delete(url).then(response => {
                         table.innerHTML = response.data.table;
                         renderTable();
+                        renderFilterTable();
                     });
                     
                 } catch (error) {
@@ -102,4 +105,5 @@ export let renderTable = () => {
 
 renderForm();
 renderTable();
+renderFilterTable();
 

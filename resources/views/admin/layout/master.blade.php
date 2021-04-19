@@ -13,10 +13,20 @@
     <body>
             @include('admin.layout.sidebar')
 
+            {{-- @include('admin.layout.pop_up') --}}
+
+            @if(isset($filters))
+                @include('admin.layout.table_filters', $filters)
+            @endif
+
+
             <div class="main">
                  @yield('content')
             </div>
-        
+
+            @if($agent->isMobile())
+                @include('admin.layout.partials.bottombar')
+            @endif
 
         @include("admin.layout.partials.js")
 

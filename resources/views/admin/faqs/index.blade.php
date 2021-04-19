@@ -1,3 +1,8 @@
+@php
+
+    $filters = ['category' => $faqs_categories, 'search' => true]; 
+@endphp
+
 @extends('admin.layout.table_form')
 
 @section('table')

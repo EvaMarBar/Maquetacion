@@ -1,6 +1,11 @@
+import { renderCkeditor } from "../../ckeditor";
+import {swipeRevealItem} from './tableSwipe';
+import { showForm } from './bottombarMenu';
+
+
 const table = document.getElementById("table");
 const form = document.getElementById("form");
-import { renderCkeditor } from "../../ckeditor";
+
 
 
 export let renderForm = () => {
@@ -51,6 +56,7 @@ export let renderTable = () => {
 
     let editButtons = document.querySelectorAll(".edit-button");
     let deleteButtons = document.querySelectorAll(".delete-button");
+    let swipeRevealItemElements = document.querySelectorAll('.swipe-element');
 
     editButtons.forEach(editButton => {
 
@@ -98,7 +104,64 @@ export let renderTable = () => {
             sendDeleteRequest();
         });
     });
+    swipeRevealItemElements.forEach(swipeRevealItemElement => {
+
+        new swipeRevealItem(swipeRevealItemElement);
+    });
 };
+
+export let editElement = (url) => {
+    
+
+    let sendEditRequest = async () => {
+
+        try {
+            await axios.get(url).then(response => {
+                form.innerHTML = response.data.form;
+                showForm();
+                renderForm();
+            });
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
+    sendEditRequest();
+}
+
+export let deletePopUp = (url) =>{
+    let popUp = document.getElementById('.pop-up');
+    let confirmButtons = document.querySelectorAll('.confirm-button');
+
+    popUp.classList.add('active');
+    confirmButtons.forEach(confirmButton =>{
+
+        confirmButton.addEventListener('click', ()=>{
+
+            if(confirmButton.id=="yes"){
+                
+                let sendDeleteRequest = async () => {
+        
+                    try {
+                        await axios.delete(url).then(response => {
+                            table.innerHTML = response.data.table;
+                            renderTable();
+                        });
+                        
+                    } catch (error) {
+                        console.error(error);
+                    }
+                };
+        
+                sendDeleteRequest();
+
+            }else{
+                renderTable();
+            }
+        })
+    }) 
+}
 
 renderForm();
 renderTable();

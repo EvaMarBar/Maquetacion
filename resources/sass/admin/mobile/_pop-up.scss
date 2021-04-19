@@ -1,0 +1,9 @@
+.pop-up{
+    display:none;
+}
+.pop-up.active{
+    display: block;
+    align-items: center;
+    border: 0.2em solid rgb(236, 157, 117);
+    z-index: 1000;
+}

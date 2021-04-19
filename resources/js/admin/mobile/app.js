@@ -2,5 +2,7 @@ require('../../bootstrap');
 require('../../ckeditor');
 require('./form');
 // require('./sidebar');
-require('./table');
-
+require('./tableSwipe');
+// require('./filterTable');
+require('./form-topbar');
+require('./bottombarMenu');
