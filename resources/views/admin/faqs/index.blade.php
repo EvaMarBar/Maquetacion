@@ -1,6 +1,6 @@
 @php
 
-    $filters = ['category' => $faqs_categories, 'search' => true]; 
+    $filters = ['category' => $faqs_categories, 'search' => true, 'initial-date' =>true, 'final-date'=>true]; 
 @endphp
 
 @extends('admin.layout.table_form')
@@ -10,10 +10,10 @@
     <table>
         <div class="title">@lang('admin/faqs.parent_section')</div>
         <tr>
-            <th>@lang('admin/faqs.faq-id')</th>
-            <th> @lang('admin/faqs.faq-question')</th>
+            <th id="id">@lang('admin/faqs.faq-id')</th>
+            <th id="title" data-url="{{route('faqs_order')}}"> @lang('admin/faqs.faq-question')</th>
             <th> @lang('admin/faqs.faq-answer')</th>
-            <th> @lang('admin/faqs.faq-category')</th>
+            <th > @lang('admin/faqs.faq-category')</th>
             <th> </th>
         </tr>
 
@@ -39,6 +39,8 @@
 @endsection
 
 @section('form')
+
+    @isset($faq)
 
     {{-- @include('admin.layout.errors') --}}
 
@@ -93,5 +95,6 @@
                 
         </div>
 
+    @endif
 
 @endsection

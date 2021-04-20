@@ -105,5 +105,4 @@ export let renderTable = () => {
 
 renderForm();
 renderTable();
-renderFilterTable();
 

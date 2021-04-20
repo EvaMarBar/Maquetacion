@@ -129,10 +129,33 @@ class FaqController extends Controller
                 return $q;
             }
             else {
-                return $q->where('name', 'like', "%$search%");
+                return $q->where('title', 'like', "%$search%");
+            }
+        });
+
+        $query->when(request('initial-date'), function ($q, $initialDate) {
+
+            if($initialDate == null){
+                return $q;
+            }
+            else {
+                return $q->whereDate('created_at', '>=' , $initialDate);
+                
             }
         });
         
+        $query->when(request('final-date'), function ($q, $finalDate) {
+
+            if($finalDate == null){
+                return $q;
+            }
+            else {
+                return $q->whereDate('created_at', '<=' , $finalDate);
+                
+            }
+        });
+
+               
         $faqs = $query->where('active', 1)->get();
 
         $view = View::make('admin.faqs.index')
@@ -143,5 +166,18 @@ class FaqController extends Controller
             'table' => $view['table'],
         ]);
     }
+
+    // public function order (Faq $faq){
+
+    //     $this->faq = Faq::where('active', 1)->orderBy('title', 'asc')->get();
+    
+    //     $view = View::make('admin.faqs.index')
+    //         ->with('faq', $this->faq)
+    //         ->renderSections();
+
+    //     return response()->json([
+    //         'table' => $view['table'],
+    //     ]);
+    // }
 
 }

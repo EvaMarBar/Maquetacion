@@ -1,9 +1,51 @@
 .pop-up{
-    display:none;
-}
-.pop-up.active{
-    display: block;
-    align-items: center;
-    border: 0.2em solid rgb(236, 157, 117);
-    z-index: 1000;
+
+    background-color: hsl(0, 0%, 100%);
+    transform: translateY(-200%);
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    top: -10%;
+    transition: transform 0.5s;
+    width: 70%;
+    z-index: 3000;
+
+    &.active{
+        position: relative;
+        top: 10em;
+        transform: translateY(0);
+        z-index: 5000;
+    }
+
+    .message{
+
+        background-color: grey;
+        border-bottom: 1px solid #e9ecef;
+        padding: 0.5em 1em;
+        text-align: center;
+    }
+
+    .modal-delete-footer{
+
+        display: flex;
+
+        .delete-option-button{
+
+            color: hsl(0, 0%, 100%);
+            cursor: pointer;
+            font-weight: 600;
+            text-align: center;
+            width: 50%;
+
+            &#cancel-delete{
+                background-color: hsl(183, 98%, 35%);;
+            }
+
+            &#confirm-delete{
+                background-color: hsl(0, 65%, 55%);
+            }
+        }
+    }
 }

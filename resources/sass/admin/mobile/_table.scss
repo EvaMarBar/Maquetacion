@@ -1,6 +1,6 @@
 .table{
   height: max-content;
-  width: 100%;
+  width: 90%;
   display: none;
 
   &.active{
@@ -10,7 +10,7 @@
       color: rgb(25, 23, 22);
       height: max-content;
       margin: 1em auto;
-      width: 100%;
+      width: 90%;
   }
 }
 
@@ -28,11 +28,11 @@
   font-size: 1em;
   font-weight: bold;
   background-color:rgb(216, 209, 205) ;
-  justify-content: space-evenly;
 }
 .row-title{
   font-size: 1.5em;
   font-weight: bold;
+  text-align: left;
   background-color:rgb(236, 157, 117);
 }
 .table-row {
@@ -41,12 +41,10 @@
   border-top: 1px solid hsl(0, 0%, 73%);
   min-height: 10vh;
   position: relative;  
-  width: inherit;  
-  justify-content: space-evenly;
+  text-align: left;
 }
 .column{
-  margin: 0.5em;
-  width: 25%;
+  margin: 0.5em 1em;
 }
 
 .content {
@@ -68,8 +66,6 @@
     position: relative;
     display: flex;
     flex-direction: row;
-    border: 1px solid black;
-
     width: 100%;
     height: max-content;
 
@@ -89,12 +85,13 @@
   touch-action: none;
   width: 100%;
   z-index: 999;
-  justify-content: space-evenly;
+  display: flex;
 }
 .table-field{
-  margin: 0.2em;
+  margin: 0.5em;
   white-space: nowrap; 
   justify-content: space-evenly;
+  flex-grow: 2;
 }
 
 .table-icons-container{

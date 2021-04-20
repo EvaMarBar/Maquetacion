@@ -13,8 +13,10 @@
     <body>
             @include('admin.layout.sidebar')
 
-            {{-- @include('admin.layout.pop_up') --}}
-
+            @if($agent->isMobile())
+                @include('admin.layout.pop_up')
+            @endif
+          
             @if(isset($filters))
                 @include('admin.layout.table_filters', $filters)
             @endif

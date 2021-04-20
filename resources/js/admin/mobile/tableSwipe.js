@@ -172,6 +172,15 @@ window.requestAnimFrame = (function(){
         case STATE_LEFT_SIDE:
           currentXPosition = -(itemWidth - handleSize);
           deletePopUp(element.querySelector('.left-swipe').dataset.url);
+          currentXPosition = 0;
+          transformStyle = 'translateX('+currentXPosition+'px)';
+
+          swipeFrontElement.style.msTransform = transformStyle;
+          swipeFrontElement.style.MozTransform = transformStyle;
+          swipeFrontElement.style.webkitTransform = transformStyle;
+          swipeFrontElement.style.transform = transformStyle;
+    
+          currentState = newState;
           break;
         case STATE_RIGHT_SIDE:
           currentXPosition = itemWidth - handleSize;
@@ -223,8 +232,7 @@ window.requestAnimFrame = (function(){
         }
 
         element.querySelector('.left-swipe').id = 'swipe-active';
-        console.log(element.querySelector('.left-swipe').id)
-
+        
         leftSwipeVisible = 1;
         rightSwipeVisible = 0;
 
@@ -298,7 +306,7 @@ window.requestAnimFrame = (function(){
 
   var registerInteraction = function () {
     'use strict';
-    window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
+    // window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
   };
 
   var swipeFronts = document.querySelectorAll('.swipe-front');

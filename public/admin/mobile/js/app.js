@@ -2021,7 +2021,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "renderForm": () => (/* binding */ renderForm),
 /* harmony export */   "renderTable": () => (/* binding */ renderTable),
 /* harmony export */   "editElement": () => (/* binding */ editElement),
-/* harmony export */   "deletePopUp": () => (/* binding */ deletePopUp)
+/* harmony export */   "deletePopUp": () => (/* binding */ deletePopUp),
+/* harmony export */   "deleteConfirmation": () => (/* binding */ deleteConfirmation)
 /* harmony export */ });
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -2245,54 +2246,66 @@ var editElement = function editElement(url) {
   sendEditRequest();
 };
 var deletePopUp = function deletePopUp(url) {
-  var popUp = document.getElementById('.pop-up');
-  var confirmButtons = document.querySelectorAll('.confirm-button');
+  var popUp = document.getElementById('pop-up');
+  var confirmDelete = document.getElementById('confirm-delete');
   popUp.classList.add('active');
-  confirmButtons.forEach(function (confirmButton) {
-    confirmButton.addEventListener('click', function () {
-      if (confirmButton.id == "yes") {
-        var sendDeleteRequest = /*#__PURE__*/function () {
-          var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
-              while (1) {
-                switch (_context5.prev = _context5.next) {
-                  case 0:
-                    _context5.prev = 0;
-                    _context5.next = 3;
-                    return axios["delete"](url).then(function (response) {
-                      table.innerHTML = response.data.table;
-                      renderTable();
-                    });
-
-                  case 3:
-                    _context5.next = 8;
-                    break;
-
-                  case 5:
-                    _context5.prev = 5;
-                    _context5.t0 = _context5["catch"](0);
-                    console.error(_context5.t0);
-
-                  case 8:
-                  case "end":
-                    return _context5.stop();
-                }
-              }
-            }, _callee5, null, [[0, 5]]);
-          }));
-
-          return function sendDeleteRequest() {
-            return _ref7.apply(this, arguments);
-          };
-        }();
-
-        sendDeleteRequest();
-      } else {
-        renderTable();
-      }
+  confirmDelete.dataset.url = url;
+};
+var deleteConfirmation = function deleteConfirmation() {
+  var popUp = document.getElementById('pop-up');
+  var confirmDelete = document.getElementById('confirm-delete');
+  var cancelDelete = document.getElementById('cancel-delete');
+  var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
+  cancelDelete.addEventListener("click", function () {
+    popUp.classList.remove('active');
+    renderTable();
+    swipeRevealItemElements.forEach(function (swipeRevealItemElement) {
+      transformStyle = 'translateX(' + 0 + 'px)';
     });
   });
+  confirmDelete.addEventListener("click", function () {
+    var url = confirmDelete.dataset.url;
+
+    var sendDeleteRequest = /*#__PURE__*/function () {
+      var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return axios["delete"](url).then(function (response) {
+                  table.innerHTML = response.data.table;
+                  popUp.classList.remove('active');
+                  renderTable();
+                });
+
+              case 3:
+                _context5.next = 8;
+                break;
+
+              case 5:
+                _context5.prev = 5;
+                _context5.t0 = _context5["catch"](0);
+                console.error(_context5.t0);
+
+              case 8:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 5]]);
+      }));
+
+      return function sendDeleteRequest() {
+        return _ref7.apply(this, arguments);
+      };
+    }();
+
+    sendDeleteRequest();
+  });
 };
+deleteConfirmation();
 renderForm();
 renderTable();
 
@@ -2480,6 +2493,13 @@ function swipeRevealItem(element) {
         case STATE_LEFT_SIDE:
           currentXPosition = -(itemWidth - handleSize);
           (0,_form__WEBPACK_IMPORTED_MODULE_0__.deletePopUp)(element.querySelector('.left-swipe').dataset.url);
+          currentXPosition = 0;
+          transformStyle = 'translateX(' + currentXPosition + 'px)';
+          swipeFrontElement.style.msTransform = transformStyle;
+          swipeFrontElement.style.MozTransform = transformStyle;
+          swipeFrontElement.style.webkitTransform = transformStyle;
+          swipeFrontElement.style.transform = transformStyle;
+          currentState = newState;
           break;
 
         case STATE_RIGHT_SIDE:
@@ -2530,7 +2550,6 @@ function swipeRevealItem(element) {
         }
 
         element.querySelector('.left-swipe').id = 'swipe-active';
-        console.log(element.querySelector('.left-swipe').id);
         leftSwipeVisible = 1;
         rightSwipeVisible = 0;
       } else if (Math.sign(differenceInX) == -1 && rightSwipeVisible == 0) {
@@ -2604,9 +2623,7 @@ function swipeRevealItem(element) {
   };
 
   var registerInteraction = function registerInteraction() {
-    'use strict';
-
-    window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
+    'use strict'; // window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
   };
 
   var swipeFronts = document.querySelectorAll('.swipe-front');

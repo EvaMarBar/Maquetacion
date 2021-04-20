@@ -5,7 +5,7 @@ body {
 
 .main {
   align-items: top;
-  display: flex;
+  display: content;
   width: 100%;
   height: 100vh;
   justify-content: space-around;
@@ -81,7 +81,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: 100%;
+  width: 90%;
   display: none;
 }
 .table.active {
@@ -93,7 +93,7 @@ body {
   height: -moz-max-content;
   height: max-content;
   margin: 1em auto;
-  width: 100%;
+  width: 90%;
 }
 
 .table-content {
@@ -111,12 +111,12 @@ body {
   font-size: 1em;
   font-weight: bold;
   background-color: #d8d1cd;
-  justify-content: space-evenly;
 }
 
 .row-title {
   font-size: 1.5em;
   font-weight: bold;
+  text-align: left;
   background-color: #ec9d75;
 }
 
@@ -126,13 +126,11 @@ body {
   border-top: 1px solid #bababa;
   min-height: 10vh;
   position: relative;
-  width: inherit;
-  justify-content: space-evenly;
+  text-align: left;
 }
 
 .column {
-  margin: 0.5em;
-  width: 25%;
+  margin: 0.5em 1em;
 }
 
 .content {
@@ -154,7 +152,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
   width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -171,13 +168,14 @@ body {
   touch-action: none;
   width: 100%;
   z-index: 999;
-  justify-content: space-evenly;
+  display: flex;
 }
 
 .table-field {
-  margin: 0.2em;
+  margin: 0.5em;
   white-space: nowrap;
   justify-content: space-evenly;
+  flex-grow: 2;
 }
 
 .table-icons-container {
@@ -397,14 +395,45 @@ body {
 }
 
 .pop-up {
-  display: none;
+  background-color: white;
+  transform: translateY(-200%);
+  position: fixed;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: -10%;
+  transition: transform 0.5s;
+  width: 70%;
+  z-index: 3000;
 }
-
 .pop-up.active {
-  display: block;
-  align-items: center;
-  border: 0.2em solid #ec9d75;
-  z-index: 1000;
+  position: relative;
+  top: 10em;
+  transform: translateY(0);
+  z-index: 5000;
+}
+.pop-up .message {
+  background-color: grey;
+  border-bottom: 1px solid #e9ecef;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+.pop-up .modal-delete-footer {
+  display: flex;
+}
+.pop-up .modal-delete-footer .delete-option-button {
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: center;
+  width: 50%;
+}
+.pop-up .modal-delete-footer .delete-option-button#cancel-delete {
+  background-color: #02a8b1;
+}
+.pop-up .modal-delete-footer .delete-option-button#confirm-delete {
+  background-color: #d74242;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

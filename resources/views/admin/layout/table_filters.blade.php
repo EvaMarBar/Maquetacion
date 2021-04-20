@@ -56,6 +56,32 @@
                     </div>    
                 @endif
 
+                @if($key == 'initial-date')
+                <div class="one-column">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="initial-date" class="label-highlight">Fecha de inicio</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="date" name="initial-date" class="input-highlight" value="">
+                        </div>
+                    </div>
+                </div>  
+                @endif
+                
+                @if($key == 'final-date')
+                <div class="one-column">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <label for="final-date" class="label-highlight">Fecha de fin</label>
+                        </div>
+                        <div class="form-input">
+                            <input type="date" name="final-date" class="input-highlight" value="">
+                        </div>
+                    </div>
+                </div>  
+                @endif
+
             @endforeach
                  
         </form>

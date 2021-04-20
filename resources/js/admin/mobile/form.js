@@ -131,37 +131,51 @@ export let editElement = (url) => {
 }
 
 export let deletePopUp = (url) =>{
-    let popUp = document.getElementById('.pop-up');
-    let confirmButtons = document.querySelectorAll('.confirm-button');
+    let popUp = document.getElementById('pop-up');
+    let confirmDelete = document.getElementById('confirm-delete');
 
     popUp.classList.add('active');
-    confirmButtons.forEach(confirmButton =>{
-
-        confirmButton.addEventListener('click', ()=>{
-
-            if(confirmButton.id=="yes"){
-                
-                let sendDeleteRequest = async () => {
-        
-                    try {
-                        await axios.delete(url).then(response => {
-                            table.innerHTML = response.data.table;
-                            renderTable();
-                        });
-                        
-                    } catch (error) {
-                        console.error(error);
-                    }
-                };
-        
-                sendDeleteRequest();
-
-            }else{
-                renderTable();
-            }
-        })
-    }) 
+    confirmDelete.dataset.url = url;
 }
+
+export let deleteConfirmation = () =>{
+    let popUp = document.getElementById('pop-up');
+    let confirmDelete = document.getElementById('confirm-delete');
+    let cancelDelete = document.getElementById('cancel-delete');
+    let swipeRevealItemElements = document.querySelectorAll('.swipe-element');
+
+
+    cancelDelete.addEventListener("click",() =>{
+        popUp.classList.remove('active');
+        renderTable();
+        swipeRevealItemElements.forEach(swipeRevealItemElement =>{
+            transformStyle = 'translateX('+0+'px)';
+        })
+    
+        
+    });
+    
+    confirmDelete.addEventListener("click", () =>{
+        let url = confirmDelete.dataset.url;
+        
+            let sendDeleteRequest = async () => {
+    
+                try {
+                    await axios.delete(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        popUp.classList.remove('active');
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+    
+            sendDeleteRequest();
+        });
+}
+deleteConfirmation();
 
 renderForm();
 renderTable();

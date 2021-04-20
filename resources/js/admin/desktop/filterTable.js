@@ -1,6 +1,6 @@
 import {renderTable} from './form';
 
-const table = document.getElementById("table-container");
+const table = document.getElementById("table");
 const tableFilter = document.getElementById("table-filter");
 const filterForm = document.getElementById("filter-form");
 
@@ -31,10 +31,11 @@ export let renderFilterTable = () => {
                         tableFilter.classList.remove('filter-active')
                         applyFilter.classList.remove('button-active');
                         openFilter.classList.add('button-active');
+                
                     });
                     
                 } catch (error) {
-    
+
                 }
             };
     
