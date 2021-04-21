@@ -84,6 +84,32 @@
 
             @endforeach
                  
+            <div>
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="created_at_from">Ordenar por</label>
+                    </div>
+                    <div class="form-input">
+                        <select name="order" data-placeholder="Seleccione una categoria">
+                            <option value="created_at">Fecha de creación</option>
+                            @foreach($order as $key => $item)
+                                <option value="{{$item}}">{{ucfirst($key)}}</option>
+                            @endforeach
+                        </select> 
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="form-label">
+                        <label for="direction">Dirección</label>
+                    </div>
+                    <div class="form-input">
+                        <select name="direction">
+                            <option value="asc">Ascendente</option>
+                            <option value="desc">Descendente</option>
+                        </select>
+                    </div>
+            </div>
         </form>
     </div>
     <div class="table-filter-buttons">

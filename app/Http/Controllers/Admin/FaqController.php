@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq;
+use Debugbar;
 
 class FaqController extends Controller
 {
@@ -111,7 +112,9 @@ class FaqController extends Controller
     }
     public function filter(Request $request){
 
-        $query = $this->faq->query();
+        $query = $this->faq->query()
+                ->join('t_faqs_category', 't_faqs.category_id', '=', 't_faqs_category.id')
+                ->where('t_faqs.active', 1);
 
         $query->when(request('category_id'), function ($q, $category_id) {
 
@@ -155,8 +158,12 @@ class FaqController extends Controller
             }
         });
 
+        $query->when(request('order'), function ($q, $order) use ($request){
+
+            $q->orderB($order, $request->direction);
+        });
                
-        $faqs = $query->where('active', 1)->get();
+        $faqs = $query->get();
 
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)
@@ -167,12 +174,12 @@ class FaqController extends Controller
         ]);
     }
 
-    // public function order (Faq $faq){
+    // public function order($column){
 
-    //     $this->faq = Faq::where('active', 1)->orderBy('title', 'asc')->get();
+    //     $faqs = $this->faq->where('active', 1)->orderBy($column, 'asc')->get();
     
     //     $view = View::make('admin.faqs.index')
-    //         ->with('faq', $this->faq)
+    //         ->with('faqs', $faqs)
     //         ->renderSections();
 
     //     return response()->json([

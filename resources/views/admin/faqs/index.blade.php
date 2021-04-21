@@ -1,25 +1,25 @@
 @php
 
     $filters = ['category' => $faqs_categories, 'search' => true, 'initial-date' =>true, 'final-date'=>true]; 
+    $order = [''];
+
 @endphp
 
 @extends('admin.layout.table_form')
 
 @section('table')
 
-    <table>
+    <table id="table-container">
         <div class="title">@lang('admin/faqs.parent_section')</div>
         <tr>
-            <th id="id">@lang('admin/faqs.faq-id')</th>
-            <th id="title" data-url="{{route('faqs_order')}}"> @lang('admin/faqs.faq-question')</th>
+            <th> @lang('admin/faqs.faq-question')</th>
             <th> @lang('admin/faqs.faq-answer')</th>
-            <th > @lang('admin/faqs.faq-category')</th>
+            <th> @lang('admin/faqs.faq-category')</th>
             <th> </th>
         </tr>
 
         @foreach($faqs as $faq_element)
             <tr>
-                <td> {{$faq_element->id}} </td>
                 <td> {{$faq_element->title}} </td>
                 <td>{{$faq_element->description}}</td>
                 <td> {{$faq_element->category->name}}</td>

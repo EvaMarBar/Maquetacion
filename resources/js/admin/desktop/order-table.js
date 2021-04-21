@@ -1,25 +1,26 @@
-import {renderTable} from "./form";
-import { renderFilterTable } from "./filterTable";
-const titleButton = document.getElementById("title");
-const table = document.getElementById("table");
+const headerButtons = document.querySelectorAll('.header-table');
 
-titleButton.addEventListener("click", () => {
+headerButtons.forEach(headerButton =>{
+    
+    headerButton.addEventListener( 'click', () => {  
 
-    let url = titleButton.dataset.url;
+        let url = headerButton.dataset.action;
 
-    let sendOrderRequest = async () => {
+        console.log(url);
 
-        try {
-            await axios.get(url).then(response => {
-                table.innerHTML = response.data.table;
-                renderTable();
-                renderFilterTable();
-            });
-            
-        } catch (error) {
-            console.error(error);
-        }
-    };
+        let sendGetRequest = async () => {
+    
+            try {
+                await axios.get(url).then(response => {
+                    table.innerHTML = response.data.table;
+                });
+                
+            } catch (error) {
+    
+            }
+        };
 
-    sendOrderRequest();
-});
+        sendGetRequest();
+        
+    })
+})
