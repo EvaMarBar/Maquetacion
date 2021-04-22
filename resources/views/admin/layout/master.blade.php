@@ -18,8 +18,12 @@
             @endif
           
             @if(isset($filters))
-                @include('admin.layout.table_filters', $filters)
+            @include('admin.layout.table_filters', [
+                'filters' => $filters, 
+                'order' => $order
+            ])
             @endif
+
 
 
             <div class="main">

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Admin\FaqRequest;
 use App\Models\DB\Faq;
 use Debugbar;
@@ -23,10 +24,11 @@ class FaqController extends Controller
 
     public function index()
     {
-
+   
         $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->get());   
+            ->with('faqs', $this->faq->where('active', 1)->paginate(8));
+            
 
         if(request()->ajax()) {
 
@@ -65,7 +67,7 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
         ->with('faq', $faq)
-        ->with('faqs', $this->faq->where('active', 1)->get())
+        ->with('faqs', $this->faq->where('active', 1)->paginate(8))
         ->renderSections();        
 
         return response()->json([
@@ -79,7 +81,7 @@ class FaqController extends Controller
     {
         $view = View::make('admin.faqs.index')
         ->with('faq', $faq)
-        ->with('faqs', $this->faq->where('active', 1)->get());   
+        ->with('faqs', $this->faq->where('active', 1)->paginate(8));   
         
         if(request()->ajax()) {
 
@@ -90,7 +92,7 @@ class FaqController extends Controller
             ]); 
         }
                 
-        return $view;
+        return $view->paginate(8);
     }
 
     public function destroy(Faq $faq)
@@ -102,7 +104,7 @@ class FaqController extends Controller
 
         $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->get())
+            ->with('faqs', $this->faq->where('active', 1)->paginate(8))
             ->renderSections();
         
         return response()->json([
@@ -112,9 +114,7 @@ class FaqController extends Controller
     }
     public function filter(Request $request){
 
-        $query = $this->faq->query()
-                ->join('t_faqs_category', 't_faqs.category_id', '=', 't_faqs_category.id')
-                ->where('t_faqs.active', 1);
+        $query = $this->faq->query();
 
         $query->when(request('category_id'), function ($q, $category_id) {
 
@@ -132,7 +132,7 @@ class FaqController extends Controller
                 return $q;
             }
             else {
-                return $q->where('title', 'like', "%$search%");
+                return $q->where('t_faqs.title', 'like', "%$search%");
             }
         });
 
@@ -142,7 +142,7 @@ class FaqController extends Controller
                 return $q;
             }
             else {
-                return $q->whereDate('created_at', '>=' , $initialDate);
+                return $q->whereDate('t_faqs.created_at', '>=' , $initialDate);
                 
             }
         });
@@ -153,17 +153,18 @@ class FaqController extends Controller
                 return $q;
             }
             else {
-                return $q->whereDate('created_at', '<=' , $finalDate);
+                return $q->whereDate('t_faqs.created_at', '<=' , $finalDate);
                 
             }
         });
 
         $query->when(request('order'), function ($q, $order) use ($request){
 
-            $q->orderB($order, $request->direction);
+            $q->orderBy($order, $request->direction);
         });
                
-        $faqs = $query->get();
+        $faqs = $query->join('t_faqs_category', 't_faqs.category_id', '=', 't_faqs_category.id')
+        ->where('t_faqs.active', 1)->paginate(8);
 
         $view = View::make('admin.faqs.index')
             ->with('faqs', $faqs)

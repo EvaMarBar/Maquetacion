@@ -5,8 +5,7 @@ body {
 
 .main {
   display: flex;
-  height: 100vh;
-  justify-content: space-around;
+  justify-content: space-evenly;
   width: 100%;
 }
 
@@ -23,6 +22,10 @@ body {
   background-color: #ec9d75;
   position: relative;
   top: 0;
+}
+.table-filter .filter-form {
+  display: flex;
+  flex-direction: column;
 }
 .table-filter .table-filter-container {
   max-height: 0;
@@ -75,7 +78,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 4em 1em;
+  margin: 4em 0.5em;
   width: 60%;
 }
 .table table {
@@ -259,7 +262,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 4em 0;
+  margin: 4em 0.5em;
   padding-top: 2em;
   width: 40%;
 }
@@ -463,6 +466,26 @@ body {
 
 .form-2.active {
   opacity: 0;
+}
+
+.table-pagination {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ec9d75;
+  font-weight: bold;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  font-size: 0.75em;
+}
+.table-pagination p {
+  margin: 0.5em 0;
+  padding: 0;
+}
+.table-pagination .table-pagination-button {
+  justify-content: space-evenly;
+  cursor: pointer;
+  margin: 0 0.5em;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

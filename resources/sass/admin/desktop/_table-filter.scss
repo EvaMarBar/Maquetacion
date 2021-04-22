@@ -14,62 +14,65 @@
             top:0;
         }
     }
-
-    .table-filter-container{
-        max-height: 0;
-        overflow: hidden;
-        width: 100%;
-        padding-left: 4em;
-
-        form{
-            padding: 1em;
-        }
+.filter-form{
+    display: flex;
+    flex-direction: column;
     }
 
-    .table-filter-buttons{
-        width: 100%;
+.table-filter-container{
+    max-height: 0;
+    overflow: hidden;
+    width: 100%;
+    padding-left: 4em;
+
+    form{
+        padding: 1em;
+    }
+}
+
+.table-filter-buttons{
+    width: 100%;
+}
+
+.table-filter-buttons .table-filter-button{
+
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+    width: 100%;
+    text-align: center;
+    
+    
+
+    &.button-active{
+        max-height: 10vh;
+        height: 2em;
+        padding:1em 0;
     }
 
-    .table-filter-buttons .table-filter-button{
-
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s;
-        width: 100%;
-        text-align: center;
-      
+    &.open-filter{
+        background-color: rgb(236, 157, 117);
         
+    }
 
-        &.button-active{
-            max-height: 10vh;
-            height: 2em;
-            padding:1em 0;
-        }
+    &.apply-filter{
+        background-color: hsl(0, 0%, 69%);
+        height: 2em;
+        
+    }
 
-        &.open-filter{
-            background-color: rgb(236, 157, 117);
-           
-        }
+    &.remove-filter{
+        background-color: hsl(0, 65%, 55%);
+    }
 
-        &.apply-filter{
-            background-color: hsl(0, 0%, 69%);
-            height: 2em;
-           
-        }
+    svg{
+        height: 1.5em;
+        padding: 0.5em;
+        width: 1.5em;
 
-        &.remove-filter{
-            background-color: hsl(0, 65%, 55%);
-        }
-
-        svg{
-            height: 1.5em;
-            padding: 0.5em;
-            width: 1.5em;
-
-            path{
-                fill: hsl(0, 0%, 100%);
-            }
+        path{
+            fill: hsl(0, 0%, 100%);
         }
     }
 }
-    
+}

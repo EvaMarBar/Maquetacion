@@ -28,7 +28,7 @@
         @endforeach
 
     </table>
-    
+
 @endsection
 
 @section('form')

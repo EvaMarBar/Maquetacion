@@ -10,6 +10,7 @@ const sidebar = document.getElementById("sidebar");
 import { renderForm } from "./form";
 import { renderTable } from "./form";
 import { renderCkeditor } from "../../ckeditor";
+import { renderFilterTable } from "./filterTable";
 
 linkButtons.forEach(linkButton => {
     linkButton.addEventListener('click', () =>{
@@ -24,6 +25,7 @@ linkButtons.forEach(linkButton => {
                         renderForm();
                         renderTable();
                         renderCkeditor();
+                        renderFilterTable();
                         menu.classList.remove("active");
                         sidebar.classList.remove("active");
                         form1.classList.remove("active");

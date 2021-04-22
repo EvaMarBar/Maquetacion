@@ -1917,10 +1917,9 @@ var table = document.getElementById("table");
 var tableFilter = document.getElementById("table-filter");
 var filterForm = document.getElementById("filter-form");
 var renderFilterTable = function renderFilterTable() {
-  var openFilter = document.getElementById("open-filter");
-  var applyFilter = document.getElementById("apply-filter");
-
-  if (openFilter != null) {
+  if (filterForm != null) {
+    var openFilter = document.getElementById("open-filter");
+    var applyFilter = document.getElementById("apply-filter");
     openFilter.addEventListener('click', function () {
       openFilter.classList.remove('button-active');
       tableFilter.classList.add('filter-active');
@@ -1972,11 +1971,8 @@ var renderFilterTable = function renderFilterTable() {
   }
 };
 var hideFilterTable = function hideFilterTable() {
-  tableFilter.classList.remove('filter-active');
-  var buttons = document.querySelectorAll(".button-active");
-  buttons.forEach(function (button) {
-    button.classList.remove('button-active');
-  });
+  var openFilter = document.getElementById("open-filter");
+  openFilter.classList.remove('button-active');
 };
 var showFilterTable = function showFilterTable() {
   var openFilter = document.getElementById("open-filter");
@@ -2243,6 +2239,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form */ "./resources/js/admin/desktop/form.js");
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ckeditor */ "./resources/js/ckeditor.js");
+/* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2258,6 +2255,7 @@ var form = document.getElementById("form");
 var table = document.getElementById("table");
 var menu = document.getElementById("menu");
 var sidebar = document.getElementById("sidebar");
+
 
 
 
@@ -2279,6 +2277,7 @@ linkButtons.forEach(function (linkButton) {
                   (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderForm)();
                   (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
                   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_2__.renderCkeditor)();
+                  (0,_filterTable__WEBPACK_IMPORTED_MODULE_3__.renderFilterTable)();
                   menu.classList.remove("active");
                   sidebar.classList.remove("active");
                   form1.classList.remove("active");

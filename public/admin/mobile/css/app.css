@@ -102,15 +102,12 @@ body {
   width: 100%;
 }
 
-.row {
-  display: flex;
-  flex-direction: row;
-}
-
 .row-header {
   font-size: 1em;
   font-weight: bold;
   background-color: #d8d1cd;
+  display: flex;
+  flex-direction: row;
 }
 
 .row-title {

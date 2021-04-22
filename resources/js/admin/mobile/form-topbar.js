@@ -4,7 +4,7 @@ const menuButton = document.getElementById("icon");
 const menu = document.getElementById("form-topbar-options");
 const next =document.getElementById("next");
 
-menuButton.addEventListener("mouseover", ()=>{
+menuButton.addEventListener("click", () => {
     
     if (menuButton.classList.contains("active")){
         menuButton.classList.remove("active");
@@ -17,10 +17,10 @@ menuButton.addEventListener("mouseover", ()=>{
 })
 
 
-pannelButtons.forEach(pannelButton =>{
-    pannelButton.addEventListener('click', ()=>{
+pannelButtons.forEach(pannelButton => {
+    pannelButton.addEventListener('click', () => {
 
-        pannelForms.forEach(pannelForm =>{
+        pannelForms.forEach(pannelForm => {
 
             if(pannelButton.dataset.but==pannelForm.dataset.num){
 
@@ -38,16 +38,16 @@ pannelButtons.forEach(pannelButton =>{
     })
 })
 
-next.addEventListener('click', ()=>{
+// next.addEventListener('click', () => {
             
-    pannelForms.forEach(pannelForm =>{
-        let activeElements = document.querySelectorAll('.active');
+//     pannelForms.forEach(pannelForm => {
+//         let activeElements = document.querySelectorAll('.active');
             
-                activeElements.forEach(activeElement =>{
-                    activeElement.classList.remove("active");   
-                })
+//                 activeElements.forEach(activeElement =>{
+//                     activeElement.classList.remove("active");   
+//                 })
                 
-        pannelForm.nextElementSibling.classList.add("active");
-        console.log(pannelForm.className)
-    })
-})
+//         pannelForm.nextElementSibling.classList.add("active");
+//         console.log(pannelForm.className)
+//     })
+// })

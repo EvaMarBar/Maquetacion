@@ -3,12 +3,12 @@
 @section('table')
 
     <div id="table-container" id="table-container">
-        <div class="row">
+        <div class="row-title">
             <div class="title">@lang('admin/clients.parent_section')</div>
         </div>
-        <div class="row">
-            <div class="column header-table">@lang('admin/clients.client_order_id')</div>
-            <div class="column header-table">@lang('admin/clients.client_email')</div>
+        <div class="row-header">
+            <div class="column">@lang('admin/clients.client_order_id')</div>
+            <div class="column">@lang('admin/clients.client_email')</div>
         </div> 
 
         @foreach($clients as $client_element)

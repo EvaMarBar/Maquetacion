@@ -3,8 +3,7 @@
         <form class="filter-form" id="filter-form" action="{{route("faqs_filter")}}" autocomplete="off">             
 
             {{ csrf_field() }}
-
-
+            
             @foreach ($filters as $key => $items)
             
                 @if($key == 'parent')
@@ -57,29 +56,29 @@
                 @endif
 
                 @if($key == 'initial-date')
-                <div class="one-column">
-                    <div class="form-group">
-                        <div class="form-label">
-                            <label for="initial-date" class="label-highlight">Fecha de inicio</label>
+                    <div class="one-column">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="initial-date" class="label-highlight">Fecha de inicio</label>
+                            </div>
+                            <div class="form-input">
+                                <input type="date" name="initial-date" class="input-highlight" value="">
+                            </div>
                         </div>
-                        <div class="form-input">
-                            <input type="date" name="initial-date" class="input-highlight" value="">
-                        </div>
-                    </div>
-                </div>  
+                    </div>  
                 @endif
                 
                 @if($key == 'final-date')
-                <div class="one-column">
-                    <div class="form-group">
-                        <div class="form-label">
-                            <label for="final-date" class="label-highlight">Fecha de fin</label>
+                    <div class="one-column">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="final-date" class="label-highlight">Fecha de fin</label>
+                            </div>
+                            <div class="form-input">
+                                <input type="date" name="final-date" class="input-highlight" value="">
+                            </div>
                         </div>
-                        <div class="form-input">
-                            <input type="date" name="final-date" class="input-highlight" value="">
-                        </div>
-                    </div>
-                </div>  
+                    </div>  
                 @endif
 
             @endforeach
@@ -91,7 +90,7 @@
                     </div>
                     <div class="form-input">
                         <select name="order" data-placeholder="Seleccione una categoria">
-                            <option value="created_at">Fecha de creación</option>
+                            <option></option>
                             @foreach($order as $key => $item)
                                 <option value="{{$item}}">{{ucfirst($key)}}</option>
                             @endforeach
@@ -105,10 +104,12 @@
                     </div>
                     <div class="form-input">
                         <select name="direction">
+                            <option></option>
                             <option value="asc">Ascendente</option>
                             <option value="desc">Descendente</option>
                         </select>
                     </div>
+                </div>
             </div>
         </form>
     </div>

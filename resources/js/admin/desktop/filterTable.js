@@ -6,10 +6,11 @@ const filterForm = document.getElementById("filter-form");
 
 export let renderFilterTable = () => {
 
+    if(filterForm != null){
+
     let openFilter = document.getElementById("open-filter");
     let applyFilter = document.getElementById("apply-filter");
 
-    if(openFilter != null){
 
         openFilter.addEventListener( 'click', () => {
             openFilter.classList.remove('button-active');
@@ -47,14 +48,9 @@ export let renderFilterTable = () => {
 
 export let hideFilterTable = () => {
 
-    tableFilter.classList.remove('filter-active')
+    let openFilter = document.getElementById("open-filter");
 
-    let buttons = document.querySelectorAll(".button-active");  
-    
-    buttons.forEach(button => {
-        button.classList.remove('button-active');
-    });
-
+    openFilter.classList.remove('button-active');
 }
 
 export let showFilterTable = () => {

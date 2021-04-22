@@ -1973,7 +1973,7 @@ var pannelForms = document.querySelectorAll('.pannel-form');
 var menuButton = document.getElementById("icon");
 var menu = document.getElementById("form-topbar-options");
 var next = document.getElementById("next");
-menuButton.addEventListener("mouseover", function () {
+menuButton.addEventListener("click", function () {
   if (menuButton.classList.contains("active")) {
     menuButton.classList.remove("active");
     menu.classList.remove("active");
@@ -1995,17 +1995,16 @@ pannelButtons.forEach(function (pannelButton) {
       }
     });
   });
-});
-next.addEventListener('click', function () {
-  pannelForms.forEach(function (pannelForm) {
-    var activeElements = document.querySelectorAll('.active');
-    activeElements.forEach(function (activeElement) {
-      activeElement.classList.remove("active");
-    });
-    pannelForm.nextElementSibling.classList.add("active");
-    console.log(pannelForm.className);
-  });
-});
+}); // next.addEventListener('click', () => {
+//     pannelForms.forEach(pannelForm => {
+//         let activeElements = document.querySelectorAll('.active');
+//                 activeElements.forEach(activeElement =>{
+//                     activeElement.classList.remove("active");   
+//                 })
+//         pannelForm.nextElementSibling.classList.add("active");
+//         console.log(pannelForm.className)
+//     })
+// })
 
 /***/ }),
 
