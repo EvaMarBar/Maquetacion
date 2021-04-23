@@ -25,7 +25,7 @@ class ClientController extends Controller
 
         $view = View::make('admin.clients.index')
             ->with('client', $this->client)
-            ->with('clients', $this->client->where('active', 1)->get());   
+            ->with('clients', $this->client->where('active', 1)->paginate(8));   
 
         if(request()->ajax()) {
 
@@ -74,7 +74,7 @@ class ClientController extends Controller
 
         $view = View::make('admin.clients.index')
         ->with('client', $client)
-        ->with('clients', $this->client->where('active', 1)->get())
+        ->with('clients', $this->client->where('active', 1)->paginate(8))
         ->renderSections();        
 
         return response()->json([
@@ -88,7 +88,7 @@ class ClientController extends Controller
     {
         $view = View::make('admin.clients.index')
         ->with('client', $client)
-        ->with('clients', $this->client->where('active', 1)->get());   
+        ->with('clients', $this->client->where('active', 1)->paginate(8));   
         
         if(request()->ajax()) {
 
@@ -111,7 +111,7 @@ class ClientController extends Controller
 
         $view = View::make('admin.clients.index')
             ->with('client', $this->client)
-            ->with('clients', $this->client->where('active', 1)->get())
+            ->with('clients', $this->client->where('active', 1)->paginate(8))
             ->renderSections();
         
         return response()->json([

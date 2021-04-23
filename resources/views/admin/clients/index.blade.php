@@ -2,7 +2,7 @@
 
 @section('table')
 
-    <div id="table-container" id="table-container">
+    <div class="table-container" id="table-container">
         <div class="row-title">
             <div class="title">@lang('admin/clients.parent_section')</div>
         </div>
@@ -34,6 +34,8 @@
                 </div>
         @endforeach
     </div>
+    @include('admin.layout.table_pagination', ['items' => $clients])
+
 
 @endsection
 

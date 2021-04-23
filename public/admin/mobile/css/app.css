@@ -83,6 +83,8 @@ body {
   height: max-content;
   width: 90%;
   display: none;
+  overflow: scroll;
+  position: relative;
 }
 .table.active {
   display: block;
@@ -94,12 +96,6 @@ body {
   height: max-content;
   margin: 1em auto;
   width: 90%;
-}
-
-.table-content {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
 }
 
 .row-header {
@@ -431,6 +427,10 @@ body {
 }
 .pop-up .modal-delete-footer .delete-option-button#confirm-delete {
   background-color: #d74242;
+}
+
+.table-pagination {
+  display: none;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

@@ -2,6 +2,8 @@
   height: max-content;
   width: 90%;
   display: none;
+  overflow: scroll;
+  position: relative;
 
   &.active{
       display: block;
@@ -14,11 +16,6 @@
   }
 }
 
-.table-content{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
 
 .row-header{
   font-size: 1em;
@@ -26,12 +23,14 @@
   background-color:rgb(216, 209, 205) ;
   display: flex;
   flex-direction: row;
+  
 }
 .row-title{
   font-size: 1.5em;
   font-weight: bold;
   text-align: left;
   background-color:rgb(236, 157, 117);
+
 }
 .table-row {
   background-color: rgb(255, 255, 255);

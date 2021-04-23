@@ -3,6 +3,8 @@ require('../../ckeditor');
 require('./form');
 // require('./sidebar');
 require('./tableSwipe');
+require('./verticalScroll');
+// require('./tableScroll');
 // require('./filterTable');
 require('./form-topbar');
 require('./bottombarMenu');

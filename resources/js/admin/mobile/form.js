@@ -1,6 +1,7 @@
 import { renderCkeditor } from "../../ckeditor";
 import {swipeRevealItem} from './tableSwipe';
 import { showForm } from './bottombarMenu';
+import {scrollWindowElement} from './verticalScroll';
 
 
 const table = document.getElementById("table");
@@ -39,6 +40,7 @@ export let renderForm = () => {
                         table.innerHTML = response.data.table;
                         renderTable();  
                         renderCkeditor();
+                        paginatorElement();
                 });
                     
                 } catch (error) {
@@ -56,8 +58,7 @@ export let renderTable = () => {
 
     let editButtons = document.querySelectorAll(".edit-button");
     let deleteButtons = document.querySelectorAll(".delete-button");
-    let swipeRevealItemElements = document.querySelectorAll('.swipe-element');
-
+    
     editButtons.forEach(editButton => {
 
         editButton.addEventListener("click", () => {
@@ -103,12 +104,37 @@ export let renderTable = () => {
 
             sendDeleteRequest();
         });
-    });
-    swipeRevealItemElements.forEach(swipeRevealItemElement => {
 
-        new swipeRevealItem(swipeRevealItemElement);
+})
+    new scrollWindowElement(table);
+}; 
+
+export   let paginatorElement = (url) =>{
+    let paginationButtons = document.querySelectorAll('.table-pagination-button');
+
+    paginationButtons.forEach(paginationButton => {
+
+    paginationButton.addEventListener("click", () => {
+
+
+        let sendPaginationRequest = async () => {
+
+            try {
+                console.log(url)
+                await axios.get(url).then(response => {
+                    table.innerHTML = response.data.table;
+                    renderTable();
+                });
+                
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        sendPaginationRequest();
     });
-};
+});
+}
 
 export let editElement = (url) => {
     
@@ -120,6 +146,7 @@ export let editElement = (url) => {
                 form.innerHTML = response.data.form;
                 showForm();
                 renderForm();
+                paginatorElement();
             });
             
         } catch (error) {
@@ -148,9 +175,9 @@ export let deleteConfirmation = () =>{
     cancelDelete.addEventListener("click",() =>{
         popUp.classList.remove('active');
         renderTable();
-        swipeRevealItemElements.forEach(swipeRevealItemElement =>{
-            transformStyle = 'translateX('+0+'px)';
-        })
+        // swipeRevealItemElements.forEach(swipeRevealItemElement =>{
+        //     transformStyle = 'translateX('+0+'px)';
+        // })
     
         
     });
@@ -165,6 +192,7 @@ export let deleteConfirmation = () =>{
                         table.innerHTML = response.data.table;
                         popUp.classList.remove('active');
                         renderTable();
+                        paginatorElement();
                     });
                     
                 } catch (error) {

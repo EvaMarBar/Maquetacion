@@ -1,45 +1,17 @@
 import {editElement} from './form';
 import {deletePopUp} from './form';
 
-export function swipeRevealItem (element){
-window.requestAnimFrame = (function(){
+export function SwipeRevealItem(element) {
     'use strict';
 
-    return  window.requestAnimationFrame       ||
-            window.webkitRequestAnimationFrame ||
-            window.mozRequestAnimationFrame    ||
-            function( callback ){
-              window.setTimeout(callback, 1000 / 60);
-            };
-  })();
-
-  /* // [START pointereventsupport] */
-  var pointerDownName = 'pointerdown';
-  var pointerUpName = 'pointerup';
-  var pointerMoveName = 'pointermove';
-
-  if(window.navigator.msPointerEnabled) {
-    pointerDownName = 'MSPointerDown';
-    pointerUpName = 'MSPointerUp';
-    pointerMoveName = 'MSPointerMove';
-  }
-
-  // Simple way to check if some form of pointerevents is enabled or not
-  window.PointerEventsSupport = false;
-  if(window.PointerEvent || window.navigator.msPointerEnabled) {
-    window.PointerEventsSupport = true;
-  }
-  /* // [END pointereventsupport] */
-
-  function SwipeRevealItem(element) {
-    'use strict';
-
+    var swipeFrontElement = element.querySelector('.swipe-front');
+    
     // Gloabl state variables
     var STATE_DEFAULT = 1;
     var STATE_LEFT_SIDE = 2;
     var STATE_RIGHT_SIDE = 3;
 
-    var swipeFrontElement = element.querySelector('.swipe-front');
+   
     var rafPending = false;
     var initialTouchPos = null;
     var lastTouchPos = null;
@@ -142,7 +114,7 @@ window.requestAnimFrame = (function(){
       // Check if we need to change state to left or right based on slop value
       if(Math.abs(differenceInX) > slopValue) {
         if(currentState === STATE_DEFAULT) {
-          if(differenceInX > 0) {
+          if(differenceInX > 0)  {
             newState = STATE_LEFT_SIDE;
           } else {
             newState = STATE_RIGHT_SIDE;
@@ -327,4 +299,3 @@ window.requestAnimFrame = (function(){
       isCompleted[sampleName] = true;
     }
   }
-}

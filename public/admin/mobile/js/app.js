@@ -2019,6 +2019,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderForm": () => (/* binding */ renderForm),
 /* harmony export */   "renderTable": () => (/* binding */ renderTable),
+/* harmony export */   "paginatorElement": () => (/* binding */ paginatorElement),
 /* harmony export */   "editElement": () => (/* binding */ editElement),
 /* harmony export */   "deletePopUp": () => (/* binding */ deletePopUp),
 /* harmony export */   "deleteConfirmation": () => (/* binding */ deleteConfirmation)
@@ -2028,6 +2029,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ckeditor */ "./resources/js/ckeditor.js");
 /* harmony import */ var _tableSwipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tableSwipe */ "./resources/js/admin/mobile/tableSwipe.js");
 /* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
+/* harmony import */ var _verticalScroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./verticalScroll */ "./resources/js/admin/mobile/verticalScroll.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2045,6 +2047,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -2084,6 +2087,7 @@ var renderForm = function renderForm() {
                     table.innerHTML = response.data.table;
                     renderTable();
                     (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+                    paginatorElement();
                   });
 
                 case 3:
@@ -2115,7 +2119,6 @@ var renderForm = function renderForm() {
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
   var deleteButtons = document.querySelectorAll(".delete-button");
-  var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
   editButtons.forEach(function (editButton) {
     editButton.addEventListener("click", function () {
       var url = editButton.dataset.url;
@@ -2201,44 +2204,87 @@ var renderTable = function renderTable() {
       sendDeleteRequest();
     });
   });
-  swipeRevealItemElements.forEach(function (swipeRevealItemElement) {
-    new _tableSwipe__WEBPACK_IMPORTED_MODULE_2__.swipeRevealItem(swipeRevealItemElement);
+  new _verticalScroll__WEBPACK_IMPORTED_MODULE_4__.scrollWindowElement(table);
+};
+var paginatorElement = function paginatorElement(url) {
+  var paginationButtons = document.querySelectorAll('.table-pagination-button');
+  paginationButtons.forEach(function (paginationButton) {
+    paginationButton.addEventListener("click", function () {
+      var sendPaginationRequest = /*#__PURE__*/function () {
+        var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+            while (1) {
+              switch (_context4.prev = _context4.next) {
+                case 0:
+                  _context4.prev = 0;
+                  console.log(url);
+                  _context4.next = 4;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    renderTable();
+                  });
+
+                case 4:
+                  _context4.next = 9;
+                  break;
+
+                case 6:
+                  _context4.prev = 6;
+                  _context4.t0 = _context4["catch"](0);
+                  console.error(_context4.t0);
+
+                case 9:
+                case "end":
+                  return _context4.stop();
+              }
+            }
+          }, _callee4, null, [[0, 6]]);
+        }));
+
+        return function sendPaginationRequest() {
+          return _ref6.apply(this, arguments);
+        };
+      }();
+
+      sendPaginationRequest();
+    });
   });
 };
 var editElement = function editElement(url) {
   var sendEditRequest = /*#__PURE__*/function () {
-    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
-          switch (_context4.prev = _context4.next) {
+          switch (_context5.prev = _context5.next) {
             case 0:
-              _context4.prev = 0;
-              _context4.next = 3;
+              _context5.prev = 0;
+              _context5.next = 3;
               return axios.get(url).then(function (response) {
                 form.innerHTML = response.data.form;
                 (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_3__.showForm)();
                 renderForm();
+                paginatorElement();
               });
 
             case 3:
-              _context4.next = 8;
+              _context5.next = 8;
               break;
 
             case 5:
-              _context4.prev = 5;
-              _context4.t0 = _context4["catch"](0);
-              console.error(_context4.t0);
+              _context5.prev = 5;
+              _context5.t0 = _context5["catch"](0);
+              console.error(_context5.t0);
 
             case 8:
             case "end":
-              return _context4.stop();
+              return _context5.stop();
           }
         }
-      }, _callee4, null, [[0, 5]]);
+      }, _callee5, null, [[0, 5]]);
     }));
 
     return function sendEditRequest() {
-      return _ref6.apply(this, arguments);
+      return _ref7.apply(this, arguments);
     };
   }();
 
@@ -2257,47 +2303,47 @@ var deleteConfirmation = function deleteConfirmation() {
   var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
   cancelDelete.addEventListener("click", function () {
     popUp.classList.remove('active');
-    renderTable();
-    swipeRevealItemElements.forEach(function (swipeRevealItemElement) {
-      transformStyle = 'translateX(' + 0 + 'px)';
-    });
+    renderTable(); // swipeRevealItemElements.forEach(swipeRevealItemElement =>{
+    //     transformStyle = 'translateX('+0+'px)';
+    // })
   });
   confirmDelete.addEventListener("click", function () {
     var url = confirmDelete.dataset.url;
 
     var sendDeleteRequest = /*#__PURE__*/function () {
-      var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+      var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                _context5.prev = 0;
-                _context5.next = 3;
+                _context6.prev = 0;
+                _context6.next = 3;
                 return axios["delete"](url).then(function (response) {
                   table.innerHTML = response.data.table;
                   popUp.classList.remove('active');
                   renderTable();
+                  paginatorElement();
                 });
 
               case 3:
-                _context5.next = 8;
+                _context6.next = 8;
                 break;
 
               case 5:
-                _context5.prev = 5;
-                _context5.t0 = _context5["catch"](0);
-                console.error(_context5.t0);
+                _context6.prev = 5;
+                _context6.t0 = _context6["catch"](0);
+                console.error(_context6.t0);
 
               case 8:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, null, [[0, 5]]);
+        }, _callee6, null, [[0, 5]]);
       }));
 
       return function sendDeleteRequest() {
-        return _ref7.apply(this, arguments);
+        return _ref8.apply(this, arguments);
       };
     }();
 
@@ -2319,341 +2365,479 @@ renderTable();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "swipeRevealItem": () => (/* binding */ swipeRevealItem)
+/* harmony export */   "SwipeRevealItem": () => (/* binding */ SwipeRevealItem)
 /* harmony export */ });
 /* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form */ "./resources/js/admin/mobile/form.js");
 
 
-function swipeRevealItem(element) {
-  window.requestAnimFrame = function () {
-    'use strict';
+function SwipeRevealItem(element) {
+  'use strict';
 
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    };
-  }();
-  /* // [START pointereventsupport] */
+  var swipeFrontElement = element.querySelector('.swipe-front'); // Gloabl state variables
 
+  var STATE_DEFAULT = 1;
+  var STATE_LEFT_SIDE = 2;
+  var STATE_RIGHT_SIDE = 3;
+  var rafPending = false;
+  var initialTouchPos = null;
+  var lastTouchPos = null;
+  var currentXPosition = 0;
+  var currentState = STATE_DEFAULT;
+  var handleSize = 10;
+  var leftSwipeVisible = 0;
+  var rightSwipeVisible = 0; // Perform client width here as this can be expensive and doens't
+  // change until window.onresize
 
-  var pointerDownName = 'pointerdown';
-  var pointerUpName = 'pointerup';
-  var pointerMoveName = 'pointermove';
+  var itemWidth = swipeFrontElement.clientWidth;
+  var slopValue = itemWidth * (1 / 4); // On resize, change the slop value
 
-  if (window.navigator.msPointerEnabled) {
-    pointerDownName = 'MSPointerDown';
-    pointerUpName = 'MSPointerUp';
-    pointerMoveName = 'MSPointerMove';
-  } // Simple way to check if some form of pointerevents is enabled or not
-
-
-  window.PointerEventsSupport = false;
-
-  if (window.PointerEvent || window.navigator.msPointerEnabled) {
-    window.PointerEventsSupport = true;
-  }
-  /* // [END pointereventsupport] */
-
-
-  function SwipeRevealItem(element) {
-    'use strict'; // Gloabl state variables
-
-    var STATE_DEFAULT = 1;
-    var STATE_LEFT_SIDE = 2;
-    var STATE_RIGHT_SIDE = 3;
-    var swipeFrontElement = element.querySelector('.swipe-front');
-    var rafPending = false;
-    var initialTouchPos = null;
-    var lastTouchPos = null;
-    var currentXPosition = 0;
-    var currentState = STATE_DEFAULT;
-    var handleSize = 10;
-    var leftSwipeVisible = 0;
-    var rightSwipeVisible = 0; // Perform client width here as this can be expensive and doens't
-    // change until window.onresize
-
-    var itemWidth = swipeFrontElement.clientWidth;
-    var slopValue = itemWidth * (1 / 4); // On resize, change the slop value
-
-    this.resize = function () {
-      itemWidth = swipeFrontElement.clientWidth;
-      slopValue = itemWidth * (1 / 4);
-    };
-    /* // [START handle-start-gesture] */
-    // Handle the start of gestures
+  this.resize = function () {
+    itemWidth = swipeFrontElement.clientWidth;
+    slopValue = itemWidth * (1 / 4);
+  };
+  /* // [START handle-start-gesture] */
+  // Handle the start of gestures
 
 
-    this.handleGestureStart = function (evt) {
-      evt.preventDefault();
+  this.handleGestureStart = function (evt) {
+    evt.preventDefault();
 
-      if (evt.touches && evt.touches.length > 1) {
-        return;
-      } // Add the move and end listeners
-
-
-      if (window.PointerEvent) {
-        evt.target.setPointerCapture(evt.pointerId);
-      } else {
-        // Add Mouse Listeners
-        document.addEventListener('mousemove', this.handleGestureMove, true);
-        document.addEventListener('mouseup', this.handleGestureEnd, true);
-      }
-
-      initialTouchPos = getGesturePointFromEvent(evt);
-      swipeFrontElement.style.transition = 'initial';
-    }.bind(this);
-    /* // [END handle-start-gesture] */
-    // Handle move gestures
-    //
-
-    /* // [START handle-move] */
-
-
-    this.handleGestureMove = function (evt) {
-      evt.preventDefault();
-
-      if (!initialTouchPos) {
-        return;
-      }
-
-      lastTouchPos = getGesturePointFromEvent(evt);
-
-      if (rafPending) {
-        return;
-      }
-
-      rafPending = true;
-      window.requestAnimFrame(onAnimFrame);
-    }.bind(this);
-    /* // [END handle-move] */
-
-    /* // [START handle-end-gesture] */
-    // Handle end gestures
-
-
-    this.handleGestureEnd = function (evt) {
-      evt.preventDefault();
-
-      if (evt.touches && evt.touches.length > 0) {
-        return;
-      }
-
-      rafPending = false; // Remove Event Listeners
-
-      if (window.PointerEvent) {
-        evt.target.releasePointerCapture(evt.pointerId);
-      } else {
-        // Remove Mouse Listeners
-        document.removeEventListener('mousemove', this.handleGestureMove, true);
-        document.removeEventListener('mouseup', this.handleGestureEnd, true);
-      }
-
-      updateSwipeRestPosition();
-      initialTouchPos = null;
-    }.bind(this);
-    /* // [END handle-end-gesture] */
-
-
-    function updateSwipeRestPosition() {
-      var differenceInX = initialTouchPos.x - lastTouchPos.x;
-      currentXPosition = currentXPosition - differenceInX; // Go to the default state and change
-
-      var newState = STATE_DEFAULT; // Check if we need to change state to left or right based on slop value
-
-      if (Math.abs(differenceInX) > slopValue) {
-        if (currentState === STATE_DEFAULT) {
-          if (differenceInX > 0) {
-            newState = STATE_LEFT_SIDE;
-          } else {
-            newState = STATE_RIGHT_SIDE;
-          }
-        } else {
-          if (currentState === STATE_LEFT_SIDE && differenceInX > 0) {
-            newState = STATE_DEFAULT;
-          } else if (currentState === STATE_RIGHT_SIDE && differenceInX < 0) {
-            newState = STATE_DEFAULT;
-          }
-        }
-      } else {
-        newState = currentState;
-      }
-
-      changeState(newState);
-      swipeFrontElement.style.transition = 'all 150ms ease-out';
-    }
-
-    function changeState(newState) {
-      var transformStyle;
-
-      switch (newState) {
-        case STATE_DEFAULT:
-          currentXPosition = 0;
-          break;
-
-        case STATE_LEFT_SIDE:
-          currentXPosition = -(itemWidth - handleSize);
-          (0,_form__WEBPACK_IMPORTED_MODULE_0__.deletePopUp)(element.querySelector('.left-swipe').dataset.url);
-          currentXPosition = 0;
-          transformStyle = 'translateX(' + currentXPosition + 'px)';
-          swipeFrontElement.style.msTransform = transformStyle;
-          swipeFrontElement.style.MozTransform = transformStyle;
-          swipeFrontElement.style.webkitTransform = transformStyle;
-          swipeFrontElement.style.transform = transformStyle;
-          currentState = newState;
-          break;
-
-        case STATE_RIGHT_SIDE:
-          currentXPosition = itemWidth - handleSize;
-          (0,_form__WEBPACK_IMPORTED_MODULE_0__.editElement)(element.querySelector('.right-swipe').dataset.url);
-          break;
-      }
-
-      transformStyle = 'translateX(' + currentXPosition + 'px)';
-      swipeFrontElement.style.msTransform = transformStyle;
-      swipeFrontElement.style.MozTransform = transformStyle;
-      swipeFrontElement.style.webkitTransform = transformStyle;
-      swipeFrontElement.style.transform = transformStyle;
-      currentState = newState;
-    }
-
-    function getGesturePointFromEvent(evt) {
-      var point = {};
-
-      if (evt.targetTouches) {
-        point.x = evt.targetTouches[0].clientX;
-        point.y = evt.targetTouches[0].clientY;
-      } else {
-        // Either Mouse event or Pointer Event
-        point.x = evt.clientX;
-        point.y = evt.clientY;
-      }
-
-      return point;
-    }
-    /* // [START on-anim-frame] */
-
-
-    function onAnimFrame() {
-      if (!rafPending) {
-        return;
-      }
-
-      var differenceInX = initialTouchPos.x - lastTouchPos.x;
-      var newXTransform = currentXPosition - differenceInX + 'px';
-      var transformStyle = 'translateX(' + newXTransform + ')';
-
-      if (Math.sign(differenceInX) == 1 && leftSwipeVisible == 0) {
-        var swipeActive = document.getElementById('swipe-active');
-
-        if (swipeActive !== null) {
-          swipeActive.removeAttribute('id');
-        }
-
-        element.querySelector('.left-swipe').id = 'swipe-active';
-        leftSwipeVisible = 1;
-        rightSwipeVisible = 0;
-      } else if (Math.sign(differenceInX) == -1 && rightSwipeVisible == 0) {
-        var _swipeActive = document.getElementById('swipe-active');
-
-        if (_swipeActive !== null) {
-          _swipeActive.removeAttribute('id');
-        }
-
-        element.querySelector('.right-swipe').id = 'swipe-active';
-        leftSwipeVisible = 0;
-        rightSwipeVisible = 1;
-      }
-
-      swipeFrontElement.style.webkitTransform = transformStyle;
-      swipeFrontElement.style.MozTransform = transformStyle;
-      swipeFrontElement.style.msTransform = transformStyle;
-      swipeFrontElement.style.transform = transformStyle;
-      rafPending = false;
-    }
-    /* // [END on-anim-frame] */
-
-    /* // [START addlisteners] */
-    // Check if pointer events are supported.
+    if (evt.touches && evt.touches.length > 1) {
+      return;
+    } // Add the move and end listeners
 
 
     if (window.PointerEvent) {
-      // Add Pointer Event Listener
-      swipeFrontElement.addEventListener('pointerdown', this.handleGestureStart, true);
-      swipeFrontElement.addEventListener('pointermove', this.handleGestureMove, true);
-      swipeFrontElement.addEventListener('pointerup', this.handleGestureEnd, true);
-      swipeFrontElement.addEventListener('pointercancel', this.handleGestureEnd, true);
+      evt.target.setPointerCapture(evt.pointerId);
     } else {
-      // Add Touch Listener
-      swipeFrontElement.addEventListener('touchstart', this.handleGestureStart, true);
-      swipeFrontElement.addEventListener('touchmove', this.handleGestureMove, true);
-      swipeFrontElement.addEventListener('touchend', this.handleGestureEnd, true);
-      swipeFrontElement.addEventListener('touchcancel', this.handleGestureEnd, true); // Add Mouse Listener
-
-      swipeFrontElement.addEventListener('mousedown', this.handleGestureStart, true);
+      // Add Mouse Listeners
+      document.addEventListener('mousemove', this.handleGestureMove, true);
+      document.addEventListener('mouseup', this.handleGestureEnd, true);
     }
-    /* // [END addlisteners] */
 
+    initialTouchPos = getGesturePointFromEvent(evt);
+    swipeFrontElement.style.transition = 'initial';
+  }.bind(this);
+  /* // [END handle-start-gesture] */
+  // Handle move gestures
+  //
+
+  /* // [START handle-move] */
+
+
+  this.handleGestureMove = function (evt) {
+    evt.preventDefault();
+
+    if (!initialTouchPos) {
+      return;
+    }
+
+    lastTouchPos = getGesturePointFromEvent(evt);
+
+    if (rafPending) {
+      return;
+    }
+
+    rafPending = true;
+    window.requestAnimFrame(onAnimFrame);
+  }.bind(this);
+  /* // [END handle-move] */
+
+  /* // [START handle-end-gesture] */
+  // Handle end gestures
+
+
+  this.handleGestureEnd = function (evt) {
+    evt.preventDefault();
+
+    if (evt.touches && evt.touches.length > 0) {
+      return;
+    }
+
+    rafPending = false; // Remove Event Listeners
+
+    if (window.PointerEvent) {
+      evt.target.releasePointerCapture(evt.pointerId);
+    } else {
+      // Remove Mouse Listeners
+      document.removeEventListener('mousemove', this.handleGestureMove, true);
+      document.removeEventListener('mouseup', this.handleGestureEnd, true);
+    }
+
+    updateSwipeRestPosition();
+    initialTouchPos = null;
+  }.bind(this);
+  /* // [END handle-end-gesture] */
+
+
+  function updateSwipeRestPosition() {
+    var differenceInX = initialTouchPos.x - lastTouchPos.x;
+    currentXPosition = currentXPosition - differenceInX; // Go to the default state and change
+
+    var newState = STATE_DEFAULT; // Check if we need to change state to left or right based on slop value
+
+    if (Math.abs(differenceInX) > slopValue) {
+      if (currentState === STATE_DEFAULT) {
+        if (differenceInX > 0) {
+          newState = STATE_LEFT_SIDE;
+        } else {
+          newState = STATE_RIGHT_SIDE;
+        }
+      } else {
+        if (currentState === STATE_LEFT_SIDE && differenceInX > 0) {
+          newState = STATE_DEFAULT;
+        } else if (currentState === STATE_RIGHT_SIDE && differenceInX < 0) {
+          newState = STATE_DEFAULT;
+        }
+      }
+    } else {
+      newState = currentState;
+    }
+
+    changeState(newState);
+    swipeFrontElement.style.transition = 'all 150ms ease-out';
   }
 
-  var swipeRevealItems = [];
+  function changeState(newState) {
+    var transformStyle;
+
+    switch (newState) {
+      case STATE_DEFAULT:
+        currentXPosition = 0;
+        break;
+
+      case STATE_LEFT_SIDE:
+        currentXPosition = -(itemWidth - handleSize);
+        (0,_form__WEBPACK_IMPORTED_MODULE_0__.deletePopUp)(element.querySelector('.left-swipe').dataset.url);
+        currentXPosition = 0;
+        transformStyle = 'translateX(' + currentXPosition + 'px)';
+        swipeFrontElement.style.msTransform = transformStyle;
+        swipeFrontElement.style.MozTransform = transformStyle;
+        swipeFrontElement.style.webkitTransform = transformStyle;
+        swipeFrontElement.style.transform = transformStyle;
+        currentState = newState;
+        break;
+
+      case STATE_RIGHT_SIDE:
+        currentXPosition = itemWidth - handleSize;
+        (0,_form__WEBPACK_IMPORTED_MODULE_0__.editElement)(element.querySelector('.right-swipe').dataset.url);
+        break;
+    }
+
+    transformStyle = 'translateX(' + currentXPosition + 'px)';
+    swipeFrontElement.style.msTransform = transformStyle;
+    swipeFrontElement.style.MozTransform = transformStyle;
+    swipeFrontElement.style.webkitTransform = transformStyle;
+    swipeFrontElement.style.transform = transformStyle;
+    currentState = newState;
+  }
+
+  function getGesturePointFromEvent(evt) {
+    var point = {};
+
+    if (evt.targetTouches) {
+      point.x = evt.targetTouches[0].clientX;
+      point.y = evt.targetTouches[0].clientY;
+    } else {
+      // Either Mouse event or Pointer Event
+      point.x = evt.clientX;
+      point.y = evt.clientY;
+    }
+
+    return point;
+  }
+  /* // [START on-anim-frame] */
+
+
+  function onAnimFrame() {
+    if (!rafPending) {
+      return;
+    }
+
+    var differenceInX = initialTouchPos.x - lastTouchPos.x;
+    var newXTransform = currentXPosition - differenceInX + 'px';
+    var transformStyle = 'translateX(' + newXTransform + ')';
+
+    if (Math.sign(differenceInX) == 1 && leftSwipeVisible == 0) {
+      var swipeActive = document.getElementById('swipe-active');
+
+      if (swipeActive !== null) {
+        swipeActive.removeAttribute('id');
+      }
+
+      element.querySelector('.left-swipe').id = 'swipe-active';
+      leftSwipeVisible = 1;
+      rightSwipeVisible = 0;
+    } else if (Math.sign(differenceInX) == -1 && rightSwipeVisible == 0) {
+      var _swipeActive = document.getElementById('swipe-active');
+
+      if (_swipeActive !== null) {
+        _swipeActive.removeAttribute('id');
+      }
+
+      element.querySelector('.right-swipe').id = 'swipe-active';
+      leftSwipeVisible = 0;
+      rightSwipeVisible = 1;
+    }
+
+    swipeFrontElement.style.webkitTransform = transformStyle;
+    swipeFrontElement.style.MozTransform = transformStyle;
+    swipeFrontElement.style.msTransform = transformStyle;
+    swipeFrontElement.style.transform = transformStyle;
+    rafPending = false;
+  }
+  /* // [END on-anim-frame] */
+
+  /* // [START addlisteners] */
+  // Check if pointer events are supported.
+
+
+  if (window.PointerEvent) {
+    // Add Pointer Event Listener
+    swipeFrontElement.addEventListener('pointerdown', this.handleGestureStart, true);
+    swipeFrontElement.addEventListener('pointermove', this.handleGestureMove, true);
+    swipeFrontElement.addEventListener('pointerup', this.handleGestureEnd, true);
+    swipeFrontElement.addEventListener('pointercancel', this.handleGestureEnd, true);
+  } else {
+    // Add Touch Listener
+    swipeFrontElement.addEventListener('touchstart', this.handleGestureStart, true);
+    swipeFrontElement.addEventListener('touchmove', this.handleGestureMove, true);
+    swipeFrontElement.addEventListener('touchend', this.handleGestureEnd, true);
+    swipeFrontElement.addEventListener('touchcancel', this.handleGestureEnd, true); // Add Mouse Listener
+
+    swipeFrontElement.addEventListener('mousedown', this.handleGestureStart, true);
+  }
+  /* // [END addlisteners] */
+
+}
+var swipeRevealItems = [];
+
+window.onload = function () {
+  'use strict';
+
+  var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
+
+  for (var i = 0; i < swipeRevealItemElements.length; i++) {
+    swipeRevealItems.push(new SwipeRevealItem(swipeRevealItemElements[i]));
+  } // We do this so :active pseudo classes are applied.
+
 
   window.onload = function () {
-    'use strict';
-
-    var swipeRevealItemElements = document.querySelectorAll('.swipe-element');
-
-    for (var i = 0; i < swipeRevealItemElements.length; i++) {
-      swipeRevealItems.push(new SwipeRevealItem(swipeRevealItemElements[i]));
-    } // We do this so :active pseudo classes are applied.
-
-
-    window.onload = function () {
-      if (/iP(hone|ad)/.test(window.navigator.userAgent)) {
-        document.body.addEventListener('touchstart', function () {}, false);
-      }
-    };
-  };
-
-  window.onresize = function () {
-    'use strict';
-
-    for (var i = 0; i < swipeRevealItems.length; i++) {
-      swipeRevealItems[i].resize();
+    if (/iP(hone|ad)/.test(window.navigator.userAgent)) {
+      document.body.addEventListener('touchstart', function () {}, false);
     }
   };
+};
 
-  var registerInteraction = function registerInteraction() {
-    'use strict'; // window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
-  };
+window.onresize = function () {
+  'use strict';
 
-  var swipeFronts = document.querySelectorAll('.swipe-front');
-
-  for (var i = 0; i < swipeFronts.length; i++) {
-    swipeFronts[i].addEventListener('touchstart', registerInteraction);
+  for (var i = 0; i < swipeRevealItems.length; i++) {
+    swipeRevealItems[i].resize();
   }
+};
 
-  (function (b, o, i, l, e, r) {
-    b.GoogleAnalyticsObject = l;
-    b[l] || (b[l] = function () {
-      (b[l].q = b[l].q || []).push(arguments);
-    });
-    b[l].l = +new Date();
-    e = o.createElement(i);
-    r = o.getElementsByTagName(i)[0];
-    e.src = '//www.google-analytics.com/analytics.js';
-    r.parentNode.insertBefore(e, r);
-  })(window, document, 'script', 'ga');
+var registerInteraction = function registerInteraction() {
+  'use strict'; // window.sampleCompleted('touch-demo-1.html-SwipeFrontTouch');
+};
 
-  ga('create', 'UA-52746336-1');
-  ga('send', 'pageview');
-  var isCompleted = {};
+var swipeFronts = document.querySelectorAll('.swipe-front');
 
-  function sampleCompleted(sampleName) {
-    if (ga && !isCompleted.hasOwnProperty(sampleName)) {
-      ga('send', 'event', 'WebCentralSample', sampleName, 'completed');
-      isCompleted[sampleName] = true;
-    }
+for (var i = 0; i < swipeFronts.length; i++) {
+  swipeFronts[i].addEventListener('touchstart', registerInteraction);
+}
+
+(function (b, o, i, l, e, r) {
+  b.GoogleAnalyticsObject = l;
+  b[l] || (b[l] = function () {
+    (b[l].q = b[l].q || []).push(arguments);
+  });
+  b[l].l = +new Date();
+  e = o.createElement(i);
+  r = o.getElementsByTagName(i)[0];
+  e.src = '//www.google-analytics.com/analytics.js';
+  r.parentNode.insertBefore(e, r);
+})(window, document, 'script', 'ga');
+
+ga('create', 'UA-52746336-1');
+ga('send', 'pageview');
+var isCompleted = {};
+
+function sampleCompleted(sampleName) {
+  if (ga && !isCompleted.hasOwnProperty(sampleName)) {
+    ga('send', 'event', 'WebCentralSample', sampleName, 'completed');
+    isCompleted[sampleName] = true;
   }
 }
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/verticalScroll.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/admin/mobile/verticalScroll.js ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "scrollWindowElement": () => (/* binding */ scrollWindowElement)
+/* harmony export */ });
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form */ "./resources/js/admin/mobile/form.js");
+
+function scrollWindowElement(element) {
+  'use strict';
+
+  var scrollWindowElement = element;
+  var STATE_DEFAULT = 1;
+  var STATE_TOP_SIDE = 2;
+  var STATE_BOTTOM_SIDE = 3;
+  var rafPending = false;
+  var initialTouchPos = null;
+  var lastTouchPos = null;
+  var currentYPosition = 0;
+  var currentState = STATE_DEFAULT;
+  var handleSize = 10;
+
+  this.handleGestureStart = function (evt) {
+    if (evt.touches && evt.touches.length > 1) {
+      return;
+    }
+
+    if (scrollWindowElement.PointerEvent) {
+      evt.target.setPointerCapture(evt.pointerId);
+    } else {
+      document.addEventListener('mousemove', this.handleGestureMove, true);
+      document.addEventListener('mouseup', this.handleGestureEnd, true);
+    }
+
+    initialTouchPos = getGesturePointFromEvent(evt);
+  }.bind(this);
+
+  this.handleGestureMove = function (evt) {
+    if (!initialTouchPos) {
+      return;
+    }
+
+    lastTouchPos = getGesturePointFromEvent(evt);
+
+    if (rafPending) {
+      return;
+    }
+
+    rafPending = true;
+    window.requestAnimFrame(onAnimFrame);
+  }.bind(this);
+
+  this.handleGestureEnd = function (evt) {
+    evt.preventDefault();
+
+    if (evt.touches && evt.touches.length > 0) {
+      return;
+    }
+
+    rafPending = false;
+
+    if (scrollWindowElement.PointerEvent) {
+      evt.target.releasePointerCapture(evt.pointerId);
+    } else {
+      document.removeEventListener('mousemove', this.handleGestureMove, true);
+      document.removeEventListener('mouseup', this.handleGestureEnd, true);
+    }
+
+    updateScrollRestPosition();
+    initialTouchPos = null;
+  }.bind(this);
+
+  function updateScrollRestPosition() {
+    var transformStyle;
+    var differenceInY = initialTouchPos.y - lastTouchPos.y;
+    currentYPosition = currentYPosition - differenceInY;
+    transformStyle = currentYPosition + 'px';
+    scrollWindowElement.style.top = transformStyle;
+    scrollWindowElement.style.transition = 'all 300ms ease-out';
+    changeState(); // console.log(scrollWindowElement.offsetTop);
+    // console.log(scrollWindowElement.getBoundingClientRect())
+  }
+
+  function getGesturePointFromEvent(evt) {
+    var point = {};
+
+    if (evt.targetTouches) {
+      point.y = evt.targetTouches[0].clientY;
+    } else {
+      point.y = evt.clientY;
+    }
+
+    return point;
+  }
+
+  function changeState() {
+    var transformStyle;
+    var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
+        elemRect = document.getElementById('table-container').getBoundingClientRect(),
+        offset = elemRect.bottom - menu.top;
+    console.log(offset);
+
+    if (currentYPosition > 1) {
+      if (scrollWindowElement.style.top >= 0 + 'px') currentYPosition = 0;
+      transformStyle = currentYPosition + 'px';
+      scrollWindowElement.style.top = transformStyle;
+      console.log("arriba"); // Esto es lo que esta a medias: falta paginar, que cambie de pagina al hacer scroll y 
+      //que el scrol no suba más de la cuenta
+      // }else if(currentYPosition < -1){
+      //     // (currentYPosition<menu.top*(-1))
+      //     if(scrollWindowElement.style.bottom<=0+'px'){
+      //         console.log('bottomm'+scrollWindowElement.style.bottom)
+      //         paginatorElement(document.getElementById('next-page').dataset.page);
+      //     }if(offset<0){
+      //         currentYPosition = (menu.top)*(-1);
+      //         transformStyle  = currentYPosition+'px';
+      //         scrollWindowElement.style.bottom = transformStyle;
+      //     }
+      //editElement(element.querySelector('.right-swipe').dataset.url);
+    }
+
+    ;
+  }
+
+  ;
+
+  function onAnimFrame() {
+    if (!rafPending) {
+      return;
+    }
+
+    var differenceInY = initialTouchPos.y - lastTouchPos.y;
+    var transformStyle = currentYPosition - differenceInY + 'px';
+    console.log(scrollWindowElement.offsetTop);
+    scrollWindowElement.style.top = transformStyle;
+    rafPending = false;
+  }
+
+  scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {
+    passive: true
+  });
+  scrollWindowElement.addEventListener('touchmove', this.handleGestureMove, {
+    passive: true
+  });
+  scrollWindowElement.addEventListener('touchend', this.handleGestureEnd, true);
+  scrollWindowElement.addEventListener('touchcancel', this.handleGestureEnd, true);
+}
+; // }else if(currentYPosition < -1){
+//     var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
+//     elemRect = document.getElementById('table').getBoundingClientRect(),
+//     offset   = elemRect.bottom - menu.top;
+//     if(offset>0){
+//         transformStyle  = currentYPosition+'px';
+//         scrollWindowElement.style.top = transformStyle;
+//     }else if(offset<0){
+//         currentYPosition = menu.top;
+//         transformStyle  = currentYPosition+'px';
+//         scrollWindowElement.style.bottom = transformStyle;
+//         sendPaginationRequest(document.getElementById("next-page").dataset.page)
+//     }
+// };
 
 /***/ }),
 
@@ -21021,7 +21205,10 @@ __webpack_require__(/*! ../../ckeditor */ "./resources/js/ckeditor.js");
 __webpack_require__(/*! ./form */ "./resources/js/admin/mobile/form.js"); // require('./sidebar');
 
 
-__webpack_require__(/*! ./tableSwipe */ "./resources/js/admin/mobile/tableSwipe.js"); // require('./filterTable');
+__webpack_require__(/*! ./tableSwipe */ "./resources/js/admin/mobile/tableSwipe.js");
+
+__webpack_require__(/*! ./verticalScroll */ "./resources/js/admin/mobile/verticalScroll.js"); // require('./tableScroll');
+// require('./filterTable');
 
 
 __webpack_require__(/*! ./form-topbar */ "./resources/js/admin/mobile/form-topbar.js");
