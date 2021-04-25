@@ -2,7 +2,7 @@
 
 @section('table')
 
-    <div class="table-container" id="table-container">
+    <div class="table-container" id="table-container" data-page="{{$clients->url(2)}}" data-current="{{$clients->currentPage()}}" data-last="{{$clients->lastPage()}}">
         <div class="row-title">
             <div class="title">@lang('admin/clients.parent_section')</div>
         </div>

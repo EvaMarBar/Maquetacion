@@ -110,19 +110,17 @@ export let renderTable = () => {
 }; 
 
 export   let paginatorElement = (url) =>{
-    let paginationButtons = document.querySelectorAll('.table-pagination-button');
-
-    paginationButtons.forEach(paginationButton => {
-
-    paginationButton.addEventListener("click", () => {
-
 
         let sendPaginationRequest = async () => {
 
             try {
-                console.log(url)
+
                 await axios.get(url).then(response => {
-                    table.innerHTML = response.data.table;
+                    table.insertAdjacentHTML("beforeend", response.data.table);
+                    document.querySelector('.table-container').dataset.current=url;
+                    // let newUrl = url.replace(/[^0-9]/g, "");
+                    //     console.log(newUrl); // "500"
+                    
                     renderTable();
                 });
                 
@@ -132,8 +130,6 @@ export   let paginatorElement = (url) =>{
         };
 
         sendPaginationRequest();
-    });
-});
 }
 
 export let editElement = (url) => {

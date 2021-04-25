@@ -48,7 +48,7 @@ export function scrollWindowElement (element){
 
         rafPending = true;
 
-        window.requestAnimFrame(onAnimFrame);
+        window.requestAnimationFrame(onAnimFrame);
 
     }.bind(this);
 
@@ -77,19 +77,19 @@ export function scrollWindowElement (element){
 
 
     function updateScrollRestPosition() {
-
         let transformStyle;
         let differenceInY = initialTouchPos.y - lastTouchPos.y;
-    
         currentYPosition = currentYPosition - differenceInY;
+
 
         transformStyle = currentYPosition+'px';
         scrollWindowElement.style.top = transformStyle;
         scrollWindowElement.style.transition = 'all 300ms ease-out';
-        changeState();
 
-        // console.log(scrollWindowElement.offsetTop);
-        // console.log(scrollWindowElement.getBoundingClientRect())
+        //console.log(scrollWindowElement.offsetTop);
+        //console.log(scrollWindowElement.getBoundingClientRect());
+
+        changeState();
     }
 
     function getGesturePointFromEvent(evt) {
@@ -105,40 +105,6 @@ export function scrollWindowElement (element){
         return point; 
 
     }
-    function changeState() {
-        let transformStyle
-        var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
-        elemRect = document.getElementById('table-container').getBoundingClientRect(),
-        offset   = elemRect.bottom - menu.top;
-        console.log(offset)
-
-        if(currentYPosition > 1){
-            if(scrollWindowElement.style.top>=0+'px')
-
-            currentYPosition = 0;
-            transformStyle  = currentYPosition+'px';
-            scrollWindowElement.style.top = transformStyle;
-            console.log("arriba")
-                      
-// Esto es lo que esta a medias: falta paginar, que cambie de pagina al hacer scroll y 
-//que el scrol no suba más de la cuenta
-        // }else if(currentYPosition < -1){
-        //     // (currentYPosition<menu.top*(-1))
-        //     if(scrollWindowElement.style.bottom<=0+'px'){
-        //         console.log('bottomm'+scrollWindowElement.style.bottom)
-        //         paginatorElement(document.getElementById('next-page').dataset.page);
-
-        //     }if(offset<0){
-                
-        //         currentYPosition = (menu.top)*(-1);
-        //         transformStyle  = currentYPosition+'px';
-        //         scrollWindowElement.style.bottom = transformStyle;
-               
-        //     }
-            //editElement(element.querySelector('.right-swipe').dataset.url);
-        };
-    
-    };
 
     function onAnimFrame() {
 
@@ -149,36 +115,52 @@ export function scrollWindowElement (element){
         let differenceInY = initialTouchPos.y - lastTouchPos.y;
         let transformStyle  = (currentYPosition - differenceInY)+'px';
 
-        console.log(scrollWindowElement.offsetTop);
+        //console.log(scrollWindowElement.offsetTop);
 
         scrollWindowElement.style.top = transformStyle;
         
 
-
+        
         rafPending = false;
     }
 
+    function changeState() {
+        let transformStyle
+        let menu = document.getElementById('bottombar-item').getBoundingClientRect(),
+            elemRect = document.querySelector('.table').getBoundingClientRect();
+    
+        if(currentYPosition > 1){
+            if(scrollWindowElement.style.top>=0+'px')
+
+            currentYPosition = 0;
+            transformStyle  = currentYPosition+'px';
+            scrollWindowElement.style.top = transformStyle;
+                      
+
+        }else if(currentYPosition < -1 ){
+           
+            if(elemRect.bottom<=menu.top){
+             
+                if(element.querySelector('.table-container').dataset.current!=element.querySelector('.table-container').dataset.last){
+                    paginatorElement(element.querySelector('.table-container').dataset.page);
+                }
+          
+
+                if(element.querySelector('.table-container').dataset.current==element.querySelector('.table-container').dataset.last){
+                    currentYPosition = 570-596;
+                    transformStyle  = currentYPosition+'px';
+                    scrollWindowElement.style.top = transformStyle;
+                }
+            
+               
+            }
+            //editElement(element.querySelector('.right-swipe').dataset.url);
+        };
+    
+    };
     
     scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {passive: true} );
     scrollWindowElement.addEventListener('touchmove', this.handleGestureMove, {passive: true} );
     scrollWindowElement.addEventListener('touchend', this.handleGestureEnd, true);
     scrollWindowElement.addEventListener('touchcancel', this.handleGestureEnd, true);
 };   
-
-// }else if(currentYPosition < -1){
-//     var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
-//     elemRect = document.getElementById('table').getBoundingClientRect(),
-//     offset   = elemRect.bottom - menu.top;
-//     if(offset>0){
-
-//         transformStyle  = currentYPosition+'px';
-//         scrollWindowElement.style.top = transformStyle;
-        
-//     }else if(offset<0){
-//         currentYPosition = menu.top;
-//         transformStyle  = currentYPosition+'px';
-//         scrollWindowElement.style.bottom = transformStyle;
-
-//         sendPaginationRequest(document.getElementById("next-page").dataset.page)
-//     }
-// };

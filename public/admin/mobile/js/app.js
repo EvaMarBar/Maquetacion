@@ -2207,48 +2207,50 @@ var renderTable = function renderTable() {
   new _verticalScroll__WEBPACK_IMPORTED_MODULE_4__.scrollWindowElement(table);
 };
 var paginatorElement = function paginatorElement(url) {
-  var paginationButtons = document.querySelectorAll('.table-pagination-button');
-  paginationButtons.forEach(function (paginationButton) {
-    paginationButton.addEventListener("click", function () {
-      var sendPaginationRequest = /*#__PURE__*/function () {
-        var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  _context4.prev = 0;
-                  console.log(url);
-                  _context4.next = 4;
-                  return axios.get(url).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                  });
+  var num = document.querySelector('.table-container').dataset.num;
+  var newUrl = url.replace(/z/g, num);
+  ;
+  console.log(newUrl);
 
-                case 4:
-                  _context4.next = 9;
-                  break;
+  var sendPaginationRequest = /*#__PURE__*/function () {
+    var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+        while (1) {
+          switch (_context4.prev = _context4.next) {
+            case 0:
+              _context4.prev = 0;
+              _context4.next = 3;
+              return axios.get(newUrl).then(function (response) {
+                table.insertAdjacentHTML("beforeend", response.data.table);
+                document.querySelector('.table-container').dataset.current = url; // let newUrl = url.replace(/[^0-9]/g, "");
+                //     console.log(newUrl); // "500"
 
-                case 6:
-                  _context4.prev = 6;
-                  _context4.t0 = _context4["catch"](0);
-                  console.error(_context4.t0);
+                renderTable();
+              });
 
-                case 9:
-                case "end":
-                  return _context4.stop();
-              }
-            }
-          }, _callee4, null, [[0, 6]]);
-        }));
+            case 3:
+              _context4.next = 8;
+              break;
 
-        return function sendPaginationRequest() {
-          return _ref6.apply(this, arguments);
-        };
-      }();
+            case 5:
+              _context4.prev = 5;
+              _context4.t0 = _context4["catch"](0);
+              console.error(_context4.t0);
 
-      sendPaginationRequest();
-    });
-  });
+            case 8:
+            case "end":
+              return _context4.stop();
+          }
+        }
+      }, _callee4, null, [[0, 5]]);
+    }));
+
+    return function sendPaginationRequest() {
+      return _ref6.apply(this, arguments);
+    };
+  }();
+
+  sendPaginationRequest();
 };
 var editElement = function editElement(url) {
   var sendEditRequest = /*#__PURE__*/function () {
@@ -2726,7 +2728,7 @@ function scrollWindowElement(element) {
     }
 
     rafPending = true;
-    window.requestAnimFrame(onAnimFrame);
+    window.requestAnimationFrame(onAnimFrame);
   }.bind(this);
 
   this.handleGestureEnd = function (evt) {
@@ -2755,9 +2757,10 @@ function scrollWindowElement(element) {
     currentYPosition = currentYPosition - differenceInY;
     transformStyle = currentYPosition + 'px';
     scrollWindowElement.style.top = transformStyle;
-    scrollWindowElement.style.transition = 'all 300ms ease-out';
-    changeState(); // console.log(scrollWindowElement.offsetTop);
-    // console.log(scrollWindowElement.getBoundingClientRect())
+    scrollWindowElement.style.transition = 'all 300ms ease-out'; //console.log(scrollWindowElement.offsetTop);
+    //console.log(scrollWindowElement.getBoundingClientRect());
+
+    changeState();
   }
 
   function getGesturePointFromEvent(evt) {
@@ -2772,49 +2775,46 @@ function scrollWindowElement(element) {
     return point;
   }
 
-  function changeState() {
-    var transformStyle;
-    var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
-        elemRect = document.getElementById('table-container').getBoundingClientRect(),
-        offset = elemRect.bottom - menu.top;
-    console.log(offset);
-
-    if (currentYPosition > 1) {
-      if (scrollWindowElement.style.top >= 0 + 'px') currentYPosition = 0;
-      transformStyle = currentYPosition + 'px';
-      scrollWindowElement.style.top = transformStyle;
-      console.log("arriba"); // Esto es lo que esta a medias: falta paginar, que cambie de pagina al hacer scroll y 
-      //que el scrol no suba más de la cuenta
-      // }else if(currentYPosition < -1){
-      //     // (currentYPosition<menu.top*(-1))
-      //     if(scrollWindowElement.style.bottom<=0+'px'){
-      //         console.log('bottomm'+scrollWindowElement.style.bottom)
-      //         paginatorElement(document.getElementById('next-page').dataset.page);
-      //     }if(offset<0){
-      //         currentYPosition = (menu.top)*(-1);
-      //         transformStyle  = currentYPosition+'px';
-      //         scrollWindowElement.style.bottom = transformStyle;
-      //     }
-      //editElement(element.querySelector('.right-swipe').dataset.url);
-    }
-
-    ;
-  }
-
-  ;
-
   function onAnimFrame() {
     if (!rafPending) {
       return;
     }
 
     var differenceInY = initialTouchPos.y - lastTouchPos.y;
-    var transformStyle = currentYPosition - differenceInY + 'px';
-    console.log(scrollWindowElement.offsetTop);
+    var transformStyle = currentYPosition - differenceInY + 'px'; //console.log(scrollWindowElement.offsetTop);
+
     scrollWindowElement.style.top = transformStyle;
     rafPending = false;
   }
 
+  function changeState() {
+    var transformStyle;
+    var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
+        elemRect = document.querySelector('.table').getBoundingClientRect();
+
+    if (currentYPosition > 1) {
+      if (scrollWindowElement.style.top >= 0 + 'px') currentYPosition = 0;
+      transformStyle = currentYPosition + 'px';
+      scrollWindowElement.style.top = transformStyle;
+    } else if (currentYPosition < -1) {
+      if (elemRect.bottom <= menu.top) {
+        if (element.querySelector('.table-container').dataset.current != element.querySelector('.table-container').dataset.last) {
+          (0,_form__WEBPACK_IMPORTED_MODULE_0__.paginatorElement)(element.querySelector('.table-container').dataset.page);
+        }
+
+        if (element.querySelector('.table-container').dataset.current == element.querySelector('.table-container').dataset.last) {
+          currentYPosition = 570 - 596;
+          transformStyle = currentYPosition + 'px';
+          scrollWindowElement.style.top = transformStyle;
+        }
+      } //editElement(element.querySelector('.right-swipe').dataset.url);
+
+    }
+
+    ;
+  }
+
+  ;
   scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {
     passive: true
   });
@@ -2824,20 +2824,7 @@ function scrollWindowElement(element) {
   scrollWindowElement.addEventListener('touchend', this.handleGestureEnd, true);
   scrollWindowElement.addEventListener('touchcancel', this.handleGestureEnd, true);
 }
-; // }else if(currentYPosition < -1){
-//     var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
-//     elemRect = document.getElementById('table').getBoundingClientRect(),
-//     offset   = elemRect.bottom - menu.top;
-//     if(offset>0){
-//         transformStyle  = currentYPosition+'px';
-//         scrollWindowElement.style.top = transformStyle;
-//     }else if(offset<0){
-//         currentYPosition = menu.top;
-//         transformStyle  = currentYPosition+'px';
-//         scrollWindowElement.style.bottom = transformStyle;
-//         sendPaginationRequest(document.getElementById("next-page").dataset.page)
-//     }
-// };
+;
 
 /***/ }),
 
