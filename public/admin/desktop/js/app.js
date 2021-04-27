@@ -1886,7 +1886,8 @@ __webpack_require__(/*! ./sidebar */ "./resources/js/admin/desktop/sidebar.js");
 
 __webpack_require__(/*! ./form-topbar */ "./resources/js/admin/desktop/form-topbar.js");
 
-__webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js"); // require('./order-table');
+__webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js"); // require('./messages');
+// require('./order-table');
 
 /***/ }),
 
@@ -2069,10 +2070,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 
+ // import { showMessages } from "./messages";
 
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var sendButton = document.getElementById("send");
+  var createButton = document.getElementById("button-create");
   sendButton.addEventListener("click", function (event) {
     event.preventDefault();
     forms.forEach(function (form) {
@@ -2088,10 +2091,18 @@ var renderForm = function renderForm() {
         });
       }
 
+      var visible = data.get('visible');
+      console.log(visible);
+
+      if (visible == null) {
+        data.set('visible', 0);
+      }
+
       var url = form.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
         var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          var errorMessage;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
@@ -2099,23 +2110,39 @@ var renderForm = function renderForm() {
                   _context.prev = 0;
                   _context.next = 3;
                   return axios.post(url, data).then(function (response) {
+                    var successMessage = document.getElementById('message-success');
+                    successMessage.classList.add('active');
+                    window.setTimeout(function () {
+                      successMessage.classList.remove('active');
+                    }, 5000);
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
-                    renderTable();
-                    (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
-                    (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                    renderTable(); // showMessages('success', response.data.message);
+                    // paginatorElement();
                   });
 
                 case 3:
-                  _context.next = 8;
+                  _context.next = 11;
                   break;
 
                 case 5:
                   _context.prev = 5;
                   _context.t0 = _context["catch"](0);
-                  console.error(_context.t0);
+                  console.log(_context.t0);
+                  errorMessage = document.getElementById('message-error');
+                  errorMessage.classList.add('active');
+                  window.setTimeout(function () {
+                    errorMessage.classList.remove('active');
+                  }, 5000); // if(error.response.status == '422'){
+                  //     let errors = error.response.data.errors;      
+                  //     let errorMessage = '';
+                  //     Object.keys(errors).forEach(function(key) {
+                  //         errorMessage += '<li>' + errors[key] + '</li>';
+                  //     })
+                  //     showMessage('error', errorMessage);
+                  // }
 
-                case 8:
+                case 11:
                 case "end":
                   return _context.stop();
               }
@@ -2131,22 +2158,65 @@ var renderForm = function renderForm() {
       sendPostRequest();
     });
   });
+  createButton.addEventListener("click", function () {
+    var url = createButton.dataset.url;
+
+    var sendCreateRequest = /*#__PURE__*/function () {
+      var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return axios.get(url).then(function (response) {
+                  form.innerHTML = response.data.form;
+                  renderForm();
+                  (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+                  (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                });
+
+              case 3:
+                _context2.next = 8;
+                break;
+
+              case 5:
+                _context2.prev = 5;
+                _context2.t0 = _context2["catch"](0);
+                console.error(_context2.t0);
+
+              case 8:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 5]]);
+      }));
+
+      return function sendCreateRequest() {
+        return _ref4.apply(this, arguments);
+      };
+    }();
+
+    sendCreateRequest();
+  });
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
   var deleteButtons = document.querySelectorAll(".delete-button");
+  var paginationButtons = document.querySelectorAll('.table-pagination-button');
   editButtons.forEach(function (editButton) {
     editButton.addEventListener("click", function () {
       var url = editButton.dataset.url;
 
       var sendEditRequest = /*#__PURE__*/function () {
-        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
             while (1) {
-              switch (_context2.prev = _context2.next) {
+              switch (_context3.prev = _context3.next) {
                 case 0:
-                  _context2.prev = 0;
-                  _context2.next = 3;
+                  _context3.prev = 0;
+                  _context3.next = 3;
                   return axios.get(url).then(function (response) {
                     form.innerHTML = response.data.form;
                     renderForm();
@@ -2155,24 +2225,24 @@ var renderTable = function renderTable() {
                   });
 
                 case 3:
-                  _context2.next = 8;
+                  _context3.next = 8;
                   break;
 
                 case 5:
-                  _context2.prev = 5;
-                  _context2.t0 = _context2["catch"](0);
-                  console.error(_context2.t0);
+                  _context3.prev = 5;
+                  _context3.t0 = _context3["catch"](0);
+                  console.error(_context3.t0);
 
                 case 8:
                 case "end":
-                  return _context2.stop();
+                  return _context3.stop();
               }
             }
-          }, _callee2, null, [[0, 5]]);
+          }, _callee3, null, [[0, 5]]);
         }));
 
         return function sendEditRequest() {
-          return _ref4.apply(this, arguments);
+          return _ref5.apply(this, arguments);
         };
       }();
 
@@ -2184,13 +2254,13 @@ var renderTable = function renderTable() {
       var url = deleteButton.dataset.url;
 
       var sendDeleteRequest = /*#__PURE__*/function () {
-        var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+        var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
             while (1) {
-              switch (_context3.prev = _context3.next) {
+              switch (_context4.prev = _context4.next) {
                 case 0:
-                  _context3.prev = 0;
-                  _context3.next = 3;
+                  _context4.prev = 0;
+                  _context4.next = 3;
                   return axios["delete"](url).then(function (response) {
                     table.innerHTML = response.data.table;
                     renderTable();
@@ -2198,27 +2268,69 @@ var renderTable = function renderTable() {
                   });
 
                 case 3:
-                  _context3.next = 7;
+                  _context4.next = 7;
                   break;
 
                 case 5:
-                  _context3.prev = 5;
-                  _context3.t0 = _context3["catch"](0);
+                  _context4.prev = 5;
+                  _context4.t0 = _context4["catch"](0);
 
                 case 7:
                 case "end":
-                  return _context3.stop();
+                  return _context4.stop();
               }
             }
-          }, _callee3, null, [[0, 5]]);
+          }, _callee4, null, [[0, 5]]);
         }));
 
         return function sendDeleteRequest() {
-          return _ref5.apply(this, arguments);
+          return _ref6.apply(this, arguments);
         };
       }();
 
       sendDeleteRequest();
+    });
+    paginationButtons.forEach(function (paginationButton) {
+      paginationButton.addEventListener("click", function () {
+        var url = paginationButton.dataset.page;
+
+        var sendPaginationRequest = /*#__PURE__*/function () {
+          var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+              while (1) {
+                switch (_context5.prev = _context5.next) {
+                  case 0:
+                    _context5.prev = 0;
+                    _context5.next = 3;
+                    return axios.get(url).then(function (response) {
+                      table.innerHTML = response.data.table;
+                      renderTable();
+                    });
+
+                  case 3:
+                    _context5.next = 8;
+                    break;
+
+                  case 5:
+                    _context5.prev = 5;
+                    _context5.t0 = _context5["catch"](0);
+                    console.error(_context5.t0);
+
+                  case 8:
+                  case "end":
+                    return _context5.stop();
+                }
+              }
+            }, _callee5, null, [[0, 5]]);
+          }));
+
+          return function sendPaginationRequest() {
+            return _ref7.apply(this, arguments);
+          };
+        }();
+
+        sendPaginationRequest();
+      });
     });
   });
 };

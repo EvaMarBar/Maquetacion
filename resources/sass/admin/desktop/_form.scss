@@ -4,7 +4,7 @@
     border-radius: 0.5em;
     height: max-content;
     margin: 4em 0.5em;
-    padding-top: 2em;
+    padding-top: 1.5em;
     width: 40%;
 }
 
@@ -31,7 +31,7 @@
 
 .form_label {
     margin-bottom: 1em;
-    width: 100%;
+    width: max-content;
     }
 
 .form_label label {
@@ -111,3 +111,12 @@
 
 .icon:hover{background-color: rgb(130, 138, 149);}
 .icon.active:hover{background-color: rgb(130, 138, 149);}
+
+.form-row{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    position: absolute;
+    right: 2em; top:9em;
+}
+

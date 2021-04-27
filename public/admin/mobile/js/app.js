@@ -2027,9 +2027,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ckeditor */ "./resources/js/ckeditor.js");
-/* harmony import */ var _tableSwipe__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./tableSwipe */ "./resources/js/admin/mobile/tableSwipe.js");
-/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
-/* harmony import */ var _verticalScroll__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./verticalScroll */ "./resources/js/admin/mobile/verticalScroll.js");
+/* harmony import */ var _bottombarMenu__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
+/* harmony import */ var _verticalScroll__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./verticalScroll */ "./resources/js/admin/mobile/verticalScroll.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2047,7 +2046,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 
 
 
@@ -2204,45 +2202,45 @@ var renderTable = function renderTable() {
       sendDeleteRequest();
     });
   });
-  new _verticalScroll__WEBPACK_IMPORTED_MODULE_4__.scrollWindowElement(table);
+  new _verticalScroll__WEBPACK_IMPORTED_MODULE_3__.scrollWindowElement(table);
 };
 var paginatorElement = function paginatorElement(url) {
-  var num = document.querySelector('.table-container').dataset.num;
-  var newUrl = url.replace(/z/g, num);
-  ;
-  console.log(newUrl);
-
   var sendPaginationRequest = /*#__PURE__*/function () {
     var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+      var currentPage, nextPage, newUrl;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
               _context4.prev = 0;
-              _context4.next = 3;
+              currentPage = document.getElementById('table-container').dataset.current;
+              nextPage = ++currentPage;
+              newUrl = url.replace(/[0-9]/g, nextPage);
+              console.log(newUrl);
+              _context4.next = 7;
               return axios.get(newUrl).then(function (response) {
                 table.insertAdjacentHTML("beforeend", response.data.table);
-                document.querySelector('.table-container').dataset.current = url; // let newUrl = url.replace(/[^0-9]/g, "");
-                //     console.log(newUrl); // "500"
-
+                document.querySelector('.table-container').dataset.current = url;
+                currentPage = nextPage.toString();
+                console.log(currentPage);
                 renderTable();
               });
 
-            case 3:
-              _context4.next = 8;
+            case 7:
+              _context4.next = 12;
               break;
 
-            case 5:
-              _context4.prev = 5;
+            case 9:
+              _context4.prev = 9;
               _context4.t0 = _context4["catch"](0);
               console.error(_context4.t0);
 
-            case 8:
+            case 12:
             case "end":
               return _context4.stop();
           }
         }
-      }, _callee4, null, [[0, 5]]);
+      }, _callee4, null, [[0, 9]]);
     }));
 
     return function sendPaginationRequest() {
@@ -2263,7 +2261,7 @@ var editElement = function editElement(url) {
               _context5.next = 3;
               return axios.get(url).then(function (response) {
                 form.innerHTML = response.data.form;
-                (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_3__.showForm)();
+                (0,_bottombarMenu__WEBPACK_IMPORTED_MODULE_2__.showForm)();
                 renderForm();
                 paginatorElement();
               });
@@ -2688,46 +2686,51 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form */ "./resources/js/admin/mobile/form.js");
 
 function scrollWindowElement(element) {
-  'use strict';
+  'use strict'; //es para usar js estricto
 
   var scrollWindowElement = element;
-  var STATE_DEFAULT = 1;
-  var STATE_TOP_SIDE = 2;
-  var STATE_BOTTOM_SIDE = 3;
   var rafPending = false;
   var initialTouchPos = null;
   var lastTouchPos = null;
-  var currentYPosition = 0;
-  var currentState = STATE_DEFAULT;
-  var handleSize = 10;
+  var currentYPosition = 0; //el this y el bind(this) eran la forma antigua de evitar que el this tenga comflicto entre ellos. 
+  // a esta función se le llama abajo.
+  //cualquier evento de js se puede recoger escribiedo evt como parámetro.
 
   this.handleGestureStart = function (evt) {
+    //que solo haya un evento de touch
     if (evt.touches && evt.touches.length > 1) {
       return;
     }
 
     if (scrollWindowElement.PointerEvent) {
-      evt.target.setPointerCapture(evt.pointerId);
+      evt.target.setPointerCapture(evt.pointerId); //para hacer pruebas con el portatil.
     } else {
       document.addEventListener('mousemove', this.handleGestureMove, true);
       document.addEventListener('mouseup', this.handleGestureEnd, true);
-    }
+    } //llama a la funcion getGesturePointFromEvent pasandole la informacion del evento que captura al tocar y se guarda en la variable vacia que hemos declarado al principio.
+
 
     initialTouchPos = getGesturePointFromEvent(evt);
-  }.bind(this);
+  }.bind(this); //esta fiuncion se arranca al mover el dedo.
+
 
   this.handleGestureMove = function (evt) {
+    //initialTouchPos es la posicion en el eje de las y. Si no tiene ningun valor (!) el return para la funcion. No mediremos el movimiento si no hemos tocado antes, esto se pone por seguridad.
     if (!initialTouchPos) {
       return;
-    }
+    } //se coje la ultima posicion del movimiento
 
-    lastTouchPos = getGesturePointFromEvent(evt);
+
+    lastTouchPos = getGesturePointFromEvent(evt); //si rafPending es verdadero (declarado antes), ahora es falso por lo que no devuelve nada.
+    //dentro de un condicional siempre se evalue si lo que hay es verdadero
 
     if (rafPending) {
       return;
-    }
+    } //al acabar se pone rafPending true como bandera, para que no se pueda volver para atras y queden cosas pendientes
 
-    rafPending = true;
+
+    rafPending = true; //la ventana necesita del requestAnimationFrame que esta en boostrap porque lo vamos a usar amenudo, sirve para que las animaciones sean más suaves. Además, lo primero que ejecuta es la animación para darle prioridad. La animación es onAnimeFrame. Puedes pasar como parámetro de una función otra función. Dentro del reqestAnimation se va a cargar el onAnimeFrame. 
+
     window.requestAnimationFrame(onAnimFrame);
   }.bind(this);
 
@@ -2764,7 +2767,12 @@ function scrollWindowElement(element) {
   }
 
   function getGesturePointFromEvent(evt) {
-    var point = {};
+    //esto es un json
+    var point = {}; //dentro del json point hay una clave "y" que tiene como valor la posicion del valor del evento de tocar
+    //el json seria asi:
+    // point = {
+    //     y: valor
+    // }
 
     if (evt.targetTouches) {
       point.y = evt.targetTouches[0].clientY;
@@ -2776,26 +2784,37 @@ function scrollWindowElement(element) {
   }
 
   function onAnimFrame() {
+    //revisa la bandera, si es falsa entonces vuelve, porque en el handleGestureMove le hemos dicho que la bandera sea verdadera, si fuera falsa no habría entrado en la funcion de movimiento
     if (!rafPending) {
       return;
-    }
+    } //la diferencia sera lo que se ha desplazado, si el valor es negativo el movimiento es hacia arriba
 
-    var differenceInY = initialTouchPos.y - lastTouchPos.y;
-    var transformStyle = currentYPosition - differenceInY + 'px'; //console.log(scrollWindowElement.offsetTop);
 
+    var differenceInY = initialTouchPos.y - lastTouchPos.y; //miramos cual es la posicion actual y le restamos la difencia para saber que es lo que tenemos que cambiar en pixeles
+
+    var transformStyle = currentYPosition - differenceInY + 'px';
     scrollWindowElement.style.top = transformStyle;
     rafPending = false;
-  }
+  } //toda esta funcion él la tiene dentro de onAnimeFrame.
+
 
   function changeState() {
     var transformStyle;
     var menu = document.getElementById('bottombar-item').getBoundingClientRect(),
-        elemRect = document.querySelector('.table').getBoundingClientRect();
+        elemRect = document.querySelector('.table').getBoundingClientRect(),
+        container = elemRect.bottom - elemRect.top; //si el gesto es de ir hacia arriba entonces: (el usa differenceInY)
 
     if (currentYPosition > 1) {
+      //si la aprte superior de la tabla (en este caso) es mayor que 0px, entonces volvemos a 0px para que no pueda seguir 
       if (scrollWindowElement.style.top >= 0 + 'px') currentYPosition = 0;
       transformStyle = currentYPosition + 'px';
-      scrollWindowElement.style.top = transformStyle;
+      scrollWindowElement.style.top = transformStyle; //si no
+      //scrollWindowElement.style.top=transforStyle.
+      //si va hacia abajo, también podría ser un else. Él tiene una bandera llamada paginationVisible que llama a la paginación y le cambia el atributo.Esta bandera es para evitar que se lance muchas veces.
+      //La funcion pagination y sustituye todo lo que no sean digitos por nada. RegEx ayuda a saber que quieres cambiar, son generadores de expresiones regulares, sirven para buscar, remplazar, etc. 
+      // url.replace(/^\D+/g, '')
+      //Luego crea un json con información que va a guardar en el tracking. Hace un axios get y adjunta la nueva pagina al final de la anterior y no encima. En response tenemos los datos de la siguiente página. Pregunta si hay rows, es decir datos, si los hay los añade abajo, pero si no no. Lo hace con:
+      //response.data.table.match(/table-row/g). A un númer un ++ le suma 1, para saber la siguiente página al NextPage le pasamos la currentPage como un número (parseInt) y le sumamos 1 y lo cambiamos a la url. 
     } else if (currentYPosition < -1) {
       if (elemRect.bottom <= menu.top) {
         if (element.querySelector('.table-container').dataset.current != element.querySelector('.table-container').dataset.last) {
@@ -2803,7 +2822,7 @@ function scrollWindowElement(element) {
         }
 
         if (element.querySelector('.table-container').dataset.current == element.querySelector('.table-container').dataset.last) {
-          currentYPosition = 570 - 596;
+          currentYPosition = menu.top - container;
           transformStyle = currentYPosition + 'px';
           scrollWindowElement.style.top = transformStyle;
         }
@@ -2814,7 +2833,9 @@ function scrollWindowElement(element) {
     ;
   }
 
-  ;
+  ; //el elemento que le hemos pasado (la tabla) tiene 4 eventos, el passive:true es para hacer mas fluido el touch
+  //googloe recomienda que a todos los eventos touch start y move se les añada passive:true
+
   scrollWindowElement.addEventListener('touchstart', this.handleGestureStart, {
     passive: true
   });

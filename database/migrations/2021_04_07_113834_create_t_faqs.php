@@ -18,6 +18,7 @@ class CreateTFaqs extends Migration
             $table->string('title');
             $table->string('description');
             $table->unsignedInteger('category_id');
+            $table->boolean('visible');
             $table->boolean('active');
             $table->timestamps();
         });

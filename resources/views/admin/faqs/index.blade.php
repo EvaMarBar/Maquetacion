@@ -16,6 +16,7 @@
                 <th> @lang('admin/faqs.faq-question')</th>
                 <th> @lang('admin/faqs.faq-answer')</th>
                 <th> @lang('admin/faqs.faq-category')</th>
+                <th> Visible </th>
                 <th> </th>
             </tr>
 
@@ -24,6 +25,7 @@
                     <td> {{$faq_element->title}} </td>
                     <td>{{$faq_element->description}}</td>
                     <td> {{$faq_element->category->name}}</td>
+                    <td>{{$faq_element->visible}}</td>
                     <td>
                         <svg class="edit-button button" data-url="{{route('faqs_show', ['faq' => $faq_element->id])}}" style="width:24px;height:24px" viewBox="0 0 24 24" >
                             <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12H20A8,8 0 0,1 12,20A8,8 0 0,1 4,12A8,8 0 0,1 12,4V2M18.78,3C18.61,3 18.43,3.07 18.3,3.2L17.08,4.41L19.58,6.91L20.8,5.7C21.06,5.44 21.06,5 20.8,4.75L19.25,3.2C19.12,3.07 18.95,3 18.78,3M16.37,5.12L9,12.5V15H11.5L18.87,7.62L16.37,5.12Z" />
@@ -61,6 +63,20 @@
 
                 <input autocomplete="false" name="hidden" type="text" style="display:none;">
                 <input type="hidden" name="id" value="{{isset($faq->id) ? $faq->id : ''}}">
+
+                <div class="form-row">
+                    <div class="button-create" id="button-create" data-url="{{route("faqs_create")}}">
+                        <svg style="width:36px;height:36px" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z" />
+                        </svg>
+                    </div>
+                    <div class="visible">
+                        <label class="switch">
+                            <input type="checkbox" name="visible" checked="checked" value="{{isset($faq->visible) ? $faq->visible : '1'}}" class="input" id="switch">
+                            <span class="slider round"></span>
+                        </label>                      
+                    </div>
+                </div>
 
                 <div class="form_group">
                     <div class="form_label">

@@ -11,6 +11,11 @@
     </head>
 
     <body>
+
+            @include('admin.layout.messages')
+
+            {{-- @include('admin.layout.spinner') --}}
+            
             @include('admin.layout.sidebar')
 
             @if($agent->isMobile())

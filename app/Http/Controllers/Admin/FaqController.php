@@ -63,6 +63,7 @@ class FaqController extends Controller
             'description' => request('description'),
             'active' => 1,
             'category_id' => request('category_id'),
+            'visible' => request('visible')
         ]);
 
         $view = View::make('admin.faqs.index')

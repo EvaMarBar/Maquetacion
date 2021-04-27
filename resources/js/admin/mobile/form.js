@@ -1,5 +1,4 @@
 import { renderCkeditor } from "../../ckeditor";
-import {swipeRevealItem} from './tableSwipe';
 import { showForm } from './bottombarMenu';
 import {scrollWindowElement} from './verticalScroll';
 
@@ -114,12 +113,17 @@ export   let paginatorElement = (url) =>{
         let sendPaginationRequest = async () => {
 
             try {
+                let currentPage = document.getElementById('table-container').dataset.current
+                let nextPage = ++currentPage
+                let newUrl = url.replace(/[0-9]/g, nextPage);
+                console.log(newUrl)
 
-                await axios.get(url).then(response => {
+                await axios.get(newUrl).then(response => {
                     table.insertAdjacentHTML("beforeend", response.data.table);
                     document.querySelector('.table-container').dataset.current=url;
-                    // let newUrl = url.replace(/[^0-9]/g, "");
-                    //     console.log(newUrl); // "500"
+                    
+                    currentPage = nextPage.toString()
+                    console.log(currentPage)
                     
                     renderTable();
                 });
