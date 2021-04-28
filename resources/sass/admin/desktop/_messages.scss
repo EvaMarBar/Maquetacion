@@ -1,0 +1,63 @@
+.messages-container{
+
+    position: fixed;
+    top:2em; right: 0.5em;
+	width: max-content;
+	z-index: 30;
+	
+	&.show{
+		animation-duration:  0.5s;
+	}
+
+	.message {
+		display: none;
+		text-align:left;
+		padding: 1em 0;
+		background-color: whitesmoke;
+		border-radius: 4px;
+		max-width: 100%;
+		position:relative;
+		box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+
+		&.success.message-active{
+			display: block;
+			border-left: 0.5em solid rgb(40, 122, 40);
+		}
+
+		&.error.message-active{
+			display: block;
+			border-left: 0.5em solid rgb(122, 40, 40);
+		}
+
+		.message-content{
+
+			padding-right: 4em;
+			padding-left: 2em;
+			
+			.message-type {
+				color: hsl(0, 0%, 24%);
+				font-weight: 700;
+				margin-top: 0;
+				margin-bottom: 0.5em;
+			}
+	
+			.message-description {
+				font-size: 0.9em;
+				margin-top: 0;
+				margin-bottom: 0;
+				color: hsl(0, 0%, 53%);
+			}
+		}
+
+		.message-close {
+			cursor: pointer;
+			fill: hsl(0, 0%, 24%);
+			height: 1.5em;
+			position: absolute;
+			right: 1.5em;
+			top: 50%;
+			transform: translateY(-50%);
+			width: 1em;
+		}
+	}
+}

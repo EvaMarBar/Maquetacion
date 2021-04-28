@@ -23,6 +23,8 @@
   background-color:rgb(216, 209, 205) ;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
   
 }
 .row-title{
@@ -39,9 +41,7 @@
   min-height: 10vh;
   position: relative;  
   text-align: left;
-}
-.column{
-  margin: 0.5em 1em;
+  justify-content: space-evenly;
 }
 
 .content {

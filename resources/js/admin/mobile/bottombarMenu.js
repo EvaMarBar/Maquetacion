@@ -1,4 +1,4 @@
-//import {showFilterTable, hideFilterTable} from './filterTable';
+import {showFilterTable, hideFilterTable} from './filterTable';
 import {renderTable} from './form';
 
 const bottombarItems = document.querySelectorAll('.bottombar-item');

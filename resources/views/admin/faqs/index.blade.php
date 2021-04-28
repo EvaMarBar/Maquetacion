@@ -1,8 +1,6 @@
 @php
     $filters = ['category' => $faqs_categories, 'search' => true, 'initial-date' =>true, 'final-date'=>true]; 
-
     $order = ['fecha de creación' => 't_faqs.created_at', 'nombre' => 't_faqs.title', 'categoría' => 't_faqs_categories.name'];
-
 @endphp
 
 @extends('admin.layout.table_form')

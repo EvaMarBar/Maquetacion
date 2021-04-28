@@ -2049,6 +2049,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _ckeditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ckeditor */ "./resources/js/ckeditor.js");
 /* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+/* harmony import */ var _spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2070,12 +2072,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 var table = document.getElementById("table");
 var form = document.getElementById("form");
 
- // import { showMessages } from "./messages";
+
+
+
 
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var sendButton = document.getElementById("send");
   var createButton = document.getElementById("button-create");
+  var onOffSwitch = document.getElementById('switch');
   sendButton.addEventListener("click", function (event) {
     event.preventDefault();
     forms.forEach(function (form) {
@@ -2091,63 +2096,50 @@ var renderForm = function renderForm() {
         });
       }
 
-      var visible = data.get('visible');
-      console.log(visible);
-
-      if (visible == null) {
-        data.set('visible', 0);
-      }
-
       var url = form.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
         var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          var errorMessage;
+          var errors, errorMessage;
           return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
+                  (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.startWait)();
+                  _context.prev = 1;
+                  _context.next = 4;
                   return axios.post(url, data).then(function (response) {
-                    var successMessage = document.getElementById('message-success');
-                    successMessage.classList.add('active');
-                    window.setTimeout(function () {
-                      successMessage.classList.remove('active');
-                    }, 5000);
                     form.id.value = response.data.id;
                     table.innerHTML = response.data.table;
-                    renderTable(); // showMessages('success', response.data.message);
-                    // paginatorElement();
+                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
+                    renderTable();
                   });
 
-                case 3:
-                  _context.next = 11;
+                case 4:
+                  _context.next = 10;
                   break;
 
-                case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
-                  console.log(_context.t0);
-                  errorMessage = document.getElementById('message-error');
-                  errorMessage.classList.add('active');
-                  window.setTimeout(function () {
-                    errorMessage.classList.remove('active');
-                  }, 5000); // if(error.response.status == '422'){
-                  //     let errors = error.response.data.errors;      
-                  //     let errorMessage = '';
-                  //     Object.keys(errors).forEach(function(key) {
-                  //         errorMessage += '<li>' + errors[key] + '</li>';
-                  //     })
-                  //     showMessage('error', errorMessage);
-                  // }
+                case 6:
+                  _context.prev = 6;
+                  _context.t0 = _context["catch"](1);
+                  (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
 
-                case 11:
+                  if (_context.t0.response.status == '422') {
+                    errors = _context.t0.response.data.errors;
+                    errorMessage = '';
+                    Object.keys(errors).forEach(function (key) {
+                      errorMessage += '<li>' + errors[key] + '</li>';
+                    });
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage);
+                  }
+
+                case 10:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee, null, [[1, 6]]);
         }));
 
         return function sendPostRequest() {
@@ -2199,6 +2191,13 @@ var renderForm = function renderForm() {
     }();
 
     sendCreateRequest();
+  });
+  onOffSwitch.addEventListener("click", function () {
+    if (onOffSwitch.value == "true") {
+      onOffSwitch.value = "false";
+    } else {
+      onOffSwitch.value = "true";
+    }
   });
 };
 var renderTable = function renderTable() {
@@ -2339,6 +2338,48 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/messages.js":
+/*!************************************************!*\
+  !*** ./resources/js/admin/desktop/messages.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "showMessage": () => (/* binding */ showMessage)
+/* harmony export */ });
+var closeButtons = document.querySelectorAll('.message-close');
+var messagesContainer = document.getElementById('messages-container');
+var messages = document.querySelectorAll('.message');
+var showMessage = function showMessage(state, messageText) {
+  messages.forEach(function (message) {
+    if (message.classList.contains(state)) {
+      var successMessage = document.getElementById('message-description-' + state);
+      messagesContainer.classList.add('show');
+      message.classList.add('message-active');
+      successMessage.innerHTML = messageText;
+      setTimeout(function () {
+        messagesContainer.classList.remove('show');
+        message.classList.remove('message-active');
+      }, 7000);
+    }
+
+    ;
+  });
+};
+closeButtons.forEach(function (closeButton) {
+  closeButton.addEventListener("click", function () {
+    messagesContainer.classList.remove('show');
+    var messagesActives = document.querySelectorAll('.message-active');
+    messagesActives.forEach(function (messageActive) {
+      messageActive.classList.remove('message-active');
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/sidebar.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/desktop/sidebar.js ***!
@@ -2441,6 +2482,31 @@ menuButton.addEventListener("click", function () {
     form3.classList.add("active");
   }
 });
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/spinner.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/desktop/spinner.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "startWait": () => (/* binding */ startWait),
+/* harmony export */   "stopWait": () => (/* binding */ stopWait)
+/* harmony export */ });
+var spinner = document.getElementById('spinner');
+var background = document.getElementById('spinner-background');
+var startWait = function startWait() {
+  spinner.classList.add('active');
+  background.classList.add('active');
+};
+var stopWait = function stopWait() {
+  spinner.classList.remove('active');
+  background.classList.remove('active');
+};
 
 /***/ }),
 

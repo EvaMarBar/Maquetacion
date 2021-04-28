@@ -4,7 +4,7 @@
     color: rgb(25, 23, 22);
     font-size: 1em;
     height: max-content;
-    margin: 4em 0.5em;
+    margin: 6em 0.5em;
     width: 60%;
 
 
@@ -21,16 +21,16 @@
         }
         tr td:first-child {
             white-space: nowrap;
-            width: 10%;
+            width: 30%;
         }
         tr td:last-child {
             white-space: nowrap;
-            width: 10%;
+            width: 30%;
         }
         
         .table-icons-container{
             display: flex;
-            justify-content: space-around;
+            justify-content: left;
         }
         
         }
@@ -56,7 +56,7 @@
             font-size: 1.5em;
             font-weight: bold;
             padding-bottom: 0.5em;
-            text-align: center;
+            text-align: left;
             width: 100%;
         }
     }
@@ -74,8 +74,10 @@
       .row-header{
         font-size: 1em;
         font-weight: bold;
+        display: flex;
+        flex-direction: row;
         background-color:rgb(216, 209, 205) ;
-        justify-content: space-evenly;
+        justify-content: left;
       }
       .row-title{
         font-size: 1em;
@@ -87,57 +89,46 @@
         background-color: rgb(255, 255, 255);
         border-bottom: 1px solid hsl(0, 0%, 73%);
         border-top: 1px solid hsl(0, 0%, 73%);
-        min-height: 10vh;
+        min-height: 5vh;
         position: relative;  
         width: inherit;  
-        justify-content: space-evenly;
+        justify-content: left;
+        display: flex;
+        flex-direction: row;
       }
       .column{
         margin: 0.5em;
         width: 25%;
       }
-      
-      .content {
-          padding: 32px;
-          box-sizing: border-box;
-          display: row;
-      
-          overflow: hidden;
-        }
-      
-        .swipe-element {
-          position: relative;
-      
-          width: 100%;
-          height: max-content;
-        }
+  
+        // .swipe-element {
+        //   position: relative;
+        //   width: 100%;
+        //   height: max-content;
+        // }
       
         .swipe-front {
           position: relative;
           display: flex;
           flex-direction: row;
-          border: 1px solid black;
-      
+          // border: 1px solid black;
           width: 100%;
           height: max-content;
-      
           margin: 0;
           padding: 8px;
           box-sizing: border-box;
-      
-       
         }
       
         
       .table-field-container{
         background-color: white;
-        min-height: 10vh;
+        min-height: 5vh;
         position: absolute;
-        -ms-touch-action: none;
         touch-action: none;
         width: 100%;
-        justify-content: space-evenly;
+        justify-content: left;
       }
+      
       .table-field{
         margin: 0.2em;
         white-space: nowrap; 
@@ -146,55 +137,29 @@
       
       .table-icons-container{
       
-        position: absolute;
-        width: 100%;
-        z-index: 997;
+        display: flex;
+        justify-content: left;
+        width: 20%;
+        position: relative;
+        left: 35em;
+    
       
         .table-icons{
-      
-            display: none;
-            min-height: 10vh;
-      
+            position: relative;
+            right: 0.5em;
+            display: flex;
+            justify-content: space-between;
+  
             svg{
                 height: 1.5em;
                 width: 1.5em;
         
                 path{
-                    fill: hsl(0, 0%, 100%);
+                    fill:black;
+                    path:hover {fill:rgb(241, 131, 75)}
+ 
                 }
             }
         }
-      
-        .table-icons#swipe-active{
-            display: block;
-        }
-      
-        .table-icons.edit-button{
-      
-           background-color: rgb(170, 233, 170);
-           text-align: left;
-      
-            svg{
-                margin-left: 1em;
-                margin-top: 1em;
-            }
-      
-        }
-        
-        .table-icons.delete-button{
-      
-            background-color: hsl(0, 65%, 73%);
-            text-align: right;
-      
-            svg{
-                margin-right: 1em;
-                margin-top: 1em;
-            }
-        }
       }
-      
-.button{ 
-    margin:0.2em;
-    path:hover {fill:rgb(241, 131, 75)}
-    display: inline block;
-}
+

@@ -104,6 +104,8 @@ body {
   background-color: #d8d1cd;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5em;
 }
 
 .row-title {
@@ -120,10 +122,7 @@ body {
   min-height: 10vh;
   position: relative;
   text-align: left;
-}
-
-.column {
-  margin: 0.5em 1em;
+  justify-content: space-evenly;
 }
 
 .content {
@@ -306,6 +305,17 @@ body {
   border-radius: 0.2em;
 }
 
+.form-row {
+  display: flex;
+  flex-direction: row;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  right: 2em;
+  top: 2em;
+}
+
 .bottombar {
   display: flex;
   height: 10vh;
@@ -316,12 +326,12 @@ body {
   z-index: 1001;
 }
 .bottombar .bottombar-item {
-  background-color: #02a8b1;
+  background-color: #ec9d75;
   text-align: center;
   width: 50%;
 }
 .bottombar .bottombar-item.bottombar-active {
-  background-color: #253788;
+  background-color: #e07640;
 }
 .bottombar .bottombar-item svg {
   height: 1.5em;
@@ -337,9 +347,8 @@ body {
   height: -moz-max-content;
   height: max-content;
   position: relative;
-  top: 10vh;
   width: 100%;
-  z-index: 1003;
+  z-index: 10;
 }
 .table-filter.filter-active .table-filter-container {
   max-height: 70vh;
@@ -347,11 +356,15 @@ body {
   position: relative;
   top: 0;
 }
+.table-filter .filter-form {
+  display: flex;
+  flex-direction: column;
+}
 .table-filter .table-filter-container {
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.5s;
   width: 100%;
+  padding-left: 4em;
 }
 .table-filter .table-filter-container form {
   padding: 1em;
@@ -368,12 +381,15 @@ body {
 }
 .table-filter .table-filter-buttons .table-filter-button.button-active {
   max-height: 10vh;
+  height: 2em;
+  padding: 1em 0;
 }
 .table-filter .table-filter-buttons .table-filter-button.open-filter {
-  background-color: #b0b0b0;
+  background-color: #ec9d75;
 }
 .table-filter .table-filter-buttons .table-filter-button.apply-filter {
-  background-color: #297f62;
+  background-color: #b0b0b0;
+  height: 2em;
 }
 .table-filter .table-filter-buttons .table-filter-button.remove-filter {
   background-color: #d74242;
@@ -401,7 +417,6 @@ body {
   z-index: 3000;
 }
 .pop-up.active {
-  position: relative;
   top: 10em;
   transform: translateY(0);
   z-index: 5000;
@@ -431,6 +446,130 @@ body {
 
 .table-pagination {
   display: none;
+}
+
+.messages-container {
+  position: fixed;
+  top: 1em;
+  right: 1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 30;
+}
+.messages-container.show {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+.messages-container .message {
+  display: none;
+  text-align: left;
+  padding: 0.5em 0;
+  background-color: whitesmoke;
+  border-radius: 4px;
+  max-width: 100%;
+  top: 0.5em;
+  position: relative;
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
+}
+.messages-container .message.success.message-active {
+  display: block;
+  border-left: 0.5em solid #287a28;
+}
+.messages-container .message.error.message-active {
+  display: block;
+  border-left: 0.5em solid #7a2828;
+}
+.messages-container .message .message-content {
+  padding-right: 4em;
+  padding-left: 2em;
+}
+.messages-container .message .message-content .message-type {
+  color: #3d3d3d;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.messages-container .message .message-content .message-description {
+  font-size: 0.9em;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #878787;
+}
+.messages-container .message .message-close {
+  cursor: pointer;
+  fill: #3d3d3d;
+  height: 1.5em;
+  position: absolute;
+  right: 1.5em;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+}
+
+/* The switch - the box around the slider */
+.visible {
+  width: 10%;
+  height: 5%;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-color: #ec9d75;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #ec9d75;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #ec9d75;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

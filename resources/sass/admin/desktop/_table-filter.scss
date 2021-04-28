@@ -48,6 +48,8 @@
         max-height: 10vh;
         height: 2em;
         padding:1em 0;
+        position: fixed;
+        box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
     }
 
     &.open-filter{

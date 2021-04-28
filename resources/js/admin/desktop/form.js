@@ -2,14 +2,16 @@ const table = document.getElementById("table");
 const form = document.getElementById("form");
 import { renderCkeditor } from "../../ckeditor";
 import {renderFilterTable} from "./filterTable";
-// import { showMessages } from "./messages";
+import { showMessage } from "./messages";
+import { startWait } from "./spinner";
+import {stopWait} from "./spinner";
 
 export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
     let sendButton = document.getElementById("send");
     let createButton = document.getElementById("button-create");
-    
+    let onOffSwitch = document.getElementById('switch');
 
     sendButton.addEventListener("click", (event) => {
     
@@ -25,49 +27,44 @@ export let renderForm = () => {
                     data.append(key, value.getData());
                 });
             }
-
-            let visible = data.get('visible');
-            console.log(visible)
-            if(visible == null){
-                data.set('visible', 0)
-            }
-
+        
             let url = form.action;
       
     
             let sendPostRequest = async () => {
+
+                startWait();
     
                 try {
                     await axios.post(url, data).then(response => {
-                        let successMessage = document.getElementById('message-success');
-                        successMessage.classList.add('active');
-                        window.setTimeout( ()=>{successMessage.classList.remove('active')}, 5000);
+
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
+
+                        stopWait();
+                        showMessage('success', response.data.message);
                         renderTable();
-                        // showMessages('success', response.data.message);
-                        // paginatorElement();
-                });
+                    });
                     
                 } catch (error) {
-                    console.log(error)
-                    let errorMessage = document.getElementById('message-error')
-                    errorMessage.classList.add('active');
-                    window.setTimeout( ()=>{errorMessage.classList.remove('active')}, 5000);
-                    // if(error.response.status == '422'){
     
-                    //     let errors = error.response.data.errors;      
-                    //     let errorMessage = '';
-    
-                    //     Object.keys(errors).forEach(function(key) {
-                    //         errorMessage += '<li>' + errors[key] + '</li>';
-                    //     })
-        
-                    //     showMessage('error', errorMessage);
+                    stopWait();
 
-                    // }
+                    if(error.response.status == '422'){
+    
+                        let errors = error.response.data.errors;      
+                        let errorMessage = '';
+    
+                        Object.keys(errors).forEach(function(key) {
+                            errorMessage += '<li>' + errors[key] + '</li>';
+                        })
+        
+                        showMessage('error', errorMessage);
+
+                    }
                 }
             };
+    
             sendPostRequest();
         });
     });
@@ -92,6 +89,15 @@ export let renderForm = () => {
         };
 
         sendCreateRequest();
+    });
+    
+    onOffSwitch.addEventListener("click", () => {
+
+        if(onOffSwitch.value == "true"){
+            onOffSwitch.value = "false";
+        }else{
+            onOffSwitch.value = "true";
+        }
     });
 }
 

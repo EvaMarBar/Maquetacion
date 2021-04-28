@@ -1,10 +1,11 @@
 require('../../bootstrap');
 require('../../ckeditor');
 require('./form');
-// require('./sidebar');
+require('./messages');
 require('./tableSwipe');
 require('./verticalScroll');
 // require('./tableScroll');
-// require('./filterTable');
-require('./form-topbar');
+require('./filterTable');
+require('./spinner');
+// require('./form-topbar');
 require('./bottombarMenu');

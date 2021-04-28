@@ -1,6 +1,9 @@
 import { renderCkeditor } from "../../ckeditor";
 import { showForm } from './bottombarMenu';
 import {scrollWindowElement} from './verticalScroll';
+import { showMessage } from "./messages";
+import { startWait } from "./spinner";
+import {stopWait} from "./spinner";
 
 
 const table = document.getElementById("table");
@@ -12,6 +15,8 @@ export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
     let sendButton = document.getElementById("send");
+    let createButton = document.getElementById("button-create");
+    let onOffSwitch = document.getElementById("switch")
 
     sendButton.addEventListener("click", (event) => {
     
@@ -30,27 +35,76 @@ export let renderForm = () => {
             }
 
             let url = form.action;
-    
+
             let sendPostRequest = async () => {
     
+                startWait();
                 try {
                     await axios.post(url, data).then(response => {
+
                         form.id.value = response.data.id;
                         table.innerHTML = response.data.table;
-                        renderTable();  
-                        renderCkeditor();
-                        paginatorElement();
-                });
+
+                        stopWait();
+                        showMessage('success', response.data.message);
+                        renderTable();
+                    });
                     
                 } catch (error) {
-                    console.error(error);
-                }
+
+                    stopWait();
+
+                    if(error.response.status == '422'){
+
+                        let errors = error.response.data.errors;      
+                        let errorMessage = '';
+
+                        Object.keys(errors).forEach(function(key) {
+                            errorMessage += '<li>' + errors[key] + '</li>';
+                        })
+        
+                        showMessage('error', errorMessage);
+                    }
+                };
+                
             };
-    
-            sendPostRequest();
+
+        sendPostRequest();
         });
     });
-};
+
+    onOffSwitch.addEventListener("click", () => {
+
+        if(onOffSwitch.value == "true"){
+            onOffSwitch.value = "false";
+        }else{
+            onOffSwitch.value = "true";
+        }
+    });
+
+    createButton.addEventListener("click", () =>{
+        let url= createButton.dataset.url;
+
+
+        let sendCreateRequest = async () => {
+
+            try {
+                await axios.get(url).then(response => {
+                    form.innerHTML = response.data.form;
+                    renderForm();
+                    renderCkeditor();
+                    renderFilterTable();
+                });
+                
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        sendCreateRequest();
+    });
+}
+
 
 
 export let renderTable = () => {
@@ -64,7 +118,15 @@ export let renderTable = () => {
 
             let url = editButton.dataset.url;
 
+            if(onOffSwitch.value == "true"){
+                onOffSwitch.value = "false";
+            }else{
+                onOffSwitch.value = "true";
+            }
+            
+
             let sendEditRequest = async () => {
+
 
                 try {
                     await axios.get(url).then(response => {

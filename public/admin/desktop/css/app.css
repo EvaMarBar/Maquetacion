@@ -50,6 +50,8 @@ body {
   max-height: 10vh;
   height: 2em;
   padding: 1em 0;
+  position: fixed;
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
 }
 .table-filter .table-filter-buttons .table-filter-button.open-filter {
   background-color: #ec9d75;
@@ -78,7 +80,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 4em 0.5em;
+  margin: 6em 0.5em;
   width: 60%;
 }
 .table table {
@@ -94,15 +96,15 @@ body {
 }
 .table table tr td:first-child {
   white-space: nowrap;
-  width: 10%;
+  width: 30%;
 }
 .table table tr td:last-child {
   white-space: nowrap;
-  width: 10%;
+  width: 30%;
 }
 .table table .table-icons-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: left;
 }
 .table th {
   height: 2em;
@@ -123,7 +125,7 @@ body {
   font-size: 1.5em;
   font-weight: bold;
   padding-bottom: 0.5em;
-  text-align: center;
+  text-align: left;
   width: 100%;
 }
 
@@ -141,8 +143,10 @@ body {
 .row-header {
   font-size: 1em;
   font-weight: bold;
+  display: flex;
+  flex-direction: row;
   background-color: #d8d1cd;
-  justify-content: space-evenly;
+  justify-content: left;
 }
 
 .row-title {
@@ -156,10 +160,12 @@ body {
   background-color: white;
   border-bottom: 1px solid #bababa;
   border-top: 1px solid #bababa;
-  min-height: 10vh;
+  min-height: 5vh;
   position: relative;
   width: inherit;
-  justify-content: space-evenly;
+  justify-content: left;
+  display: flex;
+  flex-direction: row;
 }
 
 .column {
@@ -167,26 +173,10 @@ body {
   width: 25%;
 }
 
-.content {
-  padding: 32px;
-  box-sizing: border-box;
-  display: row;
-  overflow: hidden;
-}
-
-.swipe-element {
-  position: relative;
-  width: 100%;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-}
-
 .swipe-front {
   position: relative;
   display: flex;
   flex-direction: row;
-  border: 1px solid black;
   width: 100%;
   height: -webkit-max-content;
   height: -moz-max-content;
@@ -198,11 +188,11 @@ body {
 
 .table-field-container {
   background-color: white;
-  min-height: 10vh;
+  min-height: 5vh;
   position: absolute;
   touch-action: none;
   width: 100%;
-  justify-content: space-evenly;
+  justify-content: left;
 }
 
 .table-field {
@@ -212,46 +202,26 @@ body {
 }
 
 .table-icons-container {
-  position: absolute;
-  width: 100%;
-  z-index: 997;
+  display: flex;
+  justify-content: left;
+  width: 20%;
+  position: relative;
+  left: 35em;
 }
 .table-icons-container .table-icons {
-  display: none;
-  min-height: 10vh;
+  position: relative;
+  right: 0.5em;
+  display: flex;
+  justify-content: space-between;
 }
 .table-icons-container .table-icons svg {
   height: 1.5em;
   width: 1.5em;
 }
 .table-icons-container .table-icons svg path {
-  fill: white;
+  fill: black;
 }
-.table-icons-container .table-icons#swipe-active {
-  display: block;
-}
-.table-icons-container .table-icons.edit-button {
-  background-color: #aae9aa;
-  text-align: left;
-}
-.table-icons-container .table-icons.edit-button svg {
-  margin-left: 1em;
-  margin-top: 1em;
-}
-.table-icons-container .table-icons.delete-button {
-  background-color: #e78d8d;
-  text-align: right;
-}
-.table-icons-container .table-icons.delete-button svg {
-  margin-right: 1em;
-  margin-top: 1em;
-}
-
-.button {
-  margin: 0.2em;
-  display: inline block;
-}
-.button path:hover {
+.table-icons-container .table-icons svg path path:hover {
   fill: #f1834b;
 }
 
@@ -262,8 +232,7 @@ body {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  margin: 4em 0.5em;
-  padding-top: 1.5em;
+  margin: 6em 0.5em;
   width: 40%;
 }
 
@@ -386,9 +355,9 @@ body {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  position: absolute;
-  right: 2em;
-  top: 9em;
+  position: relative;
+  left: 23em;
+  top: 1.5em;
 }
 
 .menu {
@@ -500,45 +469,54 @@ body {
   margin: 0 0.5em;
 }
 
-.message {
-  position: absolute;
-  top: -4em;
+.messages-container {
+  position: fixed;
+  top: 2em;
   right: 0.5em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  z-index: 30;
+}
+.messages-container.show {
+  -webkit-animation-duration: 0.5s;
+          animation-duration: 0.5s;
+}
+.messages-container .message {
+  display: none;
+  text-align: left;
+  padding: 1em 0;
   background-color: whitesmoke;
-  width: 30%;
+  border-radius: 4px;
+  max-width: 100%;
+  position: relative;
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
 }
-.message#message-succes.active {
-  border-left: solid 0.2em #269226;
-  position: absolute;
-  top: 4.5em;
-  right: 0.5em;
-  padding: 0.5em;
-  z-index: 100;
-  transition: 0.5s;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+.messages-container .message.success.message-active {
   display: block;
-  justify-content: right;
+  border-left: 0.5em solid #287a28;
 }
-.message#message-error.active {
-  border-left: solid 0.2em #922d26;
-  position: absolute;
-  top: 4.5em;
-  right: 0.5em;
-  padding: 0.5em;
-  z-index: 100;
-  transition: 0.5s;
-  -webkit-animation-duration: 0.5s;
-          animation-duration: 0.5s;
-  -webkit-animation-fill-mode: forwards;
-          animation-fill-mode: forwards;
+.messages-container .message.error.message-active {
   display: block;
-  justify-content: right;
+  border-left: 0.5em solid #7a2828;
 }
-
-.message-close {
+.messages-container .message .message-content {
+  padding-right: 4em;
+  padding-left: 2em;
+}
+.messages-container .message .message-content .message-type {
+  color: #3d3d3d;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.messages-container .message .message-content .message-description {
+  font-size: 0.9em;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #878787;
+}
+.messages-container .message .message-close {
   cursor: pointer;
   fill: #3d3d3d;
   height: 1.5em;
@@ -615,18 +593,21 @@ input:checked + .slider:before {
 }
 
 .spinner {
+  display: none;
+}
+.spinner .active {
   margin: auto;
   width: 70px;
   text-align: center;
   position: absolute;
   top: 20em;
-  left: 38em;
+  left: 40em;
 }
 
 .spinner > div {
   width: 18px;
   height: 18px;
-  background-color: #333;
+  background-color: white;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
@@ -659,6 +640,22 @@ input:checked + .slider:before {
     transform: scale(1);
   }
 }
+.spinner-background {
+  background-color: #000000;
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2000;
+}
+.spinner-background.overlay-active {
+  cursor: pointer;
+  display: block;
+  opacity: 0.5;
+}
+
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.

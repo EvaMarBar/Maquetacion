@@ -14,7 +14,7 @@
 
             @include('admin.layout.messages')
 
-            {{-- @include('admin.layout.spinner') --}}
+            @include('admin.layout.spinner')
             
             @include('admin.layout.sidebar')
 

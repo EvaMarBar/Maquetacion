@@ -3,8 +3,7 @@
     border: 0.5em solid  rgb(236, 157, 117);
     border-radius: 0.5em;
     height: max-content;
-    margin: 4em 0.5em;
-    padding-top: 1.5em;
+    margin: 6em 0.5em;
     width: 40%;
 }
 
@@ -116,7 +115,8 @@
     display: flex;
     flex-direction: row;
     width: max-content;
-    position: absolute;
-    right: 2em; top:9em;
+    position: relative;
+    left: 23em; top:1.5em;
+    
 }
 
