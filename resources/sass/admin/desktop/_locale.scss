@@ -1,0 +1,52 @@
+.locale-tabs{
+    background-color: rgb(245, 200, 178);
+}
+
+.locale-tabs-container{
+    background-color: rgb(245, 200, 178);
+    display: flex;
+    justify-content: space-between;
+}
+
+.locale-tabs-container-menu{
+
+    width: 100%;
+    display: flex;
+    margin:0;
+    padding: 0;
+
+    ul{
+        background-color: rgb(245, 200, 178);
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    li{
+        color: black;
+        cursor: pointer;
+        padding: 1em 1em;
+        text-align: center;
+        list-style: none;
+    }
+
+    li.locale-tab-active{
+        background-color: rgb(236, 157, 117);
+        color: black;
+    }
+}
+.locale-tab-panel{
+    display: none;
+}
+
+.locale-tab-panel.locale-tab-active{
+    display: block;
+
+    .form-group{
+        margin: 1em 0;
+
+        .form-label{
+            margin: 0.5em 0;
+        }
+    }
+}

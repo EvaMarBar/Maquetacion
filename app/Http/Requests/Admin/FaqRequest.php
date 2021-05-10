@@ -28,18 +28,18 @@ class FaqRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
+            // 'title' => 'required',
+            // 'description' => 'required',
+            // 'category_id' => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required' => 'El titulo es obligatorio',
-            'description.required' => 'Debe añadir una descripción',
-            'category_id.required'=> 'Debe elegir una categoria',
+            // 'title.required' => 'El titulo es obligatorio',
+            // 'description.required' => 'Debe añadir una descripción',
+            // 'category_id.required'=> 'Debe elegir una categoria',
         ];
     }
 }

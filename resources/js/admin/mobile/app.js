@@ -9,3 +9,6 @@ require('./filterTable');
 require('./spinner');
 // require('./form-topbar');
 require('./bottombarMenu');
+require('./localeTabs');
+require('./images');
+require('./tabs');

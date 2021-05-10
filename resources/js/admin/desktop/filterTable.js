@@ -21,29 +21,46 @@ export let renderFilterTable = () => {
         applyFilter.addEventListener( 'click', () => {  
 
             let data = new FormData(filterForm);
-            let url = filterForm.action;
+            let filters = {};
     
+            data.forEach(function(value, key){
+                filters[key] = value;
+            });
+            
+            let json = JSON.stringify(filters);
+
+            let url = filterForm.action;
+
             let sendPostRequest = async () => {
     
-                try {
-                    await axios.post(url, data).then(response => {
+              try {
+                    axios.get(url, {
+                        params: {
+                          filters: json
+                        }
+                    }).then(response => {
+                        table.classList.add('table-hide');
                         table.innerHTML = response.data.table;
                         renderTable();
+
+                        setTimeout(function(){
+                            table.classList.remove('table-hide');
+                        }, 500)
+                        
                         tableFilter.classList.remove('filter-active')
                         applyFilter.classList.remove('button-active');
                         openFilter.classList.add('button-active');
-                
                     });
                     
                 } catch (error) {
-
+    
                 }
             };
     
             sendPostRequest();
             
         });
-    }    
+    }
 };
 
 export let hideFilterTable = () => {

@@ -7,20 +7,29 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use App\Vendor\Locale\Locale;
+// use App\Vendor\Image\Image;
 use App\Http\Requests\Admin\SliderRequest;
 use App\Models\DB\Slider;
 use Debugbar;
 
 class SliderController extends Controller
 {
-  
+    protected $locale;
+    // protected $image;
+    // protected $paginate;
     protected $slider;
 
-    function __construct(Slider $slider)
+    function __construct(Slider $slider, Locale $locale)
     {
         $this->middleware('auth');
         $this->slider = $slider;
         $this->slider->visible = 1;
+        $this->locale = $locale;
+        // $this->image = $image;
+
+        $this->locale->setParent('sliders');
+
     }
 
     public function index()
@@ -28,7 +37,7 @@ class SliderController extends Controller
    
         $view = View::make('admin.sliders.index')
             ->with('slider', $this->slider)
-            ->with('sliders', $this->slider->where('active', 1)->paginate(8));
+            ->with('sliders', $this->slider->where('active', 1) ->orderBy('created_at', 'desc')->paginate(8));
             
 
         if(request()->ajax()) {
@@ -65,6 +74,10 @@ class SliderController extends Controller
             'visible' => request('visible') == "true" ? 1 : 0,
             'active' => 1 
         ]);
+
+        if(request('locale')){
+            $locale = $this->locale->store(request('locale'), $slider->id);
+        }
 
         if (request('id')){
             $message = \Lang::get('admin/sliders.slider-update');

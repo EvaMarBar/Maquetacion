@@ -15,7 +15,6 @@
 
 }
 .form_group{
-    margin: 0.5em;
     width:90%;
 }
 .form_group_column {
@@ -36,7 +35,7 @@
 .form_label label {
     color: rgb(25, 23, 22);
     font-weight: bold;
-    width:100%;    
+    width:100%; 
     }
 
 
@@ -116,7 +115,21 @@
     flex-direction: row;
     width: max-content;
     position: relative;
-    left: 23em; top:1.5em;
+    left: 23em; top:1em;
+    z-index: 10;   
+}
+.form-row-panel{
+    display: flex;
+    flex-direction: row;
+    width: max-content;
+    padding: 1em 0.5em;
     
+    .form-group{
+        margin-right: 2em;
+        
+        .form-label{
+            margin:0.5em 0;
+        }
+    }
 }
 

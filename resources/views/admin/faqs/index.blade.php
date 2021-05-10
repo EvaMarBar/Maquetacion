@@ -1,5 +1,6 @@
 @php
-    $filters = ['category' => $faqs_categories, 'search' => true, 'initial-date' =>true, 'final-date'=>true]; 
+    $route = 'faqs';
+    $filters = ['category' => $faqs_categories, 'search' => true, 'initial_date' =>true, 'final_date'=>true]; 
     $order = ['fecha de creación' => 't_faqs.created_at', 'nombre' => 't_faqs.title', 'categoría' => 't_faqs_categories.name'];
 @endphp
 
@@ -11,8 +12,6 @@
         <table id="table-container">
             <div class="title">@lang('admin/faqs.parent_section')</div>
             <tr>
-                <th> @lang('admin/faqs.faq-question')</th>
-                <th> @lang('admin/faqs.faq-answer')</th>
                 <th> @lang('admin/faqs.faq-category')</th>
                 <th> Visible </th>
                 <th> </th>
@@ -20,8 +19,6 @@
 
             @foreach($faqs as $faq_element)
                 <tr>
-                    <td> {{$faq_element->title}} </td>
-                    <td>{{$faq_element->description}}</td>
                     <td> {{$faq_element->category->name}}</td>
                     <td>{{$faq_element->visible}}</td>
                     <td>
@@ -75,39 +72,115 @@
                         </label>                      
                     </div>
                 </div>
-
-                <div class="form_group">
-                    <div class="form_label">
-                        <label> @lang('admin/faqs.faq-question')</label>
-                    </div>
-
-                    <div class="form_input">
-                        <input type="text" name="title" value="{{isset($faq->title) ? $faq->title : ''}}" class="input">
-                    </div>
-                </div>
-                
-                <div class="form_group">
-                    <div class="form_label">
-                        <label>@lang('admin/faqs.faq-answer')</label>
-                    </div>
-                    <div class="form_input" id="editor">
-                        <textarea name="description" class="ckeditor" rows="5">{{isset($faq->description) ? $faq->description : ''}}</textarea>
+                <div class="tabs-container">
+                    <div class="tabs-container-menu">
+                        <ul>
+                            <li class="tab-item tab-active" data-tab="content">
+                                Contenido
+                            </li>      
+                            <li class="tab-item" data-tab="images">
+                                Imágenes
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div class="form_group">
-                    <div class="form_label">
-                        <label>@lang('admin/faqs.faq-category')</label>
+                <div class="tab-panel tab-active" data-tab="content">
+                    <div class="form-row-panel">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="category_id" class="label-highlight">
+                                    Categoría 
+                                </label>
+                            </div>
+                            <div class="form-input">
+                                <select name="category_id" data-placeholder="Seleccione una categoría" class="input-highlight">
+                                    <option></option>
+                                    @foreach($faqs_categories as $faq_category)
+                                        <option value="{{$faq_category->id}}" {{$faq->category_id == $faq_category->id ? 'selected':''}} class="category_id">{{ $faq_category->name }}</option>
+                                    @endforeach
+                                </select>                   
+                            </div>
+                        </div>
+            
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="name" class="label-highlight">Nombre</label>
+                            </div>
+                            <div class="form-input">
+                                <input type="text" name="name" value="{{isset($faq->name) ? $faq->name : ''}}"  class="input-highlight"  />
+                            </div>
+                        </div>
                     </div>
-                    <div class="form_input">
-                        <select name="category_id" value="id">
-                            <option></option>
-                            @foreach ($faqs_categories as $faq_category)
-                            <option value="{{$faq_category->id}}" {{$faq->category_id == $faq_category->id ? 'selected':''}} class="category_id">{{ $faq_category->name }}</option>
-                            @endforeach 
-                        </select>
-                    </div>
+
+
+                    @component('admin.layout.locale', ['tab' => 'content'])
+
+                        @foreach ($localizations as $localization)
+
+                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="name" class="label-highlight">Título</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" name="locale[title.{{$localization->alias}}]" value="{{isset($locale["title.$localization->alias"]) ? $locale["title.$localization->alias"] : ''}}" class="input-highlight">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="description" class="label-highlight">Descripción</label>
+                                        </div>
+                                        <div class="form-input">
+                                            <textarea class="ckeditor input-highlight" name="locale[description.{{$localization->alias}}]">{{isset($locale["description.$localization->alias"]) ? $locale["description.$localization->alias"] : ''}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        @endforeach
+                
+                    @endcomponent
                 </div>
+{{-- 
+                <div class="tab-panel" data-tab="images">
+
+                    @component('admin.components.locale', ['tab' => 'images'])
+
+                        @foreach ($localizations as $localization)
+
+                        <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="images" data-localetab="{{$localization->alias}}">
+
+                            <div class="two-columns">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="name" class="label-highlight">Foto destacada</label>
+                                    </div>
+                                    <div class="form-input">
+                                        @include('admin.components.upload', [
+                                            'type' => 'image', 
+                                            'content' => 'featured', 
+                                            'alias' => $localization->alias,
+                                            'files' => $faq->images_featured
+                                        ])
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @endforeach
+                
+                    @endcomponent --}}
+
+                {{-- </div> --}}
+
 
             </form>
 

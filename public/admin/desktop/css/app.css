@@ -245,7 +245,6 @@ body {
 }
 
 .form_group {
-  margin: 0.5em;
   width: 90%;
 }
 
@@ -357,7 +356,23 @@ body {
   width: max-content;
   position: relative;
   left: 23em;
-  top: 1.5em;
+  top: 1em;
+  z-index: 10;
+}
+
+.form-row-panel {
+  display: flex;
+  flex-direction: row;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 1em 0.5em;
+}
+.form-row-panel .form-group {
+  margin-right: 2em;
+}
+.form-row-panel .form-group .form-label {
+  margin: 0.5em 0;
 }
 
 .menu {
@@ -654,6 +669,141 @@ input:checked + .slider:before {
   cursor: pointer;
   display: block;
   opacity: 0.5;
+}
+
+.locale-tabs {
+  background-color: #f5c8b2;
+}
+
+.locale-tabs-container {
+  background-color: #f5c8b2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.locale-tabs-container-menu {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.locale-tabs-container-menu ul {
+  background-color: #f5c8b2;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.locale-tabs-container-menu li {
+  color: black;
+  cursor: pointer;
+  padding: 1em 1em;
+  text-align: center;
+  list-style: none;
+}
+.locale-tabs-container-menu li.locale-tab-active {
+  background-color: #ec9d75;
+  color: black;
+}
+
+.locale-tab-panel {
+  display: none;
+}
+
+.locale-tab-panel.locale-tab-active {
+  display: block;
+}
+.locale-tab-panel.locale-tab-active .form-group {
+  margin: 1em 0;
+}
+.locale-tab-panel.locale-tab-active .form-group .form-label {
+  margin: 0.5em 0;
+}
+
+.drop-zone {
+  max-width: 200px;
+  height: 200px;
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: "Quicksand", sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  cursor: pointer;
+  color: #313030;
+  border: 4px dashed #ec9d75;
+  border-radius: 10px;
+  margin: 0.5em 0;
+}
+
+.drop-zone--over {
+  border-style: solid;
+}
+
+.drop-zone__input {
+  display: none;
+}
+
+.drop-zone__thumb {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #cccccc;
+  background-size: cover;
+  position: relative;
+}
+
+.drop-zone__thumb::after {
+  content: attr(data-label);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 5px 0;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  text-align: center;
+}
+
+.tabs-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tabs-container-menu {
+  width: 40%;
+  position: absolute;
+}
+.tabs-container-menu ul {
+  background-color: #f5c8b2;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -2.5em;
+  z-index: 0;
+}
+.tabs-container-menu li {
+  color: black;
+  cursor: pointer;
+  padding: 1em 0.5em;
+  text-align: center;
+}
+.tabs-container-menu li.tab-active {
+  background-color: #ec9d75;
+  color: black;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.tab-active {
+  display: block;
+  padding: 2em 2.5em;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

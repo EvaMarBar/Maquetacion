@@ -1,6 +1,6 @@
 @php
-    $filters = ['search' => true, 'initial-date' =>true, 'final-date'=>true]; 
-
+    $route = 'sliders';
+    $filters = ['search' => true, 'initial_date' =>true, 'final_date'=>true]; 
     $order = ['fecha de creación' => 't_sliders.created_at', 'nombre' => 't_sliders.name', 'entity' => 't_sliders.entity'];
 
 @endphp
@@ -67,43 +67,103 @@
                 <input type="hidden" name="id" value="{{isset($slider->id) ? $slider->id : ''}}">
 
                 <div class="form-row">
-                    <div class="button-create" id="button-create" data-url="{{route("sliders_create")}}">
-                        <svg style="width:36px;height:36px" viewBox="0 0 24 24">
-                            <path fill="currentColor" d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z" />
-                        </svg>
-                    </div>
-                    <div class="visible" id="switch">
-                        <label class="switch">
-                            <input type="checkbox" name="visible" checked="checked" value="{{$slider->visible == 1 ? 'true' : 'false'}}" {{$slider->visible == 1 ? 'checked' : '' }}  class="input" id="switch">
-                            <span class="slider round"></span>
-                        </label>                      
-                    </div>
+                   
                 </div>
-
-                <div class="form_group">
-                    <div class="form_label">
-                        <label>Nombre</label>
-                    </div>
-
-                    <div class="form_input">
-                        <input type="text" name="name" value="{{isset($slider->name) ? $slider->name : ''}}">
+                <div class="tabs-container">
+                    <div class="tabs-container-menu">
+                        <ul>
+                            <li class="tab-item tab-active" data-tab="content">
+                                Contenido
+                            </li>      
+                            <li class="tab-item" data-tab="images">
+                                Imágenes
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 
-                <div class="form_group">
-                    <div class="form_label">
-                        <label>Entidad</label>
+                @component('admin.layout.locale', ['tab' => 'content'])
+
+                @foreach ($localizations as $localization)
+
+                    <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
+
+                        <div class="one-column">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="name" class="label-highlight">Nombre</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="locale[name.{{$localization->alias}}]" value="{{isset($locale["name.$localization->alias"]) ? $locale["name.$localization->alias"] : ''}}" class="input-highlight">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="one-column">
+                            <div class="form-group">
+                                <div class="form-label">
+                                    <label for="entity" class="label-highlight">Entidad</label>
+                                </div>
+                                <div class="form-input">
+                                    <input type="text" name="locale[entity.{{$localization->alias}}]" value="{{isset($locale["entity.$localization->alias"]) ? $locale["entity.$localization->alias"] : ''}}" class="input-highlight">
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="form_input">
-                        <input type="text" name="entity" value="{{isset($slider->entity) ? $slider->entity : ''}}">
+
+                @endforeach
+        
+            @endcomponent
+{{-- 
+        <div class="tab-panel" data-tab="images">
+
+            @component('admin.layout.locale', ['tab' => 'images'])
+
+                @foreach ($localizations as $localization)
+
+                <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="images" data-localetab="{{$localization->alias}}">
+
+                    <div class="two-columns">
+                        <div class="form-group">
+                            <div class="form-label">
+                                <label for="name" class="label-highlight">Foto destacada</label>
+                            </div>
+                            <div class="form-input">
+                                @include('admin.components.upload', [
+                                    'type' => 'image', 
+                                    'content' => 'featured', 
+                                    'alias' => $localization->alias,
+                                    'files' => $faq->images_featured
+                                ])
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-    
+
+                @endforeach
+        
+            @endcomponent
+
+        </div> --}}
+
 
             </form>
 
-            <div class="form_submit">
+            <div class="form-buttons">
                 <button id="send">Enviar</button>
+                <div class="button-create" id="button-create" data-url="{{route("sliders_create")}}">
+                    <svg style="width:36px;height:36px" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M10,4L12,6H20A2,2 0 0,1 22,8V18A2,2 0 0,1 20,20H4C2.89,20 2,19.1 2,18V6C2,4.89 2.89,4 4,4H10M15,9V12H12V14H15V17H17V14H20V12H17V9H15Z" />
+                    </svg>
+                </div>
+                <div class="visible" id="switch">
+                    <label class="switch">
+                        <input type="checkbox" name="visible" checked="checked" value="{{$slider->visible == 1 ? 'true' : 'false'}}" {{$slider->visible == 1 ? 'checked' : '' }}  class="input" id="switch">
+                        <span class="slider round"></span>
+                    </label>                      
+                </div>
             </div>
                 
         </div>

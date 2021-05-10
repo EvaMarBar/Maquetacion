@@ -1986,10 +1986,11 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
-var table = document.getElementById("table");
-var tableFilter = document.getElementById("table-filter");
-var filterForm = document.getElementById("filter-form");
 var renderFilterTable = function renderFilterTable() {
+  var table = document.getElementById("table");
+  var tableFilter = document.getElementById("table-filter");
+  var filterForm = document.getElementById("filter-form");
+
   if (filterForm != null) {
     var openFilter = document.getElementById("open-filter");
     var applyFilter = document.getElementById("apply-filter");
@@ -2000,6 +2001,11 @@ var renderFilterTable = function renderFilterTable() {
     });
     applyFilter.addEventListener('click', function () {
       var data = new FormData(filterForm);
+      var filters = {};
+      data.forEach(function (value, key) {
+        filters[key] = value;
+      });
+      var json = JSON.stringify(filters);
       var url = filterForm.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
@@ -2008,30 +2014,30 @@ var renderFilterTable = function renderFilterTable() {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
-                  return axios.post(url, data).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                    tableFilter.classList.remove('filter-active');
-                    applyFilter.classList.remove('button-active');
-                    openFilter.classList.add('button-active');
-                  });
+                  try {
+                    axios.get(url, {
+                      params: {
+                        filters: json
+                      }
+                    }).then(function (response) {
+                      table.classList.add('table-hide');
+                      table.innerHTML = response.data.table;
+                      (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                      setTimeout(function () {
+                        table.classList.remove('table-hide');
+                      }, 500);
+                      tableFilter.classList.remove('filter-active');
+                      applyFilter.classList.remove('button-active');
+                      openFilter.classList.add('button-active');
+                    });
+                  } catch (error) {}
 
-                case 3:
-                  _context.next = 7;
-                  break;
-
-                case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
-
-                case 7:
+                case 1:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee);
         }));
 
         return function sendPostRequest() {
@@ -2479,6 +2485,129 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/mobile/images.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/mobile/images.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "images": () => (/* binding */ images)
+/* harmony export */ });
+var images = function images() {
+  document.querySelectorAll(".drop-zone__input").forEach(function (inputElement) {
+    var dropZoneElement = inputElement.closest(".drop-zone");
+    dropZoneElement.addEventListener("click", function (e) {
+      inputElement.click();
+    });
+    inputElement.addEventListener("change", function (e) {
+      if (inputElement.files.length) {
+        updateThumbnail(dropZoneElement, inputElement.files[0]);
+      }
+    });
+    dropZoneElement.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      dropZoneElement.classList.add("drop-zone--over");
+    });
+    ["dragleave", "dragend"].forEach(function (type) {
+      dropZoneElement.addEventListener(type, function (e) {
+        dropZoneElement.classList.remove("drop-zone--over");
+      });
+    });
+    dropZoneElement.addEventListener("drop", function (e) {
+      e.preventDefault();
+
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      }
+
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+  /**
+   * Updates the thumbnail on a drop zone element.
+   *
+   * @param {HTMLElement} dropZoneElement
+   * @param {File} file
+   */
+
+  function updateThumbnail(dropZoneElement, file) {
+    var thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb"); // First time - remove the prompt
+
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    } // First time - there is no thumbnail element, so lets create it
+
+
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("drop-zone__thumb");
+      dropZoneElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name; // Show thumbnail for image files
+
+    if (file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/localeTabs.js":
+/*!*************************************************!*\
+  !*** ./resources/js/admin/mobile/localeTabs.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleTabs": () => (/* binding */ renderLocaleTabs)
+/* harmony export */ });
+var renderLocaleTabs = function renderLocaleTabs() {
+  var localeTabsItems = document.querySelectorAll(".locale-tab-item");
+  var localeTabPanels = document.querySelectorAll(".locale-tab-panel");
+  console.log("1");
+  localeTabsItems.forEach(function (localeTabItem) {
+    localeTabItem.addEventListener("click", function () {
+      console.log("click");
+      var activeElements = document.querySelectorAll(".locale-tab-active");
+      var activeTab = localeTabItem.dataset.tab;
+      activeElements.forEach(function (activeElement) {
+        if (activeElement.dataset.tab == activeTab) {
+          activeElement.classList.remove("locale-tab-active");
+          console.log(activeElement.className);
+        }
+      });
+      localeTabItem.classList.add("locale-tab-active");
+      console.log(localeTabItem.className);
+      localeTabPanels.forEach(function (localeTabPanel) {
+        if (localeTabPanel.dataset.tab == activeTab) {
+          if (localeTabPanel.dataset.localetab == localeTabItem.dataset.localetab) {
+            localeTabPanel.classList.add("locale-tab-active");
+            console.log(localeTabPanel.className);
+          }
+        }
+      });
+    });
+  });
+};
+renderLocaleTabs();
+
+/***/ }),
+
 /***/ "./resources/js/admin/mobile/messages.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/mobile/messages.js ***!
@@ -2859,6 +2988,39 @@ function sampleCompleted(sampleName) {
     isCompleted[sampleName] = true;
   }
 }
+
+/***/ }),
+
+/***/ "./resources/js/admin/mobile/tabs.js":
+/*!*******************************************!*\
+  !*** ./resources/js/admin/mobile/tabs.js ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderTabs": () => (/* binding */ renderTabs)
+/* harmony export */ });
+var renderTabs = function renderTabs() {
+  var tabsItems = document.querySelectorAll('.tab-item');
+  var tabPanels = document.querySelectorAll(".tab-panel");
+  tabsItems.forEach(function (tabItem) {
+    tabItem.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".tab-active");
+      activeElements.forEach(function (activeElement) {
+        activeElement.classList.remove("tab-active");
+      });
+      tabItem.classList.add("tab-active");
+      tabPanels.forEach(function (tabPanel) {
+        if (tabPanel.dataset.tab == tabItem.dataset.tab) {
+          tabPanel.classList.add("tab-active");
+        }
+      });
+    });
+  });
+};
+renderTabs();
 
 /***/ }),
 
@@ -21415,6 +21577,12 @@ __webpack_require__(/*! ./spinner */ "./resources/js/admin/mobile/spinner.js"); 
 
 
 __webpack_require__(/*! ./bottombarMenu */ "./resources/js/admin/mobile/bottombarMenu.js");
+
+__webpack_require__(/*! ./localeTabs */ "./resources/js/admin/mobile/localeTabs.js");
+
+__webpack_require__(/*! ./images */ "./resources/js/admin/mobile/images.js");
+
+__webpack_require__(/*! ./tabs */ "./resources/js/admin/mobile/tabs.js");
 })();
 
 /******/ })()

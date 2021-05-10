@@ -4,5 +4,7 @@ require('./form');
 require('./sidebar');
 require('./form-topbar');
 require('./filterTable');
-// require('./messages');
+require('./localeTabs');
+require('./images');
+require('./tabs');
 // require('./order-table');

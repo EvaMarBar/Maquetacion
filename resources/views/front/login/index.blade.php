@@ -3,9 +3,6 @@
 @section('content')
 
 <div class="login">
-    <div class="login-errors">
-        @include('front.layout.errors')
-    </div>    
 
     <div class="form-content">
 

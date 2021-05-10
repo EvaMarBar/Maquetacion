@@ -1,0 +1,41 @@
+.tabs-container{
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(245, 200, 178);
+}
+
+.tabs-container-menu{
+
+    width: 40%;
+    //position: absolute;
+    background-color: rgb(245, 200, 178);
+
+    ul{
+        background-color: rgb(245, 200, 178);
+        display: flex;
+        margin: 0;
+        padding: 0;
+        z-index: 0;
+    }
+
+    li{
+        color:black;
+        cursor: pointer;
+        padding: 0.5em 0.5em;
+        text-align: center;
+    }
+
+    li.tab-active{
+        background-color: rgb(236, 157, 117) ;
+        color: black;
+    }
+}
+
+.tab-panel{
+    display: none;
+}
+
+.tab-panel.tab-active{
+    display: block;
+    padding: 0.5em 0.5em;
+}

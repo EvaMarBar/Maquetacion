@@ -1,6 +1,6 @@
 <div class="table-filter" id="table-filter">
     <div class="table-filter-container">
-        <form class="filter-form" id="filter-form" action="{{route("sliders_filter")}}" autocomplete="off">             
+        <form class="filter-form" id="filter-form" action="{{route($route.'_filter')}}" autocomplete="off">             
 
             {{ csrf_field() }}
             
@@ -55,27 +55,27 @@
                     </div>    
                 @endif
 
-                @if($key == 'initial-date')
+                @if($key == 'initial_date')
                     <div class="one-column">
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="initial-date" class="label-highlight">Fecha de inicio</label>
+                                <label for="initial_date" class="label-highlight">Fecha de inicio</label>
                             </div>
                             <div class="form-input">
-                                <input type="date" name="initial-date" class="input-highlight" value="">
+                                <input type="date" name="initial_date" class="input-highlight" value="">
                             </div>
                         </div>
                     </div>  
                 @endif
                 
-                @if($key == 'final-date')
+                @if($key == 'final_date')
                     <div class="one-column">
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="final-date" class="label-highlight">Fecha de fin</label>
+                                <label for="final_date" class="label-highlight">Fecha de fin</label>
                             </div>
                             <div class="form-input">
-                                <input type="date" name="final-date" class="input-highlight" value="">
+                                <input type="date" name="final_date" class="input-highlight" value="">
                             </div>
                         </div>
                     </div>  

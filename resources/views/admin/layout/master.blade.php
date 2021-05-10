@@ -24,10 +24,11 @@
           
             @if(isset($filters))
             @include('admin.layout.table_filters', [
+                'route' => $route, 
                 'filters' => $filters, 
                 'order' => $order
             ])
-            @endif
+        @endif
 
 
 

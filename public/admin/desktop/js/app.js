@@ -1886,8 +1886,13 @@ __webpack_require__(/*! ./sidebar */ "./resources/js/admin/desktop/sidebar.js");
 
 __webpack_require__(/*! ./form-topbar */ "./resources/js/admin/desktop/form-topbar.js");
 
-__webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js"); // require('./messages');
-// require('./order-table');
+__webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js");
+
+__webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
+
+__webpack_require__(/*! ./images */ "./resources/js/admin/desktop/images.js");
+
+__webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js"); // require('./order-table');
 
 /***/ }),
 
@@ -1928,6 +1933,11 @@ var renderFilterTable = function renderFilterTable() {
     });
     applyFilter.addEventListener('click', function () {
       var data = new FormData(filterForm);
+      var filters = {};
+      data.forEach(function (value, key) {
+        filters[key] = value;
+      });
+      var json = JSON.stringify(filters);
       var url = filterForm.action;
 
       var sendPostRequest = /*#__PURE__*/function () {
@@ -1936,30 +1946,30 @@ var renderFilterTable = function renderFilterTable() {
             while (1) {
               switch (_context.prev = _context.next) {
                 case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
-                  return axios.post(url, data).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                    tableFilter.classList.remove('filter-active');
-                    applyFilter.classList.remove('button-active');
-                    openFilter.classList.add('button-active');
-                  });
+                  try {
+                    axios.get(url, {
+                      params: {
+                        filters: json
+                      }
+                    }).then(function (response) {
+                      table.classList.add('table-hide');
+                      table.innerHTML = response.data.table;
+                      (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                      setTimeout(function () {
+                        table.classList.remove('table-hide');
+                      }, 500);
+                      tableFilter.classList.remove('filter-active');
+                      applyFilter.classList.remove('button-active');
+                      openFilter.classList.add('button-active');
+                    });
+                  } catch (error) {}
 
-                case 3:
-                  _context.next = 7;
-                  break;
-
-                case 5:
-                  _context.prev = 5;
-                  _context.t0 = _context["catch"](0);
-
-                case 7:
+                case 1:
                 case "end":
                   return _context.stop();
               }
             }
-          }, _callee, null, [[0, 5]]);
+          }, _callee);
         }));
 
         return function sendPostRequest() {
@@ -2338,6 +2348,127 @@ renderTable();
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/images.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/desktop/images.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "images": () => (/* binding */ images)
+/* harmony export */ });
+var images = function images() {
+  document.querySelectorAll(".drop-zone__input").forEach(function (inputElement) {
+    var dropZoneElement = inputElement.closest(".drop-zone");
+    dropZoneElement.addEventListener("click", function (e) {
+      inputElement.click();
+    });
+    inputElement.addEventListener("change", function (e) {
+      if (inputElement.files.length) {
+        updateThumbnail(dropZoneElement, inputElement.files[0]);
+      }
+    });
+    dropZoneElement.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      dropZoneElement.classList.add("drop-zone--over");
+    });
+    ["dragleave", "dragend"].forEach(function (type) {
+      dropZoneElement.addEventListener(type, function (e) {
+        dropZoneElement.classList.remove("drop-zone--over");
+      });
+    });
+    dropZoneElement.addEventListener("drop", function (e) {
+      e.preventDefault();
+
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
+      }
+
+      dropZoneElement.classList.remove("drop-zone--over");
+    });
+  });
+  /**
+   * Updates the thumbnail on a drop zone element.
+   *
+   * @param {HTMLElement} dropZoneElement
+   * @param {File} file
+   */
+
+  function updateThumbnail(dropZoneElement, file) {
+    var thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb"); // First time - remove the prompt
+
+    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
+      dropZoneElement.querySelector(".drop-zone__prompt").remove();
+    } // First time - there is no thumbnail element, so lets create it
+
+
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("drop-zone__thumb");
+      dropZoneElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name; // Show thumbnail for image files
+
+    if (file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/localeTabs.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/desktop/localeTabs.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleTabs": () => (/* binding */ renderLocaleTabs)
+/* harmony export */ });
+var renderLocaleTabs = function renderLocaleTabs() {
+  var localeTabsItems = document.querySelectorAll(".locale-tab-item");
+  var localeTabPanels = document.querySelectorAll(".locale-tab-panel");
+  localeTabsItems.forEach(function (localeTabItem) {
+    localeTabItem.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".locale-tab-active");
+      var activeTab = localeTabItem.dataset.tab;
+      activeElements.forEach(function (activeElement) {
+        if (activeElement.dataset.tab == activeTab) {
+          activeElement.classList.remove("locale-tab-active");
+          console.log(activeElement.className);
+        }
+      });
+      localeTabItem.classList.add("locale-tab-active");
+      console.log(localeTabItem.className);
+      localeTabPanels.forEach(function (localeTabPanel) {
+        if (localeTabPanel.dataset.tab == activeTab) {
+          if (localeTabPanel.dataset.localetab == localeTabItem.dataset.localetab) {
+            localeTabPanel.classList.add("locale-tab-active");
+            console.log(localeTabPanel.className);
+          }
+        }
+      });
+    });
+  });
+};
+renderLocaleTabs();
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/messages.js":
 /*!************************************************!*\
   !*** ./resources/js/admin/desktop/messages.js ***!
@@ -2507,6 +2638,39 @@ var stopWait = function stopWait() {
   spinner.classList.remove('active');
   background.classList.remove('active');
 };
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/tabs.js":
+/*!********************************************!*\
+  !*** ./resources/js/admin/desktop/tabs.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderTabs": () => (/* binding */ renderTabs)
+/* harmony export */ });
+var renderTabs = function renderTabs() {
+  var tabsItems = document.querySelectorAll('.tab-item');
+  var tabPanels = document.querySelectorAll(".tab-panel");
+  tabsItems.forEach(function (tabItem) {
+    tabItem.addEventListener("click", function () {
+      var activeElements = document.querySelectorAll(".tab-active");
+      activeElements.forEach(function (activeElement) {
+        activeElement.classList.remove("tab-active");
+      });
+      tabItem.classList.add("tab-active");
+      tabPanels.forEach(function (tabPanel) {
+        if (tabPanel.dataset.tab == tabItem.dataset.tab) {
+          tabPanel.classList.add("tab-active");
+        }
+      });
+    });
+  });
+};
+renderTabs();
 
 /***/ }),
 

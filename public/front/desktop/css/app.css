@@ -83,6 +83,10 @@
   transform: translatey(-50%) rotate(90deg);
 }
 
+.login {
+  padding-top: 5em;
+}
+
 .form-content {
   background-color: #d8d1cd;
   border: 1.2em solid #ec9d75;

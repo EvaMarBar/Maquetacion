@@ -1,0 +1,64 @@
+.locale-tabs{
+    background-color: rgb(245, 200, 178);
+}
+
+.locale-tabs-container{
+    // background-color: rgb(245, 200, 178);
+    display: flex;
+    justify-content: space-between;
+}
+
+.locale-tabs-container-menu{
+
+    width: 100%;
+    display: flex;
+    margin:0;
+    padding: 0;
+    // position: relative;
+    // top: 3em;
+    background-color: rgb(245, 200, 178);
+
+    ul{
+        background-color: rgb(245, 200, 178);
+        display: flex;
+        margin: 0;
+        padding: 0;
+    }
+
+    li{
+        color: black;
+        cursor: pointer;
+        padding: 0.5em;
+        text-align: center;
+        list-style: none;
+        width: 50%;
+    }
+
+    li.locale-tab-active{
+        background-color: rgb(236, 157, 117);
+        color: black;
+    }
+}
+.locale-tab-panel{
+    display: none;
+}
+
+.locale-tab-panel.locale-tab-active{
+    display: block;
+
+    .form-group{
+        margin: 1em 0;
+
+        .form-label{
+            margin: 0.5em 0;
+        }
+    }
+}
+.locale-tab-panel{
+    display: none;
+}
+
+.locale-tab-panel.tab-active{
+    display: block;
+    padding: 0.5em 0.5em;
+}
