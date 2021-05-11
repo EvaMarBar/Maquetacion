@@ -5,6 +5,8 @@ import {renderFilterTable} from "./filterTable";
 import { showMessage } from "./messages";
 import { startWait } from "./spinner";
 import {stopWait} from "./spinner";
+import { renderLocaleTabs } from "./localeTabs";
+import { renderTabs } from "./tabs";
 
 export let renderForm = () => {
 
@@ -20,6 +22,10 @@ export let renderForm = () => {
         forms.forEach(form => { 
         
             let data = new FormData(form);
+
+            if (data.get('visible') == null) {
+                data.set('visible',0);
+            }
 
             if( ckeditors != 'null'){
 
@@ -81,6 +87,9 @@ export let renderForm = () => {
                     renderForm();
                     renderCkeditor();
                     renderFilterTable();
+                    renderLocaleTabs();
+                    renderTabs();
+
                 });
                 
             } catch (error) {
@@ -91,14 +100,6 @@ export let renderForm = () => {
         sendCreateRequest();
     });
     
-    onOffSwitch.addEventListener("click", () => {
-
-        if(onOffSwitch.value == "true"){
-            onOffSwitch.value = "false";
-        }else{
-            onOffSwitch.value = "true";
-        }
-    });
 }
 
 
@@ -121,6 +122,8 @@ export let renderTable = () => {
                         renderForm();
                         renderCkeditor();
                         renderFilterTable();
+                        renderLocaleTabs();
+                        renderTabs();
                     });
                     
                 } catch (error) {
@@ -145,6 +148,8 @@ export let renderTable = () => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         renderFilterTable();
+                        renderLocaleTabs();
+                        renderTabs();
                     });
                     
                 } catch (error) {

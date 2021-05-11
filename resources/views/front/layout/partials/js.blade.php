@@ -3,5 +3,5 @@
 @endif
 
 @if($agent->isMobile())
-<script src="{{ mix('front/mobilr/js/app.js') }}"></script>
+<script src="{{ mix('front/mobile/js/app.js') }}"></script>
 @endif

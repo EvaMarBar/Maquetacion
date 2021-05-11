@@ -67,7 +67,7 @@
                     </div>
                     <div class="visible">
                         <label class="switch">
-                            <input type="checkbox" name="visible" checked="checked" value="{{isset($faq->visible) ? $faq->visible : '1'}}" class="input" id="switch">
+                            <input type="checkbox" name="visible" checked="checked" value="{{ isset($faq->visible) ? $faq->visible : '1' }}"  class="input" id="switch">
                             <span class="slider round"></span>
                         </label>                      
                     </div>

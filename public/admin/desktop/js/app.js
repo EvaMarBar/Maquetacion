@@ -1926,8 +1926,10 @@ var renderFilterTable = function renderFilterTable() {
   if (filterForm != null) {
     var openFilter = document.getElementById("open-filter");
     var applyFilter = document.getElementById("apply-filter");
+    var menu = document.getElementById("menu");
     openFilter.addEventListener('click', function () {
       openFilter.classList.remove('button-active');
+      menu.classList.remove('active');
       tableFilter.classList.add('filter-active');
       applyFilter.classList.add('button-active');
     });
@@ -2061,6 +2063,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _filterTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTable.js");
 /* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
 /* harmony import */ var _spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
+/* harmony import */ var _localeTabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
+/* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2086,6 +2090,8 @@ var form = document.getElementById("form");
 
 
 
+
+
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var sendButton = document.getElementById("send");
@@ -2095,6 +2101,10 @@ var renderForm = function renderForm() {
     event.preventDefault();
     forms.forEach(function (form) {
       var data = new FormData(form);
+
+      if (data.get('visible') == null) {
+        data.set('visible', 0);
+      }
 
       if (ckeditors != 'null') {
         Object.entries(ckeditors).forEach(function (_ref) {
@@ -2176,6 +2186,8 @@ var renderForm = function renderForm() {
                   renderForm();
                   (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
                   (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                  (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+                  (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
                 });
 
               case 3:
@@ -2202,13 +2214,6 @@ var renderForm = function renderForm() {
 
     sendCreateRequest();
   });
-  onOffSwitch.addEventListener("click", function () {
-    if (onOffSwitch.value == "true") {
-      onOffSwitch.value = "false";
-    } else {
-      onOffSwitch.value = "true";
-    }
-  });
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2231,6 +2236,8 @@ var renderTable = function renderTable() {
                     renderForm();
                     (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                    (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+                    (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
                   });
 
                 case 3:
@@ -2274,6 +2281,8 @@ var renderTable = function renderTable() {
                     table.innerHTML = response.data.table;
                     renderTable();
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                    (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+                    (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
                   });
 
                 case 3:

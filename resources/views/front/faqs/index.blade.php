@@ -11,13 +11,13 @@
     @foreach($faqs as $faq_element)
 
     <div class="faq">
-        <div class="title" id="{{$faq_element->id}}"> {{$faq_element->title}} 
+        <div class="title" id="{{$faq_element->id}}"> {{isset($faq_element->locale['title']) ? $faq_element->locale['title'] : ""}}
             <div class="plusminus button" id="{{$faq_element->id}}">
             </div>
         </div>
 
         <div class="description" id="{{$faq_element->id}}">
-            {{$faq_element->description}}
+            {!!isset($faq_element->locale['description']) ? $faq_element->locale['description'] : "" !!}
         </div>
     </div>
     

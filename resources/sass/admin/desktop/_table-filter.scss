@@ -10,13 +10,14 @@
         .table-filter-container{
             max-height: 70vh;
             background-color: rgb(236, 157, 117);
-            position: relative;
+            position: fixed;
             top:0;
         }
     }
 .filter-form{
-    display: flex;
-    flex-direction: column;
+    column-count: 3;
+    column-gap: 0.5em;
+
     }
 
 .table-filter-container{
@@ -60,6 +61,8 @@
     &.apply-filter{
         background-color: hsl(0, 0%, 69%);
         height: 2em;
+        position: fixed;
+        top:7.5em;
         
     }
 
@@ -78,3 +81,13 @@
     }
 }
 }
+// .form-group{
+//     float:left;
+//     width: 45%;
+// }
+// .two-columns{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-around;
+//     width: 100%;
+// }

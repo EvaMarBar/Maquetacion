@@ -2,39 +2,48 @@
 
 namespace App\Http\Controllers\Front;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\FaqRequest;
+use Jenssegers\Agent\Agent;
+use App\Vendor\Locale\Locale;
 use App\Models\DB\Faq;
+use App;
+use Debugbar;
 
 class FaqController extends Controller
 {
+    protected $agent;
     protected $faq;
+    protected $locale;
 
-    function __construct(Faq $faq)
+    function __construct(Faq $faq, Locale $locale, Agent $agent)
     {
+        $this->agent = $agent;
         $this->faq = $faq;
+        $this->locale = $locale;
+        
+        $this->locale->setParent('faqs');
+        $this->locale->setLanguage(App::getLocale());
     }
 
     public function index()
-    {
+    {        
 
+        $faqs = $this->faq->where('active', 1)->where('visible', 1)->get();
+
+        $faqs = $faqs->each(function($faq) {  
+            
+            $faq['locale'] = $faq->locale->pluck('value','tag');
+            
+            return $faq;
+        });
+
+      
         $view = View::make('front.faqs.index')
-            ->with('faq', $this->faq)
-            ->with('faqs', $this->faq->where('active', 1)->get());   
-
-        if(request()->ajax()) {
-
-            $sections = $view->renderSections(); 
-    
-            return response()->json([
-                'table' => $sections['table'],
-                'form' => $sections['form'],
-            ]); 
-        }
+                ->with('faqs', $faqs );
 
         return $view;
     }
+
 }

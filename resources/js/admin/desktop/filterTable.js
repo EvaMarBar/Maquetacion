@@ -10,10 +10,12 @@ export let renderFilterTable = () => {
 
     let openFilter = document.getElementById("open-filter");
     let applyFilter = document.getElementById("apply-filter");
+    let menu = document.getElementById("menu");
 
 
         openFilter.addEventListener( 'click', () => {
             openFilter.classList.remove('button-active');
+            menu.classList.remove('active');
             tableFilter.classList.add('filter-active')
             applyFilter.classList.add('button-active');
         });

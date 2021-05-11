@@ -78,7 +78,7 @@ class FaqController extends Controller
             // 'title' => request('title'),
             // 'description' => request('description'),
             'category_id' => request('category_id'),
-            'visible' => request('visible') == "true" ? 1 : 0,
+            'visible' => request('visible'),
             'active' => 1,
         ]);
 
