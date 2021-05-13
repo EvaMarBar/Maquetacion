@@ -7,6 +7,7 @@ import { startWait } from "./spinner";
 import {stopWait} from "./spinner";
 import { renderLocaleTabs } from "./localeTabs";
 import { renderTabs } from "./tabs";
+import { renderUpload } from "./upload";
 
 export let renderForm = () => {
 
@@ -89,6 +90,7 @@ export let renderForm = () => {
                     renderFilterTable();
                     renderLocaleTabs();
                     renderTabs();
+                    renderUpload();
 
                 });
                 
@@ -124,6 +126,7 @@ export let renderTable = () => {
                         renderFilterTable();
                         renderLocaleTabs();
                         renderTabs();
+                        renderUpload();
                     });
                     
                 } catch (error) {
@@ -150,6 +153,7 @@ export let renderTable = () => {
                         renderFilterTable();
                         renderLocaleTabs();
                         renderTabs();
+                        renderUpload();
                     });
                     
                 } catch (error) {
@@ -188,4 +192,4 @@ export let renderTable = () => {
 
 renderForm();
 renderTable();
-
+renderUpload();

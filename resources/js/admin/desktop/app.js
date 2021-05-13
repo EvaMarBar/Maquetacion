@@ -5,6 +5,6 @@ require('./sidebar');
 require('./form-topbar');
 require('./filterTable');
 require('./localeTabs');
-require('./images');
+require('./upload');
 require('./tabs');
 // require('./order-table');

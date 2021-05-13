@@ -148,10 +148,9 @@
                 
                     @endcomponent
                 </div>
-{{-- 
                 <div class="tab-panel" data-tab="images">
 
-                    @component('admin.components.locale', ['tab' => 'images'])
+                    @component('admin.layout.locale', ['tab' => 'images'])
 
                         @foreach ($localizations as $localization)
 
@@ -163,7 +162,7 @@
                                         <label for="name" class="label-highlight">Foto destacada</label>
                                     </div>
                                     <div class="form-input">
-                                        @include('admin.components.upload', [
+                                        @include('admin.layout.upload', [
                                             'type' => 'image', 
                                             'content' => 'featured', 
                                             'alias' => $localization->alias,
@@ -177,9 +176,9 @@
 
                         @endforeach
                 
-                    @endcomponent --}}
+                    @endcomponent
 
-                {{-- </div> --}}
+                </div>
 
 
             </form>

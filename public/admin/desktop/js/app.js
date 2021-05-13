@@ -1890,7 +1890,7 @@ __webpack_require__(/*! ./filterTable */ "./resources/js/admin/desktop/filterTab
 
 __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
 
-__webpack_require__(/*! ./images */ "./resources/js/admin/desktop/images.js");
+__webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 
 __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js"); // require('./order-table');
 
@@ -2065,6 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _spinner__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
 /* harmony import */ var _localeTabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
+/* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2085,6 +2086,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
+
 
 
 
@@ -2188,6 +2190,7 @@ var renderForm = function renderForm() {
                   (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                   (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                   (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+                  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                 });
 
               case 3:
@@ -2238,6 +2241,7 @@ var renderTable = function renderTable() {
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                     (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                     (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+                    (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                   });
 
                 case 3:
@@ -2283,6 +2287,7 @@ var renderTable = function renderTable() {
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                     (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                     (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+                    (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                   });
 
                 case 3:
@@ -2354,86 +2359,7 @@ var renderTable = function renderTable() {
 };
 renderForm();
 renderTable();
-
-/***/ }),
-
-/***/ "./resources/js/admin/desktop/images.js":
-/*!**********************************************!*\
-  !*** ./resources/js/admin/desktop/images.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "images": () => (/* binding */ images)
-/* harmony export */ });
-var images = function images() {
-  document.querySelectorAll(".drop-zone__input").forEach(function (inputElement) {
-    var dropZoneElement = inputElement.closest(".drop-zone");
-    dropZoneElement.addEventListener("click", function (e) {
-      inputElement.click();
-    });
-    inputElement.addEventListener("change", function (e) {
-      if (inputElement.files.length) {
-        updateThumbnail(dropZoneElement, inputElement.files[0]);
-      }
-    });
-    dropZoneElement.addEventListener("dragover", function (e) {
-      e.preventDefault();
-      dropZoneElement.classList.add("drop-zone--over");
-    });
-    ["dragleave", "dragend"].forEach(function (type) {
-      dropZoneElement.addEventListener(type, function (e) {
-        dropZoneElement.classList.remove("drop-zone--over");
-      });
-    });
-    dropZoneElement.addEventListener("drop", function (e) {
-      e.preventDefault();
-
-      if (e.dataTransfer.files.length) {
-        inputElement.files = e.dataTransfer.files;
-        updateThumbnail(dropZoneElement, e.dataTransfer.files[0]);
-      }
-
-      dropZoneElement.classList.remove("drop-zone--over");
-    });
-  });
-  /**
-   * Updates the thumbnail on a drop zone element.
-   *
-   * @param {HTMLElement} dropZoneElement
-   * @param {File} file
-   */
-
-  function updateThumbnail(dropZoneElement, file) {
-    var thumbnailElement = dropZoneElement.querySelector(".drop-zone__thumb"); // First time - remove the prompt
-
-    if (dropZoneElement.querySelector(".drop-zone__prompt")) {
-      dropZoneElement.querySelector(".drop-zone__prompt").remove();
-    } // First time - there is no thumbnail element, so lets create it
-
-
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("drop-zone__thumb");
-      dropZoneElement.appendChild(thumbnailElement);
-    }
-
-    thumbnailElement.dataset.label = file.name; // Show thumbnail for image files
-
-    if (file.type.startsWith("image/")) {
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = function () {
-        thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
-      };
-    } else {
-      thumbnailElement.style.backgroundImage = null;
-    }
-  }
-};
+(0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
 
 /***/ }),
 
@@ -2680,6 +2606,81 @@ var renderTabs = function renderTabs() {
   });
 };
 renderTabs();
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/upload.js":
+/*!**********************************************!*\
+  !*** ./resources/js/admin/desktop/upload.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderUpload": () => (/* binding */ renderUpload)
+/* harmony export */ });
+var renderUpload = function renderUpload() {
+  var inputElements = document.querySelectorAll(".upload-input");
+  inputElements.forEach(function (inputElement) {
+    var uploadElement = inputElement.closest(".upload");
+    uploadElement.addEventListener("click", function (e) {
+      inputElement.click();
+    });
+    inputElement.addEventListener("change", function (e) {
+      if (inputElement.files.length) {
+        updateThumbnail(uploadElement, inputElement.files[0]);
+      }
+    });
+    uploadElement.addEventListener("dragover", function (e) {
+      e.preventDefault();
+      uploadElement.classList.add("upload-over");
+    });
+    ["dragleave", "dragend"].forEach(function (type) {
+      uploadElement.addEventListener(type, function (e) {
+        uploadElement.classList.remove("upload-over");
+      });
+    });
+    uploadElement.addEventListener("drop", function (e) {
+      e.preventDefault();
+
+      if (e.dataTransfer.files.length) {
+        inputElement.files = e.dataTransfer.files;
+        updateThumbnail(uploadElement, e.dataTransfer.files[0]);
+      }
+
+      uploadElement.classList.remove("upload-over");
+    });
+  });
+
+  function updateThumbnail(uploadElement, file) {
+    var thumbnailElement = uploadElement.querySelector(".upload-thumb");
+
+    if (uploadElement.querySelector(".upload-prompt")) {
+      uploadElement.querySelector(".upload-prompt").remove();
+    }
+
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("upload-thumb");
+      uploadElement.appendChild(thumbnailElement);
+    }
+
+    thumbnailElement.dataset.label = file.name;
+
+    if (file.type.startsWith("image/")) {
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = function () {
+        thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
+      };
+    } else {
+      thumbnailElement.style.backgroundImage = null;
+    }
+  }
+};
+renderUpload();
 
 /***/ }),
 
