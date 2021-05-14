@@ -90,8 +90,6 @@ export let renderForm = () => {
                     renderFilterTable();
                     renderLocaleTabs();
                     renderTabs();
-                    renderUpload();
-
                 });
                 
             } catch (error) {
@@ -126,7 +124,6 @@ export let renderTable = () => {
                         renderFilterTable();
                         renderLocaleTabs();
                         renderTabs();
-                        renderUpload();
                     });
                     
                 } catch (error) {
@@ -153,7 +150,6 @@ export let renderTable = () => {
                         renderFilterTable();
                         renderLocaleTabs();
                         renderTabs();
-                        renderUpload();
                     });
                     
                 } catch (error) {
@@ -192,4 +188,4 @@ export let renderTable = () => {
 
 renderForm();
 renderTable();
-renderUpload();
+

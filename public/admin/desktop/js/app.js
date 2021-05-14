@@ -1892,7 +1892,7 @@ __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs
 
 __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 
-__webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js"); // require('./order-table');
+__webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js"); //require('./multipleUpload');
 
 /***/ }),
 
@@ -2190,7 +2190,6 @@ var renderForm = function renderForm() {
                   (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                   (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                   (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                 });
 
               case 3:
@@ -2241,7 +2240,6 @@ var renderTable = function renderTable() {
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                     (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                     (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                    (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                   });
 
                 case 3:
@@ -2287,7 +2285,6 @@ var renderTable = function renderTable() {
                     (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
                     (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
                     (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                    (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
                   });
 
                 case 3:
@@ -2359,7 +2356,6 @@ var renderTable = function renderTable() {
 };
 renderForm();
 renderTable();
-(0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
 
 /***/ }),
 
@@ -2660,10 +2656,13 @@ var renderUpload = function renderUpload() {
       uploadElement.querySelector(".upload-prompt").remove();
     }
 
-    if (!thumbnailElement) {
-      thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("upload-thumb");
-      uploadElement.appendChild(thumbnailElement);
+    if (thumbnailElement) {
+      for (var index = 0; index < file.length; index++) {
+        var element = files[index];
+        thumbnailElement = document.createElement("div");
+        thumbnailElement.classList.add("upload-thumb");
+        uploadElement.appendChild(thumbnailElement);
+      }
     }
 
     thumbnailElement.dataset.label = file.name;
@@ -2677,6 +2676,15 @@ var renderUpload = function renderUpload() {
       };
     } else {
       thumbnailElement.style.backgroundImage = null;
+    }
+
+    if (uploadElement.classList.contains('single')) {
+      thumbnailElement.dataseet.label = file.name;
+    }
+
+    if (uploadElement.classList.contains('collection')) {
+      var newUpload = document.getElementById("more-upload");
+      thumbnailElement.insertAdjacentHTML("afterend", newUpload);
     }
   }
 };

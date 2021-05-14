@@ -47,10 +47,15 @@ export let renderUpload = () => {
             uploadElement.querySelector(".upload-prompt").remove();
         }
       
-        if (!thumbnailElement) {
-            thumbnailElement = document.createElement("div");
-            thumbnailElement.classList.add("upload-thumb");
-            uploadElement.appendChild(thumbnailElement);
+
+        if(thumbnailElement){
+            for (let index = 0; index < file.length; index++) {
+                const element = files[index];
+                thumbnailElement = document.createElement("div");
+                thumbnailElement.classList.add("upload-thumb");
+                uploadElement.appendChild(thumbnailElement);
+                
+            }
         }
       
         thumbnailElement.dataset.label = file.name;
@@ -66,6 +71,15 @@ export let renderUpload = () => {
         } else {
             thumbnailElement.style.backgroundImage = null;
         }
+
+        if(uploadElement.classList.contains('single')){
+            thumbnailElement.dataseet.label=file.name;
+        }
+        if(uploadElement.classList.contains('collection')){
+            let newUpload = document.getElementById("more-upload")
+            thumbnailElement.insertAdjacentHTML ("afterend", newUpload)
+        }
     }
+   
 }
 renderUpload();

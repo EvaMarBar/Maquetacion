@@ -175,8 +175,34 @@
                         </div>
 
                         @endforeach
+
+                        @foreach ($localizations as $localization)
+
+                        <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="images" data-localetab="{{$localization->alias}}">
+
+                            <div class="two-columns">
+                                <div class="form-group">
+                                    <div class="form-label">
+                                        <label for="name" class="label-highlight">Fotos Múltiples</label>
+                                    </div>
+                                    <div class="form-input">
+                                        @include('admin.layout.upload', [
+                                            'type' => 'images', 
+                                            'content' => 'featured', 
+                                            'alias' => $localization->alias,
+                                            'files' => $faq->images_featured
+                                        ])
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @endforeach
+                
                 
                     @endcomponent
+                    
 
                 </div>
 

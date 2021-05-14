@@ -1,0 +1,840 @@
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+Could not open input file: /code/Maquetacion/artisan
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+
+   TypeError 
+
+  Laravel\Horizon\ProvisioningPlan::__construct(): Argument #2 ($plan) must be of type array, null given, called in /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php on line 59
+
+  at /home/vagrant/code/Maquetacion/vendor/laravel/horizon/src/ProvisioningPlan.php:43
+     39▕      * @param  array  $plan
+     40▕      * @param  array  $defaults
+     41▕      * @return void
+     42▕      */
+  ➜  43▕     public function __construct($master, array $plan, array $defaults = [])
+     44▕     {
+     45▕         $this->plan = $this->applyDefaultOptions($plan, $defaults);
+     46▕         $this->master = $master;
+     47▕
+
+      [2m+15 vendor frames [22m
+  16  /home/vagrant/code/Maquetacion/artisan:37
+      Illuminate\Foundation\Console\Kernel::handle()
+Horizon started successfully.
+Horizon started successfully.
+[2021-05-14 07:12:08][cb2582e9-f542-4972-8f52-eb4e52e90841] Processing: App\Jobs\ProcessImage
+[2021-05-14 07:12:08][dada383f-12d0-4b7d-8107-2a0ec0520d20] Processing: App\Jobs\ProcessImage
+[2021-05-14 07:12:08][d6cc0c5d-566c-4536-bca5-46afb0e044e1] Processing: App\Jobs\ProcessImage
+[2021-05-14 07:12:09][cb2582e9-f542-4972-8f52-eb4e52e90841] Processed:  App\Jobs\ProcessImage
+[2021-05-14 07:12:09][dada383f-12d0-4b7d-8107-2a0ec0520d20] Processed:  App\Jobs\ProcessImage
+[2021-05-14 07:12:09][d6cc0c5d-566c-4536-bca5-46afb0e044e1] Processed:  App\Jobs\ProcessImage

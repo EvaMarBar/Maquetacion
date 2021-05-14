@@ -171,8 +171,8 @@ class Image
 					$value->id
 				)->onQueue('process_image');
 			}
-			//Para mandar algo a la cola hay que poner onQueue (nombre de la cola) y hay que crear la caprteta jobs con un archivo ProcessImages al que le pasamos todos los datos que necesita para hacer cosas cuando peuda (?). Para que funcione esto hay que instalar presis (controller), vips (muchas cosas, difícil), horizont (gestor de colas - composer) y surpevisor (apt)
-
+			//Para mandar algo a la cola hay que poner onQueue (nombre de la cola) y hay que crear la caprteta jobs con un archivo ProcessImages al que le pasamos todos los datos que necesita para hacer cosas cuando peuda (?). Para que funcione esto hay que instalar presis (controller), vips (muchas cosas, difícil), horizont (gestor de colas - composer) y surpevisor (apt). Una cola puede tener muchas tareas pero una tarea solo puede estar en una cola.
+			
 			elseif($value->type == 'collection'){
 
 				$counter = 2;
