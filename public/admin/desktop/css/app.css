@@ -291,6 +291,7 @@ body {
 .form_submit {
   margin: 1em;
   width: 20%;
+  z-index: 10000;
 }
 .form_submit button:hover {
   background-color: #f1834b;
@@ -757,13 +758,21 @@ input:checked + .slider:before {
 }
 
 .upload-thumb {
-  width: 20%;
+  width: 100%;
   height: 100%;
   border-radius: 10px;
   overflow: hidden;
   background-color: #cccccc;
   background-size: cover;
   position: relative;
+}
+
+.upload-delete:hover svg {
+  position: center;
+  z-index: 10;
+}
+.upload-delete:hover svg path {
+  fill: black;
 }
 
 .upload-thumb::after {
@@ -776,6 +785,11 @@ input:checked + .slider:before {
   color: #ffffff;
   font-size: 14px;
   text-align: center;
+}
+
+.upload-multiple {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
 }
 
 .tabs-container {

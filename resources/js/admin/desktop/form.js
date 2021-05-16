@@ -99,6 +99,7 @@ export let renderForm = () => {
 
         sendCreateRequest();
     });
+    renderUpload();
     
 }
 

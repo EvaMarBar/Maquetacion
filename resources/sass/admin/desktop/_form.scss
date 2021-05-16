@@ -51,6 +51,7 @@
 .form_submit {
     margin: 1em;
     width: 20%;
+    z-index: 10000;
 
     button:hover{ 
         background-color:rgb(241, 131, 75) ;

@@ -15,6 +15,7 @@
 
 .upload:hover{
     border: 4px dashed rgb(245, 200, 178);
+  
 }
   
 .upload-over {
@@ -32,13 +33,22 @@
 }
 
 .upload-thumb {
-    width: 20%;
+    width: 100%;
     height: 100%;
     border-radius: 10px;
     overflow: hidden;
     background-color: #cccccc;
     background-size: cover;
     position: relative;
+}
+.upload-delete:hover{
+    svg{
+        position:center;
+        z-index: 10;
+        path{
+            fill:black;
+        }
+    }
 }
 
 .upload-thumb::after {
@@ -52,4 +62,9 @@ content: attr(data-label);
     // background: rgba(0, 0, 0, 0.75);
     font-size: 14px;
     text-align: center;
+}
+
+.upload-multiple{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }

@@ -2216,6 +2216,7 @@ var renderForm = function renderForm() {
 
     sendCreateRequest();
   });
+  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2616,6 +2617,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "renderUpload": () => (/* binding */ renderUpload)
 /* harmony export */ });
+/* harmony import */ var _form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.js */ "./resources/js/admin/desktop/form.js");
+
 var renderUpload = function renderUpload() {
   var inputElements = document.querySelectorAll(".upload-input");
   inputElements.forEach(function (inputElement) {
@@ -2623,7 +2626,7 @@ var renderUpload = function renderUpload() {
     uploadElement.addEventListener("click", function (e) {
       inputElement.click();
     });
-    inputElement.addEventListener("change", function (e) {
+    inputElement.addEventListener("change", function () {
       if (inputElement.files.length) {
         updateThumbnail(uploadElement, inputElement.files[0]);
       }
@@ -2651,18 +2654,16 @@ var renderUpload = function renderUpload() {
 
   function updateThumbnail(uploadElement, file) {
     var thumbnailElement = uploadElement.querySelector(".upload-thumb");
+    multipleUpload(uploadElement);
 
     if (uploadElement.querySelector(".upload-prompt")) {
       uploadElement.querySelector(".upload-prompt").remove();
     }
 
-    if (thumbnailElement) {
-      for (var index = 0; index < file.length; index++) {
-        var element = files[index];
-        thumbnailElement = document.createElement("div");
-        thumbnailElement.classList.add("upload-thumb");
-        uploadElement.appendChild(thumbnailElement);
-      }
+    if (!thumbnailElement) {
+      thumbnailElement = document.createElement("div");
+      thumbnailElement.classList.add("upload-thumb");
+      uploadElement.appendChild(thumbnailElement);
     }
 
     thumbnailElement.dataset.label = file.name;
@@ -2677,18 +2678,19 @@ var renderUpload = function renderUpload() {
     } else {
       thumbnailElement.style.backgroundImage = null;
     }
+  }
 
-    if (uploadElement.classList.contains('single')) {
-      thumbnailElement.dataseet.label = file.name;
-    }
+  function multipleUpload(uploadElement) {
+    var parentUpload = uploadElement.parentElement; // Crea nuevos "cuadrados" de subida cuando subo un elemento para poder subir varios
 
-    if (uploadElement.classList.contains('collection')) {
-      var newUpload = document.getElementById("more-upload");
-      thumbnailElement.insertAdjacentHTML("afterend", newUpload);
+    if (uploadElement.classList.contains("group")) {
+      var uploadElementClone = uploadElement.cloneNode(true);
+      uploadElement.classList.remove("group");
+      parentUpload.appendChild(uploadElementClone);
+      (0,_form_js__WEBPACK_IMPORTED_MODULE_0__.renderForm)();
     }
   }
 };
-renderUpload();
 
 /***/ }),
 
