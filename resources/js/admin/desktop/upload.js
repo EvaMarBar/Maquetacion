@@ -41,17 +41,17 @@ export let renderUpload = () => {
             }
         
             uploadElement.classList.remove("upload-over");
+         
         });
-
-
+      
     });
 
     function updateThumbnail(uploadElement, file) {
     
+        multipleUpload(uploadElement);
         let thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
-        multipleUpload(uploadElement);
-      
+       
         if (uploadElement.querySelector(".upload-prompt")) {
             uploadElement.querySelector(".upload-prompt").remove();
         }
@@ -61,7 +61,7 @@ export let renderUpload = () => {
             thumbnailElement.classList.add("upload-thumb");
             uploadElement.appendChild(thumbnailElement);
         }
-      
+
         thumbnailElement.dataset.label = file.name;
       
         if (file.type.startsWith("image/")) {
@@ -81,16 +81,28 @@ export let renderUpload = () => {
 
     function multipleUpload (uploadElement) {
       
-        let parentUpload = uploadElement.parentElement;
-
+        let parentUpload = document.getElementById('upload-multiple')
+        
         if (uploadElement.classList.contains("group")){
-            var uploadElementClone = uploadElement.cloneNode(true);
+            var uploadElementClone = uploadElement.parentElement.cloneNode(true);
             uploadElement.classList.remove("group");
             parentUpload.appendChild(uploadElementClone);
-            renderForm();
-        }  
+        } 
+        renderUpload();
 
     }
+    function seeMore () {
+        let seeButtons = document.querySelectorAll('.see-more');
+
+        seeButtons.forEach(seeButton =>{
+            seeButton.addEventListener('click', ()=>{
+                let imageDetails = document.getElementById('image-details');
+
+                imageDetails.classList.add('active');
+            })
+        })
+    }
+    seeMore();
 
    
 }

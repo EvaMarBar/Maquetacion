@@ -188,9 +188,9 @@
                                     <div class="form-input">
                                         @include('admin.layout.upload', [
                                             'type' => 'images', 
-                                            'content' => 'featured', 
+                                            'content' => 'grid', 
                                             'alias' => $localization->alias,
-                                            'files' => $faq->images_featured
+                                            'files' => $faq->images_grid
                                         ])
                                     </div>
                                 </div>

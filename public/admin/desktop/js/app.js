@@ -2653,8 +2653,8 @@ var renderUpload = function renderUpload() {
   });
 
   function updateThumbnail(uploadElement, file) {
-    var thumbnailElement = uploadElement.querySelector(".upload-thumb");
     multipleUpload(uploadElement);
+    var thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
     if (uploadElement.querySelector(".upload-prompt")) {
       uploadElement.querySelector(".upload-prompt").remove();
@@ -2681,15 +2681,28 @@ var renderUpload = function renderUpload() {
   }
 
   function multipleUpload(uploadElement) {
-    var parentUpload = uploadElement.parentElement; // Crea nuevos "cuadrados" de subida cuando subo un elemento para poder subir varios
+    var parentUpload = document.getElementById('upload-multiple');
 
     if (uploadElement.classList.contains("group")) {
-      var uploadElementClone = uploadElement.cloneNode(true);
+      var uploadElementClone = uploadElement.parentElement.cloneNode(true);
       uploadElement.classList.remove("group");
       parentUpload.appendChild(uploadElementClone);
-      (0,_form_js__WEBPACK_IMPORTED_MODULE_0__.renderForm)();
     }
+
+    renderUpload();
   }
+
+  function seeMore() {
+    var seeButtons = document.querySelectorAll('.see-more');
+    seeButtons.forEach(function (seeButton) {
+      seeButton.addEventListener('click', function () {
+        var imageDetails = document.getElementById('image-details');
+        imageDetails.classList.add('active');
+      });
+    });
+  }
+
+  seeMore();
 };
 
 /***/ }),

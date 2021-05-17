@@ -60,7 +60,7 @@ class Image
 		->where('content', $content)
 		->where('grid', 'original')
 		->first();
-		//Settings devolverá la linmea de la configuración de imagen en la que esta la imafen.
+		//Settings devolverá la linmea de la configuración de imagen en la que esta la imagen.
 
 		$path = '/' . $entity_id . '/' . $language . '/' . $content . '/original/' . $name . '.' . $file_extension;
 		$path = str_replace(" ", "-", $path);
@@ -103,7 +103,7 @@ class Image
 				'entity_id' => $entity_id,
 				'entity' => $this->entity,
 				'language' => $language,
-				'content' => $content],[
+				'content' => $content,
 				'path' => $this->entity . $path,
 				'filename' => $filename,
 				'mime_type' => 'image/'. $file_extension,
@@ -115,7 +115,7 @@ class Image
 
 		return $image;
 	}
-	//Si hay mas de una imagen. SI existe el path con un archivo le añade el counter que es 2 y le sube uno a counter. Es por si hay dos objetos con el mismo nombre que se le cambie el nombre al segundo. El bucle se quedará comprobando hasta que llegue a un nombre que no este cogido. Además de guardar la imagen original y los datos te devuelve la imagen en la variable $image. 
+	//Si hay mas de una imagen. Si existe el path con un archivo le añade el counter que es 2 y le sube uno a counter. Es por si hay dos objetos con el mismo nombre que se le cambie el nombre al segundo. El bucle se quedará comprobando hasta que llegue a un nombre que no este cogido. Además de guardar la imagen original y los datos te devuelve la imagen en la variable $image. 
 
 	public function store_resize($file, $entity_id, $content, $language, $original_path){
 
@@ -201,7 +201,7 @@ class Image
 					$filename, 
 					$value->content,
 					$value->type,
-					$extension,
+					$file_extension,
 					$this->extension_conversion,
 					$value->width,
 					$value->quality,
