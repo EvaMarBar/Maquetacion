@@ -13,9 +13,8 @@
     <body>
 
             @include('admin.layout.messages')
-
+            @include('admin.layout.modal_image')
             @include('admin.layout.spinner')
-            
             @include('admin.layout.sidebar')
 
             @if($agent->isMobile())

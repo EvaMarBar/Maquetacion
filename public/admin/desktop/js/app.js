@@ -2216,7 +2216,7 @@ var renderForm = function renderForm() {
 
     sendCreateRequest();
   });
-  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUpload)();
+  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUploadImage)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2443,6 +2443,132 @@ closeButtons.forEach(function (closeButton) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/desktop/modalImage.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/desktop/modalImage.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "openImageModal": () => (/* binding */ openImageModal)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _spinner__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var modalImageStoreButton = document.getElementById('modal-image-store-button');
+var modalImageDeleteButton = document.getElementById('modal-image-delete-button');
+var openImageModal = function openImageModal(image) {
+  var modal = document.getElementById('upload-image-modal');
+  var imageContainer = document.getElementById('modal-image-original');
+  var imageId = document.getElementById('modal-image-id');
+  var imageFilename = document.getElementById('modal-image-filename');
+  var imageEntityId = document.getElementById('modal-image-entity-id');
+  var imageLanguage = document.getElementById('modal-image-language');
+  var imageTitle = document.getElementById('modal-image-title');
+  var imageAlt = document.getElementById('modal-image-alt');
+  imageContainer.src = '../storage/' + image.path;
+  imageFilename.value = image.filename;
+  imageEntityId.value = image.entity_id;
+  imageLanguage.value = image.language;
+  imageId.value = image.id;
+  imageTitle.value = image.title;
+  imageAlt.value = image.alt;
+  modal.classList.add('modal-active');
+  (0,_spinner__WEBPACK_IMPORTED_MODULE_1__.startOverlay)();
+};
+modalImageStoreButton.addEventListener("click", function (e) {
+  var modal = document.getElementById('upload-image-modal');
+  var imageForm = document.getElementById('image-form');
+  var data = new FormData(imageForm);
+  var url = imageForm.action;
+
+  var sendImagePostRequest = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              try {
+                axios.post(url, data).then(function (response) {
+                  modal.classList.remove('modal-active');
+                  (0,_spinner__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                });
+              } catch (error) {}
+
+            case 1:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function sendImagePostRequest() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  sendImagePostRequest();
+});
+modalImageDeleteButton.addEventListener("click", function (e) {
+  var modal = document.getElementById('upload-image-modal');
+  var url = modalImageDeleteButton.dataset.route;
+  var imageId = document.getElementById('modal-image-id').value;
+
+  var sendImageDeleteRequest = /*#__PURE__*/function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              try {
+                axios.get(url, {
+                  params: {
+                    'image': imageId
+                  }
+                }).then(function (response) {
+                  modal.classList.remove('modal-active');
+                  (0,_spinner__WEBPACK_IMPORTED_MODULE_1__.stopWait)();
+                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  var uploadImages = document.querySelectorAll(".upload-image");
+                  uploadImages.forEach(function (uploadImage) {
+                    if (uploadImage.classList.contains(imageId)) {
+                      uploadImage.remove();
+                    }
+                  });
+                });
+              } catch (error) {}
+
+            case 1:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    return function sendImageDeleteRequest() {
+      return _ref2.apply(this, arguments);
+    };
+  }();
+
+  sendImageDeleteRequest();
+});
+
+/***/ }),
+
 /***/ "./resources/js/admin/desktop/sidebar.js":
 /*!***********************************************!*\
   !*** ./resources/js/admin/desktop/sidebar.js ***!
@@ -2558,7 +2684,9 @@ menuButton.addEventListener("click", function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "startWait": () => (/* binding */ startWait),
-/* harmony export */   "stopWait": () => (/* binding */ stopWait)
+/* harmony export */   "stopWait": () => (/* binding */ stopWait),
+/* harmony export */   "startOverlay": () => (/* binding */ startOverlay),
+/* harmony export */   "stopOverlay": () => (/* binding */ stopOverlay)
 /* harmony export */ });
 var spinner = document.getElementById('spinner');
 var background = document.getElementById('spinner-background');
@@ -2569,6 +2697,21 @@ var startWait = function startWait() {
 var stopWait = function stopWait() {
   spinner.classList.remove('active');
   background.classList.remove('active');
+};
+var startOverlay = function startOverlay() {
+  overlay.classList.add('overlay-active');
+  overlay.addEventListener("click", function (e) {
+    var modals = document.querySelectorAll('.modal');
+    modals.forEach(function (modal) {
+      if (modal.classList.contains('modal-active')) {
+        modal.classList.remove('modal-active');
+      }
+    });
+    overlay.classList.remove('overlay-active');
+  });
+};
+var stopOverlay = function stopOverlay() {
+  overlay.classList.remove('overlay-active');
 };
 
 /***/ }),
@@ -2615,29 +2758,45 @@ renderTabs();
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "renderUpload": () => (/* binding */ renderUpload)
+/* harmony export */   "renderUploadImage": () => (/* binding */ renderUploadImage)
 /* harmony export */ });
-/* harmony import */ var _form_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./form.js */ "./resources/js/admin/desktop/form.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _modalImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modalImage */ "./resources/js/admin/desktop/modalImage.js");
 
-var renderUpload = function renderUpload() {
-  var inputElements = document.querySelectorAll(".upload-input");
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+var renderUploadImage = function renderUploadImage() {
+  var inputElements = document.querySelectorAll(".upload-image-input");
+  var uploadImages = document.querySelectorAll(".upload-image");
   inputElements.forEach(function (inputElement) {
-    var uploadElement = inputElement.closest(".upload");
-    uploadElement.addEventListener("click", function (e) {
+    uploadImage(inputElement);
+  }); //Separa en una fución todos los eventos para poder darle los eventos a los elementos clonados sin tener que darselo a los demás porque lso demás ya tienen los eventos. Si se los dieramos tendriamos que hacer dos clicks. 
+
+  function uploadImage(inputElement) {
+    var uploadElement = inputElement.closest(".upload-image-add"); //Necesitamos el evento de click para que el input te deje coger las fotos. Cuando hacemos click en el div padre damos click al input hijo.
+
+    uploadElement.addEventListener("click", function (event) {
       inputElement.click();
-    });
-    inputElement.addEventListener("change", function () {
+    }); //El change detecta el cambio del valor del imput (el value). Si el imput cambia y tiene archivos llamamos a la función de actualizar la imagen pasandole el padre, y el archivo. 
+
+    inputElement.addEventListener("change", function (e) {
       if (inputElement.files.length) {
-        updateThumbnail(uploadElement, inputElement.files[0]);
+        updateThumbnail(uploadElement, inputElement.files[0], inputElement, uploadElement);
       }
-    });
+    }); //Evento para arrastrar, no es necesario pero mola. 
+
     uploadElement.addEventListener("dragover", function (e) {
       e.preventDefault();
-      uploadElement.classList.add("upload-over");
+      uploadElement.classList.add("upload-image-over");
     });
     ["dragleave", "dragend"].forEach(function (type) {
       uploadElement.addEventListener(type, function (e) {
-        uploadElement.classList.remove("upload-over");
+        uploadElement.classList.remove("upload-image-over");
       });
     });
     uploadElement.addEventListener("drop", function (e) {
@@ -2648,25 +2807,35 @@ var renderUpload = function renderUpload() {
         updateThumbnail(uploadElement, e.dataTransfer.files[0]);
       }
 
-      uploadElement.classList.remove("upload-over");
+      uploadElement.classList.remove("upload-image-over");
     });
-  });
+  } //Esta función enseña la foto que hemos elegido. Si queremos meter solo imagenes habria que hacer una restricción poniendo el if image/ (esta mas abajo) al principio, para que no haga nada si no es una imagen.
 
-  function updateThumbnail(uploadElement, file) {
-    multipleUpload(uploadElement);
-    var thumbnailElement = uploadElement.querySelector(".upload-thumb");
 
-    if (uploadElement.querySelector(".upload-prompt")) {
-      uploadElement.querySelector(".upload-prompt").remove();
+  function updateThumbnail(uploadElement, file, inputElement, upload) {
+    var thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
+    inputElement.removeEventListener("click", uploadImage);
+    upload.removeEventListener("click", uploadImage);
+
+    if (uploadElement.classList.contains('collection')) {
+      if (thumbnailElement == null) {
+        var cloneUploadElement = uploadElement.cloneNode(true);
+        var cloneInput = cloneUploadElement.querySelector('.upload-image-input');
+        uploadImage(cloneInput);
+        uploadElement.parentElement.appendChild(cloneUploadElement);
+      }
+    }
+
+    if (uploadElement.querySelector(".upload-image-prompt")) {
+      uploadElement.querySelector(".upload-image-prompt").remove();
     }
 
     if (!thumbnailElement) {
       thumbnailElement = document.createElement("div");
-      thumbnailElement.classList.add("upload-thumb");
+      thumbnailElement.classList.add("upload-image-thumb");
       uploadElement.appendChild(thumbnailElement);
-    }
+    } //FileReader trata el value de un file input o archivos. El string en el que se convierte el archivo podemos malipularlo dentro de js con el FiloeReader. Con la funcion onload podemos enchufar el texto (el archivo) al background de la imagen. No se le pueden dar valores desde el js a los input files (por seguridad).
 
-    thumbnailElement.dataset.label = file.name;
 
     if (file.type.startsWith("image/")) {
       var reader = new FileReader();
@@ -2674,35 +2843,53 @@ var renderUpload = function renderUpload() {
 
       reader.onload = function () {
         thumbnailElement.style.backgroundImage = "url('".concat(reader.result, "')");
-      };
+      }; //Tenemos que generar un name para el nuevo input, si no todos los inputs tendrán el mismo name. En el html le quitamos el name. Cone l math creamos un numero al azar y creamos el name. Conent y alias seran los dataset que tendrá el div padre del input en el html.
+
+
+      if (uploadElement.classList.contains('collection')) {
+        var content = uploadElement.dataset.content;
+        var alias = uploadElement.dataset.alias;
+        var _inputElement = uploadElement.getElementsByClassName("upload-image-input")[0];
+        _inputElement.name = "images[" + content + "-" + Math.floor(Math.random() * 99999 + 1) + "." + alias + "]";
+      }
     } else {
       thumbnailElement.style.backgroundImage = null;
     }
-  }
+  } //Hacemos un bucle donde a todas las imagenes les damos un evento que cuando ahgas click capturamos la url (enrutador).
 
-  function multipleUpload(uploadElement) {
-    var parentUpload = document.getElementById('upload-multiple');
 
-    if (uploadElement.classList.contains("group")) {
-      var uploadElementClone = uploadElement.parentElement.cloneNode(true);
-      uploadElement.classList.remove("group");
-      parentUpload.appendChild(uploadElementClone);
-    }
+  uploadImages.forEach(function (uploadImageElement) {
+    uploadImageElement.addEventListener("click", function (e) {
+      var url = uploadImageElement.dataset.url;
 
-    renderUpload();
-  }
+      var sendImageRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  try {
+                    axios.get(url).then(function (response) {
+                      (0,_modalImage__WEBPACK_IMPORTED_MODULE_1__.openImageModal)(response.data);
+                    });
+                  } catch (error) {}
 
-  function seeMore() {
-    var seeButtons = document.querySelectorAll('.see-more');
-    seeButtons.forEach(function (seeButton) {
-      seeButton.addEventListener('click', function () {
-        var imageDetails = document.getElementById('image-details');
-        imageDetails.classList.add('active');
-      });
+                case 1:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function sendImageRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
+
+      sendImageRequest();
     });
-  }
-
-  seeMore();
+  });
 };
 
 /***/ }),

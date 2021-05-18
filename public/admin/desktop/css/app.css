@@ -724,7 +724,8 @@ input:checked + .slider:before {
   margin: 0.5em 0;
 }
 
-.upload {
+.upload-image,
+.upload-image-add {
   align-items: center;
   border: 0.2em dashed #ec9d75;
   color: #cccccc;
@@ -734,34 +735,61 @@ input:checked + .slider:before {
   font-weight: 500;
   height: 30vh;
   justify-content: center;
-  margin-top: 1em;
-  padding: 1em;
+  padding: 0.5em;
   text-align: center;
-}
-
-.upload:hover {
-  border: 4px dashed #f5c8b2;
-}
-
-.upload-over {
-  border-style: solid;
-}
-
-.upload-view {
   position: relative;
 }
 
-.upload-prompt {
-  position: absolute;
-  width: 15%;
-  z-index: 999;
+.upload-image-collection {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 }
 
-.upload-input {
+.upload-image.collection,
+.upload-image-add.collection {
+  height: 15vh;
+  padding: 0;
+}
+
+.upload-image:hover,
+.upload-image-add:hover {
+  border: 4px dashed #f5c8b2;
+}
+
+.upload-image-over {
+  border-style: solid;
+}
+
+.upload-image-prompt {
+  position: absolute;
+  width: 15%;
+  z-index: 5;
+}
+
+.upload-image-options {
+  display: block;
+}
+
+.upload-image:hover .upload-image-options {
+  display: initial;
+  position: absolute;
+  width: 15%;
+  z-index: 8;
+}
+.upload-image:hover .upload-image-options svg {
+  height: 1.2em;
+  width: 1.2em;
+}
+.upload-image:hover .upload-image-options svg path {
+  fill: white;
+}
+
+.upload-image-input {
   display: none;
 }
 
-.upload-thumb {
+.upload-image-thumb {
   width: 100%;
   height: 100%;
   border-radius: 10px;
@@ -769,9 +797,10 @@ input:checked + .slider:before {
   background-color: #cccccc;
   background-size: cover;
   position: relative;
+  z-index: 8;
 }
 
-.upload-thumb::after {
+.upload-image-thumb::after {
   content: attr(data-label);
   position: absolute;
   bottom: 0;
@@ -783,19 +812,33 @@ input:checked + .slider:before {
   text-align: center;
 }
 
-.upload-multiple {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
 .see-more {
   position: absolute;
-  z-index: 3;
+  z-index: 9;
   left: 40%;
-  top: 50%;
+  top: 40%;
 }
 .see-more svg:hover path {
   fill: black;
+}
+
+.hidden {
+  position: relative;
+  top: -200em;
+}
+
+.upload-image-click {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2em;
+  font-weight: 500;
+  height: 30vh;
+  justify-content: center;
+  padding: 0.5em;
+  text-align: center;
+  position: relative;
+  background-color: blue;
 }
 
 .tabs-container {
@@ -837,53 +880,66 @@ input:checked + .slider:before {
   padding: 2em 2.5em;
 }
 
-.image-details {
-  display: none;
-}
-.image-details.active {
+#upload-image-modal {
+  background-color: white;
   display: flex;
-  width: 90%;
-  height: 90vh;
-  border: 0.5em solid #ec9d75;
-  border-radius: 0.5em;
-  color: black;
+  height: 80vh;
+  justify-content: space-between;
+  left: 10%;
+  padding: 1em;
   position: fixed;
-  top: 3em;
-  left: 3em;
-  margin: auto;
-  background-color: #d8d1cd;
-  z-index: 15;
-  box-shadow: 15px 10px 10px 5px rgba(0, 0, 0, 0.2);
+  top: -100vh;
+  transition: top 0.3s;
+  width: 80%;
+  z-index: 3000;
 }
 
-.inputs {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
+#upload-image-modal.modal-active {
+  top: 10vh;
+  transition: top 0.3s;
 }
 
-.inputs label {
-  justify-content: left;
+.modal-image {
+  padding: 1em;
+  width: 65%;
 }
 
-.inputs input {
+#modal-image-original {
+  height: 100%;
   width: 100%;
 }
 
-.image-view {
-  border: 0.2em solid #ec9d75;
-  border-radius: 0.2em;
-  width: 60%;
-  height: 70vh;
-  margin: 1em;
-  display: flex;
-  justify-content: center;
+.modal-image-attributes {
+  padding: 1em;
+  width: 30%;
 }
 
-.delete-image {
-  transform: scale(2.5);
-  position: relative;
-  top: 15em;
+.modal-image-store-button {
+  cursor: pointer;
+}
+.modal-image-store-button:hover .store-button-icon {
+  fill: #ec9d75;
+}
+.modal-image-store-button svg {
+  float: right;
+  height: 2.4em;
+  width: 2.4em;
+}
+.modal-image-store-button svg .store-button-icon {
+  fill: gray;
+}
+
+.modal-image-delete-button {
+  bottom: 1em;
+  cursor: pointer;
+  position: absolute;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-image-delete-button p {
+  color: #7a2828;
+  text-decoration: underline;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

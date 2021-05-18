@@ -89,5 +89,9 @@ Route::group(['prefix' => 'admin'],function (){
             'show' => 'sliders_show',
         ]
     ]);
+    
+    Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
+    Route::get('/image/{image}', 'App\Vendor\Image\Image@showImageSeo')->name('show_image_seo');
+    Route::post('/image', 'App\Vendor\Image\Image@storeImageSeo')->name('store_image_seo');
 });
 

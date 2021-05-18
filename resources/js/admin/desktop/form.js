@@ -7,7 +7,7 @@ import { startWait } from "./spinner";
 import {stopWait} from "./spinner";
 import { renderLocaleTabs } from "./localeTabs";
 import { renderTabs } from "./tabs";
-import { renderUpload } from "./upload";
+import { renderUploadImage } from "./upload";
 
 export let renderForm = () => {
 
@@ -99,7 +99,7 @@ export let renderForm = () => {
 
         sendCreateRequest();
     });
-    renderUpload();
+    renderUploadImage();
     
 }
 
