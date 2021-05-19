@@ -1,4 +1,17 @@
-.upload-image,
+.upload-image{
+    align-items: center;
+    border: 0.2em dashed rgb(236, 157, 117);;
+    color: #cccccc;
+    cursor: pointer;
+    display: flex;
+    font-size: 1.2em;
+    font-weight: 500;
+    height: 30vh;
+    justify-content: center;
+    padding: 0.5em;
+    text-align: center;
+    position: relative;
+}
 .upload-image-add{
     align-items: center;
     border: 0.2em dashed rgb(236, 157, 117);;
@@ -29,6 +42,13 @@
 .upload-image:hover,
 .upload-image-add:hover{
     border: 4px dashed rgb(245, 200, 178);
+}
+
+.upload-image:hover,
+.upload-image-add:hover .see-more{
+    path{
+        fill:black;
+    }
 }
   
 .upload-image-over {
@@ -91,8 +111,6 @@ content: attr(data-label);
 .see-more{
     position: absolute;
     z-index: 9;
-    left: 40%;
-    top: 40%; 
     svg:hover{
         path{
             fill:black;
@@ -115,5 +133,4 @@ content: attr(data-label);
     padding: 0.5em;
     text-align: center;
     position: relative;
-    background-color: blue;
 }

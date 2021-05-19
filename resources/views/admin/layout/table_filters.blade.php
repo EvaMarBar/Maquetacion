@@ -8,7 +8,7 @@
             
                 @if($key == 'parent')
                     <div class="one-column">
-                        <div class="form-group">
+                        <div class="form-group-filter">
                             <div class="form-label">
                                 <label for="category_id" class="label-highlight">Filtrar por</label>
                             </div>
@@ -25,7 +25,7 @@
                 @endif
 
                 @if($key == 'category')
-                    <div class="one-column">
+                    <div class="one-column-filter">
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="category_id" class="label-highlight">Filtrar por categoría</label>
@@ -43,7 +43,7 @@
                 @endif
 
                 @if($key == 'search')
-                    <div class="one-column">
+                    <div class="one-column-filter">
                         <div class="form-group">
                             <div class="form-label">
                                 <label for="search" class="label-highlight">Buscar palabra</label>
@@ -57,7 +57,7 @@
 
                 @if($key == 'initial_date')
                     <div class="one-column">
-                        <div class="form-group">
+                        <div class="form-group-filter">
                             <div class="form-label">
                                 <label for="initial_date" class="label-highlight">Fecha de inicio</label>
                             </div>
@@ -70,7 +70,7 @@
                 
                 @if($key == 'final_date')
                     <div class="one-column">
-                        <div class="form-group">
+                        <div class="form-group-filter">
                             <div class="form-label">
                                 <label for="final_date" class="label-highlight">Fecha de fin</label>
                             </div>
@@ -84,7 +84,7 @@
             @endforeach
                  
             <div>
-                <div class="form-group">
+                <div class="form-group-filter">
                     <div class="form-label">
                         <label for="created_at_from">Ordenar por</label>
                     </div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group-filter">
                     <div class="form-label">
                         <label for="direction">Dirección</label>
                     </div>

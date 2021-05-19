@@ -11,9 +11,9 @@ export let stopWait = () => {
     background.classList.remove('active');
 }
 export let startOverlay = () => {
-    overlay.classList.add('overlay-active');
+    background.classList.add('active');
 
-    overlay.addEventListener("click", (e) => {
+    background.addEventListener("click", (e) => {
         
         let modals = document.querySelectorAll('.modal');
 
@@ -23,11 +23,11 @@ export let startOverlay = () => {
             }
         }); 
 
-        overlay.classList.remove('overlay-active');
+        background.classList.remove('active');
 
     })
 }
 
 export let stopOverlay = () => {
-    overlay.classList.remove('overlay-active');
+    background.classList.remove('overlay-active');
 }

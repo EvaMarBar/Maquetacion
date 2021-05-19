@@ -7,4 +7,5 @@ require('./filterTable');
 require('./localeTabs');
 require('./upload');
 require('./tabs');
+require('./spinner');
 //require('./multipleUpload');

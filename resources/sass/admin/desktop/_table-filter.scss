@@ -8,7 +8,7 @@
     &.filter-active{
 
         .table-filter-container{
-            max-height: 70vh;
+            max-height: 100vh;
             background-color: rgb(236, 157, 117);
             position: fixed;
             top:0;
@@ -19,6 +19,9 @@
     column-gap: 0.5em;
 
     }
+.form-group{
+    padding:0;
+}
 
 .table-filter-container{
     max-height: 0;

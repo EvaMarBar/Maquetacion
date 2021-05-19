@@ -18,7 +18,7 @@ body {
   z-index: 10;
 }
 .table-filter.filter-active .table-filter-container {
-  max-height: 70vh;
+  max-height: 100vh;
   background-color: #ec9d75;
   position: fixed;
   top: 0;
@@ -28,6 +28,9 @@ body {
        column-count: 3;
   -moz-column-gap: 0.5em;
        column-gap: 0.5em;
+}
+.table-filter .form-group {
+  padding: 0;
 }
 .table-filter .table-filter-container {
   max-height: 0;
@@ -622,24 +625,25 @@ input:checked + .slider:before {
   position: absolute;
   top: 20em;
   left: 40em;
+  z-index: 15;
 }
 
-.spinner > div {
+.spinner .active > div {
   width: 18px;
   height: 18px;
-  background-color: white;
+  background-color: #ec9d75;
   border-radius: 100%;
   display: inline-block;
   -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
   animation: sk-bouncedelay 1.4s infinite ease-in-out both;
 }
 
-.spinner .bounce1 {
+.spinner .active .bounce1 {
   -webkit-animation-delay: -0.32s;
   animation-delay: -0.32s;
 }
 
-.spinner .bounce2 {
+.spinner .active .bounce2 {
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
@@ -668,9 +672,9 @@ input:checked + .slider:before {
   top: 0;
   right: 0;
   bottom: 0;
-  z-index: 2000;
+  z-index: 14;
 }
-.spinner-background.overlay-active {
+.spinner-background.active {
   cursor: pointer;
   display: block;
   opacity: 0.5;
@@ -724,7 +728,21 @@ input:checked + .slider:before {
   margin: 0.5em 0;
 }
 
-.upload-image,
+.upload-image {
+  align-items: center;
+  border: 0.2em dashed #ec9d75;
+  color: #cccccc;
+  cursor: pointer;
+  display: flex;
+  font-size: 1.2em;
+  font-weight: 500;
+  height: 30vh;
+  justify-content: center;
+  padding: 0.5em;
+  text-align: center;
+  position: relative;
+}
+
 .upload-image-add {
   align-items: center;
   border: 0.2em dashed #ec9d75;
@@ -755,6 +773,11 @@ input:checked + .slider:before {
 .upload-image:hover,
 .upload-image-add:hover {
   border: 4px dashed #f5c8b2;
+}
+
+.upload-image:hover path,
+.upload-image-add:hover .see-more path {
+  fill: black;
 }
 
 .upload-image-over {
@@ -815,8 +838,6 @@ input:checked + .slider:before {
 .see-more {
   position: absolute;
   z-index: 9;
-  left: 40%;
-  top: 40%;
 }
 .see-more svg:hover path {
   fill: black;
@@ -838,7 +859,6 @@ input:checked + .slider:before {
   padding: 0.5em;
   text-align: center;
   position: relative;
-  background-color: blue;
 }
 
 .tabs-container {
@@ -881,22 +901,25 @@ input:checked + .slider:before {
 }
 
 #upload-image-modal {
-  background-color: white;
-  display: flex;
-  height: 80vh;
-  justify-content: space-between;
-  left: 10%;
-  padding: 1em;
-  position: fixed;
-  top: -100vh;
-  transition: top 0.3s;
-  width: 80%;
-  z-index: 3000;
+  display: none;
 }
 
 #upload-image-modal.modal-active {
-  top: 10vh;
-  transition: top 0.3s;
+  display: flex;
+  width: 90%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  border: 0.5em solid #ec9d75;
+  border-radius: 0.5em;
+  color: black;
+  position: fixed;
+  top: 3em;
+  left: 3em;
+  margin: auto;
+  background-color: #d8d1cd;
+  z-index: 15;
+  box-shadow: 15px 10px 10px 5px rgba(0, 0, 0, 0.2);
 }
 
 .modal-image {
@@ -916,6 +939,9 @@ input:checked + .slider:before {
 
 .modal-image-store-button {
   cursor: pointer;
+  position: absolute;
+  right: 1em;
+  top: 1em;
 }
 .modal-image-store-button:hover .store-button-icon {
   fill: #ec9d75;
@@ -926,7 +952,7 @@ input:checked + .slider:before {
   width: 2.4em;
 }
 .modal-image-store-button svg .store-button-icon {
-  fill: gray;
+  fill: black;
 }
 
 .modal-image-delete-button {
@@ -940,6 +966,10 @@ input:checked + .slider:before {
 .modal-image-delete-button p {
   color: #7a2828;
   text-decoration: underline;
+}
+
+.form-group {
+  padding: 1em 0;
 }
 
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */

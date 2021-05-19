@@ -1,4 +1,4 @@
-<div id="upload-image-modal-active" class="modal">
+<div id="upload-image-modal" class="modal">
     <div class="modal-image">
         <img id="modal-image-original">
     </div>
