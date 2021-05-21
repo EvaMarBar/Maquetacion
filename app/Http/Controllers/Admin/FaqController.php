@@ -92,7 +92,7 @@ class FaqController extends Controller
 
         if(request('images')){
             
-            $images = $this->image->storeRequest(request('images'), 'webp', $faq->id);
+            $images = $this->image->store(request('images'), $faq->id);
         }
 
         /*if (request('id')){

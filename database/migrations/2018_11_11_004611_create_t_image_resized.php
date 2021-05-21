@@ -29,7 +29,10 @@ class CreateTImageResized extends Migration
             $table->smallInteger('width')->nullable(true);
             $table->smallInteger('height')->nullable(true);
             $table->integer('quality')->nullable(true);
-            $table->integer('image_configuration_id')->unsigned()->index()->nullable();
+            $table->integer('runtime')->nullable(true);
+            $table->integer('image_original_id')->unsigned()->nullable(true);
+            $table->integer('temporal_id')->unsigned()->index()->nullable(true);
+            $table->integer('image_configuration_id')->unsigned()->nullable(true);
             $table->timestamps();
         });
     }

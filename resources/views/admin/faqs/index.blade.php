@@ -163,10 +163,11 @@
                                     </div>
                                     <div class="form-input">
                                         @include('admin.layout.upload', [
-                                            'type' => 'image', 
+                                            'entity' => 'faqs',
+                                            'type' => 'single', 
                                             'content' => 'featured', 
                                             'alias' => $localization->alias,
-                                            'files' => $faq->images_featured
+                                            'files' => $faq->images_featured_preview
                                         ])
                                     </div>
                                 </div>
@@ -187,10 +188,11 @@
                                     </div>
                                     <div class="form-input">
                                         @include('admin.layout.upload', [
-                                            'type' => 'images', 
+                                            'entity' => 'faqs',
+                                            'type' => 'collection', 
                                             'content' => 'grid', 
                                             'alias' => $localization->alias,
-                                            'files' => $faq->images_grid
+                                            'files' => $faq->images_grid_preview
                                         ])
                                     </div>
                                 </div>
