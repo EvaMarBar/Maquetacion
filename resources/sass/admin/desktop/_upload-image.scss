@@ -64,7 +64,7 @@
 .upload-image-prompt.single,
 .upload-image-prompt.collection{
     position: absolute;
-    z-index: 999;
+    z-index: 10;
 }
 .upload-image-prompt.single{
     width: 15%;
@@ -78,7 +78,7 @@
     display: initial;
     position: absolute;
     width: 15%;
-    z-index: 999;
+    z-index: 10;
 
     svg{
         height: 1.2em;
@@ -102,7 +102,7 @@
     background-color: hsl(0, 0%, 80%);
     background-size: cover;
     position: relative;
-    z-index: 900;
+    z-index: 10;
 }
 
 .upload-image-thumb::after {
