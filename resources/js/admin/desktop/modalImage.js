@@ -13,49 +13,32 @@ export let openModal = () => {
     startOverlay();
 }
 
-export let openImageModal = (image) => {
-
-    let modal = document.getElementById('upload-image-modal');
-    let imageContainer = document.getElementById('modal-image-original');
-    let imageForm = document.getElementById('image-form');
-
-    console.log(image)
-
-    if(image.path){
-        imageContainer.src = '../storage/' + image.path;
-    
-    }
-
-    for (var [key, val] of Object.entries(image)) {
-
-        let input = imageForm.elements[key];
-
-        if(input){
-
-            switch(input.type) {
-                case 'checkbox': input.checked = !!val; break;
-                default:         input.value = val;     break;
-            }
-        }
-    }
-
-    modal.classList.add('modal-active');
-
-    startOverlay();
-}
-
 export let updateImageModal = (image) => {
 
     let imageContainer = document.getElementById('modal-image-original');
-    imageContainer.src = image.dataset.image;
-
     let imageForm = document.getElementById('image-form');
+
     imageForm.reset();
 
-    for (var [key, val] of Object.entries(image.dataset)) {
+    if(image.path){
+
+        if(image.entity_id){
+            image.imageId = image.id; 
+            imageContainer.src = '../storage/' + image.path;
+        }else{
+            imageContainer.src = image.path;
+        }
+
+    }else{
+
+        imageContainer.src = image.dataset.path;
+        image = image.dataset;
+    }
+ 
+    for (var [key, val] of Object.entries(image)) {
 
         let input = imageForm.elements[key];
-
+        
         if(input){
 
             switch(input.type) {
@@ -79,6 +62,7 @@ modalImageStoreButton.addEventListener("click", (e) => {
             axios.post(url, data).then(response => {
 
                 modal.classList.remove('modal-active');
+                imageForm.reset();
                 stopWait();
                 showMessage('success', response.data.message);
               
@@ -94,21 +78,24 @@ modalImageStoreButton.addEventListener("click", (e) => {
 
 modalImageDeleteButton.addEventListener("click", (e) => {
          
-    let modal = document.getElementById('upload-image-modal');
     let url = modalImageDeleteButton.dataset.route;
-    let temporalId = document.getElementById('modal-image-temporal-id').value;
-    let entityId = document.getElementById('modal-image-entity-id').value;
+    let modal = document.getElementById('upload-image-modal');
+    let imageForm = document.getElementById('image-form');
+    let temporalId = document.getElementById('modal-image-temporal-id');
+    let id = document.getElementById('modal-image-id');
 
-    if(entityId){
+    if(id.value){
 
         let sendImageDeleteRequest = async () => {
 
             try {
+                
                 axios.get(url, {
                     params: {
-                      'image': imageId
+                      'image': id.value
                     }
                 }).then(response => {
+                    deleteThumbnail(response.data.imageId);
                     showMessage('success', response.data.message);
                 });
                 
@@ -119,9 +106,14 @@ modalImageDeleteButton.addEventListener("click", (e) => {
     
         sendImageDeleteRequest();
 
+    }else{
+
+        deleteThumbnail(temporalId.value);
     }
 
+    temporalId.value = "";
+    id.value = "";
+    imageForm.reset();
     modal.classList.remove('modal-active');
     stopWait();
-    deleteThumbnail(temporalId);
 });

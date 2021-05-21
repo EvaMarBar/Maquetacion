@@ -36,6 +36,13 @@ class FaqController extends Controller
         elseif($this->agent->isMobile()){
             $faqs = $this->faq->with('image_featured_mobile')->where('active', 1)->where('visible', 1)->get();
         }
+        if($this->agent->isDesktop()){
+            $faqs = $this->faq->with('image_grid_desktop')->where('active', 1)->where('visible', 1)->get();
+        }
+        
+        elseif($this->agent->isMobile()){
+            $faqs = $this->faq->with('image_grid_mobile')->where('active', 1)->where('visible', 1)->get();
+        }
 
         $faqs = $faqs->each(function($faq){  
             

@@ -14,10 +14,40 @@
     position: relative;
 }
 
+.upload-image-single{
+
+    display: grid;
+
+    .upload-image,
+    .upload-image-add{
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .upload-image-add{
+        z-index: 300;
+    }
+
+    .upload-image{
+        z-index: 400;
+    }
+}
+
+.upload-image-single:hover .upload-image-add,
+.upload-image-single:hover .upload-image{
+    border: 4px dashed rgb(236, 157, 117);
+}
+
 .upload-image-collection{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
+
+    .upload-image:hover,
+    .upload-image-add:hover{
+        border: 4px dashed rgb(236, 157, 117);
+    }
+
 }
 
 .upload-image.collection,
@@ -26,37 +56,29 @@
     padding: 0;
 }
 
-.upload-image:hover,
-.upload-image-add:hover{
-    border: 4px dashed rgb(245, 200, 178);
-}
 
-.upload-image:hover,
-.upload-image-add:hover .see-more{
-    path{
-        fill:black;
-    }
-}
-  
 .upload-image-over {
     border-style: solid;
 }
 
-.upload-image-prompt{
+.upload-image-prompt.single,
+.upload-image-prompt.collection{
     position: absolute;
+    z-index: 999;
+}
+.upload-image-prompt.single{
     width: 15%;
-    z-index: 5;
 }
 
 .upload-image-options{
-    display: block;
+    display: none;
 }
 
 .upload-image:hover .upload-image-options{
     display: initial;
     position: absolute;
     width: 15%;
-    z-index: 8;
+    z-index: 999;
 
     svg{
         height: 1.2em;
@@ -80,7 +102,7 @@
     background-color: hsl(0, 0%, 80%);
     background-size: cover;
     position: relative;
-    z-index: 8;
+    z-index: 900;
 }
 
 .upload-image-thumb::after {
@@ -95,29 +117,3 @@ content: attr(data-label);
     text-align: center;
 }
 
-.see-more{
-    position: absolute;
-    z-index: 9;
-    svg:hover{
-        path{
-            fill:black;
-        }
-    }
-}
-
-.hidden{
-    position: relative;
-    top:-200em;
-}
-.upload-image-click{
-    align-items: center;
-    cursor: pointer;
-    display: flex;
-    font-size: 1.2em;
-    font-weight: 500;
-    height: 30vh;
-    justify-content: center;
-    padding: 0.5em;
-    text-align: center;
-    position: relative;
-}
