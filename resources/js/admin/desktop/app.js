@@ -8,4 +8,5 @@ require('./localeTabs');
 require('./upload');
 require('./tabs');
 require('./spinner');
+require('./localeTags');
 //require('./multipleUpload');

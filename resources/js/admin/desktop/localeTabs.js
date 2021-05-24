@@ -13,19 +13,16 @@ export let renderLocaleTabs = () => {
 
                 if(activeElement.dataset.tab == activeTab){
                     activeElement.classList.remove("locale-tab-active");
-                    console.log(activeElement.className)
                 }
             });
             
             localeTabItem.classList.add("locale-tab-active");
-            console.log(localeTabItem.className)
     
             localeTabPanels.forEach(localeTabPanel => {
     
                 if(localeTabPanel.dataset.tab == activeTab){
                     if(localeTabPanel.dataset.localetab == localeTabItem.dataset.localetab){
                         localeTabPanel.classList.add("locale-tab-active"); 
-                        console.log(localeTabPanel.className)
                     }
                 }                
             });

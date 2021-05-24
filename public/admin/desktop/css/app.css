@@ -787,7 +787,7 @@ input:checked + .slider:before {
 .upload-image-prompt.single,
 .upload-image-prompt.collection {
   position: absolute;
-  z-index: 999;
+  z-index: 10;
 }
 
 .upload-image-prompt.single {
@@ -802,7 +802,7 @@ input:checked + .slider:before {
   display: initial;
   position: absolute;
   width: 15%;
-  z-index: 999;
+  z-index: 10;
 }
 .upload-image:hover .upload-image-options svg {
   height: 1.2em;
@@ -824,7 +824,7 @@ input:checked + .slider:before {
   background-color: #cccccc;
   background-size: cover;
   position: relative;
-  z-index: 900;
+  z-index: 10;
 }
 
 .upload-image-thumb::after {

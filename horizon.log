@@ -1872,3 +1872,5 @@ Horizon started successfully.
 [2021-05-21 11:35:55][1278efdb-22f0-42ca-8e9a-c463631809ad] Processed:  App\Jobs\ProcessImage
 [2021-05-21 11:53:36][c48115a2-4fae-41dc-8a92-731a728906cd] Processing: App\Jobs\DeleteImage
 [2021-05-21 11:53:37][c48115a2-4fae-41dc-8a92-731a728906cd] Processed:  App\Jobs\DeleteImage
+Horizon started successfully.
+Horizon started successfully.

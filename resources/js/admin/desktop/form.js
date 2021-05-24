@@ -8,6 +8,7 @@ import {stopWait} from "./spinner";
 import { renderLocaleTabs } from "./localeTabs";
 import { renderTabs } from "./tabs";
 import { renderUploadImage } from "./upload";
+import { renderLocaleTags } from "./localeTags";
 
 export let renderForm = () => {
 
@@ -51,6 +52,7 @@ export let renderForm = () => {
                         stopWait();
                         showMessage('success', response.data.message);
                         renderTable();
+                        renderLocaleTags();
                     });
                     
                 } catch (error) {
@@ -76,30 +78,33 @@ export let renderForm = () => {
         });
     });
 
-    createButton.addEventListener("click", () =>{
-        let url= createButton.dataset.url;
+    if(createButton != null){
+
+        createButton.addEventListener("click", () =>{
+            let url= createButton.dataset.url;
 
 
-        let sendCreateRequest = async () => {
+            let sendCreateRequest = async () => {
 
-            try {
-                await axios.get(url).then(response => {
-                    form.innerHTML = response.data.form;
-                    renderForm();
-                    renderCkeditor();
-                    renderFilterTable();
-                    renderLocaleTabs();
-                    renderTabs();
-                });
-                
-            } catch (error) {
-                console.error(error);
-            }
-        };
+                try {
+                    await axios.get(url).then(response => {
+                        form.innerHTML = response.data.form;
+                        renderForm();
+                        renderCkeditor();
+                        renderFilterTable();
+                        renderLocaleTabs();
+                        renderTabs();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
 
-        sendCreateRequest();
-    });
-    renderUploadImage();
+            sendCreateRequest();
+        });
+        renderUploadImage();
+    }
     
 }
 
@@ -136,55 +141,59 @@ export let renderTable = () => {
         });
     });
 
-    deleteButtons.forEach(deleteButton => {
+    if(deleteButtons != null){
 
-        deleteButton.addEventListener("click", () => {
+        deleteButtons.forEach(deleteButton => {
 
-            let url = deleteButton.dataset.url;
+            deleteButton.addEventListener("click", () => {
 
-            let sendDeleteRequest = async () => {
+                let url = deleteButton.dataset.url;
 
-                try {
-                    await axios.delete(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                        renderFilterTable();
-                        renderLocaleTabs();
-                        renderTabs();
-                    });
-                    
-                } catch (error) {
-            
-                }
-            };
+                let sendDeleteRequest = async () => {
 
-            sendDeleteRequest();
-        });
-
-        paginationButtons.forEach(paginationButton => {
-
-            paginationButton.addEventListener("click", () => {
-
-                let url = paginationButton.dataset.page;
-    
-                let sendPaginationRequest = async () => {
-    
                     try {
-                        await axios.get(url).then(response => {
+                        await axios.delete(url).then(response => {
                             table.innerHTML = response.data.table;
                             renderTable();
+                            renderFilterTable();
+                            renderLocaleTabs();
+                            renderTabs();
+                            renderLocaleTags();
                         });
                         
                     } catch (error) {
-                        console.error(error);
+                
                     }
                 };
-    
-                sendPaginationRequest();
-                
+
+                sendDeleteRequest();
             });
         });
-    })
+    }
+
+    paginationButtons.forEach(paginationButton => {
+
+        paginationButton.addEventListener("click", () => {
+
+            let url = paginationButton.dataset.page;
+
+            let sendPaginationRequest = async () => {
+
+                try {
+                    await axios.get(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            sendPaginationRequest();
+            
+        });
+    });
 };
 
 renderForm();

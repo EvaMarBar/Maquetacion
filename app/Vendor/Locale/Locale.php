@@ -4,7 +4,6 @@ namespace App\Vendor\Locale;
 
 use App\Vendor\Locale\Models\Locale as DBLocale;
 use App\Vendor\Locale\Models\LocaleLanguage;
-use Debugbar;
 
 class Locale
 {
@@ -69,7 +68,6 @@ class Locale
             DBLocale::getValues($this->rel_parent, $key)->delete();   
         }
     }
-    
 
     public function getIdByLanguage($key){ 
         return DBLocale::getIdByLanguage($this->rel_parent, $this->language, $key)->pluck('value','tag')->all();
@@ -86,3 +84,5 @@ class Locale
         return $items;
     }
 }
+    
+

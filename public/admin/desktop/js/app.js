@@ -1894,7 +1894,9 @@ __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 
 __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 
-__webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js"); //require('./multipleUpload');
+__webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
+
+__webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js"); //require('./multipleUpload');
 
 /***/ }),
 
@@ -2068,6 +2070,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _localeTabs__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./localeTabs */ "./resources/js/admin/desktop/localeTabs.js");
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 /* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
+/* harmony import */ var _localeTags__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2088,6 +2091,7 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var table = document.getElementById("table");
 var form = document.getElementById("form");
+
 
 
 
@@ -2138,6 +2142,7 @@ var renderForm = function renderForm() {
                     (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
                     (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
                     renderTable();
+                    (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
                   });
 
                 case 4:
@@ -2174,51 +2179,54 @@ var renderForm = function renderForm() {
       sendPostRequest();
     });
   });
-  createButton.addEventListener("click", function () {
-    var url = createButton.dataset.url;
 
-    var sendCreateRequest = /*#__PURE__*/function () {
-      var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _context2.prev = 0;
-                _context2.next = 3;
-                return axios.get(url).then(function (response) {
-                  form.innerHTML = response.data.form;
-                  renderForm();
-                  (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
-                  (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
-                  (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
-                  (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                });
+  if (createButton != null) {
+    createButton.addEventListener("click", function () {
+      var url = createButton.dataset.url;
 
-              case 3:
-                _context2.next = 8;
-                break;
+      var sendCreateRequest = /*#__PURE__*/function () {
+        var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+            while (1) {
+              switch (_context2.prev = _context2.next) {
+                case 0:
+                  _context2.prev = 0;
+                  _context2.next = 3;
+                  return axios.get(url).then(function (response) {
+                    form.innerHTML = response.data.form;
+                    renderForm();
+                    (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+                    (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                    (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+                    (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+                  });
 
-              case 5:
-                _context2.prev = 5;
-                _context2.t0 = _context2["catch"](0);
-                console.error(_context2.t0);
+                case 3:
+                  _context2.next = 8;
+                  break;
 
-              case 8:
-              case "end":
-                return _context2.stop();
+                case 5:
+                  _context2.prev = 5;
+                  _context2.t0 = _context2["catch"](0);
+                  console.error(_context2.t0);
+
+                case 8:
+                case "end":
+                  return _context2.stop();
+              }
             }
-          }
-        }, _callee2, null, [[0, 5]]);
-      }));
+          }, _callee2, null, [[0, 5]]);
+        }));
 
-      return function sendCreateRequest() {
-        return _ref4.apply(this, arguments);
-      };
-    }();
+        return function sendCreateRequest() {
+          return _ref4.apply(this, arguments);
+        };
+      }();
 
-    sendCreateRequest();
-  });
-  (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUploadImage)();
+      sendCreateRequest();
+    });
+    (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUploadImage)();
+  }
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2270,90 +2278,95 @@ var renderTable = function renderTable() {
       sendEditRequest();
     });
   });
-  deleteButtons.forEach(function (deleteButton) {
-    deleteButton.addEventListener("click", function () {
-      var url = deleteButton.dataset.url;
 
-      var sendDeleteRequest = /*#__PURE__*/function () {
-        var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  _context4.prev = 0;
-                  _context4.next = 3;
-                  return axios["delete"](url).then(function (response) {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                    (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
-                    (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
-                    (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                  });
+  if (deleteButtons != null) {
+    deleteButtons.forEach(function (deleteButton) {
+      deleteButton.addEventListener("click", function () {
+        var url = deleteButton.dataset.url;
 
-                case 3:
-                  _context4.next = 7;
-                  break;
-
-                case 5:
-                  _context4.prev = 5;
-                  _context4.t0 = _context4["catch"](0);
-
-                case 7:
-                case "end":
-                  return _context4.stop();
-              }
-            }
-          }, _callee4, null, [[0, 5]]);
-        }));
-
-        return function sendDeleteRequest() {
-          return _ref6.apply(this, arguments);
-        };
-      }();
-
-      sendDeleteRequest();
-    });
-    paginationButtons.forEach(function (paginationButton) {
-      paginationButton.addEventListener("click", function () {
-        var url = paginationButton.dataset.page;
-
-        var sendPaginationRequest = /*#__PURE__*/function () {
-          var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+        var sendDeleteRequest = /*#__PURE__*/function () {
+          var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
               while (1) {
-                switch (_context5.prev = _context5.next) {
+                switch (_context4.prev = _context4.next) {
                   case 0:
-                    _context5.prev = 0;
-                    _context5.next = 3;
-                    return axios.get(url).then(function (response) {
+                    _context4.prev = 0;
+                    _context4.next = 3;
+                    return axios["delete"](url).then(function (response) {
                       table.innerHTML = response.data.table;
                       renderTable();
+                      (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+                      (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+                      (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+                      (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
                     });
 
                   case 3:
-                    _context5.next = 8;
+                    _context4.next = 7;
                     break;
 
                   case 5:
-                    _context5.prev = 5;
-                    _context5.t0 = _context5["catch"](0);
-                    console.error(_context5.t0);
+                    _context4.prev = 5;
+                    _context4.t0 = _context4["catch"](0);
 
-                  case 8:
+                  case 7:
                   case "end":
-                    return _context5.stop();
+                    return _context4.stop();
                 }
               }
-            }, _callee5, null, [[0, 5]]);
+            }, _callee4, null, [[0, 5]]);
           }));
 
-          return function sendPaginationRequest() {
-            return _ref7.apply(this, arguments);
+          return function sendDeleteRequest() {
+            return _ref6.apply(this, arguments);
           };
         }();
 
-        sendPaginationRequest();
+        sendDeleteRequest();
       });
+    });
+  }
+
+  paginationButtons.forEach(function (paginationButton) {
+    paginationButton.addEventListener("click", function () {
+      var url = paginationButton.dataset.page;
+
+      var sendPaginationRequest = /*#__PURE__*/function () {
+        var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+            while (1) {
+              switch (_context5.prev = _context5.next) {
+                case 0:
+                  _context5.prev = 0;
+                  _context5.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    renderTable();
+                  });
+
+                case 3:
+                  _context5.next = 8;
+                  break;
+
+                case 5:
+                  _context5.prev = 5;
+                  _context5.t0 = _context5["catch"](0);
+                  console.error(_context5.t0);
+
+                case 8:
+                case "end":
+                  return _context5.stop();
+              }
+            }
+          }, _callee5, null, [[0, 5]]);
+        }));
+
+        return function sendPaginationRequest() {
+          return _ref7.apply(this, arguments);
+        };
+      }();
+
+      sendPaginationRequest();
     });
   });
 };
@@ -2383,16 +2396,13 @@ var renderLocaleTabs = function renderLocaleTabs() {
       activeElements.forEach(function (activeElement) {
         if (activeElement.dataset.tab == activeTab) {
           activeElement.classList.remove("locale-tab-active");
-          console.log(activeElement.className);
         }
       });
       localeTabItem.classList.add("locale-tab-active");
-      console.log(localeTabItem.className);
       localeTabPanels.forEach(function (localeTabPanel) {
         if (localeTabPanel.dataset.tab == activeTab) {
           if (localeTabPanel.dataset.localetab == localeTabItem.dataset.localetab) {
             localeTabPanel.classList.add("locale-tab-active");
-            console.log(localeTabPanel.className);
           }
         }
       });
@@ -2400,6 +2410,80 @@ var renderLocaleTabs = function renderLocaleTabs() {
   });
 };
 renderLocaleTabs();
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/localeTags.js":
+/*!**************************************************!*\
+  !*** ./resources/js/admin/desktop/localeTags.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderLocaleTags": () => (/* binding */ renderLocaleTags)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./form */ "./resources/js/admin/desktop/form.js");
+/* harmony import */ var _messages__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./messages */ "./resources/js/admin/desktop/messages.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+var renderLocaleTags = function renderLocaleTags() {
+  var table = document.getElementById("table");
+  var importTags = document.getElementById('import-tags');
+  console.log(importTags.className);
+  importTags.addEventListener("click", function (evt) {
+    evt.preventDefault;
+    var url = importTags.dataset.url;
+
+    var sendEditRequest = /*#__PURE__*/function () {
+      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return axios.get(url).then(function (response) {
+                  table.innerHTML = response.data.table;
+                  (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                });
+
+              case 3:
+                _context.next = 8;
+                break;
+
+              case 5:
+                _context.prev = 5;
+                _context.t0 = _context["catch"](0);
+                console.error(_context.t0);
+
+              case 8:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 5]]);
+      }));
+
+      return function sendEditRequest() {
+        return _ref.apply(this, arguments);
+      };
+    }();
+
+    sendEditRequest();
+  });
+};
+renderLocaleTags();
 
 /***/ }),
 

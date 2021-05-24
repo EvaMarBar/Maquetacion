@@ -89,6 +89,12 @@ Route::group(['prefix' => 'admin'],function (){
             'show' => 'sliders_show',
         ]
     ]);
+
+    Route::get('/tags/{group}/{key}', 'App\Http\Controllers\Admin\LocaleTagController@show')->name('taqs_show');
+    Route::get('/tags', 'App\Http\Controllers\Admin\LocaleTagController@index')->name('tags');
+    Route::post('/tags', 'App\Http\Controllers\Admin\LocaleTagController@store')->name('tags_store');
+    Route::get('/tags/import', 'App\Http\Controllers\Admin\LocaleTagController@importTags')->name('tags_import');
+
     
     Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');
     Route::get('/image/temporal/{image?}', 'App\Vendor\Image\Image@showTemporal')->name('show_temporal_image_seo');
