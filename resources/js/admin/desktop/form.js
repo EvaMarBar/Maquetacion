@@ -9,6 +9,7 @@ import { renderLocaleTabs } from "./localeTabs";
 import { renderTabs } from "./tabs";
 import { renderUploadImage } from "./upload";
 import { renderLocaleTags } from "./localeTags";
+import { renderBlockParameters } from "./block";
 
 export let renderForm = () => {
 
@@ -17,68 +18,73 @@ export let renderForm = () => {
     let createButton = document.getElementById("button-create");
     let onOffSwitch = document.getElementById('switch');
 
-    sendButton.addEventListener("click", (event) => {
+    if(sendButton){
+        sendButton.addEventListener("click", (event) => {
     
-        event.preventDefault();
-        
-        forms.forEach(form => { 
-        
-            let data = new FormData(form);
-
-            if (data.get('visible') == null) {
-                data.set('visible',0);
-            }
-
-            if( ckeditors != 'null'){
-
-                Object.entries(ckeditors).forEach(([key, value]) => {
-                    data.append(key, value.getData());
-                });
-            }
-        
-            let url = form.action;
-      
+            event.preventDefault();
+            
+            forms.forEach(form => { 
+            
+                let data = new FormData(form);
     
-            let sendPostRequest = async () => {
-
-                startWait();
-    
-                try {
-                    await axios.post(url, data).then(response => {
-
-                        form.id.value = response.data.id;
-                        table.innerHTML = response.data.table;
-
-                        stopWait();
-                        showMessage('success', response.data.message);
-                        renderTable();
-                        renderLocaleTags();
-                    });
-                    
-                } catch (error) {
-    
-                    stopWait();
-
-                    if(error.response.status == '422'){
-    
-                        let errors = error.response.data.errors;      
-                        let errorMessage = '';
-    
-                        Object.keys(errors).forEach(function(key) {
-                            errorMessage += '<li>' + errors[key] + '</li>';
-                        })
-        
-                        showMessage('error', errorMessage);
-
-                    }
+                if (data.get('visible') == null) {
+                    data.set('visible',0);
                 }
-            };
     
-            sendPostRequest();
+                if( ckeditors != 'null'){
+    
+                    Object.entries(ckeditors).forEach(([key, value]) => {
+                        data.append(key, value.getData());
+                    });
+                }
+            
+                let url = form.action;
+        
+                let sendPostRequest = async () => {
+    
+                    startWait();
+        
+                    try {
+                        await axios.post(url, data).then(response => {
+    
+                            if(response.data.id){
+                                form.id.value = response.data.id;
+                            }
+                            
+                            table.innerHTML = response.data.table;
+    
+                            stopWait();
+                            showMessage('success', response.data.message);
+                            renderTable();
+                            renderLocaleTags();
+                        });
+                        
+                    } catch (error) {
+        
+                        stopWait();
+    
+                        if(error.response.status == '422'){
+        
+                            let errors = error.response.data.errors;      
+                            let errorMessage = '';
+        
+                            Object.keys(errors).forEach(function(key) {
+                                errorMessage += '<li>' + errors[key] + '</li>';
+                            })
+            
+                            showMessage('error', errorMessage);
+    
+                        }
+                    }
+                };
+        
+                sendPostRequest();
+            });
         });
-    });
-
-    if(createButton != null){
+    }
+  
+   
+    if(createButton){
 
         createButton.addEventListener("click", () =>{
             let url= createButton.dataset.url;
@@ -90,10 +96,7 @@ export let renderForm = () => {
                     await axios.get(url).then(response => {
                         form.innerHTML = response.data.form;
                         renderForm();
-                        renderCkeditor();
-                        renderFilterTable();
-                        renderLocaleTabs();
-                        renderTabs();
+                       
                     });
                     
                 } catch (error) {
@@ -105,6 +108,12 @@ export let renderForm = () => {
         });
         renderUploadImage();
     }
+
+    renderCkeditor();
+    renderFilterTable();
+    renderLocaleTabs();
+    renderTabs();
+    renderBlockParameters();
     
 }
 
@@ -155,10 +164,7 @@ export let renderTable = () => {
                         await axios.delete(url).then(response => {
                             table.innerHTML = response.data.table;
                             renderTable();
-                            renderFilterTable();
-                            renderLocaleTabs();
-                            renderTabs();
-                            renderLocaleTags();
+                            
                         });
                         
                     } catch (error) {
@@ -194,6 +200,11 @@ export let renderTable = () => {
             
         });
     });
+
+    renderFilterTable();
+    renderLocaleTabs();
+    renderTabs();
+    renderLocaleTags();
 };
 
 renderForm();

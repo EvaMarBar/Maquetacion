@@ -211,7 +211,7 @@
 
             </form>
 
-            <div class="form_submit">
+            <div class="form-submit">
                 <button id="send">@lang('admin/faqs.faq-send')</button>
             </div>
                 

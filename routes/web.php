@@ -5,6 +5,9 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\FaqCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Front\LoginController;
+use App\Vendor\Locale\LocalizationSeo;
+
+$localizationseo = new LocalizationSeo();
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,6 +28,14 @@ Route::post('/login', 'App\Http\Controllers\Front\LoginController@login')->name(
 Route::get('/', 'App\Http\Controllers\Front\HomeController@index')->name('home_front');
 
 Route::get('/faqs', 'App\Http\Controllers\Front\FaqController@index')->name('faqs_front');
+
+Route::group(['prefix' => $localizationseo->setLocale(),
+              'middleware' => [ 'localize' ]
+            ], function () use ($localizationseo) {
+
+    Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
+    Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
+});
 
 Route::group(['prefix' => 'admin'],function (){
 
@@ -90,10 +101,18 @@ Route::group(['prefix' => 'admin'],function (){
         ]
     ]);
 
+    Route::get('/seo/sitemap', 'App\Http\Controllers\Admin\LocaleSeoController@getSitemaps')->name('create_sitemap');
+    Route::get('/seo/import', 'App\Http\Controllers\Admin\LocaleSeoController@importSeo')->name('seo_import');
+    Route::get('/seo/{key}', 'App\Http\Controllers\Admin\LocaleSeoController@edit')->name('seo_edit');
+    Route::get('/seo', 'App\Http\Controllers\Admin\LocaleSeoController@index')->name('seo');
+    Route::post('/seo', 'App\Http\Controllers\Admin\LocaleSeoController@store')->name('seo_store');
+    Route::get('/ping-google', 'App\Http\Controllers\Admin\LocaleSeoController@pingGoogle')->name('ping_google');
+
     Route::get('/tags/{group}/{key}', 'App\Http\Controllers\Admin\LocaleTagController@show')->name('taqs_show');
     Route::get('/tags', 'App\Http\Controllers\Admin\LocaleTagController@index')->name('tags');
     Route::post('/tags', 'App\Http\Controllers\Admin\LocaleTagController@store')->name('tags_store');
     Route::get('/tags/import', 'App\Http\Controllers\Admin\LocaleTagController@importTags')->name('tags_import');
+    Route::get('/tags/filter/{filters?}', 'App\Http\Controllers\Admin\LocaleTagController@filter')->name('tags_filter');
 
     
     Route::get('/image/delete/{image?}', 'App\Vendor\Image\Image@destroy')->name('delete_image');

@@ -18,7 +18,8 @@ body {
   z-index: 10;
 }
 .table-filter.filter-active .table-filter-container {
-  max-height: 100vh;
+  max-height: 70vh;
+  min-height: 7.5em;
   background-color: #ec9d75;
   position: fixed;
   top: 0;
@@ -251,11 +252,11 @@ body {
   display: block;
 }
 
-.form_group {
+.form-group {
   width: 90%;
 }
 
-.form_group_column {
+.form-group-column {
   -moz-column-count: 2;
        column-count: 2;
   -moz-column-gap: 0.2em;
@@ -263,40 +264,41 @@ body {
   margin: 0.5em;
   width: 100%;
 }
-.form_group_column select {
+.form-group-column select {
   width: 90%;
 }
 
-.form_label {
-  margin-bottom: 1em;
+.form-label {
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
 }
 
-.form_label label {
+.form-label label {
   color: #191716;
   font-weight: bold;
   width: 100%;
+  margin: 1em;
 }
 
-.form_input input {
+.form-input input {
   width: 90%;
+  margin: 1em;
 }
 
-.form_input textarea {
+.form-input textarea {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
   width: 100%;
 }
 
-.form_submit {
+.form-submit {
   margin: 1em;
   width: 20%;
   z-index: 10000;
 }
-.form_submit button:hover {
+.form-submit button:hover {
   background-color: #f1834b;
   border: 0.1em solid #191716;
   border-radius: 0.2em;
@@ -381,6 +383,24 @@ body {
 }
 .form-row-panel .form-group .form-label {
   margin: 0.5em 0;
+}
+
+.import {
+  border: solid 0.1em black;
+  border-radius: 0.2em;
+  padding: 0.2em;
+  position: absolute;
+  left: 40em;
+  top: 6.5em;
+  font-weight: bold;
+  background-color: whitesmoke;
+  box-shadow: 1px 7px 14px -5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+}
+.import svg {
+  padding: 0;
+  transform: scale(0.9);
 }
 
 .menu {
@@ -854,8 +874,6 @@ input:checked + .slider:before {
   display: flex;
   margin: 0;
   padding: 0;
-  position: relative;
-  top: -2.5em;
   z-index: 0;
 }
 .tabs-container-menu li {
@@ -1364,4 +1382,41 @@ th {
 ==============================================================================*/
 ol, ul {
   list-style: none;
+}
+
+/*Contents*/
+img {
+  max-width: 100%;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.one-column .form-group {
+  width: 100%;
+}
+
+.two-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.two-columns .form-group {
+  width: 47%;
+}
+
+.three-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.three-columns .form-group {
+  width: 32%;
+}
+
+.four-columns {
+  display: flex;
+  justify-content: space-between;
+}
+.four-columns .form-group {
+  width: 23%;
 }

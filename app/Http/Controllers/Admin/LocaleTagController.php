@@ -41,12 +41,18 @@ class LocaleTagController extends Controller
     public function index()
     {
 
-        $group = LocaleTag::select('group', 'key')->groupBy('group', 'key')->where('group', 'not like', 'admin/%')->where('group', 'not like', 'front/seo')->where('active', 1)->paginate($this->paginate);
+        $tags = $this->tag
+        ->select('group', 'key')
+        ->groupBy('group', 'key')
+        ->where('group', 'not like', 'admin/%')
+        ->where('group', 'not like', 'front/seo')
+        ->paginate($this->paginate);         
 
-        
+
+  
         $view = View::make('admin.tags.index')
                 ->with('tag', $this->tag)
-                ->with('tags',$group);
+                ->with('tags', $tags);
 
         if(request()->ajax()) {
             
@@ -93,7 +99,7 @@ class LocaleTagController extends Controller
         ->where('group', 'not like', 'front/seo')
         ->paginate($this->paginate);  
 
-        // $message = \Lang::get('admin/tags.tag-update');
+        $message = \Lang::get('admin/tags.tag-update');
 
         $view = View::make('admin.tags.index')
         ->with('tags', $tags)
@@ -103,7 +109,7 @@ class LocaleTagController extends Controller
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
-            // 'message' => $message,
+            'message' => $message,
         ]);
     }
 
@@ -147,7 +153,7 @@ class LocaleTagController extends Controller
     public function importTags()
     {
         $this->manager->importTranslations();  
-        // $message =  \Lang::get('admin/tags.tag-import');
+        $message =  \Lang::get('admin/tags.tag-import');
 
         $tags = $this->tag
         ->select('group', 'key')
@@ -166,9 +172,48 @@ class LocaleTagController extends Controller
     
             return response()->json([
                 'table' => $sections['table'],
-                // 'message' => $message,
+                'message' => $message,
             ]); 
         }
+    }
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters'));
+        
+        $query = $this->tag->query();
+
+        if($filters != null){
+
+            $query->when($filters->parent, function ($q, $parent) {
+
+                if($parent == 'all'){
+                    return $q;
+                }
+                else{
+                    return $q->where('group', $parent);
+                }
+            });
+    
+            $query->when($filters->order, function ($q, $order) use ($filters) {
+    
+                $q->orderBy($order, $filters->direction);
+            });
+        }
+    
+        $tags = $query->select('group', 'key')
+                ->groupBy('group', 'key')
+                ->where('group', 'not like', 'admin/%')
+                ->where('group', 'not like', 'front/seo')
+                ->paginate($this->paginate)
+                ->appends(['filters' => json_encode($filters)]);  
+
+        $view = View::make('admin.tags.index')
+            ->with('tags', $tags)
+            ->renderSections();
+
+        return response()->json([
+            'table' => $view['table'],
+        ]);
     }
 
 

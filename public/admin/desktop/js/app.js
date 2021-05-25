@@ -1896,7 +1896,47 @@ __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 
 __webpack_require__(/*! ./spinner */ "./resources/js/admin/desktop/spinner.js");
 
-__webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js"); //require('./multipleUpload');
+__webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js");
+
+__webpack_require__(/*! ./block */ "./resources/js/admin/desktop/block.js"); //require('./multipleUpload');
+
+/***/ }),
+
+/***/ "./resources/js/admin/desktop/block.js":
+/*!*********************************************!*\
+  !*** ./resources/js/admin/desktop/block.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderBlockParameters": () => (/* binding */ renderBlockParameters)
+/* harmony export */ });
+var renderBlockParameters = function renderBlockParameters() {
+  var blockParameters = document.querySelectorAll('.block-parameters');
+
+  if (blockParameters) {
+    var firstSlug = '';
+    var value = '';
+    blockParameters.forEach(function (blockParameter) {
+      blockParameter.addEventListener('keydown', function () {
+        firstSlug = blockParameter.value.match(/\{.*?\}/g);
+        value = blockParameter.value;
+      });
+      blockParameter.addEventListener('keyup', function () {
+        var slug = blockParameter.value.match(/\{.*?\}/g);
+        console.log(value);
+
+        if (slug === firstSlug) {
+          console.log('ok');
+        } else {
+          blockParameter.value = value;
+        }
+      });
+    });
+  }
+};
 
 /***/ }),
 
@@ -2071,6 +2111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./tabs */ "./resources/js/admin/desktop/tabs.js");
 /* harmony import */ var _upload__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./upload */ "./resources/js/admin/desktop/upload.js");
 /* harmony import */ var _localeTags__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./localeTags */ "./resources/js/admin/desktop/localeTags.js");
+/* harmony import */ var _block__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./block */ "./resources/js/admin/desktop/block.js");
 
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2100,87 +2141,94 @@ var form = document.getElementById("form");
 
 
 
+
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
   var sendButton = document.getElementById("send");
   var createButton = document.getElementById("button-create");
   var onOffSwitch = document.getElementById('switch');
-  sendButton.addEventListener("click", function (event) {
-    event.preventDefault();
-    forms.forEach(function (form) {
-      var data = new FormData(form);
 
-      if (data.get('visible') == null) {
-        data.set('visible', 0);
-      }
+  if (sendButton) {
+    sendButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      forms.forEach(function (form) {
+        var data = new FormData(form);
 
-      if (ckeditors != 'null') {
-        Object.entries(ckeditors).forEach(function (_ref) {
-          var _ref2 = _slicedToArray(_ref, 2),
-              key = _ref2[0],
-              value = _ref2[1];
+        if (data.get('visible') == null) {
+          data.set('visible', 0);
+        }
 
-          data.append(key, value.getData());
-        });
-      }
+        if (ckeditors != 'null') {
+          Object.entries(ckeditors).forEach(function (_ref) {
+            var _ref2 = _slicedToArray(_ref, 2),
+                key = _ref2[0],
+                value = _ref2[1];
 
-      var url = form.action;
+            data.append(key, value.getData());
+          });
+        }
 
-      var sendPostRequest = /*#__PURE__*/function () {
-        var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-          var errors, errorMessage;
-          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.startWait)();
-                  _context.prev = 1;
-                  _context.next = 4;
-                  return axios.post(url, data).then(function (response) {
-                    form.id.value = response.data.id;
-                    table.innerHTML = response.data.table;
-                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
-                    renderTable();
-                    (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
-                  });
+        var url = form.action;
 
-                case 4:
-                  _context.next = 10;
-                  break;
+        var sendPostRequest = /*#__PURE__*/function () {
+          var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            var errors, errorMessage;
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.startWait)();
+                    _context.prev = 1;
+                    _context.next = 4;
+                    return axios.post(url, data).then(function (response) {
+                      if (response.data.id) {
+                        form.id.value = response.data.id;
+                      }
 
-                case 6:
-                  _context.prev = 6;
-                  _context.t0 = _context["catch"](1);
-                  (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
-
-                  if (_context.t0.response.status == '422') {
-                    errors = _context.t0.response.data.errors;
-                    errorMessage = '';
-                    Object.keys(errors).forEach(function (key) {
-                      errorMessage += '<li>' + errors[key] + '</li>';
+                      table.innerHTML = response.data.table;
+                      (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
+                      renderTable();
+                      (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
                     });
-                    (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage);
-                  }
 
-                case 10:
-                case "end":
-                  return _context.stop();
+                  case 4:
+                    _context.next = 10;
+                    break;
+
+                  case 6:
+                    _context.prev = 6;
+                    _context.t0 = _context["catch"](1);
+                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+
+                    if (_context.t0.response.status == '422') {
+                      errors = _context.t0.response.data.errors;
+                      errorMessage = '';
+                      Object.keys(errors).forEach(function (key) {
+                        errorMessage += '<li>' + errors[key] + '</li>';
+                      });
+                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage);
+                    }
+
+                  case 10:
+                  case "end":
+                    return _context.stop();
+                }
               }
-            }
-          }, _callee, null, [[1, 6]]);
-        }));
+            }, _callee, null, [[1, 6]]);
+          }));
 
-        return function sendPostRequest() {
-          return _ref3.apply(this, arguments);
-        };
-      }();
+          return function sendPostRequest() {
+            return _ref3.apply(this, arguments);
+          };
+        }();
 
-      sendPostRequest();
+        sendPostRequest();
+      });
     });
-  });
+  }
 
-  if (createButton != null) {
+  if (createButton) {
     createButton.addEventListener("click", function () {
       var url = createButton.dataset.url;
 
@@ -2195,10 +2243,6 @@ var renderForm = function renderForm() {
                   return axios.get(url).then(function (response) {
                     form.innerHTML = response.data.form;
                     renderForm();
-                    (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
-                    (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
-                    (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
-                    (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
                   });
 
                 case 3:
@@ -2227,6 +2271,12 @@ var renderForm = function renderForm() {
     });
     (0,_upload__WEBPACK_IMPORTED_MODULE_7__.renderUploadImage)();
   }
+
+  (0,_ckeditor__WEBPACK_IMPORTED_MODULE_1__.renderCkeditor)();
+  (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+  (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+  (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+  (0,_block__WEBPACK_IMPORTED_MODULE_9__.renderBlockParameters)();
 };
 var renderTable = function renderTable() {
   var editButtons = document.querySelectorAll(".edit-button");
@@ -2295,10 +2345,6 @@ var renderTable = function renderTable() {
                     return axios["delete"](url).then(function (response) {
                       table.innerHTML = response.data.table;
                       renderTable();
-                      (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
-                      (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
-                      (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
-                      (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
                     });
 
                   case 3:
@@ -2369,6 +2415,10 @@ var renderTable = function renderTable() {
       sendPaginationRequest();
     });
   });
+  (0,_filterTable__WEBPACK_IMPORTED_MODULE_2__.renderFilterTable)();
+  (0,_localeTabs__WEBPACK_IMPORTED_MODULE_5__.renderLocaleTabs)();
+  (0,_tabs__WEBPACK_IMPORTED_MODULE_6__.renderTabs)();
+  (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
 };
 renderForm();
 renderTable();
@@ -2439,49 +2489,51 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var renderLocaleTags = function renderLocaleTags() {
   var table = document.getElementById("table");
   var importTags = document.getElementById('import-tags');
-  console.log(importTags.className);
-  importTags.addEventListener("click", function (evt) {
-    evt.preventDefault;
-    var url = importTags.dataset.url;
 
-    var sendEditRequest = /*#__PURE__*/function () {
-      var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                _context.prev = 0;
-                _context.next = 3;
-                return axios.get(url).then(function (response) {
-                  table.innerHTML = response.data.table;
-                  (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
-                  (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                });
+  if (importTags) {
+    importTags.addEventListener("click", function (evt) {
+      evt.preventDefault;
+      var url = importTags.dataset.url;
 
-              case 3:
-                _context.next = 8;
-                break;
+      var sendEditRequest = /*#__PURE__*/function () {
+        var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+          return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.prev = 0;
+                  _context.next = 3;
+                  return axios.get(url).then(function (response) {
+                    table.innerHTML = response.data.table;
+                    (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
+                    (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
+                  });
 
-              case 5:
-                _context.prev = 5;
-                _context.t0 = _context["catch"](0);
-                console.error(_context.t0);
+                case 3:
+                  _context.next = 8;
+                  break;
 
-              case 8:
-              case "end":
-                return _context.stop();
+                case 5:
+                  _context.prev = 5;
+                  _context.t0 = _context["catch"](0);
+                  console.error(_context.t0);
+
+                case 8:
+                case "end":
+                  return _context.stop();
+              }
             }
-          }
-        }, _callee, null, [[0, 5]]);
-      }));
+          }, _callee, null, [[0, 5]]);
+        }));
 
-      return function sendEditRequest() {
-        return _ref.apply(this, arguments);
-      };
-    }();
+        return function sendEditRequest() {
+          return _ref.apply(this, arguments);
+        };
+      }();
 
-    sendEditRequest();
-  });
+      sendEditRequest();
+    });
+  }
 };
 renderLocaleTags();
 

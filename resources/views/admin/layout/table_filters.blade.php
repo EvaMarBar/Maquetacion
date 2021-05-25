@@ -13,10 +13,10 @@
                                 <label for="category_id" class="label-highlight">Filtrar por</label>
                             </div>
                             <div class="form-input">
-                                <select name="category_id" data-placeholder="Seleccione una categoría" class="input-highlight">
+                                <select name="parent" data-placeholder="Seleccione una categoría" class="input-highlight">
                                     <option value="all">Todas</option>
                                     @foreach($items as $item)
-                                        <option value="{{$item->id}}">{{ $item->name }}</option>
+                                        <option value="{{$item}}">{{ $item }}</option>
                                     @endforeach
                                 </select>    
                             </div>

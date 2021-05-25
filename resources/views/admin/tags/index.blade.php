@@ -1,8 +1,8 @@
-{{-- @php
-    $route = 'faqs';
-    $filters = ['category' => $faqs_categories, 'search' => true, 'initial_date' =>true, 'final_date'=>true]; 
-    $order = ['fecha de creación' => 't_faqs.created_at', 'nombre' => 't_faqs.title', 'categoría' => 't_faqs_categories.name'];
-@endphp --}}
+@php
+    $route = 'tags';
+    $filters = ['parent' => $groups]; 
+    $order = ['grupo' => 'group' , 'clave' => 'key', 'fecha de creación' => 'created_at'];
+@endphp
 
 @extends('admin.layout.table_form')
 
@@ -17,7 +17,6 @@
             <div class="row-header">
                 <div class="column">Grupo</div>
                 <div class="column">Clave</div>
-                <div class="column">Valor</div>
                 <div class="column"></div>
             </div> 
                 @foreach($tags as $tag)
@@ -25,7 +24,6 @@
                         <div class="table-field-container swipe-front">
                             <div class="table-field column">{{$tag->group}}</div>
                             <div class="table-field column">{{$tag->key}}</div>
-                            <div class="table-field column">{{$tag->value}}</div>
                         </div>
                         <div class="table-icons-container swipe-back column">
                             <div class="table-icons edit-button right-swipe" data-url="{{route('taqs_show', ['group' => str_replace('/', '-' , $tag->group), 'key' => $tag->key])}}">
@@ -72,21 +70,21 @@
                 <div class="one-column">
                     <div class="form-group">
                         <div class="form-label">
-                            <div id="import-tags" data-url="{{route('tags_import')}}">
-                               Importar
+                            <div class="import" id="import-tags" data-url="{{route('tags_import')}}">
+                                <span>Importar</span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                                </svg>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="one-column">
+                <div class="two-columns">
                     <div class="form-group">
                         <div class="form-label">
                             <label for="group" class="label-highlight">Grupo: {{$tag->group}}</label>
                         </div>
                     </div>
-                </div>
-
-                <div class="one-column">
                     <div class="form-group">
                         <div class="form-label">
                             <label for="key" class="label-highlight">Clave: {{$tag->key}}</label>
@@ -121,7 +119,7 @@
                 
             </form>
 
-            <div class="form_submit">
+            <div class="form-submit">
                 <button id="send">@lang('admin/faqs.faq-send')</button>
             </div>
                 

@@ -14,10 +14,11 @@
     display: block;
 
 }
-.form_group{
+.form-group{
     width:90%;
+    
 }
-.form_group_column {
+.form-group-column {
     column-count: 2;
     column-gap: 0.2em;
     margin: 0.5em;
@@ -27,28 +28,29 @@
     }
     }
 
-.form_label {
-    margin-bottom: 1em;
+.form-label {
     width: max-content;
     }
 
-.form_label label {
+.form-label label {
     color: rgb(25, 23, 22);
     font-weight: bold;
     width:100%; 
+    margin:1em;
     }
 
 
-.form_input input {
+.form-input input {
     width:90%;
+    margin:1em;
     }
 
-.form_input textarea {
+.form-input textarea {
     height: max-content;
     width:100%;
     }
 
-.form_submit {
+.form-submit {
     margin: 1em;
     width: 20%;
     z-index: 10000;
@@ -116,7 +118,8 @@
     flex-direction: row;
     width: max-content;
     position: relative;
-    left: 23em; top:1em;
+    left: 23em; 
+    top:1em;
     z-index: 2;   
 }
 .form-row-panel{
@@ -131,6 +134,23 @@
         .form-label{
             margin:0.5em 0;
         }
+    }
+}
+
+.import{
+    border: solid 0.1em black;
+    border-radius: 0.2em;
+    padding: 0.2em;
+    position: absolute;
+    left: 40em; top:6.5em;
+    font-weight: bold;
+    background-color: whitesmoke;
+    box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    svg{
+        padding: 0;
+        transform: scale(0.90);
     }
 }
 

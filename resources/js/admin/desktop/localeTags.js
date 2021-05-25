@@ -5,28 +5,31 @@ export let renderLocaleTags = () => {
 
     let table = document.getElementById("table");
     let importTags = document.getElementById('import-tags');
-    console.log(importTags.className)
 
-    importTags.addEventListener("click", (evt) => {
-        evt.preventDefault
-
-        let url = importTags.dataset.url;
+    if(importTags){
+        
+        importTags.addEventListener("click", (evt) => {
+            evt.preventDefault
     
-        let sendEditRequest = async () => {
+            let url = importTags.dataset.url;
+        
+            let sendEditRequest = async () => {
+    
+                try {
+                    await axios.get(url).then(response => {
+                        table.innerHTML = response.data.table;
+                        renderTable();
+                        showMessage('success', response.data.message);
+                    });
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+    
+            sendEditRequest();
+        });
+    }
 
-            try {
-                await axios.get(url).then(response => {
-                    table.innerHTML = response.data.table;
-                    renderTable();
-                    showMessage('success', response.data.message);
-                });
-                
-            } catch (error) {
-                console.error(error);
-            }
-        };
-
-        sendEditRequest();
-    });
 }
 renderLocaleTags();

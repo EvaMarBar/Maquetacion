@@ -9,4 +9,5 @@ require('./upload');
 require('./tabs');
 require('./spinner');
 require('./localeTags');
+require('./block');
 //require('./multipleUpload');

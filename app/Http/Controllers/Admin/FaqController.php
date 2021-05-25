@@ -95,11 +95,11 @@ class FaqController extends Controller
             $images = $this->image->store(request('images'), $faq->id);
         }
 
-        /*if (request('id')){
+        if (request('id')){
             $message = \Lang::get('admin/faqs.faq-update');
         }else{
             $message = \Lang::get('admin/faqs.faq-create');
-        }*/
+        }
 
         $view = View::make('admin.faqs.index')
         ->with('locale', $locale)
@@ -110,7 +110,7 @@ class FaqController extends Controller
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
-            //'message' => $message,
+            'message' => $message,
             'id' => $faq->id,
         ]);
     }
@@ -162,7 +162,7 @@ class FaqController extends Controller
         $faq->active = 0;
         $faq->save();
 
-        //$message = Lang::get('admin/faqs.faq-delete');
+        $message = Lang::get('admin/faqs.faq-delete');
 
         $view = View::make('admin.faqs.index')
             ->with('faq', $this->faq)
