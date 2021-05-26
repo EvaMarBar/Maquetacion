@@ -140,7 +140,59 @@
             </div>
 
         </div>
+        @else
 
-    @endif
+        <div class="form-container">
+            <div class="tabs-container">
+                <div class="tabs-container-menu">
+                    <ul>
+                        <li class="tab-item tab-active" data-tab="content">
+                            Contenido
+                        </li>      
+                    </ul>
+                </div>
+            </div>
+
+            <div class="tab-panel tab-active" data-tab="content">
+                <div class="three-columns">
+                    <div class="form-group">
+                        <div class="form-label">
+                            <div class="button-seo" id="import-seo" data-url="{{route('seo_import')}}">
+                                <span>Importar</span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label">
+                            <div class="button-seo" id="ping-google" data-url="{{route('ping_google')}}">
+                                <span>GoogleBot</span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M4,3A1,1 0 0,0 3,4A17,17 0 0,0 20,21A1,1 0 0,0 21,20V16.5A1,1 0 0,0 20,15.5C18.76,15.5 17.55,15.3 16.43,14.93C16.08,14.82 15.69,14.9 15.41,15.18L13.21,17.38C10.38,15.94 8.07,13.62 6.62,10.79L8.82,8.58C9.1,8.31 9.18,7.92 9.07,7.57C8.7,6.45 8.5,5.24 8.5,4A1,1 0 0,0 7.5,3M16,3V6H13V8H16V11H18V8H21V6H18V3" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-label">
+                            <div class="button-seo" id="create-sitemap" data-url="{{route('create_sitemap')}}">
+                                <span>Sitemap</span>
+                                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M5,20H19V18H5M19,9H15V3H9V9H5L12,16L19,9Z" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="one-column">
+                            <div class="form-input seo-imput">
+                                <textarea id="sitemap" class="simple"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endisset
 
 @endsection

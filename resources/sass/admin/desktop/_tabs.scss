@@ -38,5 +38,8 @@
 
 .tab-panel.tab-active{
     display: block;
-    padding: 2em 2.5em;
+    // padding: 2em 2.5em;
+    margin-top: 5em;
+    position: relative;
+    height: max-content;
 }

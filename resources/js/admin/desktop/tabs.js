@@ -7,7 +7,6 @@ export let renderTabs = () => {
 
         tabItem.addEventListener("click", () => {
           
-    
             let activeElements = document.querySelectorAll(".tab-active");
     
             activeElements.forEach(activeElement => {
@@ -25,4 +24,3 @@ export let renderTabs = () => {
         });
     });
 }
-renderTabs();

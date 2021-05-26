@@ -1,26 +1,23 @@
 import {renderTable} from './form';
 import {showMessage} from './messages';
+import {startWait, stopWait} from './spinner';
 
-export let renderLocaleTags = () => {
+export let renderGoogleBot = () => {
 
     let table = document.getElementById("table");
-    let importTags = document.getElementById('import-tags');
+    let pingGoogle = document.getElementById('ping-google');
 
-    if(importTags){
-        
-        importTags.addEventListener("click", (evt) => {
-            evt.preventDefault
-    
-            let url = importTags.dataset.url;
+    if(pingGoogle){
+
+        pingGoogle.addEventListener("click", () => {
+
+            let url = pingGoogle.dataset.url;
         
             let sendEditRequest = async () => {
     
                 try {
                     await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
                         showMessage('success', response.data.message);
-                        console.log('click')
                     });
                     
                 } catch (error) {
@@ -31,6 +28,4 @@ export let renderLocaleTags = () => {
             sendEditRequest();
         });
     }
-
 }
-renderLocaleTags();

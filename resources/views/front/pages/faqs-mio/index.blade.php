@@ -26,7 +26,7 @@
             @isset($faq_element->image_grid_desktop)
                     <div class="description-image-collection">
                         @foreach ($faq_element->image_grid_desktop as $image)
-                            <img src="{{Storage::url($image->path)}}"/> 
+                            <img src="{{Storage::url($image->path alt="{{$image->alt}}" title="{{$image->title}}")}}"/> 
                         @endforeach
                     </div>
             @endif

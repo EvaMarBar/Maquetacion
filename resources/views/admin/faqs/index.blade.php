@@ -81,6 +81,9 @@
                             <li class="tab-item" data-tab="images">
                                 Imágenes
                             </li>
+                            <li class="tab-item" data-tab="seo">
+                                Seo
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -126,7 +129,7 @@
                                             <label for="name" class="label-highlight">Título</label>
                                         </div>
                                         <div class="form-input">
-                                            <input type="text" name="locale[title.{{$localization->alias}}]" value="{{isset($locale["title.$localization->alias"]) ? $locale["title.$localization->alias"] : ''}}" class="input-highlight">
+                                            <input type="text" name="seo[title.{{$localization->alias}}]" value="{{isset($seo["title.$localization->alias"]) ? $seo["title.$localization->alias"] : ''}}" class="input-highlight">
                                         </div>
                                     </div>
                                 </div>
@@ -148,6 +151,7 @@
                 
                     @endcomponent
                 </div>
+                
                 <div class="tab-panel" data-tab="images">
 
                     @component('admin.layout.locale', ['tab' => 'images'])
@@ -202,9 +206,52 @@
 
                         @endforeach
                 
+                    @endcomponent
+                </div>
+
+                <div class="tab-panel" data-tab="seo">
+
+                    @component('admin.layout.locale', ['tab' => 'seo'])
+
+                        @foreach ($localizations as $localization)
+
+                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="seo" data-localetab="{{$localization->alias}}">
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="keywords" class="label-highlight">
+                                                Keywords 
+                                            </label>
+                                        </div>
+                                        <div class="form-input">
+                                            <input type="text" name="seo[keywords.{{$localization->alias}}]" value='{{isset($seo["keywords.$localization->alias"]) ? $seo["keywords.$localization->alias"] : ''}}' class="input-highlight">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="one-column">
+                                    <div class="form-group">
+                                        <div class="form-label">
+                                            <label for="description" class="label-highlight">
+                                                Descripción. 
+                                            </label>
+                                        </div>
+
+                                        <div class="form-input">
+                                            <textarea maxlength='160' class="input-highlight input-counter" name="seo[description.{{$localization->alias}}]">{{isset($seo["description.$localization->alias"]) ? $seo["description.$localization->alias"] : '' }}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                                                
+                            </div>
+
+                        @endforeach
                 
                     @endcomponent
-                    
+
+                </div>
+                
 
                 </div>
 

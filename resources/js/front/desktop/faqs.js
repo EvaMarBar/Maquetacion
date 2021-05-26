@@ -1,22 +1,37 @@
-const moreButtons = document.querySelectorAll(".button");
+const plusButtons = document.querySelectorAll('.faq-plus-button');
+const faqElements = document.querySelectorAll(".faq");
 
-moreButtons.forEach(moreButton =>{
+plusButtons.forEach(plusButton => { 
 
-    moreButton.addEventListener("click", () => {
-        
-        if (moreButton.classList.contains("active")){
-            moreButton.classList.remove("active");
-            moreButton.parentElement.nextElementSibling.classList.remove("active");
+    plusButton.addEventListener("click", () => {
 
-        } else {
-            let activeElements = document.querySelectorAll('.active');
+        let activeElements = document.querySelectorAll(".active");
+
+        if(plusButton.classList.contains("active")){
+
+            plusButton.classList.remove("active");
+
+            activeElements.forEach(activeElement => {
+                activeElement.classList.remove("active");
+            });
+
+        }else{
+
+            activeElements.forEach(activeElement => {
+                activeElement.classList.remove("active");
+            });
             
-            activeElements.forEach(activeElement =>{
-                activeElement.classList.remove("active");  
-            })
-            
-            moreButton.classList.add("active");
-            moreButton.parentElement.nextElementSibling.classList.add("active");
-        }      
-    })
-})
+            plusButton.classList.add("active");
+
+            faqElements.forEach(faqElement => {
+
+                if(faqElement.dataset.content == plusButton.dataset.button){
+                    faqElement.classList.add("active"); 
+                }else{
+                }
+            });
+        }
+    });
+    
+});
+

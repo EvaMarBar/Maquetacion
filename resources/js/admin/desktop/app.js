@@ -10,4 +10,7 @@ require('./tabs');
 require('./spinner');
 require('./localeTags');
 require('./block');
+require('./sitemap');
+require('./localeSeo');
+require('./googleBot');
 //require('./multipleUpload');

@@ -37,4 +37,3 @@ document.querySelectorAll('.ckeditor').forEach(ckeditor => {
     } );
 });
 }
-renderCkeditor();

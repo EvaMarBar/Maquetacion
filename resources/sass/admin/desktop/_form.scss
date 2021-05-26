@@ -154,3 +154,25 @@
     }
 }
 
+.button-seo{
+    border: solid 0.1em black;
+    border-radius: 0.2em;
+    padding: 0.2em;
+    font-weight: bold;
+    margin-top: 1em;
+    background-color: whitesmoke;
+    box-shadow: 1px 7px 14px -5px rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: center;
+    svg{
+        padding: 0;
+        transform: scale(0.90);
+    }
+}
+
+.seo-imput{
+    width: 100%;
+    padding: 0.2em;
+
+}
+

@@ -1909,19 +1909,27 @@ window.requestAnimFrame = function () {
   \********************************************/
 /***/ (() => {
 
-var moreButtons = document.querySelectorAll(".button");
-moreButtons.forEach(function (moreButton) {
-  moreButton.addEventListener("click", function () {
-    if (moreButton.classList.contains("active")) {
-      moreButton.classList.remove("active");
-      moreButton.parentElement.nextElementSibling.classList.remove("active");
-    } else {
-      var activeElements = document.querySelectorAll('.active');
+var plusButtons = document.querySelectorAll('.faq-plus-button');
+var faqElements = document.querySelectorAll(".faq");
+plusButtons.forEach(function (plusButton) {
+  plusButton.addEventListener("click", function () {
+    var activeElements = document.querySelectorAll(".active");
+
+    if (plusButton.classList.contains("active")) {
+      plusButton.classList.remove("active");
       activeElements.forEach(function (activeElement) {
         activeElement.classList.remove("active");
       });
-      moreButton.classList.add("active");
-      moreButton.parentElement.nextElementSibling.classList.add("active");
+    } else {
+      activeElements.forEach(function (activeElement) {
+        activeElement.classList.remove("active");
+      });
+      plusButton.classList.add("active");
+      faqElements.forEach(function (faqElement) {
+        if (faqElement.dataset.content == plusButton.dataset.button) {
+          faqElement.classList.add("active");
+        } else {}
+      });
     }
   });
 });

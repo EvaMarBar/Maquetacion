@@ -10,6 +10,9 @@ import { renderTabs } from "./tabs";
 import { renderUploadImage } from "./upload";
 import { renderLocaleTags } from "./localeTags";
 import { renderBlockParameters } from "./block";
+import {renderLocaleSeo} from './localeSeo';
+import {renderGoogleBot} from './googleBot';
+import {renderSitemap} from './sitemap';
 
 export let renderForm = () => {
 
@@ -114,6 +117,9 @@ export let renderForm = () => {
     renderLocaleTabs();
     renderTabs();
     renderBlockParameters();
+    renderLocaleSeo();
+    renderGoogleBot();
+    renderSitemap();
     
 }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Locale;
 use App\Vendor\Image\Image;
 use App\Http\Requests\Admin\FaqRequest;
+use App\Vendor\Locale\LocaleSlugSeo;
 use App\Models\DB\Faq;
 use \Debugbar;
 
@@ -20,16 +21,19 @@ class FaqController extends Controller
     protected $paginate;
     protected $locale;
     protected $images;
+    protected $locale_slug_seo;
 
-    function __construct(Faq $faq, Locale $locale, Image $images )
+    function __construct(Faq $faq, Locale $locale, Image $images, LocaleSlugSeo $locale_slug_seo)
     {
         $this->middleware('auth');
         $this->faq = $faq;
         // $this->agent = $agent;
         $this->locale = $locale;
         $this->image = $images;
+        $this->locale_slug_seo = $locale_slug_seo;
 
         $this->locale->setParent('faqs');
+        $this->locale_slug_seo->setParent('faqs');
         $this->image->setEntity('faqs');
 
         // if ($this->agent->isMobile()) {
@@ -77,6 +81,7 @@ class FaqController extends Controller
     public function store(FaqRequest $request)
     {            
     
+        Debugbar::info(request('seo'));
         $faq = $this->faq->updateOrCreate([
             'id' => request('id')],[
             // 'title' => request('title'),
@@ -93,6 +98,10 @@ class FaqController extends Controller
         if(request('images')){
             
             $images = $this->image->store(request('images'), $faq->id);
+        }
+
+        if(request('seo')){
+            $seo = $this->locale_slug_seo->store(request('seo'), $faq->id, 'front_faq');
         }
 
         if (request('id')){
@@ -118,9 +127,12 @@ class FaqController extends Controller
     public function edit(Faq $faq)
     {
         $locale = $this->locale->show($faq->id);
+        $seo = $this->locale_slug_seo->show($faq->id);
+
 
         $view = View::make('admin.faqs.index')
         ->with('locale', $locale)
+        ->with('seo', $seo)
         ->with('faq', $faq)
         ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate));   
         
@@ -139,9 +151,11 @@ class FaqController extends Controller
     public function show(Faq $faq){
         
         $locale = $this->locale->show($faq->id);
+        $seo = $this->locale_slug_seo->show($faq->id);
 
         $view = View::make('admin.faqs.index')
         ->with('locale', $locale)
+        ->with('seo', $seo)
         ->with('faq', $faq)
         ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate));   
         

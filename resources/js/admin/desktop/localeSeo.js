@@ -1,17 +1,16 @@
 import {renderTable} from './form';
 import {showMessage} from './messages';
 
-export let renderLocaleTags = () => {
+export let renderLocaleSeo = () => {
 
     let table = document.getElementById("table");
-    let importTags = document.getElementById('import-tags');
+    let importSeo = document.getElementById('import-seo');
 
-    if(importTags){
-        
-        importTags.addEventListener("click", (evt) => {
-            evt.preventDefault
-    
-            let url = importTags.dataset.url;
+    if(importSeo){
+
+        importSeo.addEventListener("click", () => {
+
+            let url = importSeo.dataset.url;
         
             let sendEditRequest = async () => {
     
@@ -20,7 +19,7 @@ export let renderLocaleTags = () => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         showMessage('success', response.data.message);
-                        console.log('click')
+                        stopWait();
                     });
                     
                 } catch (error) {
@@ -31,6 +30,4 @@ export let renderLocaleTags = () => {
             sendEditRequest();
         });
     }
-
 }
-renderLocaleTags();
