@@ -255,10 +255,6 @@ body {
   margin: 0.2em;
 }
 
-.input-highlight {
-  width: 100%;
-}
-
 .form_input textarea {
   height: -webkit-max-content;
   height: -moz-max-content;

@@ -16,44 +16,44 @@
 }
 .form-group{
     width:90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     
 }
-.form-group-column {
-    column-count: 2;
-    column-gap: 0.2em;
-    margin: 0.5em;
-    width:100%;
-    select{
-        width: 90%;
-    }
-    }
 
 .form-label {
     width: max-content;
+  
     }
+
+.form-input{
+    margin: 1em;
+}
 
 .form-label label {
     color: rgb(25, 23, 22);
     font-weight: bold;
-    width:100%; 
+    width:90%; 
     margin:1em;
+
     }
 
 
 .form-input input {
     width:90%;
-    margin:1em;
+    justify-self: right;
     }
 
 .form-input textarea {
     height: max-content;
-    width:100%;
+    width:90%;
     }
 
 .form-submit {
     margin: 1em;
     width: 20%;
-    z-index: 10000;
+    z-index: 10;
 
     button:hover{ 
         background-color:rgb(241, 131, 75) ;
@@ -113,27 +113,22 @@
 .icon:hover{background-color: rgb(130, 138, 149);}
 .icon.active:hover{background-color: rgb(130, 138, 149);}
 
-.form-row{
+.form-buttons{
     display: flex;
     flex-direction: row;
     width: max-content;
-    position: relative;
-    left: 23em; 
-    top:1em;
+    position: absolute;
+    right: 2em; 
+    top:10em;
     z-index: 2;   
 }
 .form-row-panel{
     display: flex;
     flex-direction: row;
-    width: max-content;
-    padding: 1em 0.5em;
-    
+    justify-content: right;
+    align-items: flex-start;
     .form-group{
-        margin-right: 2em;
-        
-        .form-label{
-            margin:0.5em 0;
-        }
+        width: 47%;
     }
 }
 

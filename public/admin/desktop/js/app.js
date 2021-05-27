@@ -3482,7 +3482,6 @@ var renderCkeditor = function renderCkeditor() {
     });
   });
 };
-renderCkeditor();
 
 /***/ }),
 

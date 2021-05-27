@@ -254,18 +254,9 @@ body {
 
 .form-group {
   width: 90%;
-}
-
-.form-group-column {
-  -moz-column-count: 2;
-       column-count: 2;
-  -moz-column-gap: 0.2em;
-       column-gap: 0.2em;
-  margin: 0.5em;
-  width: 100%;
-}
-.form-group-column select {
-  width: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .form-label {
@@ -274,29 +265,33 @@ body {
   width: max-content;
 }
 
+.form-input {
+  margin: 1em;
+}
+
 .form-label label {
   color: #191716;
   font-weight: bold;
-  width: 100%;
+  width: 90%;
   margin: 1em;
 }
 
 .form-input input {
   width: 90%;
-  margin: 1em;
+  justify-self: right;
 }
 
 .form-input textarea {
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: 100%;
+  width: 90%;
 }
 
 .form-submit {
   margin: 1em;
   width: 20%;
-  z-index: 10000;
+  z-index: 10;
 }
 .form-submit button:hover {
   background-color: #f1834b;
@@ -358,31 +353,26 @@ body {
   background-color: #828a95;
 }
 
-.form-row {
+.form-buttons {
   display: flex;
   flex-direction: row;
   width: -webkit-max-content;
   width: -moz-max-content;
   width: max-content;
-  position: relative;
-  left: 23em;
-  top: 1em;
+  position: absolute;
+  right: 2em;
+  top: 10em;
   z-index: 2;
 }
 
 .form-row-panel {
   display: flex;
   flex-direction: row;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
-  padding: 1em 0.5em;
+  justify-content: right;
+  align-items: flex-start;
 }
 .form-row-panel .form-group {
-  margin-right: 2em;
-}
-.form-row-panel .form-group .form-label {
-  margin: 0.5em 0;
+  width: 47%;
 }
 
 .import {
@@ -794,10 +784,10 @@ input:checked + .slider:before {
   grid-row: 1;
 }
 .upload-image-single .upload-image-add {
-  z-index: 300;
+  z-index: 9;
 }
 .upload-image-single .upload-image {
-  z-index: 400;
+  z-index: 9;
 }
 
 .upload-image-single:hover .upload-image-add,
@@ -886,7 +876,7 @@ input:checked + .slider:before {
 }
 
 .tabs-container-menu {
-  width: 40%;
+  width: 100%;
   position: static;
   height: 0;
 }
