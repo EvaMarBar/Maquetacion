@@ -16,8 +16,11 @@ class CreateTProducts extends Migration
         Schema::create('t_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('category_id');
-            $table->unsignedInteger('specifications_id');
-            $table->unsignedInteger('pricing_id');
+            // $table->unsignedInteger('specifications_id')->nullable(true);
+            // $table->decimal('original_price',8, 2);
+            // $table->decimal('taxes', 8, 2);
+            // $table->decimal('discount', 3, 2);
+            // $table->decimal('price',8, 2);
             $table->boolean('visible');
             $table->boolean('active');
             $table->timestamps();

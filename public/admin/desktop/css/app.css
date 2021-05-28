@@ -414,6 +414,14 @@ body {
   padding: 0.2em;
 }
 
+.check-box-list {
+  display: flex;
+}
+.check-box-list .form-input {
+  display: flex;
+  flex-wrap: row wrap;
+}
+
 .menu {
   display: flex;
   position: absolute;

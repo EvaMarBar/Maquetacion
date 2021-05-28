@@ -102,7 +102,7 @@ Route::group(['prefix' => 'admin'],function (){
     ]);
 
     // Route::get('/sliders/filter/{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
-    Route::resource('productos', 'App\Http\Controllers\Admin\ProductController', [
+    Route::resource('productos', 'App\Http\Controllers\Products\ProductController', [
         'parameters' => [
             'productos' => 'product', 
         ],
@@ -114,6 +114,7 @@ Route::group(['prefix' => 'admin'],function (){
             'show' => 'products_show',
         ]
     ]);
+    Route::post('/specifications', 'App\Http\Controllers\Products\SpecificationController@store')->name('specification_store');
 
     Route::get('/seo/sitemap', 'App\Http\Controllers\Admin\LocaleSeoController@getSitemaps')->name('create_sitemap');
     Route::get('/seo/import', 'App\Http\Controllers\Admin\LocaleSeoController@importSeo')->name('seo_import');

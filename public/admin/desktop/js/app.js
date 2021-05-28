@@ -2157,86 +2157,93 @@ var form = document.getElementById("form");
 
 var renderForm = function renderForm() {
   var forms = document.querySelectorAll(".admin-form");
-  var sendButton = document.getElementById("send");
+  var sendButtons = document.querySelectorAll(".send");
   var createButton = document.getElementById("button-create");
   var onOffSwitch = document.getElementById('switch');
 
-  if (sendButton) {
-    sendButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      forms.forEach(function (form) {
-        var data = new FormData(form);
+  if (sendButtons) {
+    sendButtons.forEach(function (sendButton) {
+      sendButton.addEventListener("click", function (event) {
+        event.preventDefault();
+        forms.forEach(function (form) {
+          var data = new FormData(form);
 
-        if (data.get('visible') == null) {
-          data.set('visible', 0);
-        }
+          if (data.get('visible') == null) {
+            data.set('visible', 0);
+          }
 
-        if (ckeditors != 'null') {
-          Object.entries(ckeditors).forEach(function (_ref) {
-            var _ref2 = _slicedToArray(_ref, 2),
-                key = _ref2[0],
-                value = _ref2[1];
+          if (ckeditors != 'null') {
+            Object.entries(ckeditors).forEach(function (_ref) {
+              var _ref2 = _slicedToArray(_ref, 2),
+                  key = _ref2[0],
+                  value = _ref2[1];
 
-            data.append(key, value.getData());
-          });
-        }
+              data.append(key, value.getData());
+            });
+          }
 
-        var url = form.action;
+          var url = form.action;
 
-        var sendPostRequest = /*#__PURE__*/function () {
-          var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-            var errors, errorMessage;
-            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-              while (1) {
-                switch (_context.prev = _context.next) {
-                  case 0:
-                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.startWait)();
-                    _context.prev = 1;
-                    _context.next = 4;
-                    return axios.post(url, data).then(function (response) {
-                      if (response.data.id) {
-                        form.id.value = response.data.id;
+          var sendPostRequest = /*#__PURE__*/function () {
+            var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+              var errors, errorMessage;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.startWait)();
+                      console.log(url);
+                      console.log(data.form);
+                      _context.prev = 3;
+                      _context.next = 6;
+                      return axios.post(url, data).then(function (response) {
+                        console.log(response);
+
+                        if (response.data.id) {
+                          form.id.value = response.data.id;
+                          console.log(response.data.material);
+                        }
+
+                        table.innerHTML = response.data.table;
+                        (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+                        (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
+                        renderTable();
+                        (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
+                      });
+
+                    case 6:
+                      _context.next = 12;
+                      break;
+
+                    case 8:
+                      _context.prev = 8;
+                      _context.t0 = _context["catch"](3);
+                      (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
+
+                      if (_context.t0.response.status == '422') {
+                        errors = _context.t0.response.data.errors;
+                        errorMessage = '';
+                        Object.keys(errors).forEach(function (key) {
+                          errorMessage += '<li>' + errors[key] + '</li>';
+                        });
+                        (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage);
                       }
 
-                      table.innerHTML = response.data.table;
-                      (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
-                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
-                      renderTable();
-                      (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
-                    });
-
-                  case 4:
-                    _context.next = 10;
-                    break;
-
-                  case 6:
-                    _context.prev = 6;
-                    _context.t0 = _context["catch"](1);
-                    (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
-
-                    if (_context.t0.response.status == '422') {
-                      errors = _context.t0.response.data.errors;
-                      errorMessage = '';
-                      Object.keys(errors).forEach(function (key) {
-                        errorMessage += '<li>' + errors[key] + '</li>';
-                      });
-                      (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('error', errorMessage);
-                    }
-
-                  case 10:
-                  case "end":
-                    return _context.stop();
+                    case 12:
+                    case "end":
+                      return _context.stop();
+                  }
                 }
-              }
-            }, _callee, null, [[1, 6]]);
-          }));
+              }, _callee, null, [[3, 8]]);
+            }));
 
-          return function sendPostRequest() {
-            return _ref3.apply(this, arguments);
-          };
-        }();
+            return function sendPostRequest() {
+              return _ref3.apply(this, arguments);
+            };
+          }();
 
-        sendPostRequest();
+          sendPostRequest();
+        });
       });
     });
   }

@@ -4,6 +4,7 @@ namespace App\Vendor\Locale;
 
 use App\Vendor\Locale\Models\LocaleSlugSeo as DBLocaleSlugSeo;
 use App\Vendor\Locale\Models\LocaleSeo as DBLocaleSeo;
+use Debugbar;
 
 class LocaleSlugSeo
 {
@@ -40,10 +41,13 @@ class LocaleSlugSeo
 
     public function store($seo, $key, $locale_key)
     {  
+  
 
         $locale_seo = $this->locale_seo->where('key', $locale_key)->first();
+        Debugbar::info($locale_seo);
 
         foreach ($seo as $rel_anchor => $value){
+         
 
             $rel_anchor = str_replace(['-', '_'], ".", $rel_anchor); 
             $explode_rel_anchor = explode('.', $rel_anchor);
@@ -60,6 +64,8 @@ class LocaleSlugSeo
                 'description' => isset($seo['description.'. $language])? $seo['description.'. $language] : '' ,
                 'keywords' => isset($seo['keywords.'. $language])? $seo['keywords.'. $language] : '' ,
             ]);
+           
+          
         }
 
         foreach($locale_slug_seo as $value){

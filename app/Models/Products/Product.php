@@ -3,6 +3,9 @@
 namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Vendor\Locale\Models\LocaleSlugSeo;
+use App\Vendor\Image\Models\ImageResized;
+use App;
 
 class Product extends Model
 {
@@ -15,11 +18,6 @@ class Product extends Model
         return $this->belongsTo(ShirtsCategory::class);
     }
 
-    public function pricing()
-    {
-        return $this->belongsTo(ShirtPricing::class);
-    }
-
     public function specifications()
     {
         return $this->belongsTo(ShirtSpecification::class);
@@ -27,7 +25,7 @@ class Product extends Model
 
     public function shirts_colours()
     {
-        return $this->hasMany(ShirtColours::class, 'colour_id')
+        return $this->hasMany(ShirtColours::class, 'colour_id');
     }
 
     public function locale()

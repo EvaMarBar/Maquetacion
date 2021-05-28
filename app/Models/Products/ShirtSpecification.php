@@ -4,7 +4,7 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ShirtsSpecifications extends Model
+class ShirtSpecification extends Model
 {
     protected $table = 't_shirts_specifications';
     protected $guarded = [];

@@ -41,6 +41,22 @@ class ViewComposerServiceProvider extends ServiceProvider
             'admin.tags.index', 
             'App\Http\ViewComposers\Admin\LocaleGroups'
         );
+        view()->composer([
+            'admin.products.index'],
+            'App\Http\ViewComposers\Admin\ShirtCategories'
+        );
+        view()->composer([
+            'admin.products.index'],
+            'App\Http\ViewComposers\Admin\ShirtSpecifications'
+        );
+        view()->composer([
+            'admin.products.index'],
+            'App\Http\ViewComposers\Admin\Size'
+        );
+        view()->composer([
+            'admin.products.index'],
+            'App\Http\ViewComposers\Admin\Colour'
+        );
     }
 
     public function register()

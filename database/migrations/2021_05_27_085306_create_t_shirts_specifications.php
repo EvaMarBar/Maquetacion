@@ -15,12 +15,8 @@ class CreateTShirtsSpecifications extends Migration
     {
         Schema::create('t_shirts_specifications', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 255);
             $table->integer('product_number');
-            $table->string('designer_name', 255);
-            $table->unsignedInteger('colour_id');
-            $table->unsignedInteger('size_id');
-            $table->string('material', 255);
+            $table->string('designer', 255);
             $table->boolean('active');
             $table->timestamps();
         });

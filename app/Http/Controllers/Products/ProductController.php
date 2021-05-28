@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Products;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Locale;
 use App\Vendor\Image\Image;
 use App\Vendor\Locale\LocaleSlugSeo;
-use App\Models\Products\Products;
+use App\Http\Controllers\Products\SpecificationController;
+use App\Models\Products\Product;
 use \Debugbar;
 
 class ProductController extends Controller
@@ -21,18 +22,20 @@ class ProductController extends Controller
     protected $locale;
     protected $images;
     protected $locale_slug_seo;
+    protected $specification;
 
-    function __construct(Product $product, Locale $locale, Image $images, LocaleSlugSeo $locale_slug_seo)
+    function __construct(Product $product, Locale $locale, Image $images, LocaleSlugSeo $locale_slug_seo, SpecificationController $specification)
     {
         $this->middleware('auth');
         $this->product = $product;
         // $this->agent = $agent;
         $this->locale = $locale;
         $this->image = $images;
-        $this->locale_slug_seo = $locale_slug_seo;
+        // $this->locale_slug_seo = $locale_slug_seo;
+        $this->specification =$specification;
 
         $this->locale->setParent('faqs');
-        $this->locale_slug_seo->setParent('faqs');
+        // $this->locale_slug_seo->setParent('faqs');
         $this->image->setEntity('faqs');
 
         // if ($this->agent->isMobile()) {
@@ -82,11 +85,19 @@ class ProductController extends Controller
     
         $product = $this->product->updateOrCreate([
             'id' => request('id')],[
-            'pricing_id' => request('pricing_id'),
-            'specifications_id' => request('specifications_id'),
             'category_id' => request('category_id'),
+            'original_price' => request('original_price'),
+            'taxes' => request('taxes'),
+            'discount' => request('discount'),
+            'price' => request('price'),
+            'visible' => request('visible'),
             'active' => 1,
         ]);
+
+        
+        if(request('specifications')){
+            $specification = $this->specification->store(request('specification'), $product->id);
+        }
 
         if(request('locale')){
             $locale = $this->locale->store(request('locale'), $product->id);
@@ -97,10 +108,11 @@ class ProductController extends Controller
             $images = $this->image->store(request('images'), $product->id);
         }
 
-        if(request('seo')){
-            $seo = $this->locale_slug_seo->store(request('seo'), $product->id, 'front_product');
-        }
+        // if(request('seo')){
+        //     $seo = $this->locale_slug_seo->store(request('seo'), $product->id, 'front_product');
 
+        // }
+        
         if (request('id')){
             $message = \Lang::get('admin/products.product-update');
         }else{

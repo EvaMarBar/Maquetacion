@@ -17,11 +17,13 @@ import {renderSitemap} from './sitemap';
 export let renderForm = () => {
 
     let forms = document.querySelectorAll(".admin-form");
-    let sendButton = document.getElementById("send");
+    let sendButtons = document.querySelectorAll(".send");
     let createButton = document.getElementById("button-create");
     let onOffSwitch = document.getElementById('switch');
 
-    if(sendButton){
+    if(sendButtons){
+
+        sendButtons.forEach(sendButton =>{
         sendButton.addEventListener("click", (event) => {
     
             event.preventDefault();
@@ -46,12 +48,15 @@ export let renderForm = () => {
                 let sendPostRequest = async () => {
     
                     startWait();
-        
+                    console.log(url)
+                    console.log(data.form)
                     try {
                         await axios.post(url, data).then(response => {
+                            console.log(response)
     
                             if(response.data.id){
                                 form.id.value = response.data.id;
+                                console.log(response.data.material)
                             }
                             
                             table.innerHTML = response.data.table;
@@ -84,8 +89,10 @@ export let renderForm = () => {
                 sendPostRequest();
             });
         });
+    })
     }
   
+
    
     if(createButton){
 
