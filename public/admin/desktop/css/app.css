@@ -246,6 +246,7 @@ body {
 
 .pannel-form {
   display: none;
+  height: 0;
 }
 
 .pannel-form.active {
@@ -908,6 +909,7 @@ input:checked + .slider:before {
 
 .tab-panel {
   display: none;
+  height: 0;
 }
 
 .tab-panel.tab-active {

@@ -1,6 +1,6 @@
 require('../../bootstrap');
 require('../../ckeditor');
-require('./form');
+// require('./form');
 require('./sidebar');
 require('./form-topbar');
 require('./filterTable');
@@ -13,4 +13,5 @@ require('./block');
 require('./sitemap');
 require('./localeSeo');
 require('./googleBot');
+require('./forms');
 //require('./multipleUpload');

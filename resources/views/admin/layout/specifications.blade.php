@@ -1,5 +1,5 @@
-<form class="admin-form" id="specifications-form" action="{{route("specification_store")}}" autocomplete="off">
-    <input type="hidden" name="id" value="{{isset($specifications->id) ? $specifications->id : ''}}">
+<form class="admin-form" id="specifications-form" action="{{route("specification_store")}}" data-form="specifications" autocomplete="off">
+    <input type="hidden" name="id" id="specification_id" value="{{isset($specifications->id) ? $specifications->id : ''}}">
 
     <div>
         <div class="two-columns">
@@ -48,6 +48,10 @@
 
 </form>
 <div class="form-submit">
-    <div class="send">Especificaciones</div>
+    <div class="send" data-form="specifications" data-url="{{route("specification_store")}}">
+        <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19M17,12L12,7V10H8V14H12V17L17,12Z" />
+        </svg>
+    </div>
 </div>
 

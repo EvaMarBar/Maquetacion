@@ -35,6 +35,9 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 
     Route::get($localizationseo->transRoute('routes.front_faqs'), 'App\Http\Controllers\Front\FaqController@index')->name('front_faqs');
     Route::get($localizationseo->transRoute('routes.front_faq'), 'App\Http\Controllers\Front\FaqController@show')->name('front_faq');
+
+    Route::get($localizationseo->transRoute('routes.front_products'), 'App\Http\Controllers\Front\ShirtController@index')->name('front_products');
+    Route::get($localizationseo->transRoute('routes.front_product'), 'App\Http\Controllers\Front\ShirtController@show')->name('front_product');
 });
 
 Route::group(['prefix' => 'admin'],function (){
@@ -102,19 +105,24 @@ Route::group(['prefix' => 'admin'],function (){
     ]);
 
     // Route::get('/sliders/filter/{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
-    Route::resource('productos', 'App\Http\Controllers\Products\ProductController', [
+    Route::resource('productos', 'App\Http\Controllers\Products\ShirtController', [
         'parameters' => [
             'productos' => 'product', 
         ],
         'names' => [
-            'index' => 'products',
-            'create' => 'products_create',
-            'store' => 'products_store',
-            'destroy' => 'products_destroy',
-            'show' => 'products_show',
+            'index' => 'shirts',
+            'create' => 'shirts_create',
+            'store' => 'shirts_store',
+            'destroy' => 'shirts_destroy',
+            'show' => 'shirts_show',
         ]
     ]);
     Route::post('/specifications', 'App\Http\Controllers\Products\SpecificationController@store')->name('specification_store');
+
+    Route::post('/sizes', 'App\Http\Controllers\Products\SizeController@store')->name('size_store');
+    Route::post('/colours', 'App\Http\Controllers\Products\ColourController@store')->name('colour_store');
+
+
 
     Route::get('/seo/sitemap', 'App\Http\Controllers\Admin\LocaleSeoController@getSitemaps')->name('create_sitemap');
     Route::get('/seo/import', 'App\Http\Controllers\Admin\LocaleSeoController@importSeo')->name('seo_import');

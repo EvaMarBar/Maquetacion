@@ -11,6 +11,6 @@ class ShirtsColours extends Model
 
     public function shirts_colours()
     {
-        return $this->hasMany(ShirtColours::class, 'colour_id')
+        return $this->hasMany(ShirtColours::class, 'colour_id');
     }
 }

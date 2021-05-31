@@ -4,5 +4,6 @@ return array (
   'front_login' => 'login',
   'front_faqs' => 'preguntas-frecuentes',
   'front_faq' => 'preguntas-frecuentes/{slug}',
-  'front_product' => 'productos'
+  'front_products' => 'productos',
+  'front_product' => 'productos/{slug}'
 );

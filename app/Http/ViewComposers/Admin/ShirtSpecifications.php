@@ -19,7 +19,7 @@ class ShirtSpecifications
 
         if(static::$composed)
         {
-            return $view->with('shirts_categories', static::$composed);
+            return $view->with('shirts_specifications', static::$composed);
         }
 
         static::$composed = $this->specifications->where('active', 1)->get();

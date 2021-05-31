@@ -1959,3 +1959,29 @@ Horizon started successfully.
 Horizon started successfully.
 Horizon started successfully.
 Horizon started successfully.
+Horizon started successfully.
+Horizon started successfully.
+[2021-05-31 11:36:05][eec88bb2-df6c-4670-8238-453f5f12607e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:05][70b13f08-61f0-45c3-9e65-62fe004fea06] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:05][64e43fa9-288c-4520-bf50-dbc287f35a98] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][eec88bb2-df6c-4670-8238-453f5f12607e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][eec88bb2-df6c-4670-8238-453f5f12607e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][eec88bb2-df6c-4670-8238-453f5f12607e] Failed:     App\Jobs\ProcessImage
+[2021-05-31 11:36:06][64e43fa9-288c-4520-bf50-dbc287f35a98] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][64e43fa9-288c-4520-bf50-dbc287f35a98] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][64e43fa9-288c-4520-bf50-dbc287f35a98] Failed:     App\Jobs\ProcessImage
+[2021-05-31 11:36:06][70b13f08-61f0-45c3-9e65-62fe004fea06] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][70b13f08-61f0-45c3-9e65-62fe004fea06] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:36:06][70b13f08-61f0-45c3-9e65-62fe004fea06] Failed:     App\Jobs\ProcessImage
+[2021-05-31 11:39:31][587bbf72-0a8b-4bc0-8eca-a6309341c01e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][dd14fc43-8cb8-4097-9398-87f8ae8b324a] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][dd14fc43-8cb8-4097-9398-87f8ae8b324a] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][dd14fc43-8cb8-4097-9398-87f8ae8b324a] Failed:     App\Jobs\ProcessImage
+[2021-05-31 11:39:31][5d0e5014-30a3-4692-be01-9a55bb304851] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][587bbf72-0a8b-4bc0-8eca-a6309341c01e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][587bbf72-0a8b-4bc0-8eca-a6309341c01e] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][587bbf72-0a8b-4bc0-8eca-a6309341c01e] Failed:     App\Jobs\ProcessImage
+[2021-05-31 11:39:31][dd14fc43-8cb8-4097-9398-87f8ae8b324a] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][5d0e5014-30a3-4692-be01-9a55bb304851] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][5d0e5014-30a3-4692-be01-9a55bb304851] Processing: App\Jobs\ProcessImage
+[2021-05-31 11:39:31][5d0e5014-30a3-4692-be01-9a55bb304851] Failed:     App\Jobs\ProcessImage

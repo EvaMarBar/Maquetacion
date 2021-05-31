@@ -1,42 +1,34 @@
 <?php
 
 namespace App\Http\Controllers\Products;
-
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Jenssegers\Agent\Agent;
 use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Locale;
-use App\Vendor\Image\Image;
 use App\Vendor\Locale\LocaleSlugSeo;
-use App\Http\Controllers\Products\SpecificationController;
-use App\Models\Products\Product;
+use App\Models\Products\ShirtSpecification;
+use App\Vendor\Product\Product;
 use \Debugbar;
 
-class ProductController extends Controller
+class ShirtControloler extends Controller
 {
-    protected $product;
+    protected $specification;
     // protected $agent;
     protected $paginate;
     protected $locale;
     protected $images;
     protected $locale_slug_seo;
-    protected $specification;
 
-    function __construct(Product $product, Locale $locale, Image $images, LocaleSlugSeo $locale_slug_seo, SpecificationController $specification)
+    function __construct(ShirtSpecification $shirt, Locale $locale)
     {
         $this->middleware('auth');
-        $this->product = $product;
+        $this->shirt = $shirt;
         // $this->agent = $agent;
         $this->locale = $locale;
-        $this->image = $images;
-        // $this->locale_slug_seo = $locale_slug_seo;
-        $this->specification =$specification;
 
-        $this->locale->setParent('faqs');
-        // $this->locale_slug_seo->setParent('faqs');
-        $this->image->setEntity('faqs');
+        $this->locale->setParent('shirts');
 
         // if ($this->agent->isMobile()) {
         //     $this->paginate = 10;
@@ -49,15 +41,14 @@ class ProductController extends Controller
 
     public function index()
     {
-
         $view = View::make('admin.products.index')
-                ->with('product', $this->product)
-                ->with('products', $this->product->where('active', 1)->paginate($this->paginate));
+        ->with('shirt', $this->shirt)
+        ->with('shirts', $this->shirt->where('active', 1)->paginate($this->paginate));
 
         if(request()->ajax()) {
             
             $sections = $view->renderSections(); 
-    
+
             return response()->json([
                 'table' => $sections['table'],
                 'form' => $sections['form'],
@@ -65,138 +56,128 @@ class ProductController extends Controller
         }
 
         return $view;
+
     }
 
     public function create()
     {
 
-        $view = View::make('admin.products.index')
-        ->with('product', $this->product)
-        ->with('products', $this->product->where('active', 1)->paginate($this->paginate))
-        ->renderSections();
-
-        return response()->json([
-            'form' => $view['form']
-        ]);
+      
     }
 
     public function store(Request $request)
     {            
-    
-        $product = $this->product->updateOrCreate([
+        
+        $shirt = $this->shirt->updateOrCreate([
             'id' => request('id')],[
-            'category_id' => request('category_id'),
-            'original_price' => request('original_price'),
-            'taxes' => request('taxes'),
-            'discount' => request('discount'),
-            'price' => request('price'),
-            'visible' => request('visible'),
+            'product_number' => request('product_number'),
+            'designer' => request('designer'),
             'active' => 1,
         ]);
 
-        
-        if(request('specifications')){
-            $specification = $this->specification->store(request('specification'), $product->id);
-        }
-
         if(request('locale')){
-            $locale = $this->locale->store(request('locale'), $product->id);
+            $locale = $this->locale->store(request('locale'), $shirt->id);
+        }
+        if(request('product')){
+            $product = $this->product->store(request('product'), $shirt->id);
         }
 
         if(request('images')){
             
-            $images = $this->image->store(request('images'), $product->id);
+            $images = $this->image->store(request('images'), $shirt->id);
         }
 
-        // if(request('seo')){
-        //     $seo = $this->locale_slug_seo->store(request('seo'), $product->id, 'front_product');
+        if(request('seo')){
+            $seo = $this->locale_slug_seo->store(request('seo'), $shirt->id, 'front_product');
+        }
 
+        // if (request('id')){
+        //     $message = \Lang::get('admin/faqs.faq-update');
+        // }else{
+        //     $message = \Lang::get('admin/faqs.faq-create');
         // }
-        
-        if (request('id')){
-            $message = \Lang::get('admin/products.product-update');
-        }else{
-            $message = \Lang::get('admin/products.product-create');
-        }
 
         $view = View::make('admin.products.index')
         ->with('locale', $locale)
-        ->with('products', $this->product->where('active', 1)->paginate($this->paginate))
+        ->with('seo', $seo)
+        ->with('image', $image)
         ->with('product', $product)
+        ->with('shirts', $this->shirt->where('active', 1)->paginate($this->paginate))
+        ->with('shirt', $shirt)
         ->renderSections();        
 
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
             'message' => $message,
-            'id' => $product->id,
+            'id' => $shirt->id,
         ]);
     }
 
-    public function edit(Product $product)
-    {
-        $locale = $this->locale->show($product->id);
-        $seo = $this->locale_slug_seo->show($product->id);
+    // public function edit(Faq $faq)
+    // {
+    //     $locale = $this->locale->show($faq->id);
+    //     $seo = $this->locale_slug_seo->show($faq->id);
 
 
-        $view = View::make('admin.products.index')
-        ->with('locale', $locale)
-        ->with('seo', $seo)
-        ->with('product', $product)
-        ->with('products', $this->product->where('active', 1)->paginate($this->paginate));   
+    //     $view = View::make('admin.faqs.index')
+    //     ->with('locale', $locale)
+    //     ->with('seo', $seo)
+    //     ->with('faq', $faq)
+    //     ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate));   
         
-        if(request()->ajax()) {
+    //     if(request()->ajax()) {
 
-            $sections = $view->renderSections(); 
+    //         $sections = $view->renderSections(); 
     
-            return response()->json([
-                'form' => $sections['form'],
-            ]); 
-        }
+    //         return response()->json([
+    //             'form' => $sections['form'],
+    //         ]); 
+    //     }
                 
-        return $view;
-    }
+    //     return $view;
+    // }
 
-    public function show(Product $product){
+    // public function show(Faq $faq){
         
-        $locale = $this->locale->show($product->id);
-        $seo = $this->locale_slug_seo->show($product->id);
+    //     $locale = $this->locale->show($faq->id);
+    //     $seo = $this->locale_slug_seo->show($faq->id);
 
-        $view = View::make('admin.products.index')
-        ->with('locale', $locale)
-        ->with('seo', $seo)
-        ->with('product', $product)
-        ->with('products', $this->product->where('active', 1)->paginate($this->paginate));   
+    //     $view = View::make('admin.faqs.index')
+    //     ->with('locale', $locale)
+    //     ->with('seo', $seo)
+    //     ->with('faq', $faq)
+    //     ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate));   
         
-        if(request()->ajax()) {
+    //     if(request()->ajax()) {
 
-            $sections = $view->renderSections(); 
+    //         $sections = $view->renderSections(); 
     
-            return response()->json([
-                'form' => $sections['form'],
-            ]); 
-        }
+    //         return response()->json([
+    //             'form' => $sections['form'],
+    //         ]); 
+    //     }
                 
-        return $view;
-    }
+    //     return $view;
+    // }
 
-    public function destroy(Product $product)
-    {
-        $product->active = 0;
-        $product->save();
+    // public function destroy(Faq $faq)
+    // {
+    //     $faq->active = 0;
+    //     $faq->save();
 
-        $message = Lang::get('admin/products.product-delete');
+    //     $message = Lang::get('admin/faqs.faq-delete');
 
-        $view = View::make('admin.products.index')
-            ->with('product', $this->product)
-            ->with('products', $this->product->where('active', 1)->paginate($this->paginate))
-            ->renderSections();
+    //     $view = View::make('admin.faqs.index')
+    //         ->with('faq', $this->faq)
+    //         ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate))
+    //         ->renderSections();
         
-        return response()->json([
-            'table' => $view['table'],
-            'form' => $view['form']
-        ]);
-    }
+    //     return response()->json([
+    //         'table' => $view['table'],
+    //         'form' => $view['form']
+    //     ]);
+    // }
 
 
     // public function filter(Request $request, $filters = null){ //Añades el $filters = null

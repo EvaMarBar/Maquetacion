@@ -1,225 +1,225 @@
-const table = document.getElementById("table");
-const form = document.getElementById("form");
-import { renderCkeditor } from "../../ckeditor";
-import {renderFilterTable} from "./filterTable";
-import { showMessage } from "./messages";
-import { startWait } from "./spinner";
-import {stopWait} from "./spinner";
-import { renderLocaleTabs } from "./localeTabs";
-import { renderTabs } from "./tabs";
-import { renderUploadImage } from "./upload";
-import { renderLocaleTags } from "./localeTags";
-import { renderBlockParameters } from "./block";
-import {renderLocaleSeo} from './localeSeo';
-import {renderGoogleBot} from './googleBot';
-import {renderSitemap} from './sitemap';
+// const table = document.getElementById("table");
+// const form = document.getElementById("form");
+// import { renderCkeditor } from "../../ckeditor";
+// import {renderFilterTable} from "./filterTable";
+// import { showMessage } from "./messages";
+// import { startWait } from "./spinner";
+// import {stopWait} from "./spinner";
+// import { renderLocaleTabs } from "./localeTabs";
+// import { renderTabs } from "./tabs";
+// import { renderUploadImage } from "./upload";
+// import { renderLocaleTags } from "./localeTags";
+// import { renderBlockParameters } from "./block";
+// import {renderLocaleSeo} from './localeSeo';
+// import {renderGoogleBot} from './googleBot';
+// import {renderSitemap} from './sitemap';
 
-export let renderForm = () => {
+// export let renderForm = () => {
 
-    let forms = document.querySelectorAll(".admin-form");
-    let sendButtons = document.querySelectorAll(".send");
-    let createButton = document.getElementById("button-create");
-    let onOffSwitch = document.getElementById('switch');
+//     let forms = document.querySelectorAll(".admin-form");
+//     let sendButtons = document.querySelectorAll(".send");
+//     let createButton = document.getElementById("button-create");
+//     let onOffSwitch = document.getElementById('switch');
 
-    if(sendButtons){
+//     if(sendButtons){
 
-        sendButtons.forEach(sendButton =>{
-        sendButton.addEventListener("click", (event) => {
+//         sendButtons.forEach(sendButton =>{
+//         sendButton.addEventListener("click", (event) => {
     
-            event.preventDefault();
+//             event.preventDefault();
             
-            forms.forEach(form => { 
+//             forms.forEach(form => { 
             
-                let data = new FormData(form);
+//                 let data = new FormData(form);
     
-                if (data.get('visible') == null) {
-                    data.set('visible',0);
-                }
+//                 if (data.get('visible') == null) {
+//                     data.set('visible',0);
+//                 }
     
-                if( ckeditors != 'null'){
+//                 if( ckeditors != 'null'){
     
-                    Object.entries(ckeditors).forEach(([key, value]) => {
-                        data.append(key, value.getData());
-                    });
-                }
+//                     Object.entries(ckeditors).forEach(([key, value]) => {
+//                         data.append(key, value.getData());
+//                     });
+//                 }
             
-                let url = form.action;
+//                 let url = form.action;
         
-                let sendPostRequest = async () => {
+//                 let sendPostRequest = async () => {
     
-                    startWait();
-                    console.log(url)
-                    console.log(data.form)
-                    try {
-                        await axios.post(url, data).then(response => {
-                            console.log(response)
+//                     startWait();
+//                     console.log(url)
+//                     console.log(data.form)
+//                     try {
+//                         await axios.post(url, data).then(response => {
+//                             console.log(response)
     
-                            if(response.data.id){
-                                form.id.value = response.data.id;
-                                console.log(response.data.material)
-                            }
+//                             if(response.data.id){
+//                                 form.id.value = response.data.id;
+//                                 console.log(response.data.material)
+//                             }
                             
-                            table.innerHTML = response.data.table;
+//                             table.innerHTML = response.data.table;
     
-                            stopWait();
-                            showMessage('success', response.data.message);
-                            renderTable();
-                            renderLocaleTags();
-                        });
+//                             stopWait();
+//                             showMessage('success', response.data.message);
+//                             renderTable();
+//                             renderLocaleTags();
+//                         });
                         
-                    } catch (error) {
+//                     } catch (error) {
         
-                        stopWait();
+//                         stopWait();
     
-                        if(error.response.status == '422'){
+//                         if(error.response.status == '422'){
         
-                            let errors = error.response.data.errors;      
-                            let errorMessage = '';
+//                             let errors = error.response.data.errors;      
+//                             let errorMessage = '';
         
-                            Object.keys(errors).forEach(function(key) {
-                                errorMessage += '<li>' + errors[key] + '</li>';
-                            })
+//                             Object.keys(errors).forEach(function(key) {
+//                                 errorMessage += '<li>' + errors[key] + '</li>';
+//                             })
             
-                            showMessage('error', errorMessage);
+//                             showMessage('error', errorMessage);
     
-                        }
-                    }
-                };
+//                         }
+//                     }
+//                 };
         
-                sendPostRequest();
-            });
-        });
-    })
-    }
+//                 sendPostRequest();
+//             });
+//         });
+//     })
+//     }
   
 
    
-    if(createButton){
+//     if(createButton){
 
-        createButton.addEventListener("click", () =>{
-            let url= createButton.dataset.url;
+//         createButton.addEventListener("click", () =>{
+//             let url= createButton.dataset.url;
 
 
-            let sendCreateRequest = async () => {
+//             let sendCreateRequest = async () => {
 
-                try {
-                    await axios.get(url).then(response => {
-                        form.innerHTML = response.data.form;
-                        renderForm();
+//                 try {
+//                     await axios.get(url).then(response => {
+//                         form.innerHTML = response.data.form;
+//                         renderForm();
                        
-                    });
+//                     });
                     
-                } catch (error) {
-                    console.error(error);
-                }
-            };
+//                 } catch (error) {
+//                     console.error(error);
+//                 }
+//             };
 
-            sendCreateRequest();
-        });
-        renderUploadImage();
-    }
+//             sendCreateRequest();
+//         });
+//         renderUploadImage();
+//     }
 
-    renderCkeditor();
-    renderFilterTable();
-    renderLocaleTabs();
-    renderTabs();
-    renderBlockParameters();
-    renderLocaleSeo();
-    renderGoogleBot();
-    renderSitemap();
+//     renderCkeditor();
+//     renderFilterTable();
+//     renderLocaleTabs();
+//     renderTabs();
+//     renderBlockParameters();
+//     renderLocaleSeo();
+//     renderGoogleBot();
+//     renderSitemap();
     
-}
+// }
 
 
-export let renderTable = () => {
+// export let renderTable = () => {
 
-    let editButtons = document.querySelectorAll(".edit-button");
-    let deleteButtons = document.querySelectorAll(".delete-button");
-    let paginationButtons = document.querySelectorAll('.table-pagination-button');
-    editButtons.forEach(editButton => {
+//     let editButtons = document.querySelectorAll(".edit-button");
+//     let deleteButtons = document.querySelectorAll(".delete-button");
+//     let paginationButtons = document.querySelectorAll('.table-pagination-button');
+//     editButtons.forEach(editButton => {
 
-        editButton.addEventListener("click", () => {
+//         editButton.addEventListener("click", () => {
 
-            let url = editButton.dataset.url;
+//             let url = editButton.dataset.url;
 
-            let sendEditRequest = async () => {
+//             let sendEditRequest = async () => {
 
-                try {
-                    await axios.get(url).then(response => {
-                        form.innerHTML = response.data.form;
-                        renderForm();
-                        renderCkeditor();
-                        renderFilterTable();
-                        renderLocaleTabs();
-                        renderTabs();
-                    });
+//                 try {
+//                     await axios.get(url).then(response => {
+//                         form.innerHTML = response.data.form;
+//                         renderForm();
+//                         renderCkeditor();
+//                         renderFilterTable();
+//                         renderLocaleTabs();
+//                         renderTabs();
+//                     });
                     
-                } catch (error) {
-                    console.error(error);
-                }
-            };
+//                 } catch (error) {
+//                     console.error(error);
+//                 }
+//             };
 
-            sendEditRequest();
-        });
-    });
+//             sendEditRequest();
+//         });
+//     });
 
-    if(deleteButtons != null){
+//     if(deleteButtons != null){
 
-        deleteButtons.forEach(deleteButton => {
+//         deleteButtons.forEach(deleteButton => {
 
-            deleteButton.addEventListener("click", () => {
+//             deleteButton.addEventListener("click", () => {
 
-                let url = deleteButton.dataset.url;
+//                 let url = deleteButton.dataset.url;
 
-                let sendDeleteRequest = async () => {
+//                 let sendDeleteRequest = async () => {
 
-                    try {
-                        await axios.delete(url).then(response => {
-                            table.innerHTML = response.data.table;
-                            renderTable();
+//                     try {
+//                         await axios.delete(url).then(response => {
+//                             table.innerHTML = response.data.table;
+//                             renderTable();
                             
-                        });
+//                         });
                         
-                    } catch (error) {
+//                     } catch (error) {
                 
-                    }
-                };
+//                     }
+//                 };
 
-                sendDeleteRequest();
-            });
-        });
-    }
+//                 sendDeleteRequest();
+//             });
+//         });
+//     }
 
-    paginationButtons.forEach(paginationButton => {
+//     paginationButtons.forEach(paginationButton => {
 
-        paginationButton.addEventListener("click", () => {
+//         paginationButton.addEventListener("click", () => {
 
-            let url = paginationButton.dataset.page;
+//             let url = paginationButton.dataset.page;
 
-            let sendPaginationRequest = async () => {
+//             let sendPaginationRequest = async () => {
 
-                try {
-                    await axios.get(url).then(response => {
-                        table.innerHTML = response.data.table;
-                        renderTable();
-                    });
+//                 try {
+//                     await axios.get(url).then(response => {
+//                         table.innerHTML = response.data.table;
+//                         renderTable();
+//                     });
                     
-                } catch (error) {
-                    console.error(error);
-                }
-            };
+//                 } catch (error) {
+//                     console.error(error);
+//                 }
+//             };
 
-            sendPaginationRequest();
+//             sendPaginationRequest();
             
-        });
-    });
+//         });
+//     });
 
-    renderFilterTable();
-    renderLocaleTabs();
-    renderTabs();
-    renderLocaleTags();
-};
+//     renderFilterTable();
+//     renderLocaleTabs();
+//     renderTabs();
+//     renderLocaleTags();
+// };
 
-renderForm();
-renderTable();
+// renderForm();
+// renderTable();
 

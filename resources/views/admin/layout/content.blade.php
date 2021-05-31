@@ -1,4 +1,5 @@
-<form class="admin-form" id="products-form" action="{{route("products_store")}}" autocomplete="off">
+<form class="admin-form" id="content-form" action="{{route("products_store")}}" data-form="content" autocomplete="off">
+    <input type="hidden" name="id" id="product_id" value="{{isset($product->id) ? $product->id : ''}}">
     <div class="form-row-panel">
         <div class="form-group">
             <div class="form-label">
@@ -21,7 +22,7 @@
                 <label for="name" class="label-highlight">Nombre</label>
             </div>
             <div class="form-input">
-                <input type="text" name="name" value="{{isset($product->name) ? $product->name : ''}}"  class="input-highlight"  />
+                <input type="text" name="name" value="{{isset($product->name) ? $product->name : ''}}"  class="input-highlight"/>
             </div>
         </div>
     </div>
@@ -76,17 +77,6 @@
                 <div class="one-column">
                     <div class="form-group">
                         <div class="form-label">
-                            <label for="name" class="label-highlight">Título</label>
-                        </div>
-                        <div class="form-input">
-                            <input type="text" name="seo[title.{{$localization->alias}}]" value="{{isset($seo["title.$localization->alias"]) ? $seo["title.$localization->alias"] : ''}}" class="input-highlight">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="one-column">
-                    <div class="form-group">
-                        <div class="form-label">
                             <label for="description" class="label-highlight">Descripción</label>
                         </div>
                         <div class="form-input">
@@ -101,7 +91,11 @@
            
         @endforeach
         <div class="form-submit">
-            <div class="send">Content</div>
+            <div class="send" data-url="{{route("products_store")}}" data-form="content">
+                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M3,19V5A2,2 0 0,1 5,3H19A2,2 0 0,1 21,5V19A2,2 0 0,1 19,21H5A2,2 0 0,1 3,19M17,12L12,7V10H8V14H12V17L17,12Z" />
+                </svg>
+            </div>
         </div>
 
     @endcomponent
