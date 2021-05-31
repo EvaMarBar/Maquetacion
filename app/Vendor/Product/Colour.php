@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers\Products;
+namespace App\Vendor\Product;
+
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Products\ShirtsColours;
 use \Debugbar;
 
-class ColourController extends Controller
+class Colour extends Controller
 {
     protected $colour;
     protected $paginate;
