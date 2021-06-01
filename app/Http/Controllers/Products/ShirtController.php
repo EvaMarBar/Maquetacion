@@ -8,27 +8,40 @@ use Jenssegers\Agent\Agent;
 use App\Http\Controllers\Controller;
 use App\Vendor\Locale\Locale;
 use App\Vendor\Locale\LocaleSlugSeo;
-use App\Models\Products\ShirtSpecification;
+use App\Vendor\Image\Image;
+use App\Models\Products\Shirt;
 use App\Vendor\Product\Product;
+use App\Vendor\Product\Size;
+use App\Vendor\Product\Colour;
 use \Debugbar;
 
-class ShirtControloler extends Controller
+class ShirtController extends Controller
 {
-    protected $specification;
+    protected $shirt;
     // protected $agent;
     protected $paginate;
     protected $locale;
     protected $images;
     protected $locale_slug_seo;
+    protected $prodcut;
+    protected $size;
+    protected $colour;
 
-    function __construct(ShirtSpecification $shirt, Locale $locale)
+    function __construct(Shirt $shirt, Locale $locale, Image $images, LocaleSlugSeo $locale_slug_seo, Product $product, Size $size, Colour $colour)
     {
         $this->middleware('auth');
         $this->shirt = $shirt;
         // $this->agent = $agent;
         $this->locale = $locale;
+        $this->image = $images;
+        $this->locale_slug_seo = $locale_slug_seo;
+        $this->product = $product;
+        $this->size = $size;
+        $this->colour = $colour;
 
         $this->locale->setParent('shirts');
+        $this->locale_slug_seo->setParent('shirts');
+        $this->image->setEntity('shirts');
 
         // if ($this->agent->isMobile()) {
         //     $this->paginate = 10;
@@ -41,7 +54,7 @@ class ShirtControloler extends Controller
 
     public function index()
     {
-        $view = View::make('admin.products.index')
+        $view = View::make('admin.shirts.index')
         ->with('shirt', $this->shirt)
         ->with('shirts', $this->shirt->where('active', 1)->paginate($this->paginate));
 
@@ -70,11 +83,22 @@ class ShirtControloler extends Controller
         
         $shirt = $this->shirt->updateOrCreate([
             'id' => request('id')],[
+            'category_id' => request('category_id'),
             'product_number' => request('product_number'),
             'designer' => request('designer'),
             'active' => 1,
         ]);
 
+        if(request('size')){
+            $size = $this->size->store(request('size'), $shirt->id);
+            Debugbar::info($size);
+        }
+        
+
+        if(request('colour')){
+            $colour = $this->colour->store(request('colour'), $shirt->id);
+        }
+       
         if(request('locale')){
             $locale = $this->locale->store(request('locale'), $shirt->id);
         }
@@ -97,11 +121,11 @@ class ShirtControloler extends Controller
         //     $message = \Lang::get('admin/faqs.faq-create');
         // }
 
-        $view = View::make('admin.products.index')
+        $view = View::make('admin.shirts.index')
         ->with('locale', $locale)
-        ->with('seo', $seo)
-        ->with('image', $image)
         ->with('product', $product)
+        ->with('size', $size)
+        ->with('colour', $colour)
         ->with('shirts', $this->shirt->where('active', 1)->paginate($this->paginate))
         ->with('shirt', $shirt)
         ->renderSections();        
@@ -109,7 +133,7 @@ class ShirtControloler extends Controller
         return response()->json([
             'table' => $view['table'],
             'form' => $view['form'],
-            'message' => $message,
+            // 'message' => $message,
             'id' => $shirt->id,
         ]);
     }
@@ -138,28 +162,35 @@ class ShirtControloler extends Controller
     //     return $view;
     // }
 
-    // public function show(Faq $faq){
+    public function show(Shirt $shirt){
         
-    //     $locale = $this->locale->show($faq->id);
-    //     $seo = $this->locale_slug_seo->show($faq->id);
+        $locale = $this->locale->show($shirt->id);
+        $seo = $this->locale_slug_seo->show($shirt->id);
+        $product = $this->product->show($shirt->id);
+        $size = $this->size->show($shirt->id);
+        $colour = $this->colour->show($shirt->id);
 
-    //     $view = View::make('admin.faqs.index')
-    //     ->with('locale', $locale)
-    //     ->with('seo', $seo)
-    //     ->with('faq', $faq)
-    //     ->with('faqs', $this->faq->where('active', 1)->paginate($this->paginate));   
+
+        $view = View::make('admin.shirts.index')
+        ->with('locale', $locale)
+        ->with('seo', $seo)
+        ->with('product', $product)
+        ->with('size', $size)
+        ->with('colour', $colour)
+        ->with('shirt', $shirt)
+        ->with('shirts', $this->shirt->where('active', 1)->paginate($this->paginate));   
         
-    //     if(request()->ajax()) {
+        if(request()->ajax()) {
 
-    //         $sections = $view->renderSections(); 
+            $sections = $view->renderSections(); 
     
-    //         return response()->json([
-    //             'form' => $sections['form'],
-    //         ]); 
-    //     }
+            return response()->json([
+                'form' => $sections['form'],
+            ]); 
+        }
                 
-    //     return $view;
-    // }
+        return $view;
+    }
 
     // public function destroy(Faq $faq)
     // {

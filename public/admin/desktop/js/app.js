@@ -2335,6 +2335,7 @@ var renderForm = function renderForm() {
   if (sendButtons) {
     sendButtons.forEach(function (sendButton) {
       sendButton.addEventListener("click", function (event) {
+        console.log('click');
         event.preventDefault();
         forms.forEach(function (form) {
           if (form.dataset.form === sendButton.dataset.form) {
@@ -2342,23 +2343,20 @@ var renderForm = function renderForm() {
 
             if (data.get('visible') == null) {
               data.set('visible', 0);
-            }
+            } // if(checkBox){
+            //     checkBox.forEach(checkElement =>{
+            //         if(checkElement.checked){
+            //             data.append(checkElement.name, checkElement.value);
+            //         }
+            //     })
+            // }
+            // if(form.dataset.product_id){
+            //     data.append('product_id', form.dataset.product_id)
+            // }
+            // if(form.dataset.specification_id){
+            //     data.append('specifications_id', form.dataset.specification_id)
+            // }
 
-            if (checkBox) {
-              checkBox.forEach(function (checkElement) {
-                if (checkElement.checked) {
-                  data.append(checkElement.name, checkElement.value);
-                }
-              });
-            }
-
-            if (form.dataset.product_id) {
-              data.append('product_id', form.dataset.product_id);
-            }
-
-            if (form.dataset.specification_id) {
-              data.append('specifications_id', form.dataset.specification_id);
-            }
 
             if (ckeditors != 'null') {
               Object.entries(ckeditors).forEach(function (_ref) {
@@ -2370,7 +2368,9 @@ var renderForm = function renderForm() {
               });
             }
 
-            var url = sendButton.dataset.url;
+            var url = form.action;
+            console.log('url', url);
+            console.log('data', data);
 
             var sendPostRequest = /*#__PURE__*/function () {
               var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2391,15 +2391,14 @@ var renderForm = function renderForm() {
                           (0,_spinner__WEBPACK_IMPORTED_MODULE_4__.stopWait)();
                           (0,_messages__WEBPACK_IMPORTED_MODULE_3__.showMessage)('success', response.data.message);
                           renderTable();
-                          (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)();
-                          var productId = document.getElementById("product_id").value;
-                          var specificationId = document.getElementById("specification_id").value;
-                          var contentId = document.getElementById("prodcut_id_content");
-                          forms.forEach(function (form) {
-                            form.dataset.product_id = productId;
-                            form.dataset.specification_id = specificationId;
-                            contentId.value = productId;
-                          });
+                          (0,_localeTags__WEBPACK_IMPORTED_MODULE_8__.renderLocaleTags)(); // let productId = document.getElementById("product_id").value;
+                          // let specificationId = document.getElementById("specification_id").value;
+                          // let contentId = document.getElementById("prodcut_id_content");
+                          // forms.forEach(form =>{
+                          //     form.dataset.product_id = productId;
+                          //     form.dataset.specification_id = specificationId;
+                          //     contentId.value = productId;
+                          //})
                         });
 
                       case 4:
@@ -2414,6 +2413,7 @@ var renderForm = function renderForm() {
                         if (_context.t0.response.status == '422') {
                           errors = _context.t0.response.data.errors;
                           errorMessage = '';
+                          console.log('send');
                           Object.keys(errors).forEach(function (key) {
                             errorMessage += '<li>' + errors[key] + '</li>';
                           });

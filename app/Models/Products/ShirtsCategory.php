@@ -9,7 +9,7 @@ class ShirtsCategory extends Model
     protected $table = 't_shirts_categories';
     protected $guarded = [];
 
-    public function products()
+    public function shirts()
     {
         return $this->hasMany(Products::class, 'category_id');
     }

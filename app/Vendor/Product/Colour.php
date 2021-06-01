@@ -2,79 +2,70 @@
 
 namespace App\Vendor\Product;
 
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
-use App\Http\Controllers\Controller;
-use App\Models\Products\ShirtsColours;
+use App\Models\Products\ShirtsColours as DBColour;
 use \Debugbar;
 
-class Colour extends Controller
+class Colour
 {
-    protected $colour;
-    protected $paginate;
+    protected $rel_parent;
 
-
-    function __construct(ShirtsColours $colour)
+    function __construct(DBColour $colours)
     {
-        $this->middleware('auth');
-        $this->colour = $colour;
+        $this->colours = $colours;
     }
 
-    public function index()
+    public function setParent($rel_parent)
     {
-        $view = View::make('admin.layout.colours')
-        ->with('colour', $this->colour)
-        ->with('colours', $this->colour->where('active', 1)->paginate($this->paginate));
-
-        if(request()->ajax()) {
-            
-            $sections = $view->renderSections(); 
-
-            return response()->json([
-                'table' => $sections['table'],
-                'form' => $sections['form'],
-            ]); 
-        }
-
-        return $view;
-
+        $this->rel_parent = $rel_parent;
     }
 
-    public function create()
+    public function getParent()
     {
-
-      
+        return $this->rel_parent;
     }
 
-    public function store(Request $request)
-    {            
-        foreach (request('colour') as $name => $value){
-            $colour = $this->colour->updateOrCreate([
-                'id' => request('id')],[
+
+    public function store($colour_id, $product_id)
+    {  
+
+        
+        foreach($colour_id as $colour_id_element => $value){
+
+        $colours[] = $this->colours->updateOrCreate([
                 'colour_id' => $value,
-                'product_id' => request('product_id'),
+                'product_id' => $product_id,
                 'active' => 1,
-            ]);
-                }
-
-        if (request('id')){
-            $message = \Lang::get('admin/faqs.faq-update');
-        }else{
-            $message = \Lang::get('admin/faqs.faq-create');
+                ]);
         }
 
-        $view = View::make('admin.layout.colours')
-        ->with('colours', $this->colour->where('active', 1)->paginate($this->paginate))
-        ->with('colour', $colour)
-        ->renderSections();        
+        return $colours;
+    }
 
-        return response()->json([
-            'table' => $view['table'],
-            'form' => $view['form'],
-            'message' => $message,
-            'id' => $colour->id,
-        ]);
+    public function show($product_id)
+    {
+        return DBColour::getValues($this->colours, $product_id)->pluck('colour_id')->all();  
+    }
+
+    public function delete($key)
+    {
+        if (DBLocale::getValues($this->rel_parent, $key)->count() > 0) {
+
+            DBLocale::getValues($this->rel_parent, $key)->delete();   
+        }
+    }
+
+    public function getIdByLanguage($key){ 
+        return DBLocale::getIdByLanguage($this->rel_parent, $this->language, $key)->pluck('value','tag')->all();
+    }
+
+    public function getAllByLanguage(){ 
+
+        $items = DBLocale::getAllByLanguage($this->rel_parent, $this->language)->get()->groupBy('key');
+
+        $items =  $items->map(function ($item) {
+            return $item->pluck('value','tag');
+        });
+
+        return $items;
     }
 }

@@ -59,9 +59,9 @@ return [
             'visibility' => 'public',
         ],
                
-        'products' => [
+        'shirts' => [
             'driver' => 'local',
-            'root' => storage_path('app/public/products'),
+            'root' => storage_path('app/public/shirts'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

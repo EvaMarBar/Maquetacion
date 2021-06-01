@@ -25,27 +25,29 @@ class Product
     }
 
 
-    public function store($product, $product_id)
+    public function store($product, $specification_id)
     {  
-        $final_price = ($product['original_price']*(1-($product['discount']/100)))*(1+($product['taxes']/100));
+        $price = ($product['original_price']*(1-($product['discount']/100)))*(1+($product['taxes']/100));
 
 
         $product[] = $this->product->updateOrCreate([
-                'product_id' => $product_id,
-                'rel_parent'=>$this->rel_parent],[
+                'id' => request('id'),
+                'specifications_id' => $specification_id],[
                 'original_price'=>$product['original_price'],
                 'discount'=>$product['discount'],
                 'taxes' =>$product['taxes'],
-                'price' => $final_price,
+                'price' => $price,
+                'visible' => request('visible'),
+                'active' => 1,
                     
             ]);
 
         return $product;
     }
 
-    public function show($product,  $product_id)
+    public function show($product_id)
     {
-        return DBProduct::getValues($this->rel_parent, $product_id)->pluck('original_price','original_price')->all();  
+        return DBProduct::getValues($product_id)->pluck('original_price','price')->all();  
     }
 
     public function delete($key)
@@ -70,3 +72,4 @@ class Product
 
         return $items;
     }
+}

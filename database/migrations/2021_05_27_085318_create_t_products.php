@@ -15,12 +15,11 @@ class CreateTProducts extends Migration
     {
         Schema::create('t_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('category_id')->nullable(true);
-            $table->unsignedInteger('specifications_id')->nullable(true);
-            $table->decimal('original_price',8, 2)->nullable(true);
-            $table->decimal('taxes', 8, 2)->nullable(true);
-            $table->decimal('discount', 4, 2)->nullable(true);
-            $table->decimal('price',8, 2)->nullable(true);
+            $table->unsignedInteger('specifications_id');
+            $table->decimal('original_price',8, 2);
+            $table->decimal('taxes', 8, 2);
+            $table->decimal('discount', 4, 2);
+            $table->decimal('price',8, 2);
             $table->boolean('visible');
             $table->boolean('active');
             $table->timestamps();

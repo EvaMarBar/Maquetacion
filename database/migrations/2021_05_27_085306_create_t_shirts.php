@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTShirtsSpecifications extends Migration
+class CreateTShirts extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreateTShirtsSpecifications extends Migration
      */
     public function up()
     {
-        Schema::create('t_shirts_specifications', function (Blueprint $table) {
+        Schema::create('t_shirts', function (Blueprint $table) {
             $table->id();
+            $table->unsignedInteger('category_id');
             $table->integer('product_number');
             $table->string('designer', 255);
             $table->boolean('active');

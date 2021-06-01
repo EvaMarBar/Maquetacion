@@ -2,80 +2,74 @@
 
 namespace App\Vendor\Product;
 
-use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Products\ShirtsSizes as DBSize;
 use Illuminate\Http\Request;
-use Jenssegers\Agent\Agent;
-use App\Http\Controllers\Controller;
-use App\Models\Products\ShirtsSizes;
 use \Debugbar;
 
-class Size extends Controller
+class Size
 {
-    protected $size;
-    // protected $agent;
-    protected $paginate;
+    protected $rel_parent;
 
-    function __construct(ShirtsSizes $size)
+    function __construct(DBSize $size)
     {
-        $this->middleware('auth');
         $this->size = $size;
     }
 
-    public function index()
+    public function setParent($rel_parent)
     {
-        $view = View::make('admin.layout.sizes')
-        ->with('size', $this->size)
-        ->with('sizes', $this->size->where('active', 1)->paginate($this->paginate));
-
-        if(request()->ajax()) {
-            
-            $sections = $view->renderSections(); 
-
-            return response()->json([
-                'table' => $sections['table'],
-                'form' => $sections['form'],
-            ]); 
-        }
-
-        return $view;
-
+        $this->rel_parent = $rel_parent;
     }
 
-    public function create()
+    public function getParent()
     {
-
-      
+        return $this->rel_parent;
     }
 
-    public function store(Request $request)
-    {            
-        foreach (request('size') as $name => $value){
-            $size = $this->size->updateOrCreate([
+
+    public function store($sizes, $product_id)
+    {  
+
+        foreach($sizes as $size){
+
+            $sizes[] = $this->size->updateOrCreate([
                 'id' => request('id')],[
-                'size_id' => $value,
-                'product_id' => request('product_id'),
+                'size_id' => $size,
+                'product_id' => $product_id,
                 'active' => 1,
-            ]);
-                }
-
-        if (request('id')){
-            $message = \Lang::get('admin/faqs.faq-update');
-        }else{
-            $message = \Lang::get('admin/faqs.faq-create');
+                ]);
+                // Debugbar::info($sizes);
+           
         }
 
-        $view = View::make('admin.layout.sizes')
-        ->with('sizes', $this->size->where('active', 1)->paginate($this->paginate))
-        ->with('size', $size)
-        ->renderSections();        
-
-        return response()->json([
-            'table' => $view['table'],
-            'form' => $view['form'],
-            'message' => $message,
-            'id' => $size->id,
-        ]);
+        return $size;
+        // Debugbar::info($size);
     }
 
+    public function show($product_id)
+    {
+        return DBSize::getValues($this->size, $product_id)->pluck('size_id')->all();  
+    }
+
+    public function delete($key)
+    {
+        if (DBLocale::getValues($this->rel_parent, $key)->count() > 0) {
+
+            DBLocale::getValues($this->rel_parent, $key)->delete();   
+        }
+    }
+
+    public function getIdByLanguage($key){ 
+        return DBLocale::getIdByLanguage($this->rel_parent, $this->language, $key)->pluck('value','tag')->all();
+    }
+
+    public function getAllByLanguage(){ 
+
+        $items = DBLocale::getAllByLanguage($this->rel_parent, $this->language)->get()->groupBy('key');
+
+        $items =  $items->map(function ($item) {
+            return $item->pluck('value','tag');
+        });
+
+        return $items;
+    }
 }

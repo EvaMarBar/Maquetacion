@@ -105,9 +105,9 @@ Route::group(['prefix' => 'admin'],function (){
     ]);
 
     // Route::get('/sliders/filter/{filters?}', 'App\Http\Controllers\Admin\SliderController@filter')->name('sliders_filter');
-    Route::resource('productos', 'App\Http\Controllers\Products\ShirtController', [
+    Route::resource('camisetas', 'App\Http\Controllers\Products\ShirtController', [
         'parameters' => [
-            'productos' => 'product', 
+            'camisetas' => 'shirt', 
         ],
         'names' => [
             'index' => 'shirts',

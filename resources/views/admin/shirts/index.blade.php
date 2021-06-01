@@ -1,12 +1,12 @@
 @php
-$route = 'product';
+$route = 'shirts';
 @endphp
 
 @extends('admin.layout.table_form')
 
 @section('table')
 
-@isset($products)
+@isset($shirts)
 
     <div class="table-container" id="table-container">
         <div class="row-title">
@@ -17,16 +17,16 @@ $route = 'product';
             <div class="column">Precio</div>
             <div class="column"></div>
         </div> 
-            @foreach($products as $product_element)
+            @foreach($shirts as $shirt_element)
                 <div class="table-row swipe-element">
-                    {{-- <div class="table-field-container swipe-front">
-                        <div class="table-field column">{{$product_element->specifications->product_number}}</div>
-                    </div> --}}
                     <div class="table-field-container swipe-front">
-                        <div class="table-field column">{{$product_element->price}}</div>
+                        <div class="table-field column">{{$shirt_element->product_number}}</div>
+                    </div>
+                    <div class="table-field-container swipe-front">
+                        <div class="table-field column">{{$shirt_element->price}}</div>
                     </div>
                     <div class="table-icons-container swipe-back column">
-                        <div class="table-icons edit-button right-swipe" data-url="{{route('products_show', ['product' => $product_element->id])}}">
+                        <div class="table-icons edit-button right-swipe" data-url="{{route('shirts_show', ['shirt' => $shirt_element->id])}}"">
                             <svg viewBox="0 0 24 24">
                                 <path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" />
                             </svg>
@@ -45,17 +45,17 @@ $route = 'product';
 
 @section('form')
 
-    @isset($product)
+    @isset($shirt)
 
         <div class="form-content">
         
 
-            <form class="admin-form" id="products-form" action="{{route("specification_store")}}" autocomplete="off">
+            <form class="admin-form" id="products-form" action="{{route("shirts_store")}}" autocomplete="off">
 
                 {{ csrf_field() }}
 
                 <input autocomplete="false" name="hidden" type="text" style="display:none;">
-                <input type="hidden" name="id" value="{{isset($product->id) ? $product->id : ''}}">
+                <input type="hidden" name="id" value="{{isset($shirt->id) ? $shirt->id : ''}}">
 
                 <div class="form-buttons">
                     <div class="button-create" id="button-create" data-url="">
@@ -65,7 +65,7 @@ $route = 'product';
                     </div>
                     <div class="visible">
                         <label class="switch">
-                            <input type="checkbox" name="visible" checked="checked" value="{{ isset($product->visible) ? $product->visible : '1' }}"  c+lass="input" id="switch">
+                            <input type="checkbox" name="visible" checked="checked" value="{{ isset($shirt->visible) ? $shirt->visible : '1' }}"  class="input" id="switch">
                             <span class="slider round"></span>
                         </label>                      
                     </div>
@@ -101,7 +101,7 @@ $route = 'product';
                                 <label for="product_number" class="label-highlight">Nº de Producto</label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="product_number"  value="{{isset($specification->product_number) ? $specification->product_number : ''}}" class="input-highlight">
+                                <input type="text" name="product_number"  value="{{isset($shirt->product_number) ? $shirt->product_number : ''}}" class="input-highlight">
                             </div>
                         </div>
             
@@ -110,7 +110,7 @@ $route = 'product';
                                 <label for="designer" class="label-highlight">Diseñador</label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="designer"  value="{{isset($specification->designer) ? $specification->designer : ''}}" class="input-highlight">
+                                <input type="text" name="designer"  value="{{isset($shirt->designer) ? $shirt->designer : ''}}" class="input-highlight">
                             </div>
                         </div>
                     </div>
@@ -119,7 +119,7 @@ $route = 'product';
                 
                         @foreach ($localizations as $localization)
                     
-                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="content" data-localetab="{{$localization->alias}}">
+                            <div class="locale-tab-panel {{ $loop->first ? 'locale-tab-active':'' }}" data-tab="specifications" data-localetab="{{$localization->alias}}">
                     
                                 <div class="one-column">
                                     <div class="form-group">
@@ -149,7 +149,7 @@ $route = 'product';
                                 <select name="category_id" data-placeholder="Seleccione una categoría" class="input-highlight">
                                     <option></option>
                                     @foreach($shirts_categories as $shirt_category)
-                                        <option name="product[category_id]" value="{{$shirt_category->id}}" {{$product->category_id == $shirt_category->id ? 'selected':''}} class="category_id">{{ $shirt_category->name }}</option>
+                                        <option name="category_id" value="{{$shirt_category->id}}" {{$shirt->category_id == $shirt_category->id ? 'selected':''}} class="category_id">{{ $shirt_category->name }}</option>
                                     @endforeach
                                 </select>                   
                             </div>
@@ -160,7 +160,7 @@ $route = 'product';
                                 <label for="name" class="label-highlight">Nombre</label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="name" value="{{isset($product->name) ? $product->name : ''}}"  class="input-highlight"  />
+                                <input type="text" name="name" value="{{isset($shirt->name) ? $shirt->name : ''}}"  class="input-highlight"  />
                             </div>
                         </div>
                     </div>
@@ -168,7 +168,7 @@ $route = 'product';
                     <div class="two-columns">
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="original_price" class="label-highlight">Precio inicial</label>
+                                <label for="product[original_price]" class="label-highlight">Precio inicial</label>
                             </div>
                             <div class="form-input">
                                 
@@ -177,7 +177,7 @@ $route = 'product';
                         </div>
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="taxes" class="label-highlight">Impuestos</label>
+                                <label for="product[taxes]" class="label-highlight">Impuestos</label>
                             </div>
                             <div class="form-input">
                                 <input type="text" name="product[taxes]" value="{{isset($product->taxes) ? $product->taxes : ''}}" class="input-highlight">
@@ -188,18 +188,18 @@ $route = 'product';
                     <div class="two-columns">
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="discount" class="label-highlight">Descuento</label>
+                                <label for="prodcut[discount]" class="label-highlight">Descuento</label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="prodcut[discount]" value="{{isset($product->discount) ? $product->discount : ''}}" class="input-highlight">
+                                <input type="text" name="product[discount]" value="{{isset($product->discount) ? $product->discount : ''}}" class="input-highlight">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="form-label">
-                                <label for="price" class="label-highlight">Precio</label>
+                                <label for="product[price]" class="label-highlight">Precio</label>
                             </div>
                             <div class="form-input">
-                                <input type="text" name="product[price]" value="{{isset($product->price) ? $product->price : ''}}" class="input-highlight">
+                                <input type="text" name="product[price]" value="{{isset($product->price) ? $product->price : ''}}" class="input-highlight" readonly>
                             </div>
                         </div>
                     </div>
@@ -247,7 +247,7 @@ $route = 'product';
                             </div>
                             <div class="form-input">
                                 @foreach($size as $size_element)
-                                    <input type="checkbox" name="size[name.{{$size_element->id}}]" class="checkbox" value="{{$size_element->id}}" class="size">
+                                    <input type="checkbox" name="size[{{$size_element->id}}]" class="checkbox" value="{{$size_element->id}}" class="checkbox">
                                     <label for="{{ $size_element->size }}">{{ $size_element->size }}</label><br>
                                 @endforeach
                             </div>
@@ -265,7 +265,7 @@ $route = 'product';
                             </div>
                             <div class="form-input">
                                 @foreach($colour as $colour_element)
-                                    <input type="checkbox" name="colour[name.{{$colour_element->id}}]" value="{{$colour_element->id}}" class="colour">
+                                    <input type="checkbox" name="colour[colour_id.{{$colour_element->id}}]" value="{{$colour_element->id}}" class="checkbox">
                                     <label for="{{$colour_element->colour}}">{{$colour_element->colour}}</label><br>
                                 @endforeach
                             </div>
@@ -293,7 +293,7 @@ $route = 'product';
                                             'type' => 'single', 
                                             'content' => 'featured', 
                                             'alias' => $localization->alias,
-                                            'files' => $product->images_featured_preview
+                                            'files' => $shirt->images_featured_preview
                                         ])
                                     </div>
                                 </div>
@@ -318,7 +318,7 @@ $route = 'product';
                                             'type' => 'collection', 
                                             'content' => 'grid', 
                                             'alias' => $localization->alias,
-                                            'files' => $product->images_grid_preview
+                                            'files' => $shirt->images_grid_preview
                                         ])
                                     </div>
                                 </div>
@@ -378,7 +378,7 @@ $route = 'product';
             </form>
 
             <div class="form-submit">
-                <div class="send">@lang('admin/faqs.faq-send')</div>
+                <button class="send">@lang('admin/faqs.faq-send')</button>
             </div>
                         
         </div>

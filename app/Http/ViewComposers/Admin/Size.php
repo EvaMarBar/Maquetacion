@@ -3,7 +3,7 @@
 namespace App\Http\ViewComposers\Admin;
 
 use Illuminate\View\View;
-use App\Models\Products\Sizes;
+use App\Vendor\Product\Models\Sizes;
 
 class Size
 {

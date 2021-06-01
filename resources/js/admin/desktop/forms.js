@@ -26,6 +26,7 @@ export let renderForm = () => {
 
         sendButtons.forEach(sendButton =>{
         sendButton.addEventListener("click", (event) => {
+            console.log('click')
     
             event.preventDefault();
             
@@ -40,22 +41,22 @@ export let renderForm = () => {
                         data.set('visible',0);
                     }
 
-                    if(checkBox){
+                    // if(checkBox){
 
-                        checkBox.forEach(checkElement =>{
-                            if(checkElement.checked){
-                                data.append(checkElement.name, checkElement.value);
-                            }
-                        })
+                    //     checkBox.forEach(checkElement =>{
+                    //         if(checkElement.checked){
+                    //             data.append(checkElement.name, checkElement.value);
+                    //         }
+                    //     })
                      
-                    }
+                    // }
 
-                    if(form.dataset.product_id){
-                        data.append('product_id', form.dataset.product_id)
-                    }
-                    if(form.dataset.specification_id){
-                        data.append('specifications_id', form.dataset.specification_id)
-                    }
+                    // if(form.dataset.product_id){
+                    //     data.append('product_id', form.dataset.product_id)
+                    // }
+                    // if(form.dataset.specification_id){
+                    //     data.append('specifications_id', form.dataset.specification_id)
+                    // }
 
                     if( ckeditors != 'null'){
         
@@ -64,7 +65,9 @@ export let renderForm = () => {
                         });
                     }
                     
-                    let url = sendButton.dataset.url;
+                    let url = form.action;
+                    console.log('url', url);
+                    console.log('data', data)
                     let sendPostRequest = async () => {
         
                         startWait();
@@ -82,15 +85,16 @@ export let renderForm = () => {
                                 showMessage('success', response.data.message);
                                 renderTable();
                                 renderLocaleTags();
-                                let productId = document.getElementById("product_id").value;
-                                let specificationId = document.getElementById("specification_id").value;
-                                let contentId = document.getElementById("prodcut_id_content");
-                                forms.forEach(form =>{
-                                    form.dataset.product_id = productId;
-                                    form.dataset.specification_id = specificationId;
-                                    contentId.value = productId;
-                                })
+                                // let productId = document.getElementById("product_id").value;
+                                // let specificationId = document.getElementById("specification_id").value;
+                                // let contentId = document.getElementById("prodcut_id_content");
+                                // forms.forEach(form =>{
+                                //     form.dataset.product_id = productId;
+                                //     form.dataset.specification_id = specificationId;
+                                //     contentId.value = productId;
+                                //})
                     
+                               
                             });
                             
                         } catch (error) {
@@ -101,7 +105,7 @@ export let renderForm = () => {
             
                                 let errors = error.response.data.errors;      
                                 let errorMessage = '';
-            
+                                console.log('send')
                                 Object.keys(errors).forEach(function(key) {
                                     errorMessage += '<li>' + errors[key] + '</li>';
                                 })

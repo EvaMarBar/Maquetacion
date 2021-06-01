@@ -1,0 +1,64 @@
+.shirt{
+    display: flex;
+    width: 90%;
+    margin: 1em;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shirt-title{
+
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+    grid-column: span 4;
+    margin: 0.5em;
+    padding: 0.5em;
+
+}
+
+.shirt-specifies{
+    display:flex;
+    justify-content: center;
+}
+.shirt-description{
+
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+    width: 70%;
+    margin: 0.5em;
+    padding: 0.5em;
+    .shirt-specifications{
+        display: table-row;
+        border: solid 1px black;
+    }
+
+}
+.shirt-image{
+
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+    width: 30%;
+    margin: 0.5em;
+    padding: 0.5em;
+
+    .shirt-description-image-grid{
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+.shirt-specifications{
+
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+    grid-area: foot;
+}
+
+.shirt-size{
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+}
+.shirt-colour{
+    border: solid 1px black;
+    background-color: rgb(236, 236, 236);
+}

@@ -3,7 +3,7 @@
 namespace App\Http\ViewComposers\Admin;
 
 use Illuminate\View\View;
-use App\Models\Products\Colours;
+use App\Vendor\Product\Models\Colours;
 
 class Colour
 {

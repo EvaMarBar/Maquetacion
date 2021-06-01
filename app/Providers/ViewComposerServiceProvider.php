@@ -42,19 +42,27 @@ class ViewComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Admin\LocaleGroups'
         );
         view()->composer([
-            'admin.products.index'],
+            'admin.shirts.index'],
             'App\Http\ViewComposers\Admin\ShirtCategories'
         );
         view()->composer([
-            'admin.products.index'],
-            'App\Http\ViewComposers\Admin\ShirtSpecifications'
+            'admin.shirts.index'],
+            'App\Http\ViewComposers\Admin\Shirts'
         );
         view()->composer([
-            'admin.products.index'],
+            'admin.shirts.index'],
             'App\Http\ViewComposers\Admin\Size'
         );
         view()->composer([
-            'admin.products.index'],
+            'admin.shirts.index'],
+            'App\Http\ViewComposers\Admin\Colour'
+        );
+        view()->composer([
+            'front.shirt*'],
+            'App\Http\ViewComposers\Admin\Size'
+        );
+        view()->composer([
+            'front.shirt*'],
             'App\Http\ViewComposers\Admin\Colour'
         );
     }
