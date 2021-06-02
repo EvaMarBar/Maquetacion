@@ -1903,6 +1903,87 @@ window.requestAnimFrame = function () {
 
 /***/ }),
 
+/***/ "./resources/js/front/desktop/carousel.js":
+/*!************************************************!*\
+  !*** ./resources/js/front/desktop/carousel.js ***!
+  \************************************************/
+/***/ (() => {
+
+var carousel = document.querySelector('.carousel');
+var cells = carousel.querySelectorAll('.carousel__cell');
+var cellCount; // cellCount set from cells-range input value
+
+var selectedIndex = 0;
+var cellWidth = carousel.offsetWidth;
+var cellHeight = carousel.offsetHeight;
+var isHorizontal = true;
+var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
+var radius, theta; // console.log( cellWidth, cellHeight );
+
+function rotateCarousel() {
+  var angle = theta * selectedIndex * -1;
+  carousel.style.transform = 'translateZ(' + -radius + 'px) ' + rotateFn + '(' + angle + 'deg)';
+}
+
+var prevButton = document.querySelector('.previous-button');
+prevButton.addEventListener('click', function () {
+  selectedIndex--;
+  rotateCarousel();
+});
+var nextButton = document.querySelector('.next-button');
+nextButton.addEventListener('click', function () {
+  selectedIndex++;
+  rotateCarousel();
+});
+var cellsRange = document.querySelector('.cells-range');
+cellsRange.addEventListener('change', changeCarousel);
+cellsRange.addEventListener('input', changeCarousel);
+
+function changeCarousel() {
+  cellCount = cellsRange.value;
+  theta = 360 / cellCount;
+  var cellSize = isHorizontal ? cellWidth : cellHeight;
+  radius = Math.round(cellSize / 2 / Math.tan(Math.PI / cellCount));
+
+  for (var i = 0; i < cells.length; i++) {
+    var cell = cells[i];
+
+    if (i < cellCount) {
+      // visible cell
+      cell.style.opacity = 1;
+      var cellAngle = theta * i;
+      cell.style.transform = rotateFn + '(' + cellAngle + 'deg) translateZ(' + radius + 'px)';
+    } else {
+      // hidden cell
+      cell.style.opacity = 0;
+      cell.style.transform = 'none';
+    }
+  }
+
+  rotateCarousel();
+}
+
+var orientationRadios = document.querySelectorAll('input[name="orientation"]');
+
+(function () {
+  for (var i = 0; i < orientationRadios.length; i++) {
+    var radio = orientationRadios[i];
+    radio.addEventListener('change', onOrientationChange);
+  }
+})();
+
+function onOrientationChange() {
+  var checkedRadio = document.querySelector('input[name="orientation"]:checked');
+  isHorizontal = checkedRadio.value == 'horizontal';
+  rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
+  changeCarousel();
+} // set initials
+
+
+onOrientationChange();
+
+/***/ }),
+
 /***/ "./resources/js/front/desktop/faqs.js":
 /*!********************************************!*\
   !*** ./resources/js/front/desktop/faqs.js ***!
@@ -2007,6 +2088,52 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
 }();
 
 sendFingerprintRequest();
+
+/***/ }),
+
+/***/ "./resources/js/front/desktop/shirt.js":
+/*!*********************************************!*\
+  !*** ./resources/js/front/desktop/shirt.js ***!
+  \*********************************************/
+/***/ (() => {
+
+var shirtColours = document.querySelectorAll('.shirt-colour');
+var shirtSizes = document.querySelectorAll('.shirt-size');
+var cart = document.getElementById('cart');
+var cartAdded = document.getElementById('cart-added');
+var wishList = document.getElementById('wish-list');
+shirtColours.forEach(function (shirtColour) {
+  shirtColour.addEventListener('click', function () {
+    var activeColours = document.querySelectorAll('.colour-active');
+    activeColours.forEach(function (activeColour) {
+      activeColour.classList.remove('colour-active');
+    });
+    shirtColour.classList.add('colour-active');
+  });
+});
+shirtSizes.forEach(function (shirtSize) {
+  shirtSize.addEventListener('click', function () {
+    var activeSizes = document.querySelectorAll('.size-active');
+    activeSizes.forEach(function (activeSize) {
+      activeSize.classList.remove('size-active');
+      console.log(activeSizes);
+    });
+    shirtSize.classList.add('size-active');
+    console.log('click');
+    console.log(shirtSize.className);
+  });
+});
+cart.addEventListener('click', function () {
+  cartAdded.classList.add('active');
+  cart.classList.remove('active');
+});
+cartAdded.addEventListener('click', function () {
+  cart.classList.add('active');
+  cartAdded.classList.remove('active');
+});
+wishList.addEventListener('click', function () {
+  wishList.classList.toggle('active');
+});
 
 /***/ }),
 
@@ -20365,6 +20492,10 @@ var __webpack_exports__ = {};
 __webpack_require__(/*! ../../bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
+
+__webpack_require__(/*! ./shirt */ "./resources/js/front/desktop/shirt.js");
+
+__webpack_require__(/*! ./carousel */ "./resources/js/front/desktop/carousel.js");
 
 __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
 })();

@@ -36,7 +36,6 @@ class ShirtController extends Controller
             $shirts = $this->shirt
                     ->with('image_featured_desktop')
                     ->where('active', 1)
-                    ->where('visible', 1)
                     ->get();
         }
         
@@ -44,7 +43,6 @@ class ShirtController extends Controller
             $shirts = $this->shirt
                     ->with('image_featured_mobile')
                     ->where('active', 1)
-                    ->where('visible', 1)
                     ->get();
         }
 
@@ -84,7 +82,7 @@ class ShirtController extends Controller
                     ->find($seo->key);
             }
 
-            $shirt['locale'] = $shirt->locale->pluck('value','tag');
+        $shirt['locale'] = $shirt->locale->pluck('value','tag');
 
             $view = View::make('front.pages.shirts.single')->with('shirt', $shirt);
 

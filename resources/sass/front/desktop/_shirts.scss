@@ -1,64 +1,34 @@
-.shirt{
+.shirts-multiple{
     display: flex;
-    width: 90%;
-    margin: 1em;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+}
+.shirt-multiple{
+    display: flex;
+    justify-content: left;
+    margin: 0.5em auto;
+    position:relative;
+
 }
 
-.shirt-title{
+.shirts-multiple-title{
 
     border: solid 1px black;
-    background-color: rgb(236, 236, 236);
-    grid-column: span 4;
-    margin: 0.5em;
-    padding: 0.5em;
-
+    text-align: center;
 }
 
-.shirt-specifies{
-    display:flex;
-    justify-content: center;
-}
-.shirt-description{
-
+.shirt-multiple-title{
+    height: max-content;
     border: solid 1px black;
-    background-color: rgb(236, 236, 236);
-    width: 70%;
-    margin: 0.5em;
-    padding: 0.5em;
-    .shirt-specifications{
-        display: table-row;
-        border: solid 1px black;
-    }
+    margin: 0.5em 0em;
 
 }
-.shirt-image{
-
-    border: solid 1px black;
-    background-color: rgb(236, 236, 236);
-    width: 30%;
-    margin: 0.5em;
-    padding: 0.5em;
-
-    .shirt-description-image-grid{
-        display: flex;
-        flex-direction: row;
-    }
-}
-
-.shirt-specifications{
-
-    border: solid 1px black;
-    background-color: rgb(236, 236, 236);
-    grid-area: foot;
-}
-
-.shirt-size{
-    border: solid 1px black;
-    background-color: rgb(236, 236, 236);
-}
-.shirt-colour{
-    border: solid 1px black;
-    background-color: rgb(236, 236, 236);
+.shirt-description-image-grid{
+    display: flex;
+    flex-direction: row;
+    width: 250px;
+    height: 270px;
+    overflow: hidden;
+ 
 }
