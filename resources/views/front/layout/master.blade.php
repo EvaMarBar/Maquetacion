@@ -31,10 +31,19 @@
             </h1>
         </header>
 
-        <div class="main">
+        @if(isset($filters))
+        @include('front.layout.table_filters', [
+            'route' => $route, 
+            'filters' => $filters, 
+            'order' => $order
+            ])
+        @endif
+
+        <div class="main" id="content">
             @yield('content')
         </div>
 
         @include("front.layout.partials.js")
+    </body>
    
         

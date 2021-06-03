@@ -1,5 +1,6 @@
 require('../../bootstrap');
 require('./faqs');
 require('./shirt');
-require('./carousel');
+// require('./filterTable');
+// require('./carousel');
 require('./fingerprint');

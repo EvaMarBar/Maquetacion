@@ -29,6 +29,7 @@ class ShirtController extends Controller
 
     public function index()
     {        
+        Debugbar::info('index');
         $seo = $this->locale_slug_seo->getByKey(Route::currentRouteName());
 
         if($this->agent->isDesktop()){
@@ -56,6 +57,7 @@ class ShirtController extends Controller
         $view = View::make('front.pages.shirts.index')
                 ->with('shirts', $shirts) 
                 ->with('seo', $seo );
+
         
         return $view;
     }
@@ -63,6 +65,7 @@ class ShirtController extends Controller
     public function show($slug)
     {      
         $seo = $this->locale_slug_seo->getIdByLanguage($slug);
+        Debugbar::info('show');
 
         if(isset($seo->key)){
 
@@ -83,13 +86,73 @@ class ShirtController extends Controller
             }
 
         $shirt['locale'] = $shirt->locale->pluck('value','tag');
+        
+        $view = View::make('front.pages.shirts.single')->with('shirt', $shirt);
+    
+        if(request()->ajax()) {
+    
+            $sections = $view->renderSections(); 
 
-            $view = View::make('front.pages.shirts.single')->with('shirt', $shirt);
+            return response()->json([
+                'product' => $sections['content'],
+            ]); 
+            
 
-            return $view;
+        }
+
+        return $view;
+       
 
         }else{
             return response()->view('errors.404', [], 404);
         }
     }
+    public function filter(Request $request, $filters = null){
+
+        $filters = json_decode($request->input('filters')); 
+        
+        $query = $this->shirt->query();
+
+        if($filters != null){
+           
+            $query->when($filters->category_id, function ($q, $category_id) {
+
+                if($category_id == 'all'){
+                    return $q;
+                }
+                else {
+                    return $q->where('category_id', $category_id);
+                }
+            });
+
+            $query->when($filters->search, function ($q, $search) {
+
+                if($search == null){
+                    return $q;
+                }
+                else {
+                    return $q->where('t_shirts.title', 'like', "%$search%");
+                }
+            });
+
+
+            $query->when($filters->order, function ($q, $order) use ($filters) {
+
+                $q->orderBy($order, $filters->direction);
+            });
+
+
+        }
+
+        $shirts = $query->where('t_shirts.active', 1)->paginate($this->paginate)->appends(['filters' => json_encode($filters)]); 
+
+        $view = View::make('front.pages.shirts.index')
+            ->with('shirts', $shirts)
+            ->renderSections();
+
+        return response()->json([
+            'product' => $view['content'],
+        ]);
+    }
+
 }

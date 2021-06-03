@@ -20,7 +20,7 @@ class LocaleSlugSeo extends Model
         return $this->belongsTo(LocaleSlugSeo::class, 'parent_slug')->with('parents');
     }
 
-    public function scopeGetValues($query, $rel_parent, $key){
+    public function scopeGetValues($query, $rel_parent, $key, $language){
         
         return $query->where('key', $key)
             ->where('rel_parent', $rel_parent);

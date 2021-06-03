@@ -38,6 +38,7 @@ Route::group(['prefix' => $localizationseo->setLocale(),
 
     Route::get($localizationseo->transRoute('routes.front_products'), 'App\Http\Controllers\Front\ShirtController@index')->name('front_products');
     Route::get($localizationseo->transRoute('routes.front_product'), 'App\Http\Controllers\Front\ShirtController@show')->name('front_product');
+    Route::get($localizationseo->transRoute('routes.front_product_filter'), 'App\Http\Controllers\Front\ShirtController@filter')->name('shirts_filter');
 });
 
 Route::group(['prefix' => 'admin'],function (){

@@ -1903,87 +1903,6 @@ window.requestAnimFrame = function () {
 
 /***/ }),
 
-/***/ "./resources/js/front/desktop/carousel.js":
-/*!************************************************!*\
-  !*** ./resources/js/front/desktop/carousel.js ***!
-  \************************************************/
-/***/ (() => {
-
-var carousel = document.querySelector('.carousel');
-var cells = carousel.querySelectorAll('.carousel__cell');
-var cellCount; // cellCount set from cells-range input value
-
-var selectedIndex = 0;
-var cellWidth = carousel.offsetWidth;
-var cellHeight = carousel.offsetHeight;
-var isHorizontal = true;
-var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
-var radius, theta; // console.log( cellWidth, cellHeight );
-
-function rotateCarousel() {
-  var angle = theta * selectedIndex * -1;
-  carousel.style.transform = 'translateZ(' + -radius + 'px) ' + rotateFn + '(' + angle + 'deg)';
-}
-
-var prevButton = document.querySelector('.previous-button');
-prevButton.addEventListener('click', function () {
-  selectedIndex--;
-  rotateCarousel();
-});
-var nextButton = document.querySelector('.next-button');
-nextButton.addEventListener('click', function () {
-  selectedIndex++;
-  rotateCarousel();
-});
-var cellsRange = document.querySelector('.cells-range');
-cellsRange.addEventListener('change', changeCarousel);
-cellsRange.addEventListener('input', changeCarousel);
-
-function changeCarousel() {
-  cellCount = cellsRange.value;
-  theta = 360 / cellCount;
-  var cellSize = isHorizontal ? cellWidth : cellHeight;
-  radius = Math.round(cellSize / 2 / Math.tan(Math.PI / cellCount));
-
-  for (var i = 0; i < cells.length; i++) {
-    var cell = cells[i];
-
-    if (i < cellCount) {
-      // visible cell
-      cell.style.opacity = 1;
-      var cellAngle = theta * i;
-      cell.style.transform = rotateFn + '(' + cellAngle + 'deg) translateZ(' + radius + 'px)';
-    } else {
-      // hidden cell
-      cell.style.opacity = 0;
-      cell.style.transform = 'none';
-    }
-  }
-
-  rotateCarousel();
-}
-
-var orientationRadios = document.querySelectorAll('input[name="orientation"]');
-
-(function () {
-  for (var i = 0; i < orientationRadios.length; i++) {
-    var radio = orientationRadios[i];
-    radio.addEventListener('change', onOrientationChange);
-  }
-})();
-
-function onOrientationChange() {
-  var checkedRadio = document.querySelector('input[name="orientation"]:checked');
-  isHorizontal = checkedRadio.value == 'horizontal';
-  rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
-  changeCarousel();
-} // set initials
-
-
-onOrientationChange();
-
-/***/ }),
-
 /***/ "./resources/js/front/desktop/faqs.js":
 /*!********************************************!*\
   !*** ./resources/js/front/desktop/faqs.js ***!
@@ -2095,45 +2014,148 @@ sendFingerprintRequest();
 /*!*********************************************!*\
   !*** ./resources/js/front/desktop/shirt.js ***!
   \*********************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "renderColours": () => (/* binding */ renderColours),
+/* harmony export */   "renderSizes": () => (/* binding */ renderSizes),
+/* harmony export */   "renderCart": () => (/* binding */ renderCart),
+/* harmony export */   "renderWishList": () => (/* binding */ renderWishList),
+/* harmony export */   "renderLinkButtons": () => (/* binding */ renderLinkButtons),
+/* harmony export */   "renderNextPhoto": () => (/* binding */ renderNextPhoto)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var shirtColours = document.querySelectorAll('.shirt-colour');
 var shirtSizes = document.querySelectorAll('.shirt-size');
 var cart = document.getElementById('cart');
 var cartAdded = document.getElementById('cart-added');
 var wishList = document.getElementById('wish-list');
-shirtColours.forEach(function (shirtColour) {
-  shirtColour.addEventListener('click', function () {
-    var activeColours = document.querySelectorAll('.colour-active');
-    activeColours.forEach(function (activeColour) {
-      activeColour.classList.remove('colour-active');
+var linkButtons = document.querySelectorAll('.shirt-link');
+var nextPhotoButtons = document.querySelectorAll('.next-photo');
+var renderColours = function renderColours() {
+  if (shirtColours) {
+    shirtColours.forEach(function (shirtColour) {
+      shirtColour.addEventListener('click', function () {
+        var activeColours = document.querySelectorAll('.colour-active');
+        activeColours.forEach(function (activeColour) {
+          activeColour.classList.remove('colour-active');
+        });
+        shirtColour.classList.add('colour-active');
+      });
     });
-    shirtColour.classList.add('colour-active');
-  });
-});
-shirtSizes.forEach(function (shirtSize) {
-  shirtSize.addEventListener('click', function () {
-    var activeSizes = document.querySelectorAll('.size-active');
-    activeSizes.forEach(function (activeSize) {
-      activeSize.classList.remove('size-active');
-      console.log(activeSizes);
+  }
+};
+renderColours();
+var renderSizes = function renderSizes() {
+  if (shirtSizes) {
+    shirtSizes.forEach(function (shirtSize) {
+      shirtSize.addEventListener('click', function () {
+        var activeSizes = document.querySelectorAll('.size-active');
+        activeSizes.forEach(function (activeSize) {
+          activeSize.classList.remove('size-active');
+          console.log(activeSizes);
+        });
+        shirtSize.classList.add('size-active');
+        console.log('click');
+        console.log(shirtSize.className);
+      });
     });
-    shirtSize.classList.add('size-active');
-    console.log('click');
-    console.log(shirtSize.className);
-  });
-});
-cart.addEventListener('click', function () {
-  cartAdded.classList.add('active');
-  cart.classList.remove('active');
-});
-cartAdded.addEventListener('click', function () {
-  cart.classList.add('active');
-  cartAdded.classList.remove('active');
-});
-wishList.addEventListener('click', function () {
-  wishList.classList.toggle('active');
-});
+  }
+};
+renderSizes();
+var renderCart = function renderCart() {
+  if (cart) {
+    cart.addEventListener('click', function () {
+      cartAdded.classList.add('active');
+      cart.classList.remove('active');
+    });
+    cartAdded.addEventListener('click', function () {
+      cart.classList.add('active');
+      cartAdded.classList.remove('active');
+    });
+  }
+};
+renderCart();
+var renderWishList = function renderWishList() {
+  if (wishList) {
+    wishList.addEventListener('click', function () {
+      wishList.classList.toggle('active');
+    });
+  }
+};
+renderWishList();
+var renderLinkButtons = function renderLinkButtons() {
+  if (linkButtons) {
+    linkButtons.forEach(function (linkButton) {
+      linkButton.addEventListener('click', function () {
+        console.log('click');
+        var url = linkButton.dataset.url;
+        var content = document.getElementById('content');
+
+        var sendProductRequest = /*#__PURE__*/function () {
+          var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+            return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+              while (1) {
+                switch (_context.prev = _context.next) {
+                  case 0:
+                    try {
+                      axios.get(url).then(function (response) {
+                        content.innerHTML = response.data.product;
+                        window.history.pushState('', '', url);
+                        renderColours();
+                      });
+                    } catch (error) {
+                      console.error(error);
+                    }
+
+                  case 1:
+                  case "end":
+                    return _context.stop();
+                }
+              }
+            }, _callee);
+          }));
+
+          return function sendProductRequest() {
+            return _ref.apply(this, arguments);
+          };
+        }();
+
+        renderColours();
+        sendProductRequest();
+      });
+    });
+  }
+};
+renderLinkButtons();
+var renderNextPhoto = function renderNextPhoto() {
+  if (nextPhotoButtons) {
+    var second = nextPhotoButtons.forEach(function (nextPhoto) {
+      nextPhoto.addEventListener('click', function () {
+        if (second) {
+          nextPhoto.style.transform = "translateX(0px)";
+          second = false;
+          console.log(second);
+        } else {
+          nextPhoto.style.transform = "translateX(-250px)";
+          second = true;
+          console.log(second);
+        }
+      });
+    });
+    renderLinkButtons();
+  }
+};
+renderNextPhoto();
 
 /***/ }),
 
@@ -20493,9 +20515,9 @@ __webpack_require__(/*! ../../bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./faqs */ "./resources/js/front/desktop/faqs.js");
 
-__webpack_require__(/*! ./shirt */ "./resources/js/front/desktop/shirt.js");
+__webpack_require__(/*! ./shirt */ "./resources/js/front/desktop/shirt.js"); // require('./filterTable');
+// require('./carousel');
 
-__webpack_require__(/*! ./carousel */ "./resources/js/front/desktop/carousel.js");
 
 __webpack_require__(/*! ./fingerprint */ "./resources/js/front/desktop/fingerprint.js");
 })();

@@ -32,11 +32,9 @@
                     <div class="shirt-images">
                         @isset($shirt->image_grid_desktop)
                             <div class="shirt-description-image-grid">
-                                @foreach ($shirt->image_grid_desktop as $image)
                                     <div class="shirt-description-image-grid-item">
-                                        <img src="{{Storage::url($image->path)}}" alt="{{$image->alt}}" title="{{$image->title}}" />
+                                        <img src="{{Storage::url($shirt->image_grid_desktop->last()->path)}}" alt="{{$shirt->image_grid_desktop->last()->alt}}" title="{{$shirt->image_grid_desktop->last()->title}}" />
                                     </div>
-                                @endforeach
                             </div>
                         @endif
                         <div class="wish-list" id="wish-list">
