@@ -44,7 +44,6 @@ class LocaleSlugSeo
   
 
         $locale_seo = $this->locale_seo->where('key', $locale_key)->first();
-        Debugbar::info($locale_seo);
 
         foreach ($seo as $rel_anchor => $value){
          

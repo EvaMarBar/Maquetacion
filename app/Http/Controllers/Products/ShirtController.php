@@ -91,7 +91,6 @@ class ShirtController extends Controller
 
         if(request('size')){
             $size = $this->size->store(request('size'), $shirt->id);
-            Debugbar::info($size);
         }
         
 

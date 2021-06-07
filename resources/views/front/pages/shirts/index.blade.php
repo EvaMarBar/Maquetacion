@@ -16,7 +16,7 @@
 
     @if($agent->isMobile())
         <div class="page-section">
-            @include("front.shirts.faqs.mobile.shirt")
+            @include("front.pages.shirts.mobile.shirts")
         </div>
     @endif
 @endsection

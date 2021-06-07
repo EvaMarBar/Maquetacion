@@ -4,8 +4,25 @@
 @import "faqs.scss";
 @import "shirts.scss";
 @import "shirt.scss";
-@import "carousel.scss";
 @import "front-form.scss";
 @import "table-filter.scss";
+@import "menu.scss";
 @import "master.scss";
+@import "layout/topbar";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/bottombar";
+
+
+
+
+
+
+
+
 @import "../../normalize";
+@import "../../mixins";
+@import "../../contents";
+// @import "../../typography";
+@import "../../variables";
+

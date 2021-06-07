@@ -1,0 +1,58 @@
+.header-fixed{
+	padding: 0% 5%;
+	height: max-content;
+	width: 90%;
+	z-index: 15;
+	background-color: rgb(236, 157, 117);
+	box-shadow: 2px 1px 1px #ddcfc6;
+
+	&.blur{
+		background-color: rgba(73, 73, 73, 0.8);
+		overflow: hidden;
+
+		h4{
+			color:black;
+		}
+	}
+}
+
+.header-fixed .header-container{
+
+	display: flex;
+	justify-content: space-between;
+	height: 100%;
+
+	.header-logo{
+		width: max-content;
+		z-index: 20;
+		padding: 0.5em;
+	}
+
+	.header-menu{
+		display: flex;
+		width: max-content;
+		z-index: 20;
+
+		.booking-button{
+			
+			margin: auto;
+			margin-left: 2em;
+		}
+	}
+}
+
+.header-fixed .header-bar{
+
+	height: 3.5em;
+	overflow: hidden;
+	padding-top: 1em;
+	width: 100%;
+	z-index: 20;
+
+	&.blur{
+		background-color: grey;
+		filter: blur(2px);
+		opacity: 0.8;
+		overflow: hidden;
+	}
+}

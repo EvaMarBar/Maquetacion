@@ -1,15 +1,20 @@
 import {openModal, openImageModal, updateImageModal} from './modalImage';
 
+
+
 export let renderUploadImage = () => {
+
 
     let inputElements = document.querySelectorAll(".upload-image-input");
     let uploadImages = document.querySelectorAll(".upload-image");
+   
 
     inputElements.forEach(inputElement => {
-    
+      
         uploadImage(inputElement);
+       
     });
-
+   
     uploadImages.forEach(uploadImage => {
 
         uploadImage.addEventListener("click", (e) => {
@@ -23,7 +28,9 @@ function uploadImage(inputElement){
 
     let uploadElement = inputElement.parentElement;
 
+ 
     uploadElement.addEventListener("click", (e) => {
+    
         
         let thumbnailElement = uploadElement.querySelector(".upload-image-thumb");
 

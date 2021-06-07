@@ -22,14 +22,9 @@
     </head>
 
     <body>
-        <header>
-            <h1>
-                <svg style="width:24px;height:24px" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
-                </svg>
-                Cabecera
-            </h1>
-        </header>
+        @include("front.layout.partials.topbar")
+        @include("front.layout.partials.header_fixed")
+   
 
         @if(isset($filters))
         @include('front.layout.table_filters', [
@@ -43,6 +38,8 @@
             @yield('content')
         </div>
 
+        @include("front.layout.partials.footer")
+        @include("front.layout.partials.bottombar")
         @include("front.layout.partials.js")
     </body>
    

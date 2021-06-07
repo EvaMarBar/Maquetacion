@@ -37,12 +37,10 @@ class Size
                 'product_id' => $product_id,
                 'active' => 1,
                 ]);
-                // Debugbar::info($sizes);
            
         }
 
         return $size;
-        // Debugbar::info($size);
     }
 
     public function show($product_id)

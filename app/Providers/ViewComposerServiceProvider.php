@@ -65,6 +65,16 @@ class ViewComposerServiceProvider extends ServiceProvider
             'front.shirt*'],
             'App\Http\ViewComposers\Admin\Colour'
         );
+        view()->composer([
+            'front.layout.partials.header_fixed',
+            'front.pages.login.index'],
+            'App\Http\ViewComposers\Front\Logo'
+        );
+
+        view()->composer(
+            'front.layout.partials.footer',
+            'App\Http\ViewComposers\Front\LogoLight'
+        );
     }
 
     public function register()

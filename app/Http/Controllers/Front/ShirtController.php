@@ -29,7 +29,7 @@ class ShirtController extends Controller
 
     public function index()
     {        
-        Debugbar::info('index');
+
         $seo = $this->locale_slug_seo->getByKey(Route::currentRouteName());
 
         if($this->agent->isDesktop()){
@@ -65,7 +65,6 @@ class ShirtController extends Controller
     public function show($slug)
     {      
         $seo = $this->locale_slug_seo->getIdByLanguage($slug);
-        Debugbar::info('show');
 
         if(isset($seo->key)){
 
