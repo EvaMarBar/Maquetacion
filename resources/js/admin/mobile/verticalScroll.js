@@ -94,9 +94,6 @@ export function scrollWindowElement (element){
         scrollWindowElement.style.top = transformStyle;
         scrollWindowElement.style.transition = 'all 300ms ease-out';
 
-        //console.log(scrollWindowElement.offsetTop);
-        //console.log(scrollWindowElement.getBoundingClientRect());
-
         changeState();
     }
 

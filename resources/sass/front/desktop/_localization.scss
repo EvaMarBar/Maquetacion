@@ -1,0 +1,12 @@
+.localization{
+    cursor: pointer;
+    position: relative;
+    margin-top: 0.75em;
+    width: 1.5em;
+    height: 1em;
+
+    &:hover{
+        box-shadow: 0px 7px 7px rgba(223, 238, 243, 0.3);
+    }
+}
+

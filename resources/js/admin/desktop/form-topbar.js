@@ -49,7 +49,6 @@ if(menuButton != null){
                     })
                     
             pannelForm.nextElementSibling.classList.add("active");
-            console.log(pannelForm.className)
         })
     })
 }

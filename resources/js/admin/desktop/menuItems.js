@@ -20,8 +20,7 @@ export let renderMenuItems = () => {
                 let language = createButton.dataset.language; 
                 let menu = createButton.dataset.menu; 
                 let modalContainer = document.getElementById('menu-item-modal-container');
-                console.log('click2')
-
+            
                 let sendMenuItemRequest = async () => {
 
                     try {
@@ -36,7 +35,6 @@ export let renderMenuItems = () => {
                             document.getElementById('menu-id').value = menu;
                             renderSelects();
                             renderMenuItemForm();
-                            console.log('send')
 
                             setTimeout(function(){ 
                                 openModal()}

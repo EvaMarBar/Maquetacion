@@ -2098,7 +2098,6 @@ if (menuButton != null) {
         activeElement.classList.remove("active");
       });
       pannelForm.nextElementSibling.classList.add("active");
-      console.log(pannelForm.className);
     });
   });
 }
@@ -2180,7 +2179,6 @@ var renderForm = function renderForm() {
   if (sendButtons) {
     sendButtons.forEach(function (sendButton) {
       sendButton.addEventListener("click", function (event) {
-        console.log('click');
         event.preventDefault();
         forms.forEach(function (form) {
           if (form.dataset.form === sendButton.dataset.form) {
@@ -2214,8 +2212,6 @@ var renderForm = function renderForm() {
             }
 
             var url = form.action;
-            console.log('url', url);
-            console.log('data', data);
 
             var sendPostRequest = /*#__PURE__*/function () {
               var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2258,7 +2254,6 @@ var renderForm = function renderForm() {
                         if (_context.t0.response.status == '422') {
                           errors = _context.t0.response.data.errors;
                           errorMessage = '';
-                          console.log('send');
                           Object.keys(errors).forEach(function (key) {
                             errorMessage += '<li>' + errors[key] + '</li>';
                           });
@@ -2719,7 +2714,6 @@ var renderLocaleTags = function renderLocaleTags() {
                     table.innerHTML = response.data.table;
                     (0,_form__WEBPACK_IMPORTED_MODULE_1__.renderTable)();
                     (0,_messages__WEBPACK_IMPORTED_MODULE_2__.showMessage)('success', response.data.message);
-                    console.log('click');
                   });
 
                 case 3:
@@ -2791,7 +2785,6 @@ var renderMenuItems = function renderMenuItems() {
         var language = createButton.dataset.language;
         var menu = createButton.dataset.menu;
         var modalContainer = document.getElementById('menu-item-modal-container');
-        console.log('click2');
 
         var sendMenuItemRequest = /*#__PURE__*/function () {
           var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -2810,7 +2803,6 @@ var renderMenuItems = function renderMenuItems() {
                         document.getElementById('menu-id').value = menu;
                         (0,_selects__WEBPACK_IMPORTED_MODULE_3__.renderSelects)();
                         (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.renderMenuItemForm)();
-                        console.log('send');
                         setTimeout(function () {
                           (0,_modalMenuItem__WEBPACK_IMPORTED_MODULE_1__.openModal)();
                         }, 200);
@@ -3142,7 +3134,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 var openModal = function openModal() {
   var modal = document.getElementById('menu-item-modal');
   modal.classList.add('modal-active');
-  console.log(modal.className);
   (0,_spinner__WEBPACK_IMPORTED_MODULE_3__.startOverlay)();
 };
 var renderMenuItemForm = function renderMenuItemForm() {
@@ -3408,7 +3399,6 @@ var renderSitemap = function renderSitemap() {
                   _context.prev = 0;
                   _context.next = 3;
                   return axios.get(url).then(function (response) {
-                    console.log(sitemap);
                     sitemap.value = response.data.sitemap;
                   });
 

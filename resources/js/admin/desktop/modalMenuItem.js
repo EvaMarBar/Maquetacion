@@ -8,8 +8,6 @@ export let openModal = () => {
 
     let modal = document.getElementById('menu-item-modal');
     modal.classList.add('modal-active');
-    console.log(modal.className)
-    
     startOverlay();
 }
 

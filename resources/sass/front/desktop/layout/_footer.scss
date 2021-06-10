@@ -1,12 +1,12 @@
 .footer{
-	background-color: rgb(236, 157, 117);
+	background-color: rgb(192, 111, 111);
 	height: max-content;
 	margin-top: 0px;
-	padding: 0% 10%;
+	padding: 0%;
 	position: relative;
-	width: 80%;
+	bottom: 0;
+	width: 100%;
 }
-
 
 .footer .footer-element-title{
 	color: black;
@@ -14,9 +14,7 @@
 }
 
 .footer .booking-button{
-	
 	margin-top: 2em;
-	
 }
 
 .footer .footer-element-container{
@@ -24,12 +22,19 @@
 	p,a,h1,h2,h3,h4,h5{
 		color: black;
 		font-weight: 400;
+		cursor: pointer;
+	}
 
+	a:link, a:visited, a:active{
+		text-decoration: none;
+	}
+	
+	a:hover{
+		background-color: white;
 	}
 }
 
 .footer .footer-element-icon{
-
 	margin-right: 0.5em;
 
 	svg{
@@ -56,5 +61,9 @@
 .footer-logo{
 	width: max-content;
 	z-index: 20;
-	padding: 0.5em 0;
+	padding: 1em 0;
+}
+
+.four-columns{
+	padding: 0 4em;
 }

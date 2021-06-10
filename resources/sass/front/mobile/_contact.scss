@@ -1,0 +1,90 @@
+.contact{
+    margin: 5% auto;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: left;
+    
+}
+
+.two-columns-front{
+    display: flex;
+}
+
+.information{
+    display: flex;
+    align-items: left;
+    align-content: center;
+    justify-content: flex-start;
+    flex-flow: column wrap;
+    padding: 0 1em;
+    width: 30%;
+}
+
+.social-media{
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.contact-information{
+    display: flex;
+    align-content: center;
+    flex-direction: column;
+}
+
+.contact-item{
+    padding: 0 0.5em 1em 0.5em;
+    display: flex;
+    align-items: center;
+
+    svg{
+        margin:0 0.2em;
+    }
+}
+
+.contact-form{
+    width: max-content;
+    padding: 0 1em;
+    width: 70%;
+
+    .form-group{
+        margin-bottom: 1em;
+        width: 100%;
+    }
+
+    .form-label{
+        margin-bottom: 0.5em;
+        width: 100%;
+    }
+
+    .form-label label{
+        color: hsl(0, 0%, 0%);
+        font-weight: 400;
+        font-size: 1em;
+        transition: color 0.5s;
+    }
+
+    .form-input{
+        width: 100%;
+    }
+
+    .form-input input, 
+    .form-input textarea,
+    .form-input select {
+        border: 0.1em solid hsl(0, 0%, 83%);
+        border-radius: 0.3em;
+        box-sizing: border-box;         
+        color: hsl(0, 0%, 0%);
+        padding: 0.4em;
+        width: 100%;
+
+    }
+    .form-input .ck-editor__editable_inline {
+        min-height: 15vh;
+    }
+
+    .form-input textarea{
+        height: 20vh;
+    }
+}

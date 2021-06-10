@@ -6,8 +6,6 @@ headerButtons.forEach(headerButton =>{
 
         let url = headerButton.dataset.action;
 
-        console.log(url);
-
         let sendGetRequest = async () => {
     
             try {

@@ -178,15 +178,13 @@ export   let paginatorElement = (url) =>{
                 let currentPage = document.getElementById('table-container').dataset.current
                 let nextPage = ++currentPage
                 let newUrl = url.replace(/[0-9]/g, nextPage);
-                console.log(newUrl)
 
                 await axios.get(newUrl).then(response => {
                     table.insertAdjacentHTML("beforeend", response.data.table);
                     document.querySelector('.table-container').dataset.current=url;
                     
                     currentPage = nextPage.toString()
-                    console.log(currentPage)
-                    
+                
                     renderTable();
                 });
                 

@@ -25,7 +25,7 @@ class LoginController extends Controller
 
     public function index()
     {
-        return view('front.login.index');
+        return view('front.pages.login.index');
     }
 
     public function login(LoginRequest $request)

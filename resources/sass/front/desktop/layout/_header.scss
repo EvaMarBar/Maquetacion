@@ -3,7 +3,7 @@
 	height: max-content;
 	width: 90%;
 	z-index: 15;
-	background-color: rgb(236, 157, 117);
+	background-color: rgb(192, 111, 111);
 	box-shadow: 2px 1px 1px #ddcfc6;
 
 	&.blur{
@@ -32,6 +32,10 @@
 		display: flex;
 		width: max-content;
 		z-index: 20;
+
+		a:link, a:visited, a:active{
+			text-decoration: none;
+		}
 
 		.booking-button{
 			

@@ -29,7 +29,6 @@ export let renderForm = () => {
 
         sendButtons.forEach(sendButton =>{
         sendButton.addEventListener("click", (event) => {
-            console.log('click')
     
             event.preventDefault();
             
@@ -69,8 +68,6 @@ export let renderForm = () => {
                     }
                     
                     let url = form.action;
-                    console.log('url', url);
-                    console.log('data', data)
                     let sendPostRequest = async () => {
         
                         startWait();
@@ -108,7 +105,6 @@ export let renderForm = () => {
             
                                 let errors = error.response.data.errors;      
                                 let errorMessage = '';
-                                console.log('send')
                                 Object.keys(errors).forEach(function(key) {
                                     errorMessage += '<li>' + errors[key] + '</li>';
                                 })

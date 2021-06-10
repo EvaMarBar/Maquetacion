@@ -143,11 +143,10 @@ export function scrollRevealItem (){
       // Check if we need to change state to top or bottom based on slop value
           if(differenceInY > 0) {
             currentYPosition = currentYPosition + 200;
-            console.log(currentYPosition);
-       
+           
         } else if (differenceInY < 0){
         currentYPosition = currentYPosition - 200;
-        console.log(currentYPosition);
+        
         }else if(scrollWindowElement.offsetTop < 0){
 
           transformStyle = 'translateY('+currentYPosition+'px)';

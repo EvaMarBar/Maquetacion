@@ -1972,20 +1972,17 @@ var sendFingerprintRequest = /*#__PURE__*/function () {
 
             _context.prev = 10;
             _context.next = 13;
-            return axios.post('/fingerprint', data).then(function (response) {
-              console.log(response);
-            });
+            return axios.post('/fingerprint', data).then(function (response) {});
 
           case 13:
-            _context.next = 18;
+            _context.next = 17;
             break;
 
           case 15:
             _context.prev = 15;
             _context.t0 = _context["catch"](10);
-            console.log(_context.t0);
 
-          case 18:
+          case 17:
           case "end":
             return _context.stop();
         }
@@ -2054,11 +2051,8 @@ var renderSizes = function renderSizes() {
         var activeSizes = document.querySelectorAll('.size-active');
         activeSizes.forEach(function (activeSize) {
           activeSize.classList.remove('size-active');
-          console.log(activeSizes);
         });
         shirtSize.classList.add('size-active');
-        console.log('click');
-        console.log(shirtSize.className);
       });
     });
   }
@@ -2089,7 +2083,6 @@ var renderLinkButtons = function renderLinkButtons() {
   if (linkButtons) {
     linkButtons.forEach(function (linkButton) {
       linkButton.addEventListener('click', function () {
-        console.log('click');
         var url = linkButton.dataset.url;
         var content = document.getElementById('content');
 
@@ -2136,11 +2129,9 @@ var renderNextPhoto = function renderNextPhoto() {
         if (second) {
           nextPhoto.style.transform = "translateX(0px)";
           second = false;
-          console.log(second);
         } else {
           nextPhoto.style.transform = "translateX(-250px)";
           second = true;
-          console.log(second);
         }
       });
     });

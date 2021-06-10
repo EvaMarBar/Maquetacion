@@ -48,6 +48,6 @@ pannelButtons.forEach(pannelButton => {
 //                 })
                 
 //         pannelForm.nextElementSibling.classList.add("active");
-//         console.log(pannelForm.className)
+// 
 //     })
 // })

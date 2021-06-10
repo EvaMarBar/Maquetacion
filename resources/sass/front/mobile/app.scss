@@ -1,8 +1,30 @@
 @charset "utf-8";
 
+//@import "errors.scss";
 @import "faqs.scss";
 @import "shirts.scss";
-@import "shirt.scss";
+@import "shirt.scss"; 
 @import "table-filter.scss";
+@import "contact.scss";
+// @import "contact-form.scss";
+
+
 @import "master.scss";
+@import "layout/topbar";
+@import "layout/header";
+@import "layout/footer";
+@import "layout/bottombar";
+
+
+
+
+
+
+
+
 @import "../../normalize";
+@import "../../mixins";
+@import "../../contents";
+// @import "../../typography";
+@import "../../variables";
+

@@ -20,7 +20,6 @@ export let renderLocaleTags = () => {
                         table.innerHTML = response.data.table;
                         renderTable();
                         showMessage('success', response.data.message);
-                        console.log('click')
                     });
                     
                 } catch (error) {

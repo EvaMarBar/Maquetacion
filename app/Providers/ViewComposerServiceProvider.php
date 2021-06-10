@@ -34,7 +34,9 @@ class ViewComposerServiceProvider extends ServiceProvider
             'App\Http\ViewComposers\Admin\Countries'
         );
         view()->composer([
-            'admin.*'], 
+            'admin.*',
+            'front.layout.localization',
+            'front.layout.modal_localization'], 
             'App\Http\ViewComposers\Admin\LocaleLanguage'
         );
         view()->composer(

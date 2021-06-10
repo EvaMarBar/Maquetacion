@@ -39,6 +39,8 @@ Route::group(['prefix' => $localizationseo->setLocale(),
     Route::get($localizationseo->transRoute('routes.front_products'), 'App\Http\Controllers\Front\ShirtController@index')->name('front_products');
     Route::get($localizationseo->transRoute('routes.front_product'), 'App\Http\Controllers\Front\ShirtController@show')->name('front_product');
     Route::get($localizationseo->transRoute('routes.front_product_filter'), 'App\Http\Controllers\Front\ShirtController@filter')->name('shirts_filter');
+    Route::get($localizationseo->transRoute('routes.front_contact'), 'App\Http\Controllers\Front\ContactController@index')->name('front_contact');
+    Route::get($localizationseo->transRoute('routes.front_about_us'), 'App\Http\Controllers\Front\AboutUsController@index')->name('front_about_us');
 });
 
 Route::group(['prefix' => 'admin'],function (){
@@ -162,5 +164,7 @@ Route::group(['prefix' => 'admin'],function (){
     ]);
     Route::get('/informacion-de-la-empresa', 'App\Http\Controllers\Admin\BusinessInformationController@index')->name('business_information');
     Route::post('/informacion-de-la-empresa', 'App\Http\Controllers\Admin\BusinessInformationController@store')->name('business_information_store');
+    Route::post('/contacto', 'App\Http\Controllers\Front\ContactController@store')->name('front_contact_form');
+    Route::get('/traduccion/{language}/{parent}/{slug?}', 'App\Http\Controllers\Front\LocalizationController@show')->name('front_localization');
 });
 

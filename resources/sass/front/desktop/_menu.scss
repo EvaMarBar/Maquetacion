@@ -8,10 +8,10 @@
 
 		margin: 0.5em; 
 
-		&.selected{
-
+		.menu-item.menu-item-selected{
+			h4,
 			a h4{
-				color: red;
+				color: white;
 			}
 		}
 

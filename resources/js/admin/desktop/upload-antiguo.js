@@ -59,8 +59,6 @@ export let renderUpload = () => {
 
         let newName = Math.floor((Math.random() * 100) + 1) + name
         images.concat(newName);
-        console.log(newName)
-        console.log(images)
         
         multipleUpload(uploadElement);
         let thumbnailElement = uploadElement.querySelector(".upload-thumb");

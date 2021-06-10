@@ -2345,31 +2345,29 @@ var paginatorElement = function paginatorElement(url) {
               currentPage = document.getElementById('table-container').dataset.current;
               nextPage = ++currentPage;
               newUrl = url.replace(/[0-9]/g, nextPage);
-              console.log(newUrl);
-              _context5.next = 7;
+              _context5.next = 6;
               return axios.get(newUrl).then(function (response) {
                 table.insertAdjacentHTML("beforeend", response.data.table);
                 document.querySelector('.table-container').dataset.current = url;
                 currentPage = nextPage.toString();
-                console.log(currentPage);
                 renderTable();
               });
 
-            case 7:
-              _context5.next = 12;
+            case 6:
+              _context5.next = 11;
               break;
 
-            case 9:
-              _context5.prev = 9;
+            case 8:
+              _context5.prev = 8;
               _context5.t0 = _context5["catch"](0);
               console.error(_context5.t0);
 
-            case 12:
+            case 11:
             case "end":
               return _context5.stop();
           }
         }
-      }, _callee5, null, [[0, 9]]);
+      }, _callee5, null, [[0, 8]]);
     }));
 
     return function sendPaginationRequest() {
@@ -2579,25 +2577,20 @@ __webpack_require__.r(__webpack_exports__);
 var renderLocaleTabs = function renderLocaleTabs() {
   var localeTabsItems = document.querySelectorAll(".locale-tab-item");
   var localeTabPanels = document.querySelectorAll(".locale-tab-panel");
-  console.log("1");
   localeTabsItems.forEach(function (localeTabItem) {
     localeTabItem.addEventListener("click", function () {
-      console.log("click");
       var activeElements = document.querySelectorAll(".locale-tab-active");
       var activeTab = localeTabItem.dataset.tab;
       activeElements.forEach(function (activeElement) {
         if (activeElement.dataset.tab == activeTab) {
           activeElement.classList.remove("locale-tab-active");
-          console.log(activeElement.className);
         }
       });
       localeTabItem.classList.add("locale-tab-active");
-      console.log(localeTabItem.className);
       localeTabPanels.forEach(function (localeTabPanel) {
         if (localeTabPanel.dataset.tab == activeTab) {
           if (localeTabPanel.dataset.localetab == localeTabItem.dataset.localetab) {
             localeTabPanel.classList.add("locale-tab-active");
-            console.log(localeTabPanel.className);
           }
         }
       });
@@ -3112,9 +3105,7 @@ function scrollWindowElement(element) {
     currentYPosition = currentYPosition - differenceInY;
     transformStyle = currentYPosition + 'px';
     scrollWindowElement.style.top = transformStyle;
-    scrollWindowElement.style.transition = 'all 300ms ease-out'; //console.log(scrollWindowElement.offsetTop);
-    //console.log(scrollWindowElement.getBoundingClientRect());
-
+    scrollWindowElement.style.transition = 'all 300ms ease-out';
     changeState();
   }
 

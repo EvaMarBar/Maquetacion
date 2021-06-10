@@ -6,7 +6,6 @@ use App\Vendor\Locale\Models\LocaleLanguage;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Front\MenuController as FrontMenuController;
 
-
 if ( ! function_exists('slug_helper'))
 {
     function slug_helper($string)

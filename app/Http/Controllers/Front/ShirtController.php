@@ -59,6 +59,15 @@ class ShirtController extends Controller
                 ->with('seo', $seo );
 
         
+        if(request()->ajax()) {
+
+            $sections = $view->renderSections(); 
+    
+            return response()->json([
+                'view' => $sections['content'],
+            ]); 
+        }
+        
         return $view;
     }
 

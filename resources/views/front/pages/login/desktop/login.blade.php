@@ -1,7 +1,3 @@
-@extends('front.layout.master')
-
-@section('content')
-
 <div class="login">
 
     <div class="form-content">
@@ -36,6 +32,3 @@
             
     </div>
 </div>
-
-
-@endsection

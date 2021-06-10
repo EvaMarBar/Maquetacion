@@ -24,6 +24,8 @@
     <body>
         @include("front.layout.partials.topbar")
         @include("front.layout.partials.header_fixed")
+        @include("front.layout.modal_localization")
+        @include("front.layout.spinner")
    
 
         @if(isset($filters))
