@@ -168,6 +168,7 @@ return [
          * Package Service Providers...
          */
 
+        App\Providers\HorizonServiceProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
         App\Vendor\Locale\ManagerServiceProvider::class,
         App\Vendor\Locale\TranslationServiceProvider::class,
