@@ -1,22 +1,40 @@
-const moreButtons = document.querySelectorAll(".button");
+export let renderFaqs = () => {
 
-moreButtons.forEach(moreButton =>{
+    const plusButtons = document.querySelectorAll('.faq-plus-button');
+    const faqElements = document.querySelectorAll(".faq");
 
-    moreButton.addEventListener("click", () => {
+    plusButtons.forEach(plusButton => { 
+
+        plusButton.addEventListener("click", () => {
+
+            let activeElements = document.querySelectorAll(".active");
+
+            if(plusButton.classList.contains("active")){
+
+                plusButton.classList.remove("active");
+
+                activeElements.forEach(activeElement => {
+                    activeElement.classList.remove("active");
+                });
+
+            }else{
+
+                activeElements.forEach(activeElement => {
+                    activeElement.classList.remove("active");
+                });
+                
+                plusButton.classList.add("active");
+
+                faqElements.forEach(faqElement => {
+
+                    if(faqElement.dataset.content == plusButton.dataset.button){
+                        faqElement.classList.add("active"); 
+                    }else{
+                    }
+                });
+            }
+        });
         
-        if (moreButton.classList.contains("active")){
-            moreButton.classList.remove("active");
-            moreButton.parentElement.nextElementSibling.classList.remove("active");
+    });
 
-        } else {
-            let activeElements = document.querySelectorAll('.active');
-            
-            activeElements.forEach(activeElement =>{
-                activeElement.classList.remove("active");  
-            })
-            
-            moreButton.classList.add("active");
-            moreButton.parentElement.nextElementSibling.classList.add("active");
-        }      
-    })
-})
+}

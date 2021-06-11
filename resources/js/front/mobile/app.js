@@ -1,4 +1,9 @@
 require('../../bootstrap');
 require('./faqs');
-require('./fingerprint');
 require('./shirt');
+require('./forms');
+require('./menu');
+require('./components');
+require('./fingerprint');
+require('./spinner');
+require('./localization');

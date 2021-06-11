@@ -1,0 +1,44 @@
+.login{
+    min-height: 80vh;
+    width: 100%;
+    padding-top: 5em ;
+}
+.form-content{
+    background-color: rgb(216, 209, 205);
+    border: 1.2em solid  rgb(236, 157, 117);
+    border-radius: 1em;
+    height: max-content;
+    width: 100%;
+
+    .form_group {
+        margin:1em;
+        width: 100%;
+        }
+    
+    .form_label {
+        margin-bottom: 1em;
+        width: 100%;
+        }
+    
+    .form_label label {
+        color: rgb(25, 23, 22);
+        font-weight: bold;
+        width:100%;    
+        }
+    
+    
+    .form_input input {
+        width:90%;
+        }
+}
+.form_submit {
+    margin: 1em;
+    width: 20%;
+
+    button:hover{ 
+        background-color:rgb(241, 131, 75) ;
+        border: 0.1em solid rgb(25, 23, 22);
+        border-radius: 0.2em;
+    }
+}
+

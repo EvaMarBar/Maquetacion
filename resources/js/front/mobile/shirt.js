@@ -31,10 +31,9 @@ export let renderSizes = () =>{
                 let activeSizes = document.querySelectorAll('.size-active');
                 activeSizes.forEach(activeSize =>{
                     activeSize.classList.remove('size-active')
-                 
                 });
                 shirtSize.classList.add('size-active');
-              
+            
             })
         })
     }
@@ -72,7 +71,7 @@ export let renderLinkButtons = () =>{
 
         linkButtons.forEach(linkButton =>{
             linkButton.addEventListener('click', () => {
-              
+    
             let url = linkButton.dataset.url;
             let content =  document.getElementById('content');
 
@@ -114,7 +113,7 @@ export let renderNextPhoto = () =>{
                 }else{
                     nextPhoto.style.transform = "translateX(-250px)"
                     second = true    
-                  
+                
                 }
             })
         })
