@@ -102,9 +102,8 @@ class ShirtController extends Controller
             $sections = $view->renderSections(); 
 
             return response()->json([
-                'product' => $sections['content'],
+                'view' => $sections['content'],
             ]); 
-            
 
         }
 

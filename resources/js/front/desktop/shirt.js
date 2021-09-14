@@ -1,3 +1,4 @@
+import {renderComponents} from './components';
 let shirtColours = document.querySelectorAll('.shirt-colour');
 let shirtSizes = document.querySelectorAll('.shirt-size');
 let cart = document.getElementById('cart');
@@ -79,7 +80,7 @@ export let renderLinkButtons = () =>{
     
                 try {
                         axios.get(url).then(response => {
-                        content.innerHTML = response.data.product
+                        content.innerHTML = response.data.view
                         window.history.pushState('','',url);
                         renderColours();
                     
@@ -95,6 +96,29 @@ export let renderLinkButtons = () =>{
         })
     
     }
+    window.addEventListener('popstate', event => {
+
+        let mainContent = document.getElementById('content');
+        let url = event.state;
+    
+        let sendPageRequest = async () => {
+    
+            try {
+    
+                axios.get(url).then(response => {
+                    mainContent.innerHTML = response.data.view;
+                    console.log(response.data.view)
+                    renderComponents();    
+                });
+                
+            } catch (error) {
+    
+            }
+        };
+    
+        sendPageRequest();
+        
+    });
 }
 renderLinkButtons();
 
@@ -119,5 +143,27 @@ export let renderNextPhoto = () =>{
         })
         renderLinkButtons();
     }
+    window.addEventListener('popstate', event => {
+
+        let mainContent = document.getElementById('content');
+        let url = event.state;
+    
+        let sendPageRequest = async () => {
+    
+            try {
+    
+                axios.get(url).then(response => {
+                    mainContent.innerHTML = response.data.view;
+                    renderComponents();    
+                });
+                
+            } catch (error) {
+    
+            }
+        };
+    
+        sendPageRequest();
+        
+    });
 }
 renderNextPhoto();

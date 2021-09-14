@@ -807,11 +807,10 @@ body {
 }
 
 .header-fixed {
-  padding: 0% 5%;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: 90%;
+  width: 100%;
   z-index: 15;
   background-color: #c06f6f;
   box-shadow: 2px 1px 1px #ddcfc6;
@@ -828,6 +827,7 @@ body {
   display: flex;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
 }
 .header-fixed .header-container .header-logo {
   width: -webkit-max-content;
@@ -838,9 +838,7 @@ body {
 }
 .header-fixed .header-container .header-menu {
   display: flex;
-  width: -webkit-max-content;
-  width: -moz-max-content;
-  width: max-content;
+  width: 100%;
   z-index: 20;
 }
 .header-fixed .header-container .header-menu a:link, .header-fixed .header-container .header-menu a:visited, .header-fixed .header-container .header-menu a:active {
@@ -849,20 +847,6 @@ body {
 .header-fixed .header-container .header-menu .booking-button {
   margin: auto;
   margin-left: 2em;
-}
-
-.header-fixed .header-bar {
-  height: 3.5em;
-  overflow: hidden;
-  padding-top: 1em;
-  width: 100%;
-  z-index: 20;
-}
-.header-fixed .header-bar.blur {
-  background-color: grey;
-  filter: blur(2px);
-  opacity: 0.8;
-  overflow: hidden;
 }
 
 .footer {
